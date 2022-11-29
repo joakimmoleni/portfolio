@@ -13,10 +13,6 @@ A fully responsive personal portfolio website, <br />Responsive for all devices,
 
 <br />
 
-### Demo Screeshots
-
-![Joakim Desktop Demo](./ "Desktop Demo")
-
 ### Contact
 
 If you want to contact with me you can reach me at
