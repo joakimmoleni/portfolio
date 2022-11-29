@@ -154,7 +154,6 @@ html {
   font-family: var(--ff-main);
   font-size: 10px;
   scroll-behavior: smooth;
-  overflow-y: scroll;
 }
 
 body {
@@ -165,6 +164,7 @@ body {
 }
 
 body.nav-active { overflow: hidden; }
+
 
 ::-webkit-scrollbar { width: 10px; }
 
@@ -204,8 +204,6 @@ body.nav-active { overflow: hidden; }
 .hidden {
   display: none;
 }
-
-
 
 /*-----------------------------------*\
   #REUSED STYLE
@@ -309,6 +307,12 @@ body.nav-active { overflow: hidden; }
   content: "03. ";
   color: var(--mainLinkColor);
 }
+
+.resumes::before {
+  content: "00. ";
+  color: var(--mainLinkColor);
+}
+
 
 /*-----------------------------------*\
   #HEADER
@@ -791,7 +795,9 @@ textarea.input-field {
 
   }
 
-
+  html {
+    overflow-y: scroll;
+  }
 
   /**
    * REUSED STYLE
