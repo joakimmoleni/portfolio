@@ -23,7 +23,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
       rel="stylesheet"
     />
 
@@ -31,11 +35,6 @@
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-
-    <!-- 
-    - preload images
-  -->
-    <link rel="preload" as="image" href="./assets/images/mountainman.png" />
   </head>
 
   <body>
@@ -43,13 +42,13 @@
     - #HEADER
   -->
 
-    <header class="header" data-header>
+    <header id="header" class="header" data-header>
       <div class="container">
         <a href="#" class="logo"> Joakim </a>
 
         <nav class="navbar" data-navbar>
           <div class="navbar-top">
-            <a href="#" class="logo"> Joakim </a>
+            <a href="#" class="logo" data-nav-toggler> Joakim </a>
 
             <button
               class="nav-close-btn"
@@ -62,19 +61,30 @@
 
           <ul class="navbar-list">
             <li>
-              <a href="#" class="navbar-link">Home</a>
+              <a
+                href="#section-about"
+                class="navbar-link abouts"
+                data-nav-toggler=""
+                >About</a
+              >
             </li>
 
             <li>
-              <a href="#section-about" class="navbar-link">About</a>
+              <a
+                href="#section-project"
+                class="navbar-link projects"
+                data-nav-toggler=""
+                >Projects</a
+              >
             </li>
 
             <li>
-              <a href="#section-project" class="navbar-link">Projects</a>
-            </li>
-
-            <li>
-              <a href="#section-contact" class="navbar-link">Contact</a>
+              <a
+                href="#section-contact"
+                class="navbar-link contacts"
+                data-nav-toggler=""
+                >Contact</a
+              >
             </li>
           </ul>
 
@@ -146,32 +156,23 @@
 
         <section id="section-hero" class="section hero" aria-label="home">
           <div class="container">
-            <figure class="hero-banner">
-              <img
-                src="./assets/images/mountainman.png"
-                width="860"
-                height="840"
-                alt="Joakim"
-                class="w-100"
-                data-reveal="top"
-              />
-
-              <div class="shape" data-reveal="top" data-reveal-delay="0.35s">
-                <div>✔️&#xfe0e; 15+ years of sales</div>
-                <div>✔️&#xfe0e; 3 startups successfully launched</div>
-                <div>✔️&#xfe0e; 100s of employees helped</div>
-                <div>✔️&#xfe0e; Tech nerd since 5y old</div>
-              </div>
-            </figure>
-
             <div class="hero-content">
+              <h3 class="hero-hello">Hi, my name is</h3>
               <h1
                 class="h1 hero-title"
                 data-reveal="top"
-                data-reveal-delay="0.5s"
+                data-reveal-delay="0.7s"
               >
-                Front-end developer student with full-stack goals
+                Joakim Melén.
               </h1>
+              <h3
+                class="h1 hero-title"
+                data-reveal="top"
+                data-reveal-delay="0.7s"
+                style="color: grey"
+              >
+                I build things for our mighty, computer.
+              </h3>
 
               <p
                 class="section-text"
@@ -199,7 +200,7 @@
           <div class="container">
             <div class="wrapper">
               <div data-reveal="left">
-                <h2 class="h2 section-title">What I Do?</h2>
+                <h2 class="h4 section-title abouts">About</h2>
 
                 <p class="section-text">
                   I have been into tech since I was a kid. Gaming, computers,
@@ -214,67 +215,23 @@
                 </p>
               </div>
 
-              <ul class="progress-list" data-reveal="right">
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <p>JavaScript/TypeScript</p>
+              <figure class="banner">
+                <img
+                  src="./assets/images/mountainman.jpg"
+                  width="860"
+                  height="840"
+                  alt="Joakim"
+                  class="w-100"
+                  data-reveal="top"
+                />
 
-                    <span class="span">100 %</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-fill"
-                      style="width: 100%; background-color: #c7b1dd"
-                    ></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <p>Frameworks</p>
-
-                    <span class="span">80 %</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-fill"
-                      style="width: 80%; background-color: #8caeec"
-                    ></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <p>Development</p>
-
-                    <span class="span">85 %</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-fill"
-                      style="width: 85%; background-color: #b0d4c1"
-                    ></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <p>Optimize</p>
-
-                    <span class="span">90 %</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-fill"
-                      style="width: 90%; background-color: #e3a6b6"
-                    ></div>
-                  </div>
-                </li>
-              </ul>
+                <div class="shape" data-reveal="top" data-reveal-delay="0.35s">
+                  <div>✔️&#xfe0e; 15+ years of sales</div>
+                  <div>✔️&#xfe0e; 3 startups successfully launched</div>
+                  <div>✔️&#xfe0e; 100s of employees helped</div>
+                  <div>✔️&#xfe0e; Tech nerd since 5y old</div>
+                </div>
+              </figure>
             </div>
 
             <ul class="grid-list">
@@ -381,8 +338,8 @@
           <div class="container">
             <div class="title-wrapper" data-reveal="top">
               <div>
-                <h2 class="h2 section-title" id="project-label">
-                  Latest Projects
+                <h2 class="h4 section-title projects" id="project-label">
+                  Projects
                 </h2>
 
                 <p class="section-text">
@@ -563,13 +520,12 @@
                   />
                 </div>
 
-                <h2 class="h2 section-title">
-                  If you like what you see, let's do something together.
-                </h2>
+                <h2 class="h4 section-title contacts">Contact</h2>
 
                 <p class="section-text">
-                  Have any questions or tips for me? Reach out to me from this
-                  contact form and I will get back to you shortly.
+                  Have any questions or tips for me? Want some help or want to
+                  build something togheter? Whatever it might be, don't hesitate
+                  to contact me.
                 </p>
               </div>
 

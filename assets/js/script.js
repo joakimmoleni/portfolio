@@ -30,6 +30,8 @@ const toggleNavbar = function () {
 
 addEventOnElements(navTogglers, "click", toggleNavbar);
 
+
+
 /**
  * THEME SELECTOR / DARK MODE
  */
@@ -52,6 +54,8 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
+
+
 /**
  * HEADER
  * active header when window scroll down to 100px
@@ -67,6 +71,26 @@ window.addEventListener("scroll", function () {
   }
 });
 
+
+
+/**
+ * HEADER
+ * show header on scroll up
+ */
+
+const topnavi = document.getElementById('header');
+let lastScroll = 0;
+
+window.addEventListener('scroll', (e) => {
+  let currScroll = window.scrollY
+
+  if (lastScroll > currScroll) {
+    topnavi.style.top = '0px'
+  } else {
+    topnavi.style.top = '-100px'
+  }
+  lastScroll = currScroll
+})
 
 
 /**
