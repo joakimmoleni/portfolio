@@ -534,18 +534,6 @@ body.nav-active { overflow: hidden; }
   max-width: 17vw;
 }
 
-.progress-item:not(:last-child) { margin-block-end: 16px; }
-
-.progress {
-  background-color: var(--mainBorderColor);
-  height: 6px;
-  width: 100%;
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-}
-
-.progress-fill { height: inherit; }
-
 .about-card { text-align: center; }
 
 .about-card .card-icon {
@@ -555,8 +543,9 @@ body.nav-active { overflow: hidden; }
 
 .about-card .card-title { margin-block: 16px 10px; }
 
-
-
+.about-card ion-icon {
+  color: var(--mainLinkColor);
+}
 
 
 /*-----------------------------------*\
