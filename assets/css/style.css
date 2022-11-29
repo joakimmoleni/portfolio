@@ -159,7 +159,7 @@ html {
 
 body {
   background-color: var(--mainBgColor);
-  color: var(--mainTextColor);
+  color: var(--secondaryTextColor);
   font-size: 1.6rem;
   line-height: 1.7;
 }
@@ -265,7 +265,7 @@ body.nav-active { overflow: hidden; }
 .btn-primary,
 .btn-secondary:is(:hover, :focus-visible) {
   background-color: var(--secondaryLinkColor);
-  color: var(--secondaryTextColor);
+  color: var(--mainTextColor);
 }
 
 .section-text { font-size: var(--fs-5); }
@@ -531,7 +531,9 @@ body.nav-active { overflow: hidden; }
   position: inherit;
   margin-top: 10px;
   filter: drop-shadow(var(--shadow-2));
-  max-width: 17vw;
+  text-align: right;
+  display: inline-block;
+  /* max-width: 17vw; */
 }
 
 .about-card { text-align: center; }
@@ -543,7 +545,7 @@ body.nav-active { overflow: hidden; }
 
 .about-card .card-title { margin-block: 16px 10px; }
 
-.about-card ion-icon {
+.about-card ion-icon, .contact-card ion-icon {
   color: var(--mainLinkColor);
 }
 
