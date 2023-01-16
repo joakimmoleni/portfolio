@@ -267,22 +267,78 @@ body.nav-active { overflow: hidden; }
   gap: 30px;
 }
 
-[data-reveal] {
-  opacity: 0;
-  transition: 0.75s ease;
+/* Define the keyframe animations */
+@keyframes reveal-top {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-[data-reveal="top"] { transform: translateY(-30px); }
+@keyframes reveal-bottom {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-[data-reveal="bottom"] { transform: translateY(30px); }
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-[data-reveal="left"] { transform: translateX(-30px); }
+@keyframes reveal-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-[data-reveal="right"] { transform: translateX(30px); }
+/* Apply the animations to the elements */
+[data-reveal="top"] {
+  animation-name: reveal-top;
+  animation-duration: 0.75s;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  -webkit-animation-name: reveal-top;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-play-state: paused;
+}
 
-[data-reveal].revealed {
-  transform: translate(0);
-  opacity: 1;
+[data-reveal="bottom"] {
+  animation-name: reveal-bottom;
+  animation-duration: 0.75s;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  -webkit-animation-name: reveal-bottom;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-play-state: paused;
+}
+
+[data-reveal="left"] {
+  animation-name: reveal-left;
+  animation-duration: 0.75s;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  -webkit-animation-name: reveal-left;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-play-state: paused;
+}
+
+[data-reveal="right"] {
+  animation-name: reveal-right;
+  animation-duration: 0.75s;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  -webkit-animation-name: reveal-right;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-play-state: paused;
+}
+
+[data-reveal] {
+  opacity: 0;
+  animation-duration: 0.75s;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-timing-function: ease;
 }
 
 .abouts::before {
@@ -503,21 +559,16 @@ body.nav-active { overflow: hidden; }
   object-fit: cover;
   object-position: bottom right;
   border-radius: 33px;
-  filter: grayscale(100%) contrast(120%);
+  filter: grayscale(100%) brightness(120%) saturate(120%);
   transition: var(--transition-2);
   max-height: 50vh;
-  
+  transition-duration: 0.5s;
 }
 
-.banner .w-100:is(:hover, :focus-visible) {
-  filter: grayscale(10%) contrast(100%);
-  transition: ease-in-out 0.5s;
-  transform: scale(1.2);
+.banner .w-100:hover, .banner .w-100:focus {
+  filter: grayscale(10%) brightness(100%) saturate(100%);
+  transform: scale(1.1) translate(10%, -10%);
   object-position: right;
-}
-
-.w-100::before {
-  content: "This yeeeeeeeeeeeeeeeeeeeeeeee"
 }
 
 .shape {

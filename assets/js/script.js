@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 /**
  * add event listener on multiple elements
  */
@@ -11,8 +9,6 @@ const addEventOnElements = function (elements, eventType, callback) {
     elements[i].addEventListener(eventType, callback);
   }
 }
-
-
 
 /**
  * NAVBAR TOGGLE FOR MOBILE
@@ -29,8 +25,6 @@ const toggleNavbar = function () {
 }
 
 addEventOnElements(navTogglers, "click", toggleNavbar);
-
-
 
 /**
  * THEME SELECTOR / DARK MODE
@@ -54,8 +48,6 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
-
-
 /**
  * HEADER
  * active header when window scroll down to 100px
@@ -71,8 +63,6 @@ window.addEventListener("scroll", function () {
   }
 });
 
-
-
 /**
  * HEADER
  * show header on scroll up
@@ -83,15 +73,13 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', (e) => {
   let currScroll = window.scrollY
-
-  if (lastScroll > currScroll) {
+  if(currScroll > lastScroll){
+    topnavi.style.top = '-100px';
+  }else {
     topnavi.style.top = '0px'
-  } else {
-    topnavi.style.top = '-100px'
   }
-  lastScroll = currScroll
+  lastScroll = currScroll;
 })
-
 
 /**
  * SCROLL REVEAL
@@ -104,6 +92,7 @@ const reveal = function () {
   for (let i = 0, len = revealElements.length; i < len; i++) {
     if (revealElements[i].getBoundingClientRect().top < window.innerHeight / 1.2) {
       revealElements[i].classList.add("revealed");
+      revealElements[i].style.animationPlayState = "running";
     }
   }
 }
