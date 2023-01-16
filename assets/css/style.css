@@ -269,76 +269,85 @@ body.nav-active { overflow: hidden; }
 
 /* Define the keyframe animations */
 @keyframes reveal-top {
-  from { opacity: 0; transform: translateY(-30px); }
+  from { opacity: 0; transform: translateY(-35px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes reveal-bottom {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(35px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes reveal-left {
-  from { opacity: 0; transform: translateX(-30px); }
+  from { opacity: 0; transform: translateX(-260px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes reveal-right {
-  from { opacity: 0; transform: translateX(30px); }
+  from { opacity: 0; transform: translateX(260px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 /* Apply the animations to the elements */
 [data-reveal="top"] {
   animation-name: reveal-top;
-  animation-duration: 0.75s;
+  animation-duration: .75s;
   animation-fill-mode: both;
   animation-play-state: paused;
   -webkit-animation-name: reveal-top;
-  -webkit-animation-duration: 0.75s;
+  -webkit-animation-duration: .75s;
   -webkit-animation-fill-mode: both;
   -webkit-animation-play-state: paused;
 }
 
 [data-reveal="bottom"] {
   animation-name: reveal-bottom;
-  animation-duration: 0.75s;
+  animation-duration: .75s;
   animation-fill-mode: both;
   animation-play-state: paused;
   -webkit-animation-name: reveal-bottom;
-  -webkit-animation-duration: 0.75s;
+  -webkit-animation-duration: .75s;
   -webkit-animation-fill-mode: both;
   -webkit-animation-play-state: paused;
 }
 
 [data-reveal="left"] {
   animation-name: reveal-left;
-  animation-duration: 0.75s;
+  animation-duration: .75s;
   animation-fill-mode: both;
   animation-play-state: paused;
   -webkit-animation-name: reveal-left;
-  -webkit-animation-duration: 0.75s;
+  -webkit-animation-duration: .75s;
   -webkit-animation-fill-mode: both;
   -webkit-animation-play-state: paused;
 }
 
 [data-reveal="right"] {
   animation-name: reveal-right;
-  animation-duration: 0.75s;
+  animation-duration: .75s;
   animation-fill-mode: both;
   animation-play-state: paused;
   -webkit-animation-name: reveal-right;
-  -webkit-animation-duration: 0.75s;
+  -webkit-animation-duration: .75s;
   -webkit-animation-fill-mode: both;
   -webkit-animation-play-state: paused;
 }
 
 [data-reveal] {
   opacity: 0;
-  animation-duration: 0.75s;
+  animation-duration: .75s;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.75s;
+  -webkit-animation-duration: .75s;
   -webkit-animation-timing-function: ease;
+}
+
+[data-reveal-delay] {
+  animation-duration: [value]s;
+  animation-delay: [value]s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: [value]s;
+  -webkit-animation-delay: [value]s;
+  -webkit-animation-fill-mode: both;
 }
 
 .abouts::before {

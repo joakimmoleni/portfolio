@@ -103,5 +103,8 @@ for (let i = 0, len = revealElements.length; i < len; i++) {
 }
 
 for (let i = 0, len = revealDelayElements.length; i < len; i++) {
-  revealDelayElements[i].style.transitionDelay = revealDelayElements[i].dataset.revealDelay;
+    revealDelayElements[i].style.animationDuration = revealDelayElements[i].dataset.revealDelay + 's';
+    revealDelayElements[i].style.animationDelay = revealDelayElements[i].dataset.revealDelay + 's';
+    revealDelayElements[i].style.webkitAnimationDuration = revealDelayElements[i].dataset.revealDelay + 's';
+    revealDelayElements[i].style.webkitAnimationDelay = revealDelayElements[i].dataset.revealDelay + 's';
 }
