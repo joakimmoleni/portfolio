@@ -1,9 +1,7 @@
 'use strict';
-
 /**
  * add event listener on multiple elements
  */
-
 const addEventOnElements = function (elements, eventType, callback) {
   for (let i = 0, len = elements.length; i < len; i++) {
     elements[i].addEventListener(eventType, callback);
@@ -13,7 +11,6 @@ const addEventOnElements = function (elements, eventType, callback) {
 /**
  * NAVBAR TOGGLE FOR MOBILE
  */
-
 const navbar = document.querySelector("[data-navbar]");
 const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const overlay = document.querySelector("[data-overlay]");
@@ -29,8 +26,6 @@ addEventOnElements(navTogglers, "click", toggleNavbar);
 /**
  * THEME SELECTOR / DARK MODE
  */
-
-
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
 function switchTheme(e) {
@@ -52,7 +47,6 @@ toggleSwitch.addEventListener('change', switchTheme, false);
  * HEADER
  * active header when window scroll down to 100px
  */
-
 const header = document.querySelector("[data-header]");
 
 window.addEventListener("scroll", function () {
@@ -65,41 +59,49 @@ window.addEventListener("scroll", function () {
 
 /**
  * HEADER
- * show header on scroll up
+ * show header on scroll up - hide on scroll down
  */
-
-const topnavi = document.getElementById('header');
+const topnavi = document.getElementById("header");
+topnavi.style.top = "0px";
 let lastScroll = 0;
+let ticking = false;
 
-window.addEventListener('scroll', (e) => {
-  let currScroll = window.scrollY
-  if(currScroll > lastScroll){
-    topnavi.style.top = '-100px';
-  }else {
-    topnavi.style.top = '0px'
+function updateHeader() {
+  if (window.scrollY > lastScroll) {
+    topnavi.style.top = "-100px";
+  } else {
+    topnavi.style.top = "0px";
   }
-  lastScroll = currScroll;
-})
+  lastScroll = window.scrollY;
+  ticking = false;
+}
+
+window.addEventListener("scroll", function() {
+  if (!ticking) {
+    window.requestAnimationFrame(updateHeader);
+    ticking = true;
+  }
+});
 
 /**
  * SCROLL REVEAL
  */
-
 const revealElements = document.querySelectorAll("[data-reveal]");
 const revealDelayElements = document.querySelectorAll("[data-reveal-delay]");
 
-const reveal = function () {
-  for (let i = 0, len = revealElements.length; i < len; i++) {
-    if (revealElements[i].getBoundingClientRect().top < window.innerHeight / 1.2) {
-      revealElements[i].classList.add("revealed");
-      revealElements[i].style.animationPlayState = "running";
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("revealed");
+      entry.target.style.animationPlayState = "running";
     }
-  }
+  });
+});
+
+for (let i = 0, len = revealElements.length; i < len; i++) {
+  revealObserver.observe(revealElements[i]);
 }
 
 for (let i = 0, len = revealDelayElements.length; i < len; i++) {
   revealDelayElements[i].style.transitionDelay = revealDelayElements[i].dataset.revealDelay;
 }
-
-window.addEventListener("scroll", reveal);
-window.addEventListener("load", reveal);
