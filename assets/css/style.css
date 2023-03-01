@@ -43,12 +43,12 @@
   --ff-main: 'Montserrat', sans-serif;
   --ff-secondary: 'Roboto Condensed', sans-serif;
 
-  --fs-1: calc(2.7rem + 1.38vw);
-  --fs-2: calc(2.6rem + .66vw);
-  --fs-3: calc(2.6rem + .24vw);
-  --fs-4: 1.9rem;
-  --fs-5: 1.8rem;
-  --fs-6: 1.7rem;
+  --fs-1: calc(2.6rem + 1.18vw);
+  --fs-2: calc(2.5rem + .46vw);
+  --fs-3: calc(2.4rem + .15vw);
+  --fs-4: 1.8rem;
+  --fs-5: 1.7rem;
+  --fs-6: 1.6rem;
   --fs-7: 1.5rem;
   --fs-8: 1.4rem;
   
@@ -151,7 +151,7 @@ html {
 body {
   background-color: var(--mainBgColor);
   color: var(--secondaryTextColor);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.7;
 }
 
@@ -555,6 +555,7 @@ body.nav-active { overflow: hidden; }
   display: grid;
   gap: 50px;
   margin-block-end: 70px;
+  line-height: 2.4rem;
 }
 
 .progress-list .label-wrapper {
@@ -580,7 +581,7 @@ body.nav-active { overflow: hidden; }
   object-position: right;
 }
 
-.about-card { text-align: center; }
+.about-card { text-align: center; line-height: 2rem; }
 
 .about-card .card-icon {
   max-width: max-content;
@@ -660,6 +661,7 @@ body.nav-active { overflow: hidden; }
   border-radius: var(--radius-8);
   display: grid;
   gap: 40px;
+  line-height: 2.2rem;
 }
 
 .contact .section-title { margin-block-start: 20px; }
@@ -911,7 +913,7 @@ textarea.input-field {
   .hero { padding-block-start: calc(var(--section-padding) + 80px); }
 
   .hero .container {
-    grid-template-columns: 0.8fr 1fr;
+    grid-template-columns: 2fr auto;
     align-items: center;
     gap: 100px;
   }
