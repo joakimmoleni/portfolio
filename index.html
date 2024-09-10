@@ -5,21 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 
-    - primary meta tags
-  -->
     <title>Joakim - Software Developer</title>
     <meta name="title" content="Joakim - Software Developer" />
     <meta name="description" content="This is a personal portfolio" />
 
-    <!-- 
-    - favicon
-  -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-    <!-- 
-    - google font link
-  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,136 +22,65 @@
       rel="stylesheet"
     />
 
-    <!-- 
-    - custom css link
-  -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
   <body>
-    <!-- 
-    - #HEADER
-  -->
 
     <header id="header" class="header" data-header>
       <div class="container">
-        <a href="#" class="logo"> Joakim </a>
-
+        <a href="#" class="logo">Joakim</a>
+    
         <nav class="navbar" data-navbar>
           <div class="navbar-top">
-            <a href="#" class="logo" data-nav-toggler> Joakim </a>
-
-            <button
-              class="nav-close-btn"
-              aria-label="close menu"
-              data-nav-toggler
-            >
+            <a href="#" class="logo" data-nav-toggler>Joakim</a>
+    
+            <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
               <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
             </button>
           </div>
-
+    
           <ul class="navbar-list">
-            <li>
-              <a
-                href="#section-about"
-                class="navbar-link abouts"
-                data-nav-toggler=""
-                >About</a
-              >
-            </li>
-
-            <li>
-              <a
-                href="#section-project"
-                class="navbar-link projects"
-                data-nav-toggler=""
-                >Projects</a
-              >
-            </li>
-
-            <li>
-              <a
-                href="#section-contact"
-                class="navbar-link contacts"
-                data-nav-toggler=""
-                >Contact</a
-              >
-            </li>
-            <a
-              href="./assets/CV_Joakim-Melen-2022.pdf"
-              class="navbar-link resumes"
-              target="_blank"
-            >
-              Resume &rarr;
-            </a>
+            <li><a href="#section-about" class="navbar-link abouts" data-nav-toggler>About</a></li>
+            <li><a href="#section-project" class="navbar-link projects" data-nav-toggler>Projects</a></li>
+            <li><a href="#section-contact" class="navbar-link contacts" data-nav-toggler>Contact</a></li>
+            <li><a href="./assets/CV_Joakim-Melen-2022.pdf" class="navbar-link resumes" target="_blank">Resume &rarr;</a></li>
           </ul>
-
+    
           <div class="theme-switch-wrapper">
             <label class="theme-switch" for="checkbox">
               <input type="checkbox" id="checkbox" />
-
-              <ion-icon id="darkmode" name="moon-sharp"></ion-icon>
-              <ion-icon
-                id="lightmode"
-                class="hidden"
-                name="sunny-outline"
-              ></ion-icon>
+              <ion-icon id="darkmode" name="contrast-outline"></ion-icon>
+              <ion-icon id="lightmode" class="hidden" name="contrast"></ion-icon>
             </label>
           </div>
-
+    
           <div class="wrapper">
-            <a href="mailto:devjoakimmelen@gmail.com" class="contact-link"
-              >devjoakimmelen@gmail.com</a
-            >
+            <a href="mailto:devjoakimmelen@gmail.com" class="contact-link">devjoakimmelen@gmail.com</a>
           </div>
-
+    
           <ul class="social-list">
-            <li>
-              <a
-                target="_blank"
-                href="https://github.com/joakimmelen"
-                class="social-link"
-              >
-                <ion-icon name="logo-github"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a
-                target="_blank"
-                href="https://www.linkedin.com/in/joakimmelensweden"
-                class="social-link"
-              >
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a
-                target="_blank"
-                href="https://joakimmelen.github.io/Resume-Website"
-                class="social-link"
-              >
-                <ion-icon name="planet"></ion-icon>
-              </a>
-            </li>
+            <li><a target="_blank" href="https://github.com/joakimmoleni" class="social-link"><ion-icon name="logo-github"></ion-icon></a></li>
+            <li><a target="_blank" href="https://www.linkedin.com/in/joakimmoleni" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
           </ul>
         </nav>
-
+    
         <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
           <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
         </button>
-
+    
         <div class="overlay" data-nav-toggler data-overlay></div>
       </div>
-    </header>
+    </header>    
 
     <main>
       <article>
-        <!-- 
-        - #HERO
-      -->
-
+        <!-- HERO -->
         <section id="section-hero" class="section hero" aria-label="home">
           <div class="container">
             <div class="hero-content">
@@ -170,7 +90,7 @@
                 data-reveal="top"
                 data-reveal-delay=".25"
               >
-                Joakim Melén
+                Joakim Moléni
               </h1>
               <h3
                 class="h2 hero-title"
@@ -178,7 +98,7 @@
                 data-reveal-delay=".75"
                 style="color: grey"
               >
-                and I am a full-stack software developer.
+                and I am a software engineer.
               </h3>
 
               <p
@@ -186,10 +106,7 @@
                 data-reveal="top"
                 data-reveal-delay="1.5"
               >
-              I'm a full-stack software developer with expertise in building responsive and user-friendly websites using modern front-end technologies such as TypeScript, JavaScript, React, Vue, and Svelte. I'm also proficient in back-end technologies like Node.js, Python, Express, and Django, and have hands-on experience implementing various APIs. <br>
-              </p>
-              <p class="section-text h4" data-reveal="bottom" data-reveal-delay="1.6">
-              My goal and passion is to continually learn and improve my skills, and to create the most engaging and fantastic software and user experiences that truly stand out. If you're interested in learning more about me and experience or seeing some of my recent projects, feel free to get in touch.
+              I love to build very cool things. <br>
               </p>
 
               <div
@@ -209,9 +126,7 @@
           </div>
         </section>
 
-        <!-- 
-        - #ABOUT
-      -->
+        <!-- ABOUT -->
         <br />
         <br />
         <br />
@@ -222,30 +137,20 @@
                 <h2 class="h4 section-title abouts">About</h2>
 
                 <p class="section-text">
-                  I have been into tech since I was a kid. <br />
-                  Gaming, computers, consoles, building stuff that does not make
-                  sense (made from stuff that made sense), figuring out how to
-                  use and alter most software etc. <br />
-                  Everything I got my hands on really. <br />
-                  In almost every role I've had professionally, I have been
-                  involved in tech/IT as much as I could. <br />
-                  But I never got around to actually learning software
-                  development until now. <br />
+                  I've been heavily into tech since I was a kid. <br />
+                  I loved building things that didn't always make sense, using parts that did. <br />
                   <br />
-                  I'm a front-end student and I find everything full-stack
-                  interesting. My goal is to become a full-stack developer, and
-                  I'm excited to learn and grow in this field. <br />
+                  Lucky me, now it all makes sense. <br />
                   <br />
-                  I want to develop software that is not only functional but
-                  also visually appealing, user-friendly and accessible to
-                  everyone. I am looking forward to working on projects that
-                  make a positive impact on people's lives.
+                  Now, I work professionally as a solution engineer and developer at one of Sweden's largest banks. <br />
+                  I'm fortunate to build with and test the latest technologies and trends.
+                  <br />
                 </p>
               </div>
 
               <figure data-reveal="right" data-reveal-delay=".5" class="banner">
                 <img
-                  src="./assets/images/mountainman.webp"
+                  src="./assets/images/nostalgia.jpg"
                   loading="lazy"
                   alt="Joakim"
                   class="w-100"
@@ -261,12 +166,12 @@
                     <ion-icon name="logo-web-component" size="large"></ion-icon>
                   </div>
 
-                  <h3 class="h4 card-title">Web Design</h3>
+                  <h3 class="h4 card-title">Web</h3>
 
                   <p class="card-text">
-                    Started playing around with some web design back in the 90s
-                    with Dreamweaver. Have a good understanding of Photoshop,
-                    Figma and such programs.
+                    Mastery in a wide range of technologies including JavaScript, TypeScript, React, Vue, Angular, 
+                    HTML, CSS, Next.js, Svelte, SvelteKit, SQLite, Snowpack, Vite, Webpack, and much more. 
+                    If it's on the web, I've got it covered.
                   </p>
                 </div>
               </li>
@@ -277,12 +182,11 @@
                     <ion-icon name="apps-sharp" size="large"></ion-icon>
                   </div>
 
-                  <h3 class="h4 card-title">Mobile Design</h3>
+                  <h3 class="h4 card-title">Mobile</h3>
 
                   <p class="card-text">
-                    Mobile first, mobile design, mobile apps and so on. This was
-                    primary in all of our classes in school and also obvious
-                    today.
+                    Proficient in developing both native apps and 
+                    cross-platform solutions that run seamlessly on web and mobile.
                   </p>
                 </div>
               </li>
@@ -293,12 +197,12 @@
                     <ion-icon name="code-working-sharp" size="large"></ion-icon>
                   </div>
 
-                  <h3 class="h4 card-title">Development</h3>
+                  <h3 class="h4 card-title">Infrastructure</h3>
 
                   <p class="card-text">
-                    I love developing sites, apps, games, and everything I can
-                    come up with. This is what I find most interesting and
-                    engaging. Time flies when I must solve a problem.
+                    I've crafted some impressive solutions using Node.js, Python, Django, 
+                    Docker, Assembler, COBOL, and so on. 
+                    This is where my passion lies— building the backbone that makes everything else work.
                   </p>
                 </div>
               </li>
@@ -309,11 +213,12 @@
                     <ion-icon name="search-sharp" size="large"></ion-icon>
                   </div>
 
-                  <h3 class="h4 card-title">SEO</h3>
+                  <h3 class="h4 card-title">Databases</h3>
 
                   <p class="card-text">
-                    The necessary evil of today. At least if you ask me. But
-                    it's not hard and is integrated everywhere.
+                    In today's world, understanding databases is non-negotiable. 
+                    I have hands-on experience working with databases and systems that handle billions of 
+                    transactions with millions of users.
                   </p>
                 </div>
               </li>
@@ -321,9 +226,7 @@
           </div>
         </section>
 
-        <!-- 
-        - #PROJECT
-      -->
+        <!-- PROJECT -->
 
         <section
           id="section-project"
@@ -334,11 +237,13 @@
             <div class="title-wrapper" data-reveal="top">
               <div>
                 <h2 class="h4 section-title projects" id="project-label">
-                  Projects
+                  Work
                 </h2>
 
                 <p class="section-text">
-                  Check out some of my latest projects.
+                  Check out some of my work.
+                  <br />
+                  Sadly most of my creations are companies intellectual property. Meaning hidden.
                 </p>
               </div>
 
@@ -348,15 +253,46 @@
             </div>
 
             <ul class="grid-list">
+              
+              <li>
+                <div class="project-card project-card-2">
+                  <div class="card-content" data-reveal="right">
+                    <p class="card-tag" style="color: #3f78e0">Instant payments</p>
+                    
+                    <h3 class="h3 card-title">Infrastructure for Pan-European Payments</h3>
+                    
+                    <p class="card-text">
+                      I worked on the infrastructure for Pan-European Payments at one of 
+                      Sweden's largest banks, focusing on long-term solutions for both Sweden and Europe.
+                    </p>
+                  </div>
+                  
+                  <figure class="card-banner" data-reveal="left">
+                    <img
+                    src="./assets/images/project2.jpg"
+                    width="600"
+                    height="367"
+                    loading="lazy"
+                    alt="Web Design"
+                    class="w-100"
+                    />
+                  </figure>
+                </div>
+              </li>
+
               <li>
                 <div class="project-card project-card-1">
                   <div class="card-content" data-reveal="left">
-                    <p class="card-tag" style="color: #a07cc5">Web Design</p>
+                    <p class="card-tag" style="color: #a07cc5">Web</p>
 
-                    <h3 class="h3 card-title">Futuristic Themes</h3>
+                    <h3 class="h3 card-title">AI-Powered Coaching for League of Legends</h3>
 
                     <p class="card-text">
-                      I specialize in building responsive and user-friendly websites. With a focus on accessibility and intuitive user experience, I create engaging and dynamic websites that stand out from the rest. I'm here to help you build the website of your dreams.
+                      At Fragsheet, my former team and I developed an AI coach from scratch, 
+                      seamlessly integrating it into our frontend/web client. 
+                      Leveraging the latest advancements in technology, this AI coach 
+                      delivers sophisticated insights and guidance that go beyond mere statistics.
+
                     </p>
 
                     <!-- <a href="#" class="btn-text" style="color: #a07cc5">
@@ -371,9 +307,9 @@
 
                   <figure class="card-banner" data-reveal="right">
                     <img
-                      src="./assets/images/project-1.webp"
+                      src="./assets/images/project1.webp"
                       width="650"
-                      height="370"
+                      height="170"
                       loading="lazy"
                       alt="Web Design"
                       class="w-100"
@@ -381,47 +317,24 @@
                   </figure>
                 </div>
               </li>
-
-              <li>
-                <div class="project-card project-card-2">
-                  <div class="card-content" data-reveal="right">
-                    <p class="card-tag" style="color: #3f78e0">Mobile Development</p>
-
-                    <h3 class="h3 card-title">Weekly Allowence Budget App</h3>
-
-                    <p class="card-text">
-                      I built a mobile app for budgeting and expense tracking. With my experience in both front-end and back-end technologies, I can create apps that are user-friendly, engaging, and intuitive to use. 
-                    </p>
-                  </div>
-
-                  <figure class="card-banner" data-reveal="left">
-                    <img
-                      src="./assets/images/project-2.webp"
-                      width="600"
-                      height="367"
-                      loading="lazy"
-                      alt="Web Design"
-                      class="w-100"
-                    />
-                  </figure>
-                </div>
-              </li>
-
+              
               <li>
                 <div class="project-card project-card-3">
                   <div class="card-content" data-reveal="left">
-                    <p class="card-tag" style="color: #7cb798">Web Design</p>
+                    <p class="card-tag" style="color: #7cb798">Application integration</p>
 
-                    <h3 class="h3 card-title">Infinity Scroller</h3>
+                    <h3 class="h3 card-title">Enhancing Legacy Systems: <br>Maintenance and Development in Assembler Language</h3>
 
                     <p class="card-text">
-                      Modern features can be very important for the UX/UI flow on a page. Such as pagnation/infinite scrolling, allowing for a smooth and continuous browsing experience. 
+                      I handled both maintenance and new development in Assembler language, 
+                      ensuring stability and adding features to legacy systems. 
+                      My work involved optimizing low-level code for performance and reliability.
                     </p>
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
                     <img
-                      src="./assets/images/project-3.webp"
+                      src="./assets/images/project3.jpg"
                       width="600"
                       height="367"
                       loading="lazy"
@@ -435,12 +348,14 @@
               <li>
                 <div class="project-card project-card-4">
                   <div class="card-content" data-reveal="left">
-                    <p class="card-tag" style="color: #d16b86">Mobile Design</p>
+                    <p class="card-tag" style="color: #d16b86">Mainframe</p>
 
-                    <h3 class="h3 card-title">Storage Optimizer App</h3>
+                    <h3 class="h3 card-title">Building and Sustaining High-Traffic Systems with Millions of Daily Users</h3>
 
                     <p class="card-text">
-                      Developing mobile apps for storage optimization. I can create apps that help you free up space on your device, allowing for a more seamless and efficient user experience.
+                      I developed and maintained COBOL-based systems handling millions 
+                      of daily users, focusing on account management and transaction processing. 
+                      My role involved ensuring robust performance and reliability at scale.
                     </p>
 
                     <!-- <a href="#" class="btn-text" style="color: #d16b86">
@@ -455,7 +370,7 @@
 
                   <figure class="card-banner" data-reveal="right">
                     <img
-                      src="./assets/images/project-4.webp"
+                      src="./assets/images/project4.webp"
                       width="620"
                       height="370"
                       loading="lazy"
@@ -469,9 +384,7 @@
           </div>
         </section>
 
-        <!-- 
-        - #CONTACT
-      -->
+          <!-- CONTACT  -->
 
         <section
           id="section-contact"
@@ -485,9 +398,12 @@
                 <h2 class="h4 section-title contacts">Contact</h2>
 
                 <p class="section-text">
-                  Have any questions for me? I am always looking for new
-                  challenges and opportunities to improve my skills and deliver
-                  high-quality work to my clients.
+                  Have any questions for me? 
+                  <br>
+                  I'm always open for cool stuff!
+                  <br>
+                  <br>
+                  <span style="font-style: italic;">P.S. The easiest way to reach me is via LinkedIn</span>
                 </p>
               </div>
 
@@ -527,19 +443,16 @@
       </article>
     </main>
 
-    <!-- 
-    - #FOOTER
-  -->
-
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
-        <p class="copyright">© 2023 Joakim Melén. All rights reserved.</p>
+        <p class="copyright">© 2024 Joakim Moléni. All rights reserved.</p>
 
         <ul class="social-list">
           <li>
             <a
               target="_blank"
-              href="https://github.com/joakimmelen"
+              href="https://github.com/joakimmoleni"
               class="social-link"
             >
               <ion-icon name="logo-github"></ion-icon>
@@ -549,34 +462,19 @@
           <li>
             <a
               target="_blank"
-              href="https://www.linkedin.com/in/joakimmelensweden"
+              href="https://www.linkedin.com/in/joakimmoleni"
               class="social-link"
             >
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
 
-          <li>
-            <a
-              target="_blank"
-              href="https://joakimmelen.github.io/Resume-Website"
-              class="social-link"
-            >
-              <ion-icon name="planet"></ion-icon>
-            </a>
-          </li>
         </ul>
       </div>
     </footer>
 
-    <!-- 
-    - custom js link
-  -->
     <script src="./assets/js/script.js"></script>
 
-    <!-- 
-    - ionicon link
-  -->
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"

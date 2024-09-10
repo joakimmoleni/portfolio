@@ -12,18 +12,18 @@
    * colors
    */
 
-   --mainTextColor-light:rgb(36, 36, 36);
-   --secondaryTextColor-light:rgb(51 51 51);
-   --mainLinkColor-light:#d8a524;
-   --secondaryLinkColor-light:#d8a52431;
-   --mainBorderColor-light:rgb(218, 218, 218);
-   --mainBgColor-light:rgb(249, 250, 251);
-   --secondaryBgColor-light:rgba(249, 250, 251, 0.923);
+   --mainTextColor-light: #333333;
+   --secondaryTextColor-light: #555555;
+   --mainLinkColor-light: #d49f20;
+   --secondaryLinkColor-light: #e6b450;
+   --mainBorderColor-light: #cccccc;
+   --mainBgColor-light: #f7f7f7;
+   --secondaryBgColor-light: #fafafa;   
 
    --mainTextColor-dark:#fff;
    --secondaryTextColor-dark:#c8c8c8;
-   --mainLinkColor-dark:rgb(30, 190, 214);
-   --secondaryLinkColor-dark:rgba(30, 189, 214, 0.137);
+   --mainLinkColor-dark:rgb(29, 233, 14);
+   --secondaryLinkColor-dark:rgba(27, 130, 63, 0.622);
    --mainBorderColor-dark:#2b3031;
    --mainBgColor-dark:#131415;
    --secondaryBgColor-dark:#131415cf;
@@ -40,7 +40,7 @@
    * typography
    */
 
-  --ff-main: 'Montserrat', sans-serif;
+  --ff-main: 'IBM Plex Mono', monospace;
   --ff-secondary: 'Roboto Condensed', sans-serif;
 
   --fs-1: calc(2.6rem + 1.18vw);
@@ -173,20 +173,20 @@ body.nav-active { overflow: hidden; }
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
-  margin-right: 5vw;
+  margin-right: 5vw;  
 
 }
 .theme-switch {
   display: inline-block;
   cursor: pointer;
-  border: 1px solid var(--mainBorderColor);
-  color: var(--mainLinkColor);
+  border: 1px solid var(--mainBgColor);
+  color: var(--mainTextColor);
   border-radius: 5px;
   font-size: 3rem;
 }
 
 .theme-switch:is(:hover, :focus-visible) {
-  color: var(--mainTextColor);
+  border: 1px solid var(--mainTextColor);
 }
 
 .theme-switch input {
@@ -229,6 +229,7 @@ body.nav-active { overflow: hidden; }
 .h4 {
   color: var(--mainTextColor);
   line-height: 1.3;
+  font-weight: 400;
 }
 
 .h1 { font-size: var(--fs-1); }
@@ -567,7 +568,6 @@ body.nav-active { overflow: hidden; }
 
 .banner .w-100 {
   object-fit: cover;
-  object-position: bottom right;
   border-radius: 33px;
   filter: grayscale(100%) brightness(120%) saturate(120%);
   transition: var(--transition-2);
