@@ -9,8 +9,28 @@
     <meta name="title" content="Joakim - Software Developer" />
     <meta name="description" content="This is a personal portfolio" />
 
+    <!-- PATCH: theme-colors för mobil UI -->
+    <meta name="theme-color" content="#131415" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f7f7"  media="(prefers-color-scheme: light)">
+
+    <!-- PATCH: Open Graph / Twitter (pekar på din sida/bild—byt bild-URL om du vill) -->
+    <meta property="og:title" content="Joakim - Software Developer">
+    <meta property="og:description" content="Portfolio — Web, Mobile, Infrastructure, Databases.">
+    <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/nostalgia.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joakimmoleni.github.io/portfolio/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Joakim - Software Developer">
+    <meta name="twitter:description" content="Portfolio — Web, Mobile, Infrastructure, Databases.">
+    <meta name="twitter:image" content="https://joakimmoleni.github.io/portfolio/assets/images/nostalgia.jpg">
+
+    <!-- PATCH: canonical -->
+    <link rel="canonical" href="https://joakimmoleni.github.io/portfolio/" />
+
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
+    <!-- Fonts (som hos dig, + preconnect för prestanda) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +41,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
       rel="stylesheet"
     />
-
     <link 
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
@@ -36,7 +55,7 @@
       <div class="container">
         <a href="#" class="logo">Joakim</a>
     
-        <nav class="navbar" data-navbar>
+        <nav class="navbar" data-navbar aria-label="Primary Navigation">
           <div class="navbar-top">
             <a href="#" class="logo" data-nav-toggler>Joakim</a>
     
@@ -49,7 +68,8 @@
             <li><a href="#section-about" class="navbar-link abouts" data-nav-toggler>About</a></li>
             <li><a href="#section-project" class="navbar-link projects" data-nav-toggler>Projects</a></li>
             <li><a href="#section-contact" class="navbar-link contacts" data-nav-toggler>Contact</a></li>
-            <li><a href="./assets/CV_Joakim-Melen-2022.pdf" class="navbar-link resumes" target="_blank">Resume &rarr;</a></li>
+            <!-- PATCH: rel -->
+            <li><a href="./assets/CV_Joakim-Melen-2022.pdf" class="navbar-link resumes" target="_blank" rel="noopener noreferrer">Resume &rarr;</a></li>
           </ul>
     
           <div class="theme-switch-wrapper">
@@ -65,12 +85,13 @@
           </div>
     
           <ul class="social-list">
-            <li><a target="_blank" href="https://github.com/joakimmoleni" class="social-link"><ion-icon name="logo-github"></ion-icon></a></li>
-            <li><a target="_blank" href="https://www.linkedin.com/in/joakimmoleni" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <!-- PATCH: aria-label + rel -->
+            <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/joakimmoleni" class="social-link" aria-label="GitHub profile: joakimmoleni"><ion-icon name="logo-github"></ion-icon></a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/joakimmoleni" class="social-link" aria-label="LinkedIn profile: Joakim Moléni"><ion-icon name="logo-linkedin"></ion-icon></a></li>
           </ul>
         </nav>
     
-        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler aria-expanded="false">
           <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
         </button>
     
@@ -106,7 +127,7 @@
                 data-reveal="top"
                 data-reveal-delay="1.5"
               >
-              I love to build very cool things. <br>
+              I love to build things. <br>
               </p>
 
               <div
@@ -137,21 +158,19 @@
                 <h2 class="h4 section-title abouts">About</h2>
 
                 <p class="section-text">
-                  I've been heavily into tech since I was a kid. <br />
-                  I loved building things that didn't always make sense, using parts that did. <br />
-                  <br />
-                  Lucky me, now it all makes sense. <br />
-                  <br />
-                  Now, I work professionally as a solution engineer and developer at one of Sweden's largest banks. <br />
-                  I'm fortunate to build with and test the latest technologies and trends.
-                  <br />
+                  I’ve been hooked on tech since I was a kid — mixing parts that didn’t belong together, just to see what would happen. <br>
+                  Back then it was chaos; now it’s craft.
+                  <br><br>
+                  Today I work as a solution engineer and developer at one of Sweden’s largest banks, where I get to blend cutting-edge tools with rock-solid mainframe systems.
                 </p>
               </div>
 
               <figure data-reveal="right" data-reveal-delay=".5" class="banner">
+                <!-- PATCH: decoding/async/lazy + bättre alt -->
                 <img
                   src="./assets/images/nostalgia.jpg"
-                  loading="lazy"
+                  
+                  decoding="async"
                   alt="Joakim"
                   class="w-100"
                   data-reveal="top"
@@ -169,9 +188,7 @@
                   <h3 class="h4 card-title">Web</h3>
 
                   <p class="card-text">
-                    Mastery in a wide range of technologies including JavaScript, TypeScript, React, Vue, Angular, 
-                    HTML, CSS, Next.js, Svelte, SvelteKit, SQLite, Snowpack, Vite, Webpack, and much more. 
-                    If it's on the web, I've got it covered.
+                    I work fluently with the modern web stack — JavaScript, TypeScript, React, Vue, Angular, Svelte, Next.js, and the tooling behind it. But when possible, I prefer to keep things lean: vanilla code, built from the ground up. Less magic, more control.
                   </p>
                 </div>
               </li>
@@ -185,8 +202,7 @@
                   <h3 class="h4 card-title">Mobile</h3>
 
                   <p class="card-text">
-                    Proficient in developing both native apps and 
-                    cross-platform solutions that run seamlessly on web and mobile.
+                    I can ship native apps and cross-platform products that work seamlessly on web and mobile. But my focus is always on keeping it lightweight — writing what’s needed, avoiding bloated stacks, and owning the code.
                   </p>
                 </div>
               </li>
@@ -200,9 +216,7 @@
                   <h3 class="h4 card-title">Infrastructure</h3>
 
                   <p class="card-text">
-                    I've crafted some impressive solutions using Node.js, Python, Django, 
-                    Docker, Assembler, COBOL, and so on. 
-                    This is where my passion lies— building the backbone that makes everything else work.
+                    I’ve worked across the stack — Node.js, Python, Docker, Django, even COBOL and Assembler. But the tech is secondary. What I really enjoy is building the core myself, shaping infrastructure that everything else can stand on.
                   </p>
                 </div>
               </li>
@@ -216,9 +230,7 @@
                   <h3 class="h4 card-title">Databases</h3>
 
                   <p class="card-text">
-                    In today's world, understanding databases is non-negotiable. 
-                    I have hands-on experience working with databases and systems that handle billions of 
-                    transactions with millions of users.
+                    Databases aren’t optional — they’re the heartbeat of any system. I’ve handled systems with millions of daily transactions, but I still approach them the same way: keep it lean, know exactly how the data moves, and never hide behind abstractions.
                   </p>
                 </div>
               </li>
@@ -241,9 +253,8 @@
                 </h2>
 
                 <p class="section-text">
-                  Check out some of my work.
-                  <br />
-                  Sadly most of my creations are companies intellectual property. Meaning hidden.
+                  Here are a few examples of my work. 
+                  Most of what I build is part of proprietary systems at large companies    —    so while I can’t show everything, I can share enough to give you a sense of the impact.
                 </p>
               </div>
 
@@ -262,19 +273,20 @@
                     <h3 class="h3 card-title">Infrastructure for Pan-European Payments</h3>
                     
                     <p class="card-text">
-                      I worked on the infrastructure for Pan-European Payments at one of 
-                      Sweden's largest banks, focusing on long-term solutions for both Sweden and Europe.
+                      I helped build the backbone for instant payments across Europe. Working at one of Sweden’s largest banks, I focused on long-term, high-reliability solutions designed to handle transactions at continental scale.
                     </p>
                   </div>
                   
                   <figure class="card-banner" data-reveal="left">
+                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
-                    src="./assets/images/project2.jpg"
-                    width="600"
-                    height="367"
-                    loading="lazy"
-                    alt="Web Design"
-                    class="w-100"
+                      src="./assets/images/project2.jpg"
+                      width="600"
+                      height="367"
+                      loading="lazy"
+                      decoding="async"
+                      alt="Web Design"
+                      class="w-100"
                     />
                   </figure>
                 </div>
@@ -288,29 +300,19 @@
                     <h3 class="h3 card-title">AI-Powered Coaching for League of Legends</h3>
 
                     <p class="card-text">
-                      At Fragsheet, my former team and I developed an AI coach from scratch, 
-                      seamlessly integrating it into our frontend/web client. 
-                      Leveraging the latest advancements in technology, this AI coach 
-                      delivers sophisticated insights and guidance that go beyond mere statistics.
+                      At Fragsheet, my team and I developed an AI coach from the ground up and integrated it directly into our web client. By combining advanced analytics with machine learning, the coach provided players with insights and guidance far beyond raw statistics.
 
                     </p>
-
-                    <!-- <a href="#" class="btn-text" style="color: #a07cc5">
-                      <span class="span">See Project</span>
-
-                      <ion-icon
-                        name="arrow-forward-outline"
-                        aria-hidden="true"
-                      ></ion-icon>
-                    </a> -->
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
+                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project1.webp"
                       width="650"
                       height="170"
                       loading="lazy"
+                      decoding="async"
                       alt="Web Design"
                       class="w-100"
                     />
@@ -321,23 +323,23 @@
               <li>
                 <div class="project-card project-card-3">
                   <div class="card-content" data-reveal="left">
-                    <p class="card-tag" style="color: #7cb798">Application integration</p>
+                    <p class="card-tag" style="color: #7cb798">Application Integration</p>
 
-                    <h3 class="h3 card-title">Enhancing Legacy Systems: <br>Maintenance and Development in Assembler Language</h3>
+                    <h3 class="h3 card-title">Maintaining and Extending Legacy Systems in Assembler</h3>
 
                     <p class="card-text">
-                      I handled both maintenance and new development in Assembler language, 
-                      ensuring stability and adding features to legacy systems. 
-                      My work involved optimizing low-level code for performance and reliability.
+                      I work hands-on with critical legacy systems in Assembler   —   maintaining stability, adding new features, and optimizing low-level code for performance and reliability in production.
                     </p>
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
+                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project3.jpg"
                       width="600"
                       height="367"
                       loading="lazy"
+                      decoding="async"
                       alt="Web Design"
                       class="w-100"
                     />
@@ -350,30 +352,21 @@
                   <div class="card-content" data-reveal="left">
                     <p class="card-tag" style="color: #d16b86">Mainframe</p>
 
-                    <h3 class="h3 card-title">Building and Sustaining High-Traffic Systems with Millions of Daily Users</h3>
+                    <h3 class="h3 card-title">Building and Sustaining High-Traffic Systems</h3>
 
                     <p class="card-text">
-                      I developed and maintained COBOL-based systems handling millions 
-                      of daily users, focusing on account management and transaction processing. 
-                      My role involved ensuring robust performance and reliability at scale.
+                      developed and maintained COBOL-based platforms serving millions of daily users. My work centered on account management and transaction processing  —  ensuring performance, reliability, and trust at scale.
                     </p>
-
-                    <!-- <a href="#" class="btn-text" style="color: #d16b86">
-                      <span class="span">See Project</span>
-
-                      <ion-icon
-                        name="arrow-forward-outline"
-                        aria-hidden="true"
-                      ></ion-icon>
-                    </a> -->
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
+                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project4.webp"
                       width="620"
                       height="370"
                       loading="lazy"
+                      decoding="async"
                       alt="Mobile Design"
                       class="w-100"
                     />
@@ -398,18 +391,21 @@
                 <h2 class="h4 section-title contacts">Contact</h2>
 
                 <p class="section-text">
-                  Have any questions for me? 
-                  <br>
-                  I'm always open for cool stuff!
+                  Curious about my work, or just want to bounce an idea? 
+                  <br><br>
+                  Reach out — I’m always up for cool stuff.
                   <br>
                   <br>
                   <span style="font-style: italic;">P.S. The easiest way to reach me is via LinkedIn</span>
                 </p>
               </div>
 
-              <form action="" class="contact-form" data-reveal="right">
+              <!-- PATCH: onsubmit + labels (sr-only kräver css) -->
+              <form action="" class="contact-form" data-reveal="right" onsubmit="return mailtoSubmit(event)">
                 <div class="input-wrapper">
+                  <label for="name" class="sr-only">Name</label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     placeholder="Name *"
@@ -417,7 +413,9 @@
                     class="input-field"
                   />
 
+                  <label for="email_address" class="sr-only">Email</label>
                   <input
+                    id="email_address"
                     type="email"
                     name="email_address"
                     placeholder="Email *"
@@ -426,7 +424,9 @@
                   />
                 </div>
 
+                <label for="message" class="sr-only">Message</label>
                 <textarea
+                  id="message"
                   name="message"
                   placeholder="Message *"
                   required
@@ -446,14 +446,16 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
-        <p class="copyright">© 2024 Joakim Moléni. All rights reserved.</p>
+        <p class="copyright">© 2026 Joakim Moléni. All rights reserved.</p>
 
         <ul class="social-list">
           <li>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/joakimmoleni"
               class="social-link"
+              aria-label="GitHub profile: joakimmoleni"
             >
               <ion-icon name="logo-github"></ion-icon>
             </a>
@@ -462,8 +464,10 @@
           <li>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.linkedin.com/in/joakimmoleni"
               class="social-link"
+              aria-label="LinkedIn profile: Joakim Moléni"
             >
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>

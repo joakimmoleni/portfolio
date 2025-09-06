@@ -1,75 +1,83 @@
 'use strict';
 
 /**
+ * Helpers
+ */
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => root.querySelectorAll(sel);
+
+/**
  * Add event listener on multiple elements
  */
-const addEventOnElements = function (elements, eventType, callback) {
-  for (let i = 0, len = elements.length; i < len; i++) {
-    if (elements[i]) {
-      elements[i].addEventListener(eventType, callback);
-    }
-  }
-}
+const addEventOnElements = (elements, eventType, callback) => {
+  elements.forEach(el => el && el.addEventListener(eventType, callback));
+};
 
 /**
  * NAVBAR TOGGLE FOR MOBILE
  */
-const navbar = document.querySelector("[data-navbar]");
-const navTogglers = document.querySelectorAll("[data-nav-toggler]");
-const overlay = document.querySelector("[data-overlay]");
+const navbar   = $("[data-navbar]");
+const navTogglers = $$("[data-nav-toggler]");
+const overlay  = $("[data-overlay]");
+const body     = document.body;
 
-const toggleNavbar = function () {
-  if (navbar && overlay) {
-    navbar.classList.toggle("active");
-    overlay.classList.toggle("active");
-    document.body.classList.toggle("nav-active");
+const toggleNavbar = () => {
+  if (!navbar || !overlay) return;
+
+  const isActive = navbar.classList.toggle("active");
+  overlay.classList.toggle("active");
+  body.classList.toggle("nav-active");
+
+  // a11y: uppdatera aria-expanded på open-btn
+  const openBtn = $(".nav-open-btn");
+  if (openBtn) {
+    openBtn.setAttribute("aria-expanded", String(isActive));
   }
-}
+};
 
 addEventOnElements(navTogglers, "click", toggleNavbar);
 
 /**
  * THEME SELECTOR / DARK MODE
  */
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const toggleSwitch = $('.theme-switch input[type="checkbox"]');
+const prefersDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// initiera theme från localStorage eller system
+const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', currentTheme);
+if (toggleSwitch) {
+  toggleSwitch.checked = currentTheme === 'light';
+  $("#lightmode")?.classList.toggle('hidden', currentTheme !== 'light');
+  $("#darkmode")?.classList.toggle('hidden', currentTheme !== 'dark');
+}
 
 function switchTheme(e) {
-  if (e.target.checked) {
-    document.documentElement.setAttribute('data-theme', 'light');
-    document.getElementById('lightmode')?.classList.remove('hidden');
-    document.getElementById('darkmode')?.classList.add('hidden');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('lightmode')?.classList.add('hidden');
-    document.getElementById('darkmode')?.classList.remove('hidden');
-  }    
+  const theme = e.target.checked ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  $("#lightmode")?.classList.toggle('hidden', theme !== 'light');
+  $("#darkmode")?.classList.toggle('hidden', theme !== 'dark');
 }
 
-if (toggleSwitch) {
-  toggleSwitch.addEventListener('change', switchTheme);
-}
+toggleSwitch?.addEventListener('change', switchTheme);
 
 /**
  * HEADER
  * Active header when window scrolls down to 100px
  */
-const header = document.querySelector("[data-header]");
+const header = $("[data-header]");
 
-window.addEventListener("scroll", function () {
-  if (header) {
-    if (window.scrollY > 100) {
-      header.classList.add("active");
-    } else {
-      header.classList.remove("active");
-    }
-  }
+window.addEventListener("scroll", () => {
+  if (!header) return;
+  header.classList.toggle("active", window.scrollY > 100);
 });
 
 /**
  * HEADER
  * Show header on scroll up - hide on scroll down
  */
-const topnavi = document.getElementById("header");
+const topnavi = $("#header");
 if (topnavi) {
   topnavi.style.top = "0px";
   let lastScroll = 0;
@@ -85,7 +93,7 @@ if (topnavi) {
     ticking = false;
   }
 
-  window.addEventListener("scroll", function() {
+  window.addEventListener("scroll", () => {
     if (!ticking) {
       window.requestAnimationFrame(updateHeader);
       ticking = true;
@@ -96,23 +104,32 @@ if (topnavi) {
 /**
  * SCROLL REVEAL
  */
-const revealElements = document.querySelectorAll("[data-reveal]");
-const revealDelayElements = document.querySelectorAll("[data-reveal-delay]");
+const revealElements = $$("[data-reveal]");
+const revealDelayElements = $$("[data-reveal-delay]");
 
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("revealed");
-      entry.target.style.animationPlayState = "running";
-    }
+// disable animation if user prefers reduced motion
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reducedMotion) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        entry.target.style.animationPlayState = "running";
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  revealDelayElements.forEach(el => {
+    const delay = el.dataset.revealDelay || '0.75';
+    el.style.animationDuration = delay + 's';
+    el.style.animationDelay = delay + 's';
+    el.style.webkitAnimationDuration = delay + 's';
+    el.style.webkitAnimationDelay = delay + 's';
   });
-});
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-revealDelayElements.forEach(el => {
-  el.style.animationDuration = el.dataset.revealDelay + 's';
-  el.style.animationDelay = el.dataset.revealDelay + 's';
-  el.style.webkitAnimationDuration = el.dataset.revealDelay + 's';
-  el.style.webkitAnimationDelay = el.dataset.revealDelay + 's';
-});
+} else {
+  // om användaren inte vill ha animationer – visa direkt
+  revealElements.forEach(el => el.classList.add("revealed"));
+}
