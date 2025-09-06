@@ -150,7 +150,7 @@ body.nav-active { overflow: hidden; }
 
 .theme-switch input { display: none; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 /*-----------------------------------*\
   #REUSED STYLE

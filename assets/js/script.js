@@ -37,30 +37,45 @@ const toggleNavbar = () => {
 
 addEventOnElements(navTogglers, "click", toggleNavbar);
 
+
 /**
  * THEME SELECTOR / DARK MODE
  */
-const toggleSwitch = $('.theme-switch input[type="checkbox"]');
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 const prefersDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// initiera theme från localStorage eller system
-const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-document.documentElement.setAttribute('data-theme', currentTheme);
-if (toggleSwitch) {
-  toggleSwitch.checked = currentTheme === 'light';
-  $("#lightmode")?.classList.toggle('hidden', currentTheme !== 'light');
-  $("#darkmode")?.classList.toggle('hidden', currentTheme !== 'dark');
+const lightIcon = document.getElementById('lightmode');
+const darkIcon  = document.getElementById('darkmode');
+
+// Initiera theme från localStorage eller system default
+const savedTheme = localStorage.getItem('theme');
+const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+applyTheme(currentTheme);
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+
+  // toggla checkboxen rätt
+  if (toggleSwitch) {
+    toggleSwitch.checked = theme === 'light';
+  }
+
+  // visa rätt ikon
+  if (lightIcon && darkIcon) {
+    lightIcon.classList.toggle('hidden', theme !== 'light');
+    darkIcon.classList.toggle('hidden', theme !== 'dark');
+  }
 }
 
 function switchTheme(e) {
   const theme = e.target.checked ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  $("#lightmode")?.classList.toggle('hidden', theme !== 'light');
-  $("#darkmode")?.classList.toggle('hidden', theme !== 'dark');
+  applyTheme(theme);
 }
 
 toggleSwitch?.addEventListener('change', switchTheme);
+
 
 /**
  * HEADER

@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+  
     <title>Joakim - Software Developer</title>
-    <meta name="title" content="Joakim - Software Developer" />
-    <meta name="description" content="This is a personal portfolio" />
-
-    <!-- PATCH: theme-colors för mobil UI -->
+    <meta name="title" content="Joakim - Software Developer">
+    <meta name="description" content="This is a personal portfolio">
+  
+    <!-- Theme colors for mobile UI -->
     <meta name="theme-color" content="#131415" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f7f7f7"  media="(prefers-color-scheme: light)">
-
-    <!-- PATCH: Open Graph / Twitter (pekar på din sida/bild—byt bild-URL om du vill) -->
+  
+    <!-- Open Graph / Twitter -->
     <meta property="og:title" content="Joakim - Software Developer">
     <meta property="og:description" content="Portfolio — Web, Mobile, Infrastructure, Databases.">
     <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/nostalgia.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://joakimmoleni.github.io/portfolio/">
-
+  
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Joakim - Software Developer">
     <meta name="twitter:description" content="Portfolio — Web, Mobile, Infrastructure, Databases.">
     <meta name="twitter:image" content="https://joakimmoleni.github.io/portfolio/assets/images/nostalgia.jpg">
-
-    <!-- PATCH: canonical -->
-    <link rel="canonical" href="https://joakimmoleni.github.io/portfolio/" />
-
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
-    <!-- Fonts (som hos dig, + preconnect för prestanda) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
-      rel="stylesheet"
-    />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="./assets/css/style.css" />
-  </head>
+  
+    <!-- Canonical -->
+    <link rel="canonical" href="https://joakimmoleni.github.io/portfolio/">
+  
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  
+    <!-- Main CSS -->
+    <link rel="preload" as="style" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="./assets/css/style.css"></noscript>
+  </head>  
 
   <body>
 
@@ -68,7 +65,6 @@
             <li><a href="#section-about" class="navbar-link abouts" data-nav-toggler>About</a></li>
             <li><a href="#section-project" class="navbar-link projects" data-nav-toggler>Projects</a></li>
             <li><a href="#section-contact" class="navbar-link contacts" data-nav-toggler>Contact</a></li>
-            <!-- PATCH: rel -->
             <li><a href="./assets/CV_Joakim-Melen-2022.pdf" class="navbar-link resumes" target="_blank" rel="noopener noreferrer">Resume &rarr;</a></li>
           </ul>
     
@@ -85,7 +81,6 @@
           </div>
     
           <ul class="social-list">
-            <!-- PATCH: aria-label + rel -->
             <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/joakimmoleni" class="social-link" aria-label="GitHub profile: joakimmoleni"><ion-icon name="logo-github"></ion-icon></a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/joakimmoleni" class="social-link" aria-label="LinkedIn profile: Joakim Moléni"><ion-icon name="logo-linkedin"></ion-icon></a></li>
           </ul>
@@ -108,15 +103,11 @@
               <h3 class="hero-hello">My name is</h3>
               <h1
                 class="h1 hero-title"
-                data-reveal="top"
-                data-reveal-delay=".25"
               >
                 Joakim Moléni
               </h1>
               <h3
                 class="h2 hero-title"
-                data-reveal="top"
-                data-reveal-delay=".75"
                 style="color: grey"
               >
                 and I am a software engineer.
@@ -124,16 +115,12 @@
 
               <p
                 class="section-text h4"
-                data-reveal="top"
-                data-reveal-delay="1.5"
               >
               I love to build things. <br>
               </p>
 
               <div
                 class="btn-wrapper"
-                data-reveal="bottom"
-                data-reveal-delay="2"
               >
                 <a href="#section-project" class="btn btn-primary"
                   >See My Works</a
@@ -166,10 +153,10 @@
               </div>
 
               <figure data-reveal="right" data-reveal-delay=".5" class="banner">
-                <!-- PATCH: decoding/async/lazy + bättre alt -->
                 <img
                   src="./assets/images/nostalgia.jpg"
-                  
+                  fetchpriority="high" 
+                  loading="eager"
                   decoding="async"
                   alt="Joakim"
                   class="w-100"
@@ -278,7 +265,6 @@
                   </div>
                   
                   <figure class="card-banner" data-reveal="left">
-                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project2.jpg"
                       width="600"
@@ -306,7 +292,6 @@
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
-                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project1.webp"
                       width="650"
@@ -333,7 +318,6 @@
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
-                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project3.jpg"
                       width="600"
@@ -360,7 +344,6 @@
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
-                    <!-- PATCH: decoding/async/lazy + alt -->
                     <img
                       src="./assets/images/project4.webp"
                       width="620"
@@ -400,7 +383,6 @@
                 </p>
               </div>
 
-              <!-- PATCH: onsubmit + labels (sr-only kräver css) -->
               <form action="" class="contact-form" data-reveal="right" onsubmit="return mailtoSubmit(event)">
                 <div class="input-wrapper">
                   <label for="name" class="sr-only">Name</label>
@@ -477,15 +459,7 @@
       </div>
     </footer>
 
-    <script src="./assets/js/script.js"></script>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script src="./assets/js/script.js" defer></script>
+    <script type="module" defer src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.esm.js"></script>
   </body>
 </html>
