@@ -464,8 +464,14 @@ section[id] { scroll-margin-top: 120px; }
 
 .hero-cursor {
   color: var(--mainLinkColor);
-  animation: blink 1.25s step-end infinite;
+  animation: none;
   font-weight: 400;
+  opacity: 0;
+}
+
+.hero-typing.is-active .hero-cursor {
+  animation: blink 1.6s step-end infinite;
+  opacity: 0.72;
 }
 
 .hero-cursor.is-typing {

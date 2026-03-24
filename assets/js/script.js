@@ -6,6 +6,13 @@
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => root.querySelectorAll(sel);
 
+// Keep canonical-looking root URL when index is opened directly.
+if (window.location.protocol.startsWith('http') && window.location.pathname.endsWith('/index.html')) {
+  const cleanPath = window.location.pathname.replace(/index\.html$/, '');
+  const cleanUrl = `${cleanPath}${window.location.search}${window.location.hash}`;
+  window.history.replaceState(null, '', cleanUrl);
+}
+
 /**
  * Add event listener on multiple elements
  */
@@ -165,6 +172,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
  * HERO TYPING ANIMATION (single-line loop)
  */
 (function heroTypingLoop() {
+  const typingWrap = $('.hero-typing');
   const typingEl = $('.hero-typing-text');
   const cursorEl = $('.hero-cursor');
   if (!typingEl) return;
@@ -186,7 +194,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const ERASE_SPEED = 16;
   const HOLD_AFTER_TYPE = 1200;
   const HOLD_BETWEEN_LINES = 200;
-  const EXTRA_LOOP_DELAY = 800;
+  const LAST_LINE_LOOP_PAUSE = 1500;
 
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -209,6 +217,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   async function runLoop() {
     let index = 0;
     await sleep(START_DELAY);
+    typingWrap?.classList.add('is-active');
+
+    const hasStaticFirstLine = typingEl.textContent.trim() === lines[0];
+    if (hasStaticFirstLine) {
+      await sleep(HOLD_AFTER_TYPE);
+      await eraseLine(lines[0]);
+      await sleep(HOLD_BETWEEN_LINES);
+      index = 1;
+    }
 
     while (true) {
       const line = lines[index];
@@ -217,7 +234,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       await eraseLine(line);
 
       const isLastLine = index === lines.length - 1;
-      await sleep(isLastLine ? HOLD_BETWEEN_LINES + EXTRA_LOOP_DELAY : HOLD_BETWEEN_LINES);
+      await sleep(isLastLine ? LAST_LINE_LOOP_PAUSE : HOLD_BETWEEN_LINES);
 
       index = (index + 1) % lines.length;
     }
