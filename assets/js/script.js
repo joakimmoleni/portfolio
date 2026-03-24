@@ -166,6 +166,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
  */
 (function heroTypingLoop() {
   const typingEl = $('.hero-typing-text');
+  const cursorEl = $('.hero-cursor');
   if (!typingEl) return;
 
   const lines = [
@@ -180,18 +181,22 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     return;
   }
 
-  const TYPE_SPEED = 24;
-  const ERASE_SPEED = 14;
-  const HOLD_AFTER_TYPE = 850;
-  const HOLD_AFTER_ERASE = 170;
+  const START_DELAY = 500;
+  const TYPE_SPEED = 30;
+  const ERASE_SPEED = 16;
+  const HOLD_AFTER_TYPE = 1200;
+  const HOLD_BETWEEN_LINES = 200;
+  const EXTRA_LOOP_DELAY = 800;
 
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   async function typeLine(text) {
+    cursorEl?.classList.add('is-typing');
     for (let i = 1; i <= text.length; i += 1) {
       typingEl.textContent = text.slice(0, i);
       await sleep(TYPE_SPEED);
     }
+    cursorEl?.classList.remove('is-typing');
   }
 
   async function eraseLine(text) {
@@ -203,12 +208,17 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   async function runLoop() {
     let index = 0;
+    await sleep(START_DELAY);
+
     while (true) {
       const line = lines[index];
       await typeLine(line);
       await sleep(HOLD_AFTER_TYPE);
       await eraseLine(line);
-      await sleep(HOLD_AFTER_ERASE);
+
+      const isLastLine = index === lines.length - 1;
+      await sleep(isLastLine ? HOLD_BETWEEN_LINES + EXTRA_LOOP_DELAY : HOLD_BETWEEN_LINES);
+
       index = (index + 1) % lines.length;
     }
   }
