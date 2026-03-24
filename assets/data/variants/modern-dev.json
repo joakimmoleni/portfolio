@@ -1,0 +1,52 @@
+{
+  "personal": {
+    "name": "Joakim Moléni",
+    "title": "Software Engineer — High-Reliability Systems & Core-to-Cloud Architecture",
+    "location": "Stockholm, Sweden",
+    "email": "jcrooge@gmail.com",
+    "github": "github.com/joakimmoleni",
+    "linkedin": "linkedin.com/in/joakimmoleni"
+  },
+  "profile": "Software Engineer focused on high-reliability transaction systems within core banking environments. Experienced in developing and maintaining mission-critical flows on IBM z/OS (COBOL, HLASM, IMS) and integrating them with modern service architectures (Node.js, REST APIs, AWS).",
+  "coreStack": [
+    "COBOL",
+    "HLASM",
+    "IBM z/OS",
+    "IMS",
+    "Python",
+    "JavaScript",
+    "Node.js",
+    "SQL",
+    "Linux",
+    "REST APIs",
+    "AWS"
+  ],
+  "experience": [
+    {
+      "company": "SEB",
+      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 – Present",
+      "highlights": [
+        "Development and maintenance of high-availability core banking systems on IBM z/OS",
+        "Implementation of transaction logic in COBOL and HLASM within regulated financial infrastructure",
+        "Integration between mainframe transaction flows and distributed service layers via REST-based interfaces"
+      ]
+    },
+    {
+      "company": "Fragsheet",
+      "role": "Full-stack Developer",
+      "years": "Jan 2023 – Jul 2023",
+      "highlights": [
+        "Designed and implemented REST APIs in Node.js",
+        "Cloud deployment and infrastructure setup in AWS environments"
+      ]
+    }
+  ],
+  "projects": [],
+  "education": [],
+  "skills": {
+    "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
+    "platforms": ["IBM z/OS", "IMS", "Linux", "Node.js", "AWS"],
+    "concepts": ["High-Availability Systems", "Transaction Processing", "System Design", "Distributed Systems"]
+  }
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
   
-    <title>Joakim - Software Engineer</title>
-    <meta name="title" content="Joakim - Software Engineer">
-    <meta name="description" content="This is a personal portfolio">
+    <title>Joakim Moléni - Software Engineer</title>
+    <meta name="title" content="Joakim Moléni - Software Engineer">
+    <meta name="description" content="Software engineer working in core banking — mainframe systems, payment infrastructure and backend services. Portfolio of Joakim Moléni.">
   
     <!-- Theme colors for mobile UI -->
     <meta name="theme-color" content="#131415" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f7f7f7"  media="(prefers-color-scheme: light)">
   
     <!-- Open Graph -->
-    <meta property="og:title" content="Joakim - Software Engineer">
-    <meta property="og:description" content="Portfolio — Web, Mobile, Infrastructure, Databases.">
+    <meta property="og:title" content="Joakim Moléni - Software Engineer">
+    <meta property="og:description" content="Software engineer in core banking. Mainframe systems, payment infrastructure and backend services.">
     <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/nostalgia.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://joakimmoleni.github.io/portfolio/">
@@ -44,9 +44,7 @@
     </noscript>
   
     <!-- Main CSS -->
-    <link rel="preload" as="style" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="./assets/css/style.css"></noscript>
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   
   <body>
@@ -60,7 +58,10 @@
             <a href="#" class="logo" data-nav-toggler>Joakim</a>
     
             <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
-              <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
     
@@ -68,30 +69,45 @@
             <li><a href="#section-about" class="navbar-link abouts" data-nav-toggler>About</a></li>
             <li><a href="#section-project" class="navbar-link projects" data-nav-toggler>Projects</a></li>
             <li><a href="#section-contact" class="navbar-link contacts" data-nav-toggler>Contact</a></li>
-            <li><a href="./assets/CV_Joakim-Melen-2022.pdf" class="navbar-link resumes" target="_blank" rel="noopener noreferrer">Resume &rarr;</a></li>
+            <li><a href="./resume.html" class="navbar-link resumes" data-nav-toggler>Resume →</a></li>
           </ul>
-    
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-              <input type="checkbox" id="checkbox" />
-              <ion-icon id="darkmode" name="contrast-outline"></ion-icon>
-              <ion-icon id="lightmode" class="hidden" name="contrast"></ion-icon>
-            </label>
-          </div>
-    
+
           <div class="wrapper">
-            <a href="mailto:devjoakimmelen@gmail.com" class="contact-link">devjoakimmelen@gmail.com</a>
+            <a href="mailto:jcrooge@gmail.com" class="contact-link">jcrooge@gmail.com</a>
           </div>
     
           <ul class="social-list">
-            <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/joakimmoleni" class="social-link" aria-label="GitHub profile: joakimmoleni"><ion-icon name="logo-github"></ion-icon></a></li>
-            <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/joakimmoleni" class="social-link" aria-label="LinkedIn profile: Joakim Moléni"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/joakimmoleni" class="social-link" aria-label="GitHub profile: joakimmoleni"><svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/joakimmoleni" class="social-link" aria-label="LinkedIn profile: Joakim Moléni"><svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.006 1.413-.103.25-.129.599-.129.949v5.443h-3.554s.05-8.736 0-9.646h3.554v1.364c.42-.648 1.36-1.573 3.322-1.573 2.429 0 4.252 1.586 4.252 4.999v5.856zM5.337 8.855c-1.144 0-1.915-.758-1.915-1.706 0-.968.77-1.706 1.906-1.706.974 0 1.914.738 1.914 1.706 0 .948-.779 1.706-1.905 1.706zm1.6 12.002h-3.21V9.542h3.21v11.315zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
           </ul>
         </nav>
-    
-        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler aria-expanded="false">
-          <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-        </button>
+
+        <div class="header-actions">
+          <button class="theme-switch" id="themeToggle" aria-label="Toggle dark/light mode">
+            <svg id="darkmode" class="icon-moon" viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg id="lightmode" class="icon-sun hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <button class="nav-open-btn" aria-label="open menu" data-nav-toggler aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="width: 24px; height: 24px;">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
     
         <div class="overlay" data-nav-toggler data-overlay></div>
       </div>
@@ -102,45 +118,32 @@
         <!-- HERO -->
         <section id="section-hero" class="section hero" aria-label="home">
           <div class="container">
-            <div class="hero-content">
-              <h3 class="hero-hello">My name is</h3>
-              <h1
-                class="h1 hero-title"
-              >
-                Joakim Moléni
-              </h1>
-              <h3
-                class="h2 hero-title"
-                style="color: grey"
-              >
-                and I am a software engineer.
-              </h3>
+            <div class="hero-shell">
+              <div class="hero-content">
+                <div class="hero-headline-block">
+                  <p class="hero-greeting" aria-hidden="true">
+                    <span class="hero-greeting-text"></span><span class="hero-cursor">_</span>
+                  </p>
+                  <h1 class="hero-name" aria-label="Joakim Moleni. I build systems that stay up, scale under pressure, carry real transactions and hold when it matters">
+                    <span class="hero-name-text"></span><span class="hero-cursor">_</span>
+                  </h1>
 
-              <p
-                class="section-text h4"
-              >
-              I love to build things. <br>
-              </p>
+                  <ul class="hero-lines" aria-hidden="true"></ul>
 
-              <div
-                class="btn-wrapper"
-              >
-                <a href="#section-project" class="btn btn-primary"
-                  >See My Works</a
-                >
-
-                <a href="#section-contact" class="btn btn-secondary"
-                  >Contact Me</a
-                >
+                  <p class="hero-subtitle">From mainframe transaction flows to modern service architectures.</p>
+                </div>
+                <div class="hero-cta-block">
+                  <div class="btn-wrapper">
+                    <a href="#section-project" class="btn btn-primary">View Projects</a>
+                    <a href="./resume.html" class="btn btn-secondary">Resume</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         <!-- ABOUT -->
-        <br />
-        <br />
-        <br />
         <section id="section-about" class="section about" aria-label="about">
           <div class="container">
             <div class="wrapper">
@@ -148,23 +151,19 @@
                 <h2 class="h4 section-title abouts">About</h2>
 
                 <p class="section-text">
-                  I’ve been hooked on tech since I was a kid — mixing parts that didn’t belong together, just to see what would happen. <br>
-                  Back then it was chaos; now it’s craft.
+                  I spent over a decade in operational leadership before moving into software engineering. That background shapes how I think about systems: ownership, reliability and what it takes to keep things running when it counts.
                   <br><br>
-                  Today I work as a solution engineer and developer at one of Sweden’s largest banks, where I get to blend cutting-edge tools with rock-solid mainframe systems.
+                  Today I build and maintain transaction-critical software in core banking, where mainframe logic and modern services have to work together without excuses.
                 </p>
               </div>
 
               <figure data-reveal="right" data-reveal-delay=".5" class="banner">
-                <img
-                  src="./assets/images/nostalgia.jpg"
-                  fetchpriority="high" 
-                  loading="eager"
-                  decoding="async"
-                  alt="Joakim"
-                  class="w-100"
-                  data-reveal="top"
-                />
+                <object type="image/svg+xml"
+                        data="./assets/images/about.svg"
+                        class="project-svg"
+                        aria-label="Animated circuit board visualization with microcontroller, memory and I/O components"
+                        data-reveal="top">
+                </object>
               </figure>
             </div>
 
@@ -172,13 +171,18 @@
               <li data-reveal="bottom">
                 <div class="about-card">
                   <div class="card-icon">
-                    <ion-icon name="logo-web-component" size="large"></ion-icon>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="2" y1="20" x2="22" y2="20"></line>
+                      <line x1="6" y1="20" x2="6" y2="23"></line>
+                      <line x1="18" y1="20" x2="18" y2="23"></line>
+                    </svg>
                   </div>
 
                   <h3 class="h4 card-title">Web</h3>
 
                   <p class="card-text">
-                    I work fluently with the modern web stack — JavaScript, TypeScript, React, Vue, Angular, Svelte, Next.js, and the tooling behind it. But when possible, I prefer to keep things lean: vanilla code, built from the ground up. Less magic, more control.
+                    Comfortable across the modern web stack — from REST APIs and Node.js services to frontend interfaces. I prefer solutions that stay readable and do what they need to without unnecessary layers.
                   </p>
                 </div>
               </li>
@@ -186,13 +190,19 @@
               <li data-reveal="bottom" data-reveal-delay="0.25">
                 <div class="about-card">
                   <div class="card-icon">
-                    <ion-icon name="apps-sharp" size="large"></ion-icon>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M8 12h8"></path>
+                      <rect x="2" y="8" width="6" height="8" rx="1"></rect>
+                      <rect x="16" y="8" width="6" height="8" rx="1"></rect>
+                      <path d="M12 2v4"></path>
+                      <path d="M12 18v4"></path>
+                    </svg>
                   </div>
 
-                  <h3 class="h4 card-title">Mobile</h3>
+                  <h3 class="h4 card-title">Integrations</h3>
 
                   <p class="card-text">
-                    I can ship native apps and cross-platform products that work seamlessly on web and mobile. But my focus is always on keeping it lightweight — writing what’s needed, avoiding bloated stacks, and owning the code.
+                    Most of my day-to-day work involves bridging mainframe transaction flows with distributed service layers. Getting data across those boundaries reliably is harder than it sounds — and where I add the most value.
                   </p>
                 </div>
               </li>
@@ -200,13 +210,17 @@
               <li data-reveal="bottom" data-reveal-delay="0.5">
                 <div class="about-card">
                   <div class="card-icon">
-                    <ion-icon name="code-working-sharp" size="large"></ion-icon>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="4" rx="1"></rect>
+                      <rect x="2" y="10" width="20" height="4" rx="1"></rect>
+                      <rect x="2" y="17" width="20" height="4" rx="1"></rect>
+                    </svg>
                   </div>
 
                   <h3 class="h4 card-title">Infrastructure</h3>
 
                   <p class="card-text">
-                    I’ve worked across the stack — Node.js, Python, Docker, Django, even COBOL and Assembler. But the tech is secondary. What I really enjoy is building the core myself, shaping infrastructure that everything else can stand on.
+                    Experience spanning COBOL, HLASM, Node.js, Python and Linux environments. I care most about the parts that hold everything together: service design, deployment pipelines and runtime decisions that outlast the sprint.
                   </p>
                 </div>
               </li>
@@ -214,13 +228,17 @@
               <li data-reveal="bottom" data-reveal-delay="0.75">
                 <div class="about-card">
                   <div class="card-icon">
-                    <ion-icon name="search-sharp" size="large"></ion-icon>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                      <path d="M21 12c0 1.66-4.03 3-9 3s-9-1.34-9-3"></path>
+                      <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
                   </div>
 
-                  <h3 class="h4 card-title">Databases</h3>
+                  <h3 class="h4 card-title">Data & Databases</h3>
 
                   <p class="card-text">
-                    Databases aren’t optional — they’re the heartbeat of any system. I’ve handled systems with millions of daily transactions, but I still approach them the same way: keep it lean, know exactly how the data moves, and never hide behind abstractions.
+                    Worked with SQL, IMS and transactional data in regulated banking environments. I focus on how data flows between systems, where consistency breaks down and how to prevent it in high-volume production.
                   </p>
                 </div>
               </li>
@@ -243,13 +261,12 @@
                 </h2>
 
                 <p class="section-text">
-                  Here are a few examples of my work. 
-                  Most of what I build is part of proprietary systems at large companies    —    so while I can’t show everything, I can share enough to give you a sense of the impact.
+                  Most of my work lives in proprietary banking systems I cannot show in full. These are selected examples of the kind of problems I work on: transaction reliability, cross-platform integration and systems that run long after anyone is watching.
                 </p>
               </div>
 
-              <a href="#section-project" class="btn btn-secondary"
-                >See All Projects</a
+              <a href="./resume.html" class="btn btn-secondary"
+                >Open Resume</a
               >
             </div>
 
@@ -263,20 +280,16 @@
                     <h3 class="h3 card-title">Infrastructure for Pan-European Payments</h3>
                     
                     <p class="card-text">
-                      I helped build the backbone for instant payments across Europe. Working at one of Sweden’s largest banks, I focused on long-term, high-reliability solutions designed to handle transactions at continental scale.
+                      Worked on the infrastructure layer for instant payment flows within core banking — designing for traceability, fault tolerance and the kind of throughput where every missed edge case becomes a production incident.
                     </p>
                   </div>
                   
                   <figure class="card-banner" data-reveal="left">
-                    <img
-                      src="./assets/images/project2.jpg"
-                      width="600"
-                      height="367"
-                      loading="lazy"
-                      decoding="async"
-                      alt="Web Design"
-                      class="w-100"
-                    />
+                    <object type="image/svg+xml"
+                            data="./assets/images/payments.svg"
+                            class="project-svg"
+                            aria-label="Payment infrastructure visualization">
+                    </object>
                   </figure>
                 </div>
               </li>
@@ -289,8 +302,7 @@
                     <h3 class="h3 card-title">AI-Powered Coaching for League of Legends</h3>
 
                     <p class="card-text">
-                      At Fragsheet, my team and I developed an AI coach from the ground up and integrated it directly into our web client. By combining advanced analytics with machine learning, the coach provided players with insights and guidance far beyond raw statistics.
-
+                      Built the REST API layer and cloud infrastructure (AWS) for Fragsheet's AI coaching product. My role was connecting the analysis pipeline to the live application — handling real-time data, auth and deployment for an early-stage team.
                     </p>
                   </div>
 
@@ -301,7 +313,7 @@
                       height="170"
                       loading="lazy"
                       decoding="async"
-                      alt="Web Design"
+                      alt="Fragsheet AI coaching application interface"
                       class="w-100"
                     />
                   </figure>
@@ -316,20 +328,16 @@
                     <h3 class="h3 card-title">Maintaining and Extending Legacy Systems in Assembler</h3>
 
                     <p class="card-text">
-                      I work hands-on with critical legacy systems in Assembler   —   maintaining stability, adding new features, and optimizing low-level code for performance and reliability in production.
+                      Hands-on maintenance and extension of HLASM production code in core banking — patching transaction logic, tracing failures across IMS regions and introducing changes with zero tolerance for regression in a live environment.
                     </p>
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
-                    <img
-                      src="./assets/images/project3.jpg"
-                      width="600"
-                      height="367"
-                      loading="lazy"
-                      decoding="async"
-                      alt="Web Design"
-                      class="w-100"
-                    />
+                    <object type="image/svg+xml"
+                            data="./assets/images/assembler.svg"
+                            class="project-svg"
+                            aria-label="Assembler code visualization">
+                    </object>
                   </figure>
                 </div>
               </li>
@@ -342,20 +350,16 @@
                     <h3 class="h3 card-title">Building and Sustaining High-Traffic Systems</h3>
 
                     <p class="card-text">
-                      developed and maintained COBOL-based platforms serving millions of daily users. My work centered on account management and transaction processing  —  ensuring performance, reliability, and trust at scale.
+                      Developing and maintaining COBOL batch and online programs on IBM z/OS that process banking transactions daily. The work requires precision in transaction handling, data integrity across IMS databases and careful performance tuning.
                     </p>
                   </div>
 
                   <figure class="card-banner" data-reveal="right">
-                    <img
-                      src="./assets/images/project4.webp"
-                      width="620"
-                      height="370"
-                      loading="lazy"
-                      decoding="async"
-                      alt="Mobile Design"
-                      class="w-100"
-                    />
+                    <object type="image/svg+xml"
+                            data="./assets/images/mainframe.svg"
+                            class="project-svg"
+                            aria-label="Mainframe data center visualization">
+                    </object>
                   </figure>
                 </div>
               </li>
@@ -373,16 +377,16 @@
           <div class="container">
             <div class="contact-card">
               <div class="contact-content" data-reveal="left">
-                <ion-icon size="large" name="mail-outline"></ion-icon>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="M22 6L12 13L2 6"></path>
+                </svg>
                 <h2 class="h4 section-title contacts">Contact</h2>
 
                 <p class="section-text">
-                  Curious about my work, or just want to bounce an idea? 
+                  Open to conversations about backend engineering, mainframe modernisation or roles that bridge legacy and modern systems.
                   <br><br>
-                  Reach out — I’m always up for cool stuff.
-                  <br>
-                  <br>
-                  <span style="font-style: italic;">P.S. The easiest way to reach me is via LinkedIn</span>
+                  Easiest via LinkedIn. The form opens your email client.
                 </p>
               </div>
 
@@ -419,7 +423,7 @@
                 ></textarea>
 
                 <button type="submit" class="btn btn-secondary">
-                  Send Message
+                  Send via Email Client
                 </button>
               </form>
             </div>
@@ -431,7 +435,7 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
-        <p class="copyright">© 2026 Joakim Moléni. All rights reserved.</p>
+        <p class="copyright">© <span id="copyrightYear">2026</span> Joakim Moléni. All rights reserved.</p>
 
         <ul class="social-list">
           <li>
@@ -442,7 +446,7 @@
               class="social-link"
               aria-label="GitHub profile: joakimmoleni"
             >
-              <ion-icon name="logo-github"></ion-icon>
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
           </li>
 
@@ -454,7 +458,7 @@
               class="social-link"
               aria-label="LinkedIn profile: Joakim Moléni"
             >
-              <ion-icon name="logo-linkedin"></ion-icon>
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.006 1.413-.103.25-.129.599-.129.949v5.443h-3.554s.05-8.736 0-9.646h3.554v1.364c.42-.648 1.36-1.573 3.322-1.573 2.429 0 4.252 1.586 4.252 4.999v5.856zM5.337 8.855c-1.144 0-1.915-.758-1.915-1.706 0-.968.77-1.706 1.906-1.706.974 0 1.914.738 1.914 1.706 0 .948-.779 1.706-1.905 1.706zm1.6 12.002h-3.21V9.542h3.21v11.315zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
           </li>
 
@@ -463,6 +467,5 @@
     </footer>
 
     <script src="./assets/js/script.js" defer></script>
-    <script type="module" defer src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.esm.js"></script>
   </body>
 </html>

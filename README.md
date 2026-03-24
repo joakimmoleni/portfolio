@@ -1,18 +1,30 @@
-<div align="center">
-  
-  <br />
-  <br />
+# Joakim Moléni — Portfolio
 
-  <h2 align="center">Joakim - Portfolio Website</h2>
+Personal portfolio and interactive resume builder. Static site built with HTML, CSS and vanilla JavaScript.
 
-A fully responsive personal portfolio website, <br />Responsive for all devices, built using HTML, CSS, and JavaScript.
+## Features
 
-<a href="#"><strong>➥ Live Demo</strong></a>
+- Responsive portfolio with dark/light theme
+- Multi-variant resume system (Core Systems, Modern Backend, Platform & Delivery)
+- Print-optimized PDF export for resumes
+- Accessible: keyboard navigation, reduced-motion support, semantic HTML
 
-</div>
+## Structure
 
-<br />
+- `index.html` — Main portfolio page
+- `resume.html` — Interactive resume with variant selector
+- `assets/data/` — Resume data (JSON) with per-variant overrides
+- `assets/css/` — Stylesheets (portfolio + resume)
+- `assets/js/` — Scripts (portfolio + resume)
 
-### Contact
+## Run locally
 
-If you want to contact with me you can reach me at
+Open `index.html` in a browser, or serve with any static file server:
+
+```sh
+npx serve .
+```
+
+## Contact
+
+Joakim Moléni — [jcrooge@gmail.com](mailto:jcrooge@gmail.com)

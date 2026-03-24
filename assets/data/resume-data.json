@@ -1,0 +1,119 @@
+{
+  "personal": {
+    "name": "Joakim Moléni",
+    "title": "Software Engineer — High-Reliability Systems & Core-to-Cloud Architecture",
+    "location": "Stockholm, Sweden",
+    "email": "jcrooge@gmail.com",
+    "github": "github.com/joakimmoleni",
+    "linkedin": "linkedin.com/in/joakimmoleni"
+  },
+  "variants": [
+    {
+      "id": "mainframe-dev",
+      "title": "Core Systems CV",
+      "template": "mainframe-dev",
+      "path": "./assets/data/variants/mainframe-dev.json",
+      "description": "Prioritises mainframe, reliability and transaction-heavy work."
+    },
+    {
+      "id": "modern-dev",
+      "title": "Modern Backend CV",
+      "template": "modern-dev",
+      "path": "./assets/data/variants/modern-dev.json",
+      "description": "Highlights backend, integrations and modern service delivery."
+    },
+    {
+      "id": "platform-dev",
+      "title": "Platform & Delivery CV",
+      "template": "platform-dev",
+      "path": "./assets/data/variants/platform-dev.json",
+      "description": "Balances architecture, ownership and delivery across systems."
+    }
+  ],
+  "profile": "Software Engineer focused on high-reliability transaction systems within core banking environments. Experienced in developing and maintaining mission-critical flows on IBM z/OS (COBOL, HLASM, IMS) and integrating them with modern service architectures (Node.js, REST APIs, AWS). Strong systems-level perspective shaped by leadership background and operational accountability.",
+  "coreStack": [
+    "COBOL",
+    "HLASM",
+    "IBM z/OS",
+    "IMS",
+    "Python",
+    "JavaScript",
+    "Node.js",
+    "SQL",
+    "Linux",
+    "REST APIs",
+    "AWS"
+  ],
+  "experience": [
+    {
+      "company": "SEB",
+      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 – Present",
+      "highlights": [
+        "Development and maintenance of high-availability core banking systems on IBM z/OS",
+        "Implementation of transaction logic in COBOL and HLASM within regulated financial infrastructure",
+        "Integration between mainframe transaction flows and distributed service layers via REST-based interfaces",
+        "Participation in system design discussions and reliability improvements across critical financial processes"
+      ]
+    },
+    {
+      "company": "Handelsbanken",
+      "role": "System Engineer",
+      "years": "Aug 2023 – Aug 2024",
+      "highlights": [
+        "Backend development within banking systems supporting core financial processes",
+        "System integration and operational support across Linux and distributed environments",
+        "Work spanning APIs, databases and service-layer integrations"
+      ]
+    },
+    {
+      "company": "Fragsheet",
+      "role": "Full-stack Developer",
+      "years": "Jan 2023 – Jul 2023",
+      "highlights": [
+        "Designed and implemented REST APIs in Node.js",
+        "Cloud deployment and infrastructure setup in AWS environments",
+        "Contributed to architectural decisions in early-stage product development"
+      ]
+    },
+    {
+      "company": "Changemaker Educations",
+      "role": "Frontend / Backend Developer",
+      "years": "Sep 2021 – Jul 2023",
+      "highlights": [
+        "Web application development with REST integrations and SQL-backed data models",
+        "Deployment and maintenance in Linux-based cloud environments"
+      ]
+    },
+    {
+      "company": "Earlier Experience (Selected)",
+      "role": "Business & Operational Leadership Roles",
+      "years": "2005 – 2019",
+      "highlights": [
+        "Senior roles across renewable energy, events and technical operations",
+        "Leadership responsibility, project management and system-oriented decision making",
+        "Operational accountability influencing current approach to reliability and system design"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portfolio & Resume Builder",
+      "description": "Personal engineering portfolio with integrated version-controlled resume generator and print-optimized PDF export pipeline.",
+      "tech": ["HTML", "CSS", "JavaScript", "Client-side PDF rendering"]
+    }
+  ],
+  "education": [],
+  "skills": {
+    "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
+    "platforms": ["IBM z/OS", "IMS", "Linux", "Node.js", "AWS"],
+    "concepts": [
+      "High-Availability Systems",
+      "Transaction Processing",
+      "System Design",
+      "Distributed Systems",
+      "RESTful Architecture",
+      "Core-to-Cloud Integration"
+    ]
+  }
+}

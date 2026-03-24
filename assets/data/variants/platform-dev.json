@@ -1,0 +1,69 @@
+{
+  "personal": {
+    "name": "Joakim Moléni",
+    "title": "Software Engineer — Platform, Integration & Technical Delivery",
+    "location": "Stockholm, Sweden",
+    "email": "jcrooge@gmail.com",
+    "github": "github.com/joakimmoleni",
+    "linkedin": "linkedin.com/in/joakimmoleni"
+  },
+  "profile": "Engineer with a systems-level perspective shaped by banking, backend development and operational leadership. Strong at connecting old and new technology, turning ambiguous requirements into workable architecture and keeping delivery grounded in reliability.",
+  "coreStack": [
+    "System Design",
+    "Mainframe Integration",
+    "Node.js",
+    "Python",
+    "SQL",
+    "Linux",
+    "REST APIs",
+    "AWS"
+  ],
+  "experience": [
+    {
+      "company": "SEB",
+      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 – Present",
+      "highlights": [
+        "Working in high-reliability banking flows where mainframe logic and distributed services need to align cleanly",
+        "Contributing to architecture and implementation decisions across transaction-heavy production systems",
+        "Improving maintainability and delivery confidence in regulated infrastructure"
+      ]
+    },
+    {
+      "company": "Handelsbanken",
+      "role": "System Engineer",
+      "years": "Aug 2023 – Aug 2024",
+      "highlights": [
+        "Backend and systems work across Linux environments, APIs and core banking integrations",
+        "Hands-on support for service behaviour, operational issues and system-level troubleshooting"
+      ]
+    },
+    {
+      "company": "Earlier Leadership Experience",
+      "role": "Operational / Business Leadership",
+      "years": "2005 – 2019",
+      "highlights": [
+        "Built decision-making discipline, ownership and delivery focus that now inform technical work",
+        "Experience leading teams, priorities and outcomes in environments where execution mattered"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portfolio & Resume Builder",
+      "description": "A lightweight personal site with role-specific resume variants, print support and minimal client-side logic.",
+      "tech": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "name": "Core-to-Cloud Integration Work",
+      "description": "Production-facing work connecting stable transactional systems to newer service layers without losing reliability along the way.",
+      "tech": ["IBM z/OS", "REST APIs", "Node.js", "SQL"]
+    }
+  ],
+  "education": [],
+  "skills": {
+    "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
+    "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS"],
+    "concepts": ["System Ownership", "Technical Delivery", "Integration Design", "Reliability", "Operational Clarity"]
+  }
+}

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" width="760" height="520">
+  <rect width="760" height="520" fill="#0c0e0c"/>
+
+  <!-- Terminal window chrome -->
+  <rect x="30" y="30" width="700" height="460" rx="8" fill="#0e120e" stroke="#1a2a1a" stroke-width="1.5"/>
+
+  <!-- Title bar -->
+  <rect x="30" y="30" width="700" height="36" rx="8" fill="#111811"/>
+  <rect x="30" y="54" width="700" height="12" fill="#111811"/>
+  <!-- Window buttons -->
+  <circle cx="56" cy="48" r="6" fill="#3a1a1a"/>
+  <circle cx="76" cy="48" r="6" fill="#3a2a0a"/>
+  <circle cx="96" cy="48" r="6" fill="#1a2a1a"/>
+  <!-- Title -->
+  <text x="380" y="53" font-family="'Courier New', monospace" font-size="11" fill="#2a4a2a" text-anchor="middle">HLASM — PROD.PAYROLL.LOAD(CALCSUB) — IBM z/OS</text>
+
+  <!-- Line numbers column -->
+  <rect x="30" y="66" width="52" height="424" fill="#0c100c"/>
+  <line x1="82" y1="66" x2="82" y2="490" stroke="#1a241a" stroke-width="1"/>
+
+  <!-- Code content area -->
+  <!-- Line 1 -->
+  <text x="44" y="90" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">001</text>
+  <text x="96" y="90" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* PAYROLL CALCULATION SUBSYSTEM</text>
+
+  <!-- Line 2 -->
+  <text x="44" y="108" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">002</text>
+  <text x="96" y="108" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* LAST MODIFIED: 1997-03-14  AUTHOR: E.LINDGREN</text>
+
+  <!-- Line 3 blank -->
+  <text x="44" y="126" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">003</text>
+
+  <!-- Line 4 -->
+  <text x="44" y="144" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">004</text>
+  <text x="96" y="144" font-family="'Courier New', monospace" font-size="10" fill="#48bba2" font-weight="bold">CALCSUB  </text>
+  <text x="178" y="144" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">CSECT</text>
+
+  <!-- Line 5 -->
+  <text x="44" y="162" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">005</text>
+  <text x="96" y="162" font-family="'Courier New', monospace" font-size="10" fill="#3a6a4a">         </text>
+  <text x="178" y="162" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">STM</text>
+  <text x="214" y="162" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">   14,12,12(13)</text>
+  <text x="370" y="162" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* SAVE REGISTERS</text>
+
+  <!-- Line 6 -->
+  <text x="44" y="180" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">006</text>
+  <text x="178" y="180" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">BALR</text>
+  <text x="214" y="180" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">  12,0</text>
+  <text x="370" y="180" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* BASE REGISTER</text>
+
+  <!-- Line 7 -->
+  <text x="44" y="198" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">007</text>
+  <text x="178" y="198" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">USING</text>
+  <text x="214" y="198" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0"> *,12</text>
+
+  <!-- Line 8 blank -->
+  <text x="44" y="216" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">008</text>
+
+  <!-- Line 9 - highlighted active line -->
+  <rect x="82" y="220" width="648" height="18" fill="#0f1e0f" rx="0"/>
+  <rect x="82" y="220" width="3" height="18" fill="#48bba2"/>
+  <text x="44" y="234" font-family="'Courier New', monospace" font-size="10" fill="#48bba2">009</text>
+  <text x="96" y="234" font-family="'Courier New', monospace" font-size="10" fill="#48bba2" font-weight="bold">CALC_PAY </text>
+  <text x="178" y="234" font-family="'Courier New', monospace" font-size="10" fill="#6aba8a">L</text>
+  <text x="214" y="234" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">     2,HOURS</text>
+  <text x="370" y="234" font-family="'Courier New', monospace" font-size="10" fill="#2a5a3a">* LOAD HOURS WORKED</text>
+
+  <!-- Line 10 -->
+  <text x="44" y="252" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">010</text>
+  <text x="178" y="252" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">M</text>
+  <text x="214" y="252" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">     2,RATE</text>
+  <text x="370" y="252" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* MULTIPLY BY HOURLY RATE</text>
+
+  <!-- Line 11 -->
+  <text x="44" y="270" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">011</text>
+  <text x="178" y="270" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">SRA</text>
+  <text x="214" y="270" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">   3,2</text>
+  <text x="370" y="270" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* ADJUST FOR FIXED POINT</text>
+
+  <!-- Line 12 -->
+  <text x="44" y="288" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">012</text>
+  <text x="178" y="288" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">ST</text>
+  <text x="214" y="288" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    3,GROSSPAY</text>
+  <text x="370" y="288" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* STORE GROSS PAY</text>
+
+  <!-- Line 13 blank -->
+  <text x="44" y="306" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">013</text>
+
+  <!-- Line 14 -->
+  <text x="44" y="324" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">014</text>
+  <text x="178" y="324" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">L</text>
+  <text x="214" y="324" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">     13,4(13)</text>
+  <text x="370" y="324" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* RESTORE SAVE AREA PTR</text>
+
+  <!-- Line 15 -->
+  <text x="44" y="342" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">015</text>
+  <text x="178" y="342" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">LM</text>
+  <text x="214" y="342" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    14,12,12(13)</text>
+  <text x="370" y="342" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* RESTORE REGISTERS</text>
+
+  <!-- Line 16 -->
+  <text x="44" y="360" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">016</text>
+  <text x="178" y="360" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">BR</text>
+  <text x="214" y="360" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    14</text>
+  <text x="370" y="360" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* RETURN TO CALLER</text>
+
+  <!-- Spacer lines -->
+  <text x="44" y="378" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">017</text>
+  <text x="44" y="396" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">018</text>
+  <text x="96" y="396" font-family="'Courier New', monospace" font-size="10" fill="#48bba2" font-weight="bold">HOURS    </text>
+  <text x="178" y="396" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">DS</text>
+  <text x="214" y="396" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    F</text>
+  <text x="370" y="396" font-family="'Courier New', monospace" font-size="10" fill="#1e3a1e">* FULLWORD</text>
+
+  <text x="44" y="414" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">019</text>
+  <text x="96" y="414" font-family="'Courier New', monospace" font-size="10" fill="#48bba2" font-weight="bold">RATE     </text>
+  <text x="178" y="414" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">DS</text>
+  <text x="214" y="414" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    F</text>
+
+  <text x="44" y="432" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">020</text>
+  <text x="96" y="432" font-family="'Courier New', monospace" font-size="10" fill="#48bba2" font-weight="bold">GROSSPAY </text>
+  <text x="178" y="432" font-family="'Courier New', monospace" font-size="10" fill="#5a9a6a">DS</text>
+  <text x="214" y="432" font-family="'Courier New', monospace" font-size="10" fill="#8ab8a0">    F</text>
+
+  <!-- Cursor blink on line 21 -->
+  <text x="44" y="450" font-family="'Courier New', monospace" font-size="10" fill="#2a3a2a">021</text>
+  <rect x="96" y="438" width="7" height="14" fill="#48bba2" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Status bar -->
+  <rect x="30" y="466" width="700" height="24" rx="0" fill="#0a120a"/>
+  <rect x="30" y="466" width="700" height="24" fill="#0c160c"/>
+  <text x="96" y="482" font-family="'Courier New', monospace" font-size="9" fill="#48bba2" opacity="0.8">INSERT</text>
+  <text x="160" y="482" font-family="'Courier New', monospace" font-size="9" fill="#2a5a3a">Ln 9, Col 1</text>
+  <text x="270" y="482" font-family="'Courier New', monospace" font-size="9" fill="#2a5a3a">HLASM r6.0</text>
+  <text x="500" y="482" font-family="'Courier New', monospace" font-size="9" fill="#2a5a3a">SYS1.PROCLIB(CALCSUB)</text>
+  <text x="680" y="482" font-family="'Courier New', monospace" font-size="9" fill="#48bba2" text-anchor="end">z/OS 3.1</text>
+</svg>
