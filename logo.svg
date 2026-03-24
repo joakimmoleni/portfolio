@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" shape-rendering="crispEdges">
+  <rect width="48" height="48" fill="#0A0F14"/>
+
+  <!-- Subtle inner glow: 1px offset ghost glyphs -->
+  <text x="9.2" y="29.2"
+        font-family="'DejaVu Sans Mono','Liberation Mono','Courier New',monospace"
+        font-weight="700" font-size="19"
+        fill="#3FA76A" opacity="0.18">&gt;</text>
+  <text x="28.2" y="34.2"
+        font-family="'DejaVu Sans Mono','Liberation Mono','Courier New',monospace"
+        font-weight="700" font-size="15"
+        fill="#3FA76A" opacity="0.18">_</text>
+
+  <!-- Main glyphs — sharp -->
+  <text x="9" y="29"
+        font-family="'DejaVu Sans Mono','Liberation Mono','Courier New',monospace"
+        font-weight="700" font-size="19"
+        fill="#3FA76A">&gt;</text>
+  <text x="28" y="34"
+        font-family="'DejaVu Sans Mono','Liberation Mono','Courier New',monospace"
+        font-weight="700" font-size="15"
+        fill="#3FA76A">_</text>
+</svg>

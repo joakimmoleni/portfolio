@@ -309,6 +309,13 @@ section[id] { scroll-margin-top: 120px; }
   letter-spacing: 0.02em;
 }
 
+.logo img {
+  display: block;
+  width: auto;
+  height: 32px;
+  max-width: 124px;
+}
+
 .logo:is(:hover, :focus-visible) { color: var(--mainLinkColor); }
 
 .navbar {
