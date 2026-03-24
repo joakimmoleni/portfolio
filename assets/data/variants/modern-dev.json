@@ -1,25 +1,19 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Software Engineer — High-Reliability Systems & Core-to-Cloud Architecture",
+    "title": "Software Engineer — High-Reliability Service Integration",
     "location": "Stockholm, Sweden",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Software Engineer focused on high-reliability transaction systems within core banking environments. Experienced in developing and maintaining mission-critical flows on IBM z/OS (COBOL, HLASM, IMS) and integrating them with modern service architectures (Node.js, REST APIs, AWS).",
+  "profile": "Software Engineer bridging transaction-critical core systems with modern backend services. I focus on reliability, integration quality and stable performance when production load is high and failure costs are real.",
   "coreStack": [
-    "COBOL",
-    "HLASM",
-    "IBM z/OS",
-    "IMS",
-    "Python",
-    "JavaScript",
-    "Node.js",
-    "SQL",
-    "Linux",
-    "REST APIs",
-    "AWS"
+    "Distributed service integration",
+    "Legacy modernization",
+    "Transaction processing",
+    "Performance-critical systems",
+    "System ownership"
   ],
   "experience": [
     {
@@ -27,9 +21,9 @@
       "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
       "years": "Aug 2024 – Present",
       "highlights": [
-        "Development and maintenance of high-availability core banking systems on IBM z/OS",
-        "Implementation of transaction logic in COBOL and HLASM within regulated financial infrastructure",
-        "Integration between mainframe transaction flows and distributed service layers via REST-based interfaces"
+        "Developed and maintained transaction-critical systems handling high-volume financial flows on IBM z/OS.",
+        "Integrated mainframe transaction paths with modern distributed services through stable interface contracts.",
+        "Improved reliability and traceability for production systems operating in regulated banking domains."
       ]
     },
     {
@@ -37,8 +31,8 @@
       "role": "Full-stack Developer",
       "years": "Jan 2023 – Jul 2023",
       "highlights": [
-        "Designed and implemented REST APIs in Node.js",
-        "Cloud deployment and infrastructure setup in AWS environments"
+        "Designed and implemented Node.js APIs for data-intensive production workflows.",
+        "Built AWS deployment paths with emphasis on operational clarity and resilient service behavior."
       ]
     }
   ],
@@ -47,6 +41,6 @@
   "skills": {
     "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
     "platforms": ["IBM z/OS", "IMS", "Linux", "Node.js", "AWS"],
-    "concepts": ["High-Availability Systems", "Transaction Processing", "System Design", "Distributed Systems"]
+    "concepts": ["High-reliability systems", "Transaction-critical architecture", "Distributed integration"]
   }
 }

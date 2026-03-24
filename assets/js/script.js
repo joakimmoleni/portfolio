@@ -162,104 +162,58 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 
 /**
- * HERO TYPING ANIMATION
+ * HERO TYPING ANIMATION (single-line loop)
  */
-(function heroAnimation() {
-  const greetingText = 'hello, my name is';
-  const nameText = 'Joakim Moléni';
-  const phrases = [
-    'stay up',
-    'scale under pressure',
-    'carry real data',
-    'hold when it matters'
+(function heroTypingLoop() {
+  const typingEl = $('.hero-typing-text');
+  if (!typingEl) return;
+
+  const lines = [
+    'real financial flows',
+    'high transaction volumes',
+    'systems that cannot fail',
+    'core banking on IBM z/OS'
   ];
 
-  const greetingEl  = $('.hero-greeting-text');
-  const nameEl      = $('.hero-name');
-  const nameTextEl  = $('.hero-name-text');
-  const linesList   = $('.hero-lines');
-  const subtitle    = $('.hero-subtitle');
-
-  if (!greetingEl || !nameTextEl || !linesList) return;
-
-  // If reduced motion, show everything immediately
   if (reducedMotion) {
-    greetingEl.textContent = greetingText;
-    nameTextEl.textContent = nameText;
-    nameEl.classList.add('visible');
-    phrases.forEach(phrase => {
-      const li = document.createElement('li');
-      li.innerHTML = `<span class="line-prefix">I build systems that</span> <span class="line-tail">${phrase}</span>`;
-      li.classList.add('visible');
-      linesList.appendChild(li);
-    });
-    subtitle.classList.add('visible');
-    $$('.hero-cursor').forEach(c => c.classList.add('done'));
+    typingEl.textContent = lines[0];
     return;
   }
 
-  const CHAR_SPEED = 38;
+  const TYPE_SPEED = 24;
+  const ERASE_SPEED = 14;
+  const HOLD_AFTER_TYPE = 850;
+  const HOLD_AFTER_ERASE = 170;
 
-  function typeText(el, text, speed) {
-    return new Promise(resolve => {
-      let i = 0;
-      const interval = setInterval(() => {
-        el.textContent = text.slice(0, ++i);
-        if (i >= text.length) { clearInterval(interval); resolve(); }
-      }, speed);
-    });
-  }
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  async function run() {
-    // Phase 1: Type greeting in green
-    await typeText(greetingEl, greetingText, CHAR_SPEED);
-    await wait(300);
-
-    // Hide greeting cursor
-    const greetingCursor = greetingEl.parentElement.querySelector('.hero-cursor');
-    if (greetingCursor) greetingCursor.classList.add('done');
-
-    // Phase 2: Type name character by character
-    nameEl.classList.add('visible');
-    await typeText(nameTextEl, nameText, CHAR_SPEED);
-    await wait(1200);
-
-    // Hide name cursor
-    const nameCursor = nameEl.querySelector('.hero-cursor');
-    if (nameCursor) nameCursor.classList.add('done');
-    await wait(300);
-
-    // Phase 3: Type all lines uniformly
-    for (let i = 0; i < phrases.length; i++) {
-      const li = document.createElement('li');
-      const prefixSpan = document.createElement('span');
-      prefixSpan.className = 'line-prefix';
-      const tailSpan = document.createElement('span');
-      tailSpan.className = 'line-tail';
-      const cursor = document.createElement('span');
-      cursor.className = 'hero-cursor';
-      cursor.textContent = '_';
-
-      li.appendChild(prefixSpan);
-      li.append(' ');
-      li.appendChild(tailSpan);
-      li.appendChild(cursor);
-      linesList.appendChild(li);
-      li.classList.add('visible');
-
-      await typeText(prefixSpan, 'I build systems that ', CHAR_SPEED);
-      await typeText(tailSpan, phrases[i], CHAR_SPEED);
-      cursor.classList.add('done');
-      await wait(60);
+  async function typeLine(text) {
+    for (let i = 1; i <= text.length; i += 1) {
+      typingEl.textContent = text.slice(0, i);
+      await sleep(TYPE_SPEED);
     }
-
-    await wait(400);
-
-    // Phase 4: Show subtitle
-    subtitle.classList.add('visible');
   }
 
-  run();
+  async function eraseLine(text) {
+    for (let i = text.length; i >= 0; i -= 1) {
+      typingEl.textContent = text.slice(0, i);
+      await sleep(ERASE_SPEED);
+    }
+  }
+
+  async function runLoop() {
+    let index = 0;
+    while (true) {
+      const line = lines[index];
+      await typeLine(line);
+      await sleep(HOLD_AFTER_TYPE);
+      await eraseLine(line);
+      await sleep(HOLD_AFTER_ERASE);
+      index = (index + 1) % lines.length;
+    }
+  }
+
+  runLoop();
 })();
+
+

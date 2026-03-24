@@ -1,22 +1,19 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Software Engineer — Platform, Integration & Technical Delivery",
+    "title": "Software Engineer — Platform Reliability & Delivery",
     "location": "Stockholm, Sweden",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Engineer with a systems-level perspective shaped by banking, backend development and operational leadership. Strong at connecting old and new technology, turning ambiguous requirements into workable architecture and keeping delivery grounded in reliability.",
+  "profile": "Engineer focused on platform reliability across legacy and modern environments. I combine operational discipline with technical delivery to keep transaction-critical systems stable as architecture evolves.",
   "coreStack": [
-    "System Design",
-    "Mainframe Integration",
-    "Node.js",
-    "Python",
-    "SQL",
-    "Linux",
-    "REST APIs",
-    "AWS"
+    "System ownership",
+    "High-reliability systems",
+    "Legacy modernization",
+    "Distributed service integration",
+    "Performance under load"
   ],
   "experience": [
     {
@@ -24,9 +21,9 @@
       "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
       "years": "Aug 2024 – Present",
       "highlights": [
-        "Working in high-reliability banking flows where mainframe logic and distributed services need to align cleanly",
-        "Contributing to architecture and implementation decisions across transaction-heavy production systems",
-        "Improving maintainability and delivery confidence in regulated infrastructure"
+        "Worked on high-reliability banking flows where mainframe logic and modern services must align without introducing failure risk.",
+        "Contributed to architecture and delivery decisions across transaction-heavy production systems with strict stability targets.",
+        "Improved maintainability and release confidence in regulated infrastructure handling critical financial processes."
       ]
     },
     {
@@ -34,8 +31,8 @@
       "role": "System Engineer",
       "years": "Aug 2023 – Aug 2024",
       "highlights": [
-        "Backend and systems work across Linux environments, APIs and core banking integrations",
-        "Hands-on support for service behaviour, operational issues and system-level troubleshooting"
+        "Delivered backend and systems work across Linux environments, APIs and banking integration boundaries.",
+        "Provided hands-on support for runtime behavior, operational incidents and end-to-end troubleshooting."
       ]
     },
     {
@@ -43,20 +40,20 @@
       "role": "Operational / Business Leadership",
       "years": "2005 – 2019",
       "highlights": [
-        "Built decision-making discipline, ownership and delivery focus that now inform technical work",
-        "Experience leading teams, priorities and outcomes in environments where execution mattered"
+        "Built execution discipline, ownership and resilience patterns now applied to engineering work.",
+        "Led teams and outcomes in environments where continuity, accountability and delivery quality were business-critical."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Portfolio & Resume Builder",
-      "description": "A lightweight personal site with role-specific resume variants, print support and minimal client-side logic.",
+      "name": "Resume Presentation System",
+      "description": "A minimal profile presentation with role-targeted content variants and print support for hiring workflows.",
       "tech": ["HTML", "CSS", "JavaScript"]
     },
     {
-      "name": "Core-to-Cloud Integration Work",
-      "description": "Production-facing work connecting stable transactional systems to newer service layers without losing reliability along the way.",
+      "name": "Core-to-Modern Integration",
+      "description": "Production-facing integration work connecting stable transactional systems to modern service layers while preserving reliability.",
       "tech": ["IBM z/OS", "REST APIs", "Node.js", "SQL"]
     }
   ],
@@ -64,6 +61,6 @@
   "skills": {
     "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
     "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS"],
-    "concepts": ["System Ownership", "Technical Delivery", "Integration Design", "Reliability", "Operational Clarity"]
+    "concepts": ["System ownership", "Transaction-critical operations", "Integration design", "Reliability", "Operational clarity"]
   }
 }

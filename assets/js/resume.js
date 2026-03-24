@@ -3,6 +3,9 @@ const themeToggle = document.getElementById('themeToggle');
 const htmlElement = document.documentElement;
 const resumeContent = document.getElementById('resumeContent');
 const resumeStatus = document.getElementById('resumeStatus');
+const readModeBtn = document.getElementById('readModeBtn');
+const editModeBtn = document.getElementById('editModeBtn');
+const resumeEditPanel = document.getElementById('resumeEditPanel');
 
 function setStatus(message, type = 'info') {
   if (!resumeStatus) return;
@@ -10,11 +13,32 @@ function setStatus(message, type = 'info') {
   resumeStatus.dataset.state = type;
 }
 
+function setResumeMode(mode) {
+  const safeMode = mode === 'edit' ? 'edit' : 'read';
+  document.body.setAttribute('data-resume-mode', safeMode);
+  localStorage.setItem('resumeMode', safeMode);
+
+  if (resumeEditPanel) {
+    resumeEditPanel.hidden = safeMode !== 'edit';
+  }
+
+  if (readModeBtn && editModeBtn) {
+    const isRead = safeMode === 'read';
+    readModeBtn.classList.toggle('active', isRead);
+    editModeBtn.classList.toggle('active', !isRead);
+    readModeBtn.setAttribute('aria-pressed', String(isRead));
+    editModeBtn.setAttribute('aria-pressed', String(!isRead));
+  }
+}
+
 // Initialize theme
 const savedTheme = localStorage.getItem('theme') || 
                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 htmlElement.setAttribute('data-theme', savedTheme);
 updateThemeToggle(savedTheme);
+
+const savedResumeMode = localStorage.getItem('resumeMode') || 'read';
+setResumeMode(savedResumeMode);
 
 themeToggle?.addEventListener('click', () => {
   const currentTheme = htmlElement.getAttribute('data-theme');
@@ -33,6 +57,9 @@ function updateThemeToggle(theme) {
     lightIcon.classList.toggle('hidden', theme !== 'light');
   }
 }
+
+readModeBtn?.addEventListener('click', () => setResumeMode('read'));
+editModeBtn?.addEventListener('click', () => setResumeMode('edit'));
 
 // Load and render resume data
 async function loadResume() {

@@ -183,6 +183,62 @@ main {
     margin: 0 auto;
 }
 
+.resume-mode-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem;
+  border: 1px solid var(--borderColor);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surfaceColor) 88%, transparent);
+}
+
+.mode-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mutedTextColor);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mode-btn.active {
+  background: var(--accentColor);
+  color: var(--mainBgColor);
+}
+
+.resume-read-meta {
+  display: grid;
+  gap: 0.12rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.read-meta-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: var(--accentColor);
+}
+
+.read-meta-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--mutedTextColor);
+}
+
+.resume-edit-panel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
 /* VERSION TABS: Lightweight selector */
 .version-tabs {
   display: flex;
@@ -305,6 +361,22 @@ main {
   text-align: left;
 }
 
+body[data-resume-mode="read"] .resume-edit-panel {
+  display: none;
+}
+
+body[data-resume-mode="read"] .resume-status {
+  display: none;
+}
+
+body[data-resume-mode="edit"] .resume-read-meta {
+  display: none;
+}
+
+body[data-resume-mode="edit"] .resume-edit-panel {
+  display: flex;
+}
+
 .resume {
   background: transparent;
   border: none;
@@ -341,7 +413,24 @@ main {
 
   .resume-header-content {
     flex-direction: column;
+    align-items: stretch;
     gap: 1.5rem;
+  }
+
+  .resume-mode-switch {
+    align-self: flex-start;
+  }
+
+  .resume-read-meta {
+    margin: 0;
+  }
+
+  .resume-edit-panel {
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .version-tabs {
@@ -617,6 +706,7 @@ main {
 
   .resume-header-content {
     flex-direction: column;
+    align-items: stretch;
     gap: 1rem;
     width: 100%;
   }
