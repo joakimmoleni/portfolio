@@ -1,50 +1,71 @@
-/*-----------------------------------*\
-  #RESUME — Page-specific overrides
-  Loaded AFTER style.css on resume.html
-\*-----------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/*
- * style.css sets html { font-size: 10px } (rem = 10px trick).
- * Resume was designed for 16px base, so we override on this page.
- */
+:root {
+  --mainBgColor: #0e1114;
+  --mainTextColor: #e6eaf0;
+  --surfaceColor: #14181d;
+  --accentColor: #4aac72;
+  --accentSoft: rgba(74, 172, 114, 0.14);
+  --borderColor: rgba(255, 255, 255, 0.08);
+  --mutedTextColor: #a7b0be;
+  --cardBg: #fbfbfa;
+  --cardTextColor: #1a2027;
+  --sidebarBg: #eef2f2;
+  --dividerColor: rgba(26, 32, 39, 0.08);
+  --shadowColor: 0 26px 60px rgba(0, 0, 0, 0.24);
+}
+
+[data-theme="light"] {
+  --mainBgColor: #f6f7f9;
+  --mainTextColor: #22252a;
+  --surfaceColor: #ffffff;
+  --accentColor: #2a7a4e;
+  --accentSoft: rgba(42, 122, 78, 0.1);
+  --borderColor: rgba(22, 32, 42, 0.08);
+  --mutedTextColor: #4a5560;
+  --shadowColor: 0 18px 40px rgba(24, 34, 44, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Override style.css 10px root — resume.css was written for 16px base */
 html:has(body.page-resume) {
   font-size: 16px !important;
 }
 
-/*-----------------------------------*\
-  #RESUME CUSTOM PROPERTIES
-\*-----------------------------------*/
-
-:root {
-  /* Accent aliases (match style.css values) */
-  --accentColor:    #4aac72;
-  --accentSoft:     rgba(74, 172, 114, 0.14);
-
-  /* Resume-document colours */
-  --cardBg:         #fbfbfa;
-  --cardTextColor:  #1a2027;
-  --sidebarBg:      #eef2f2;
-  --dividerColor:   rgba(26, 32, 39, 0.08);
-  --mutedTextColor: #a7b0be;
-  --borderColor:    rgba(255, 255, 255, 0.08);
-  --surfaceColor:   #14181d;
-  --shadowColor:    0 26px 60px rgba(0, 0, 0, 0.24);
+body {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  background:
+    radial-gradient(circle at top left, rgba(74, 172, 114, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 20%),
+    var(--mainBgColor);
+  color: var(--mainTextColor);
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-[data-theme="light"] {
-  --accentColor:    #2a7a4e;
-  --accentSoft:     rgba(42, 122, 78, 0.1);
-  --borderColor:    rgba(22, 32, 42, 0.08);
-  --mutedTextColor: #4a5560;
-  --surfaceColor:   #ffffff;
-  --shadowColor:    0 18px 40px rgba(24, 34, 44, 0.12);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/*-----------------------------------*\
-  #HEADER OVERRIDES (page-resume)
-\*-----------------------------------*/
+button {
+  font: inherit;
+}
 
-/* Always fixed, full-width on resume page */
+.hidden {
+  display: none !important;
+}
+
+/* Header, logo, nav and theme toggle are now handled by shared style.css */
+
+/* On resume page: header always fixed at top, no floating pill */
 .page-resume .header {
   position: fixed;
   top: 0;
@@ -55,41 +76,65 @@ html:has(body.page-resume) {
   animation: none;
 }
 
-/* Scale nav elements back — style.css rem values are for 10px root */
-.page-resume .logo            { font-size: 0.875rem; }
-.page-resume .header          { padding-block: 1.25rem; }
-.page-resume .navbar-link     { font-size: 0.875rem; letter-spacing: 0.09rem; }
-.page-resume .nav-close-btn   { font-size: 1.25rem; }
-.page-resume .nav-open-btn    { font-size: 1.5rem; }
-.page-resume .theme-switch svg,
-.page-resume .social-link svg { width: 1.125rem; height: 1.125rem; }
+/* Fix nav element sizes — style.css rem values were designed for 10px root */
+.page-resume .logo {
+  font-size: 0.875rem;
+}
 
-/*-----------------------------------*\
-  #MAIN LAYOUT
-\*-----------------------------------*/
+.page-resume .header {
+  padding-block: 1.25rem;
+}
+
+.page-resume .navbar-link {
+  font-size: 0.875rem;
+  letter-spacing: 0.09rem;
+}
+
+.page-resume .nav-close-btn {
+  font-size: 1.25rem;
+}
+
+.page-resume .nav-open-btn {
+  font-size: 1.5rem;
+}
+
+.page-resume .theme-switch svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.page-resume .social-link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
 
 main {
   padding: 100px 1rem 4rem;
 }
 
-/* Undo style.css global display resets that break resume inline text */
+/* Reset style.css global resets that break resume layout */
 main a,
-main span   { display: inline; }
-main button { display: inline-flex; }
-main img    { display: inline-block; }
+main span {
+  display: inline;
+}
+
+main button {
+  display: inline-flex;
+}
+
+main img {
+  display: inline-block;
+}
 
 .resume-wrapper {
   width: 100%;
-  max-width: 1000px;
+    max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  gap: 1.5rem;
+    gap: 1.5rem;
 }
 
-/*-----------------------------------*\
-  #RESUME HEADER (mode switch + meta)
-\*-----------------------------------*/
-
+/* HEADER: Version selector + actions */
 .resume-header {
   display: flex;
   justify-content: space-between;
@@ -97,7 +142,9 @@ main img    { display: inline-block; }
   gap: 2rem;
   padding: 1rem 0;
   background: color-mix(in srgb, var(--mainBgColor) 88%, transparent);
+  border: none;
   border-bottom: 1px solid var(--borderColor);
+  border-radius: 0;
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -108,15 +155,11 @@ main img    { display: inline-block; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+    gap: 1.5rem;
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+    max-width: 1000px;
+    margin: 0 auto;
 }
-
-/*-----------------------------------*\
-  #MODE SWITCH (Read / Edit)
-\*-----------------------------------*/
 
 .resume-mode-switch {
   display: inline-flex;
@@ -146,17 +189,15 @@ main img    { display: inline-block; }
   transition: background-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
 }
 
-.mode-btn:hover { opacity: 0.85; }
+.mode-btn:hover {
+  opacity: 0.85;
+}
 
 .mode-btn.active {
   background: var(--accentColor);
   color: #fff;
   opacity: 1;
 }
-
-/*-----------------------------------*\
-  #READ META + EDIT PANEL
-\*-----------------------------------*/
 
 .resume-read-meta {
   display: grid;
@@ -186,16 +227,7 @@ main img    { display: inline-block; }
   margin-left: auto;
 }
 
-/* Mode visibility */
-body[data-resume-mode="read"] .resume-edit-panel,
-body[data-resume-mode="read"] .resume-status  { display: none; }
-body[data-resume-mode="edit"] .resume-read-meta { display: none; }
-body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
-
-/*-----------------------------------*\
-  #VERSION TABS
-\*-----------------------------------*/
-
+/* VERSION TABS: Lightweight selector */
 .version-tabs {
   display: flex;
   align-items: center;
@@ -204,7 +236,7 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 
 .version-label {
   color: var(--mutedTextColor);
-  font-size: 0.75rem;
+    font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   margin: 0;
@@ -219,7 +251,9 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   margin: 0;
 }
 
-.tab-item { display: inline-block; }
+.tab-item {
+  display: inline-block;
+}
 
 .tab-btn {
   padding: 0.5rem 0.8rem;
@@ -250,10 +284,7 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   border-color: var(--accentColor);
 }
 
-/*-----------------------------------*\
-  #ACTIONS (Export buttons)
-\*-----------------------------------*/
-
+/* ACTIONS: Export buttons */
 .resume-actions {
   display: flex;
   gap: 0.75rem;
@@ -264,13 +295,13 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.8rem;
-  border: 1px solid transparent;
-  border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
   background: transparent;
-  color: var(--mutedTextColor);
+    color: var(--mutedTextColor);
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.8rem;
+    font-size: 0.8rem;
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -301,21 +332,53 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   color: #fff;
 }
 
-.action-btn svg { width: 18px; height: 18px; }
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+}
 
-.action-btn-secondary { padding: 0.6rem 0.7rem; }
+.action-btn-secondary {
+  padding: 0.6rem 0.7rem;
+}
 
-/*-----------------------------------*\
-  #RESUME DOCUMENT
-\*-----------------------------------*/
-
-.resume-document { display: grid; gap: 0.5rem; }
+/* RESUME DOCUMENT: Main focus */
+.resume-document {
+  display: grid;
+  gap: 0.5rem;
+}
 
 .resume-status {
   padding: 0.6rem 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   color: var(--mutedTextColor);
   font-size: 0.75rem;
   text-align: left;
+}
+
+body[data-resume-mode="read"] .resume-edit-panel {
+  display: none;
+}
+
+body[data-resume-mode="read"] .resume-status {
+  display: none;
+}
+
+body[data-resume-mode="edit"] .resume-read-meta {
+  display: none;
+}
+
+body[data-resume-mode="edit"] .resume-edit-panel {
+  display: flex;
+}
+
+.resume {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
 }
 
 .resume-inner {
@@ -330,9 +393,97 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   line-height: 1.45;
 }
 
-/*-----------------------------------*\
-  #RESUME CONTENT (Left / Right)
-\*-----------------------------------*/
+/* RESPONSIVE: Mobile */
+@media (max-width: 900px) {
+  .resume-wrapper {
+    max-width: 100%;
+    gap: 2rem;
+  }
+
+  .resume-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.2rem;
+  }
+
+  .resume-header-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .resume-mode-switch {
+    align-self: flex-start;
+  }
+
+  .resume-read-meta {
+    margin: 0;
+  }
+
+  .resume-edit-panel {
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .version-tabs {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .tabs-list {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .resume-actions {
+    width: 100%;
+  }
+
+  .action-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .action-btn span {
+    display: none;
+  }
+
+  .action-btn-secondary span {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 80px 0.75rem 2rem;
+    font-size: 16px;
+  }
+
+  .resume-wrapper {
+    gap: 1.5rem;
+  }
+
+  .resume-header {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .version-label {
+    font-size: 0.75rem;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Old UI components - removed for new layout */
 
 .resume-left {
   padding: 14mm 11mm 14mm 14mm;
@@ -394,7 +545,9 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   word-break: break-word;
 }
 
-.contact-link { color: var(--accentColor); }
+.contact-link {
+  color: var(--accentColor);
+}
 
 .skill-item,
 .job-highlights li {
@@ -460,11 +613,10 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   color: #32404b;
 }
 
-/*-----------------------------------*\
-  #RESUME PROJECTS
-\*-----------------------------------*/
-
-.resume-project-list { display: grid; gap: 0.7rem; }
+.resume-project-list {
+  display: grid;
+  gap: 0.7rem;
+}
 
 .resume-project-item {
   padding: 0.75rem 0.9rem;
@@ -495,51 +647,20 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   color: #66717d;
 }
 
+
 .resume-error {
   grid-column: 1 / -1;
   padding: 2rem;
   color: #d94f4f;
 }
 
-/*-----------------------------------*\
-  #RESPONSIVE — RESUME
-\*-----------------------------------*/
+/* .no-print visibility handled via @media print only */
+
+@media (max-width: 1160px) {
+  /* Old mobile layout rules removed for new responsive design */
+}
 
 @media (max-width: 900px) {
-  .resume-wrapper { max-width: 100%; gap: 2rem; }
-
-  .resume-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-    padding: 1.2rem;
-  }
-
-  .resume-header-content {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.5rem;
-  }
-
-  .resume-mode-switch { align-self: flex-start; }
-  .resume-read-meta   { margin: 0; }
-
-  .resume-edit-panel {
-    width: 100%;
-    margin: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
-  }
-
-  .version-tabs { flex-wrap: wrap; gap: 0.8rem; }
-  .tabs-list    { flex-wrap: wrap; width: 100%; }
-
-  .resume-actions { width: 100%; }
-  .action-btn     { flex: 1; justify-content: center; font-size: 0.8rem; }
-  .action-btn span,
-  .action-btn-secondary span { display: none; }
-
   .resume-inner {
     width: 100%;
     min-height: auto;
@@ -552,21 +673,15 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
     padding: 2rem;
   }
 
-  .resume-right { padding: 2rem; }
-}
-
-@media (max-width: 600px) {
-  main { padding: 80px 0.75rem 2rem; }
-  .resume-wrapper { gap: 1.5rem; }
-
-  .resume-header {
-    padding: 1rem;
-    border-radius: 16px;
+  .resume-right {
+    padding: 2rem;
   }
 }
 
 @media (max-width: 575px) {
-  main { padding-inline: 0.6rem; }
+  main {
+    padding-inline: 0.6rem;
+  }
 
   .resume-header {
     border-radius: 16px;
@@ -582,14 +697,14 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   }
 }
 
-/*-----------------------------------*\
-  #PRINT
-\*-----------------------------------*/
-
 @media print {
-  @page { size: A4; margin: 8mm; }
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
 
-  html, body {
+  html,
+  body {
     background: #ffffff !important;
     margin: 0;
     padding: 0;
@@ -597,10 +712,18 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
     print-color-adjust: exact;
   }
 
-  header, .no-print, .resume-status { display: none !important; }
-  main { padding: 0; }
+  header,
+  .no-print,
+  .resume-status {
+    display: none !important;
+  }
 
-  .resume-wrapper, .resume {
+  main {
+    padding: 0;
+  }
+
+  .resume-wrapper,
+  .resume {
     display: block;
     max-width: none;
     margin: 0;
@@ -616,7 +739,9 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

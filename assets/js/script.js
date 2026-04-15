@@ -64,10 +64,10 @@ function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
 
-  // visa rätt ikon
+  // visa rätt ikon (visa sol i mörkt läge, måne i ljust)
   if (lightIcon && darkIcon) {
-    lightIcon.classList.toggle('hidden', theme !== 'light');
-    darkIcon.classList.toggle('hidden', theme !== 'dark');
+    lightIcon.classList.toggle('hidden', theme !== 'dark');
+    darkIcon.classList.toggle('hidden', theme !== 'light');
   }
 }
 
@@ -149,7 +149,7 @@ if (!reducedMotion) {
         entry.target.style.animationPlayState = "running";
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
 
@@ -190,11 +190,11 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
   const START_DELAY = 500;
-  const TYPE_SPEED = 30;
-  const ERASE_SPEED = 16;
-  const HOLD_AFTER_TYPE = 1200;
-  const HOLD_BETWEEN_LINES = 200;
-  const LAST_LINE_LOOP_PAUSE = 1500;
+  const TYPE_SPEED = 48;
+  const ERASE_SPEED = 24;
+  const HOLD_AFTER_TYPE = 1600;
+  const HOLD_BETWEEN_LINES = 300;
+  const LAST_LINE_LOOP_PAUSE = 2000;
 
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 

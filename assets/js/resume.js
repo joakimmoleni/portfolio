@@ -1,6 +1,4 @@
-﻿// Theme persistence
-const themeToggle = document.getElementById('themeToggle');
-const htmlElement = document.documentElement;
+﻿// Resume-specific logic (theme/nav handled by shared script.js)
 const resumeContent = document.getElementById('resumeContent');
 const resumeStatus = document.getElementById('resumeStatus');
 const readModeBtn = document.getElementById('readModeBtn');
@@ -31,32 +29,8 @@ function setResumeMode(mode) {
   }
 }
 
-// Initialize theme
-const savedTheme = localStorage.getItem('theme') || 
-                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-htmlElement.setAttribute('data-theme', savedTheme);
-updateThemeToggle(savedTheme);
-
 const savedResumeMode = localStorage.getItem('resumeMode') || 'read';
 setResumeMode(savedResumeMode);
-
-themeToggle?.addEventListener('click', () => {
-  const currentTheme = htmlElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  htmlElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateThemeToggle(newTheme);
-});
-
-function updateThemeToggle(theme) {
-  const darkIcon = document.getElementById('darkmode');
-  const lightIcon = document.getElementById('lightmode');
-  
-  if (darkIcon && lightIcon) {
-    darkIcon.classList.toggle('hidden', theme !== 'dark');
-    lightIcon.classList.toggle('hidden', theme !== 'light');
-  }
-}
 
 readModeBtn?.addEventListener('click', () => setResumeMode('read'));
 editModeBtn?.addEventListener('click', () => setResumeMode('edit'));
@@ -189,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function exportPdf() {
-  const controls = document.querySelectorAll('.nav-back, header, .no-print');
+  const controls = document.querySelectorAll('header, .no-print');
   const prevStyles = [];
   controls.forEach(el => {
     prevStyles.push([el, el.style.display]);
@@ -368,7 +342,7 @@ window.printOnePage = function printOnePage() {
 
   // In-place one-page print: scale element, hide UI, print, then restore
   try {
-    const controls = document.querySelectorAll('.nav-back, header, .no-print');
+    const controls = document.querySelectorAll('header, .no-print');
     const prevStyles = [];
     controls.forEach(el => { prevStyles.push([el, el.style.display]); el.style.display = 'none'; });
 
