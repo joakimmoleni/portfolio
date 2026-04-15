@@ -1,40 +1,41 @@
 {
   "personal": {
-    "name": "Joakim Moléni",
-    "title": "Software Engineer — Transaction-Critical Core Banking Systems",
+    "name": "Joakim Mol\u00e9ni",
+    "title": "Systems Engineer \u2014 IBM z/OS, Assembler & COBOL",
     "location": "Stockholm, Sweden",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Engineer focused on high-reliability transaction processing in core banking. I work with COBOL and HLASM on IBM z/OS where correctness, operational continuity and performance under pressure are essential.",
-  "coreStack": ["High-reliability systems", "Transaction processing", "System ownership", "IBM z/OS operations", "Performance-critical flows"],
+  "profile": "I write assembler and COBOL at the deepest layer of core banking \u2014 the code that processes real money, every day, with zero margin for error. One of a small group of engineers in Sweden working at this level. COBOL got me in the door. Assembler is where I found my edge.",
+  "coreStack": ["IBM z/OS Assembler (HLASM)", "COBOL", "IMS", "Transaction-critical systems", "System ownership"],
   "experience": [
     {
       "company": "SEB",
-      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "years": "Aug 2024 – Present",
+      "role": "Systems Engineer (HLASM & COBOL / IBM z/OS)",
+      "years": "Aug 2024 \u2013 Present",
       "highlights": [
-        "Developed and maintained transaction-critical systems handling high-volume financial flows on IBM z/OS.",
-        "Implemented core transaction logic in COBOL and HLASM for regulated financial services where correctness is non-negotiable.",
-        "Improved reliability and operational visibility across business-critical processing paths with low tolerance for downtime."
+        "Write and maintain assembler and COBOL at the core of SEB\u2019s banking platform \u2014 code where a single defect can halt the bank.",
+        "Part of a five-person team recognised as among the strongest mainframe developers at SEB, routinely solving problems others can\u2019t.",
+        "Review COBOL across teams, catch missed edge cases, and drive quality in production-critical transaction paths.",
+        "Lead risk analysis and incident investigation for core ledger systems \u2014 full trace of what happened, where, and why."
       ]
     },
     {
       "company": "Handelsbanken",
       "role": "System Engineer",
-      "years": "Aug 2023 – Aug 2024",
+      "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Delivered backend capabilities supporting transaction-sensitive banking processes.",
-        "Worked with integration and operations across Linux and distributed environments under production constraints."
+        "Pushing to production within the first week of COBOL training \u2014 the fastest in the cohort.",
+        "Built and maintained transaction logic for deposits and payments that directly affected daily banking operations."
       ]
     }
   ],
   "projects": [],
   "education": [],
   "skills": {
-    "languages": ["COBOL", "HLASM", "SQL"],
+    "languages": ["HLASM", "COBOL", "SQL"],
     "platforms": ["IBM z/OS", "IMS", "Linux"],
-    "concepts": ["Transaction-critical systems", "Reliability engineering", "Performance under load"]
+    "concepts": ["Transaction-critical systems", "Core banking operations", "System ownership", "Performance under load"]
   }
 }

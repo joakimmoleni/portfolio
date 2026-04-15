@@ -7,13 +7,13 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Engineer focused on platform reliability across legacy and modern environments. I combine operational discipline with technical delivery to keep transaction-critical systems stable as architecture evolves.",
+  "profile": "I keep critical systems running while making them better \u2014 across mainframe and modern platforms. Before engineering, I led teams and businesses for 14 years, so I think in outcomes: what ships, what holds, and what the team actually needs. That mix of operational discipline and hands-on technical range is what I bring.",
   "coreStack": [
-    "System ownership",
-    "High-reliability systems",
-    "Legacy modernization",
-    "Distributed service integration",
-    "Performance under load"
+    "System ownership & delivery",
+    "Cross-platform architecture",
+    "Internal tooling",
+    "Legacy-to-modern evolution",
+    "Team leadership background"
   ],
   "experience": [
     {
@@ -21,9 +21,9 @@
       "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
       "years": "Aug 2024 – Present",
       "highlights": [
-        "Worked on high-reliability banking flows where mainframe logic and modern services must align without introducing failure risk.",
-        "Contributed to architecture and delivery decisions across transaction-heavy production systems with strict stability targets.",
-        "Improved maintainability and release confidence in regulated infrastructure handling critical financial processes."
+        "Own architecture and delivery decisions across transaction-critical systems where mainframe and modern services must work together.",
+        "Build internal developer tooling that replaced scattered Word docs and old binders with a searchable, structured documentation hub.",
+        "Drive risk analysis for core banking modules and lead incident investigations end-to-end."
       ]
     },
     {
@@ -31,8 +31,8 @@
       "role": "System Engineer",
       "years": "Aug 2023 – Aug 2024",
       "highlights": [
-        "Delivered backend and systems work across Linux environments, APIs and banking integration boundaries.",
-        "Provided hands-on support for runtime behavior, operational incidents and end-to-end troubleshooting."
+        "Delivered backend and integration work across Linux environments and banking APIs \u2014 hands-on from day one.",
+        "Handled production incidents, runtime diagnostics and end-to-end troubleshooting across system boundaries."
       ]
     },
     {
@@ -40,20 +40,20 @@
       "role": "Operational / Business Leadership",
       "years": "2005 – 2019",
       "highlights": [
-        "Built execution discipline, ownership and resilience patterns now applied to engineering work.",
-        "Led teams and outcomes in environments where continuity, accountability and delivery quality were business-critical."
+        "14 years of leading teams, owning outcomes and building operational discipline \u2014 skills that now shape how I approach system design and delivery.",
+        "Consistently operated in environments where uptime, accountability and execution quality were non-negotiable."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Resume Presentation System",
-      "description": "A minimal profile presentation with role-targeted content variants and print support for hiring workflows.",
+      "name": "Documentation Hub for Mainframe Teams",
+      "description": "A web-based internal tool replacing scattered documents with a searchable, structured platform built for mainframe developers and managers alike.",
       "tech": ["HTML", "CSS", "JavaScript"]
     },
     {
       "name": "Core-to-Modern Integration",
-      "description": "Production-facing integration work connecting stable transactional systems to modern service layers while preserving reliability.",
+      "description": "Production integration connecting stable mainframe transaction paths to modern service layers \u2014 reliability preserved, capabilities extended.",
       "tech": ["IBM z/OS", "REST APIs", "Node.js", "SQL"]
     }
   ],
@@ -61,6 +61,6 @@
   "skills": {
     "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
     "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS"],
-    "concepts": ["System ownership", "Transaction-critical operations", "Integration design", "Reliability", "Operational clarity"]
+    "concepts": ["System ownership", "Cross-platform delivery", "Internal tooling & DX", "Operational leadership", "Architecture evolution"]
   }
 }

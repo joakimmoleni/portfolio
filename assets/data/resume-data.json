@@ -1,7 +1,7 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Software Engineer — High-Reliability Systems in Core Banking",
+    "title": "Systems Engineer — Core Banking, IBM z/OS",
     "location": "Stockholm, Sweden",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
@@ -30,25 +30,25 @@
       "description": "Balances architecture, ownership and delivery across systems."
     }
   ],
-  "profile": "Software Engineer focused on transaction-critical systems in core banking. I build and maintain high-reliability flows on IBM z/OS while integrating legacy infrastructure with modern service layers. My approach is shaped by system ownership, operational accountability and performance under load.",
+  "profile": "Systems engineer at the deepest layer of core banking \u2014 writing assembler and COBOL on IBM z/OS where a single defect can take down the bank. One of roughly seven engineers in Sweden working at this level. My range spans from bare-metal mainframe code to modern web frontends and internal developer tooling. Shaped by a lifetime of building \u2014 from custom hardware at age five to leading in business \u2014 I bring both technical depth and operational discipline to everything I ship.",
   "coreStack": [
-    "High-reliability systems",
-    "Transaction processing",
-    "Legacy modernization",
-    "Distributed service integration",
-    "Performance-critical systems",
-    "System ownership"
+    "IBM z/OS Assembler & COBOL",
+    "Transaction-critical systems",
+    "Full-stack development",
+    "Internal tooling & documentation",
+    "System architecture & ownership",
+    "Legacy-to-modern integration"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "years": "Aug 2024 – Present",
+      "role": "Systems Engineer (HLASM & COBOL / IBM z/OS)",
+      "years": "Aug 2024 \u2013 Present",
       "highlights": [
-        "Developed and maintained transaction-critical systems handling high-volume financial flows on IBM z/OS.",
-        "Implemented and evolved COBOL and HLASM transaction logic in business-critical core banking domains with strict correctness requirements.",
-        "Drove integration between mainframe execution paths and distributed service layers to improve reliability and operational traceability.",
-        "Contributed to resilience and performance work for systems operating under sustained production load."
+        "Write and maintain assembler and COBOL at the core of SEB\u2019s banking platform \u2014 code where a single defect can halt the bank.",
+        "Part of a five-person team recognised as among the strongest mainframe developers at SEB, routinely solving problems others can\u2019t.",
+        "Review COBOL across teams, catch missed edge cases, and drive quality in production-critical transaction paths.",
+        "Lead risk analysis and incident investigation for core ledger systems. Build internal documentation tooling that replaced scattered Word files and old binders."
       ]
     },
     {
@@ -56,9 +56,9 @@
       "role": "System Engineer",
       "years": "Aug 2023 – Aug 2024",
       "highlights": [
-        "Delivered backend components for core financial processes with focus on stability, recoverability and predictable runtime behavior.",
-        "Supported cross-system integration and incident-sensitive operations across Linux and distributed service environments.",
-        "Worked close to production realities where system correctness and continuity directly affected financial operations."
+        "Pushing to production within the first week of COBOL training \u2014 the fastest in the cohort.",
+        "Built and maintained transaction logic for deposits and payments on core banking systems.",
+        "Worked across system boundaries in Linux and distributed environments under real production constraints."
       ]
     },
     {
@@ -66,9 +66,9 @@
       "role": "Full-stack Developer",
       "years": "Jan 2023 – Jul 2023",
       "highlights": [
-        "Built service APIs and infrastructure for data-intensive product flows with emphasis on reliability and clean service contracts.",
-        "Implemented deployment patterns in AWS and improved delivery confidence for a fast-moving product team.",
-        "Owned integration points between analysis pipelines and customer-facing services under changing load patterns."
+        "Designed and shipped Node.js APIs powering a real-time analytics product for competitive gaming.",
+        "Built AWS deployment pipelines and owned the full delivery path from code to production.",
+        "Owned integration points between data pipelines and customer-facing services under changing load."
       ]
     },
     {
@@ -76,8 +76,8 @@
       "role": "Frontend / Backend Developer",
       "years": "Sep 2021 – Jul 2023",
       "highlights": [
-        "Developed service-backed applications with SQL data models and integration-heavy workflows.",
-        "Maintained Linux-hosted solutions with focus on durability, maintainability and production clarity."
+        "Built service-backed applications with SQL data models and integration-heavy workflows.",
+        "Maintained Linux-hosted solutions with focus on production durability."
       ]
     },
     {
@@ -85,16 +85,16 @@
       "role": "Business & Operational Leadership Roles",
       "years": "2005 – 2019",
       "highlights": [
-        "Led operations in high-accountability environments where uptime, ownership and execution quality were non-negotiable.",
-        "Built decision discipline and resilience practices that now inform system design and delivery in software engineering.",
-        "Managed teams and outcomes with long-term stability as a primary success metric."
+        "14 years of leading teams, owning outcomes and building operational discipline \u2014 skills that now shape how I approach system design.",
+        "Consistently operated in environments where uptime, accountability and execution quality were non-negotiable.",
+        "Track record among the top sellers and business developers nationally before switching to engineering."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Portfolio & Resume Presentation",
-      "description": "A focused profile experience designed to communicate engineering impact in high-reliability and transaction-critical contexts.",
+      "name": "Documentation Hub for Mainframe Teams",
+      "description": "A web-based internal tool replacing scattered Word docs, old HTML pages and physical binders with a searchable, structured documentation platform built for mainframe developers and their managers.",
       "tech": ["HTML", "CSS", "JavaScript"]
     }
   ],
@@ -103,12 +103,12 @@
     "languages": ["COBOL", "HLASM", "JavaScript", "Python", "SQL"],
     "platforms": ["IBM z/OS", "IMS", "Node.js", "Linux", "AWS", "REST APIs"],
     "concepts": [
-      "High-reliability systems",
       "Transaction-critical architecture",
       "Core banking operations",
-      "Performance under load",
-      "Legacy to modern integration",
-      "End-to-end system ownership"
+      "System ownership & accountability",
+      "Performance under production load",
+      "Legacy-to-modern integration",
+      "Internal tooling & developer experience"
     ]
   }
 }

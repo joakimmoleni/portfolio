@@ -7,12 +7,12 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Software Engineer bridging transaction-critical core systems with modern backend services. I focus on reliability, integration quality and stable performance when production load is high and failure costs are real.",
+  "profile": "I connect the mainframe to the modern world \u2014 building the service layers and APIs that let decades-old banking infrastructure talk to everything new. I\u2019ve shipped both sides: assembler at the core and Node.js in the cloud. That range is rare, and it\u2019s what makes the integration work stick.",
   "coreStack": [
-    "Distributed service integration",
-    "Legacy modernization",
-    "Transaction processing",
-    "Performance-critical systems",
+    "Mainframe-to-modern integration",
+    "API design & service contracts",
+    "Full-stack delivery",
+    "Cloud infrastructure (AWS)",
     "System ownership"
   ],
   "experience": [
@@ -21,9 +21,9 @@
       "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
       "years": "Aug 2024 – Present",
       "highlights": [
-        "Developed and maintained transaction-critical systems handling high-volume financial flows on IBM z/OS.",
-        "Integrated mainframe transaction paths with modern distributed services through stable interface contracts.",
-        "Improved reliability and traceability for production systems operating in regulated banking domains."
+        "Built integration paths between core mainframe systems and modern distributed services \u2014 reliable contracts that both sides can trust.",
+        "Own the full picture: assembler at the transaction layer, APIs at the service boundary, and web frontends for internal tooling.",
+        "Drive traceability and observability improvements so production issues get found fast, not discovered by customers."
       ]
     },
     {
@@ -31,8 +31,8 @@
       "role": "Full-stack Developer",
       "years": "Jan 2023 – Jul 2023",
       "highlights": [
-        "Designed and implemented Node.js APIs for data-intensive production workflows.",
-        "Built AWS deployment paths with emphasis on operational clarity and resilient service behavior."
+        "Designed and shipped Node.js APIs powering a real-time analytics product \u2014 stable interfaces under fast iteration.",
+        "Built AWS deployment pipelines and owned the full delivery path from code to production."
       ]
     }
   ],
@@ -41,6 +41,6 @@
   "skills": {
     "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
     "platforms": ["IBM z/OS", "IMS", "Linux", "Node.js", "AWS"],
-    "concepts": ["High-reliability systems", "Transaction-critical architecture", "Distributed integration"]
+    "concepts": ["Mainframe-to-modern integration", "API design & reliability", "Full-stack delivery", "Cloud infrastructure"]
   }
 }

@@ -178,10 +178,10 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   if (!typingEl) return;
 
   const lines = [
-    'real financial flows',
-    'high transaction volumes',
-    'systems that cannot fail',
-    'core banking on IBM z/OS'
+    'IBM z/OS assembler at the core',
+    'full-stack tools for mainframe teams',
+    'systems that absolutely cannot fail',
+    'whatever needs building, I build it'
   ];
 
   if (reducedMotion) {
