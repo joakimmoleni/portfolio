@@ -66,7 +66,8 @@
   --transition-3: 0.3s ease-in-out;
 
   /* Decorative */
-  --heroGlow: radial-gradient(circle at top left, rgba(74, 172, 114, 0.15), transparent 42%);
+  --heroGlow: radial-gradient(ellipse at 15% 0%, rgba(74, 172, 114, 0.12), transparent 38%),
+              radial-gradient(ellipse at 85% 10%, rgba(74, 172, 114, 0.06), transparent 30%);
 }
 
 [data-theme="light"] {
@@ -414,6 +415,10 @@ section[id]   { scroll-margin-top: 120px; }
 .hero {
   padding-block-start: calc(var(--section-padding) + 64px);
   background-color: var(--mainBgColor);
+  background-image:
+    radial-gradient(circle, color-mix(in srgb, var(--mainBorderColor) 40%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center;
   position: relative;
 }
 
@@ -430,6 +435,7 @@ section[id]   { scroll-margin-top: 120px; }
   grid-template-columns: 1fr;
   padding: clamp(60px, 9vw, 112px);
   border: 1px solid color-mix(in srgb, var(--mainBorderColor) 68%, transparent);
+  border-top: none;
   border-radius: 22px;
   background: linear-gradient(
     135deg,
@@ -438,8 +444,23 @@ section[id]   { scroll-margin-top: 120px; }
   );
   overflow: hidden;
   isolation: isolate;
-  box-shadow: var(--shadow-2);
+  box-shadow:
+    var(--shadow-2),
+    inset 0 1px 0 0 color-mix(in srgb, var(--mainBorderColor) 30%, transparent);
   animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Gradient accent line at the top */
+.hero-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mainLinkColor), transparent);
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 @keyframes fadeIn {
@@ -450,14 +471,12 @@ section[id]   { scroll-margin-top: 120px; }
 .hero-shell::before {
   content: "";
   position: absolute;
-  top: 20px;
-  right: 40px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(74, 172, 114, 0.1), transparent 70%);
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
   pointer-events: none;
   z-index: -1;
+  mix-blend-mode: overlay;
 }
 
 .hero-content {
@@ -472,11 +491,18 @@ section[id]   { scroll-margin-top: 120px; }
 .hero-name {
   font-size: clamp(2.6rem, 5.2vw, 4.6rem);
   font-weight: 700;
-  color: color-mix(in srgb, var(--mainTextColor) 96%, #ffffff 4%);
+  color: var(--mainTextColor);
   line-height: 1.1;
   letter-spacing: -0.03em;
   max-width: 18ch;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--mainTextColor) 100%, transparent) 0%,
+    color-mix(in srgb, var(--mainTextColor) 72%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-typing {
@@ -556,19 +582,27 @@ section[id]   { scroll-margin-top: 120px; }
 }
 
 .btn:is(:hover, :focus-visible) {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(74, 172, 114, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74, 172, 114, 0.14), 0 2px 6px rgba(74, 172, 114, 0.08);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(74, 172, 114, 0.1);
+  transition-duration: 0.1s;
 }
 
 .btn-primary {
   background-color: var(--secondaryLinkColor);
   color: var(--onAccentColor);
   border-color: var(--secondaryLinkColor);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .btn-primary:is(:hover, :focus-visible) {
   background-color: color-mix(in srgb, var(--secondaryLinkColor) 82%, #000);
   border-color: color-mix(in srgb, var(--secondaryLinkColor) 82%, #000);
+  box-shadow: 0 8px 24px rgba(74, 172, 114, 0.2), 0 2px 6px rgba(74, 172, 114, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .btn-secondary {
@@ -824,6 +858,7 @@ textarea.input-field {
   }
 
   .hero-shell::before { display: none; }
+  .hero-shell::after  { left: 5%; right: 5%; }
   .hero .container    { padding-inline: 10px; }
   .hero-content       { gap: 24px; padding-bottom: 3px; }
   .hero-name          { font-size: clamp(2rem, 9vw, 2.8rem); }
