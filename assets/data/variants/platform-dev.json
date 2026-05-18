@@ -1,66 +1,149 @@
 {
   "personal": {
-    "name": "Joakim Moléni",
-    "title": "Software Engineer — Platform Reliability & Delivery",
+    "name": "Joakim Mol\u00e9ni",
+    "title": "Senior Software Engineer | Technical Leadership & Platform Delivery",
+    "title_sv": "Senior mjukvaruingenj\u00f6r | Teknisk ledning & plattformsleverans",
     "location": "Stockholm, Sweden",
+    "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I keep critical systems running while making them better \u2014 across mainframe and modern platforms. Before engineering, I led teams and businesses for 14 years, so I think in outcomes: what ships, what holds, and what the team actually needs. That mix of operational discipline and hands-on technical range is what I bring.",
+  "profile": "Senior engineer who combines 14 years of operational leadership with hands-on systems engineering at Sweden\u2019s largest banks. Own architecture decisions across transaction-critical systems where mainframe and modern must coexist. Built internal tooling that replaced legacy processes. Led teams, budgets and multi-year projects before writing my first line of COBOL. That background means I think in outcomes \u2014 what ships, what holds, and what the team needs to deliver reliably.",
+  "profile_sv": "Senior ingenj\u00f6r som kombinerar 14 \u00e5rs operativ ledning med hands-on systemutveckling p\u00e5 Sveriges st\u00f6rsta banker. \u00c4ger arkitekturbeslut \u00f6ver transaktionskritiska system d\u00e4r stordator och modernt m\u00e5ste samexistera. Byggde interna verktyg som ersatte \u00e4ldre processer. Ledde team, budgetar och fler\u00e5rsprojekt innan jag skrev min f\u00f6rsta rad COBOL. Den bakgrunden inneb\u00e4r att jag t\u00e4nker i resultat \u2014 vad som levereras, vad som h\u00e5ller och vad teamet beh\u00f6ver f\u00f6r att leverera tillf\u00f6rlitligt.",
   "coreStack": [
-    "System ownership & delivery",
-    "Cross-platform architecture",
-    "Internal tooling",
-    "Legacy-to-modern evolution",
-    "Team leadership background"
+    "System ownership & architecture",
+    "Cross-platform delivery (z/OS + cloud)",
+    "Technical leadership & mentoring",
+    "CI/CD, Git, Agile practices",
+    "Internal tooling & developer experience",
+    "Incident response & risk analysis"
+  ],
+  "coreStack_sv": [
+    "System\u00e4gande & arkitektur",
+    "Plattformsoberoende leverans (z/OS + moln)",
+    "Teknisk ledning & mentorskap",
+    "CI/CD, Git, agila metoder",
+    "Intern verktygsbygge & utvecklarupplevelse",
+    "Incidenthantering & riskanalys"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "years": "Aug 2024 – Present",
+      "role": "Senior Software Engineer (COBOL & HLASM / IBM z/OS)",
+      "role_sv": "Senior mjukvaruingenj\u00f6r (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 \u2013 Present",
+      "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Own architecture and delivery decisions across transaction-critical systems where mainframe and modern services must work together.",
-        "Build internal developer tooling that replaced scattered Word docs and old binders with a searchable, structured documentation hub.",
-        "Drive risk analysis for core banking modules and lead incident investigations end-to-end."
+        "Own architecture and delivery decisions across transaction-critical core banking systems where mainframe and modern services coexist.",
+        "Built internal documentation platform that replaced scattered Word files and physical binders \u2014 now used daily by the department.",
+        "Lead risk analysis for core banking modules. Drive incident investigations end-to-end from detection through resolution and prevention.",
+        "Conduct code reviews across teams. Mentor junior developers on production-quality standards and mainframe best practices."
+      ],
+      "highlights_sv": [
+        "\u00c4ger arkitektur- och leveransbeslut \u00f6ver transaktionskritiska k\u00e4rnbankssystem d\u00e4r stordator och moderna tj\u00e4nster samexisterar.",
+        "Byggde intern dokumentationsplattform som ersatte utspridda Word-filer och fysiska p\u00e4rmar \u2014 anv\u00e4nds nu dagligen av avdelningen.",
+        "Leder riskanalys f\u00f6r k\u00e4rnbanksmoduler. Driver incidentutredningar end-to-end fr\u00e5n detektering via l\u00f6sning till prevention.",
+        "Genomf\u00f6r kodgranskningar \u00e5t flera team. Mentorerar juniora utvecklare i produktionskvalitet och stordator-best-practices."
       ]
     },
     {
       "company": "Handelsbanken",
-      "role": "System Engineer",
-      "years": "Aug 2023 – Aug 2024",
+      "role": "Systems Engineer (COBOL / IBM z/OS)",
+      "role_sv": "Systemingenj\u00f6r (COBOL / IBM z/OS)",
+      "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Delivered backend and integration work across Linux environments and banking APIs \u2014 hands-on from day one.",
-        "Handled production incidents, runtime diagnostics and end-to-end troubleshooting across system boundaries."
+        "Deployed to production within the first week \u2014 fastest ramp-up in a cohort of 12. Delivered backend and integration work across Linux and mainframe environments.",
+        "Handled production incidents and end-to-end troubleshooting across system boundaries under real operational pressure."
+      ],
+      "highlights_sv": [
+        "Levererade till produktion inom f\u00f6rsta veckan \u2014 snabbaste uppstarten i en kohort p\u00e5 12. Levererade backend- och integrationsarbete \u00f6ver Linux- och stordatormilj\u00f6er.",
+        "Hanterade produktionsincidenter och end-to-end-fels\u00f6kning \u00f6ver systemgr\u00e4nser under verkligt operativt tryck."
       ]
     },
     {
-      "company": "Earlier Leadership Experience",
-      "role": "Operational / Business Leadership",
-      "years": "2005 – 2019",
+      "company": "PostNord TPL AB",
+      "role": "Returns Manager",
+      "role_sv": "Returansvarig",
+      "years": "Apr 2020 \u2013 Sep 2021",
       "highlights": [
-        "14 years of leading teams, owning outcomes and building operational discipline \u2014 skills that now shape how I approach system design and delivery.",
-        "Consistently operated in environments where uptime, accountability and execution quality were non-negotiable."
+        "Managed logistics operations at scale \u2014 process ownership, SLA compliance and continuous improvement in a high-volume environment.",
+        "First exposure to IBM mainframe and Linux systems in an operational context."
+      ],
+      "highlights_sv": [
+        "Ansvarade f\u00f6r logistikverksamhet i stor skala \u2014 process\u00e4garskap, SLA-efterlevnad och st\u00e4ndiga f\u00f6rb\u00e4ttringar under h\u00f6g volym.",
+        "F\u00f6rsta kontakten med IBM stordator- och Linux-system i operativ kontext."
+      ]
+    },
+    {
+      "company": "Cell Solar Nordic AB",
+      "role": "Senior Business Specialist",
+      "role_sv": "Senior aff\u00e4rsspecialist",
+      "years": "Feb 2017 \u2013 Mar 2019",
+      "highlights": [
+        "Technical solution design and end-to-end project delivery for energy installations across Sweden. Top performer nationally \u2014 highest revenue in the company.",
+        "Full project lifecycle ownership from client proposal through execution and handover."
+      ],
+      "highlights_sv": [
+        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer \u00f6ver hela Sverige. B\u00e4st i landet \u2014 h\u00f6gst oms\u00e4ttning i bolaget.",
+        "\u00c4gde hela projektlivscykeln fr\u00e5n kundoffert via genomf\u00f6rande till \u00f6verl\u00e4mning."
+      ]
+    },
+    {
+      "company": "Executive & Leadership Roles",
+      "company_sv": "Ledande befattningar",
+      "role": "COO / Executive Producer / Project Manager / Operations Manager",
+      "role_sv": "COO / Executive Producer / Projektledare / Verksamhetsansvarig",
+      "years": "2007 \u2013 2011",
+      "highlights": [
+        "COO at Genom Historien AB \u2014 full P&L responsibility and operational leadership of a cultural heritage business.",
+        "Executive Producer for artist Stefan Andersson \u2014 production, logistics and team coordination for national concert tours.",
+        "Project Manager at Carlstens F\u00e4stning \u2014 led multi-year cultural projects with external stakeholders and public funding.",
+        "Operations Manager at Kronhuset \u2014 venue operations, team leadership, budget ownership."
+      ],
+      "highlights_sv": [
+        "COO p\u00e5 Genom Historien AB \u2014 fullt resultatansvar och operativ ledning av en kulturarvsverksamhet.",
+        "Executive Producer f\u00f6r Stefan Andersson \u2014 produktion, logistik och teamkoordination f\u00f6r nationella konsertturn\u00e9er.",
+        "Projektledare p\u00e5 Carlstens F\u00e4stning \u2014 ledde fler\u00e5rsprojekt med externa intressenter och offentlig finansiering.",
+        "Verksamhetsansvarig p\u00e5 Kronhuset \u2014 drift, teamledning, budgetansvar."
+      ]
+    },
+    {
+      "company": "Ericsson",
+      "role": "Machine Technician",
+      "role_sv": "Maskintekniker",
+      "years": "Apr 2011 \u2013 Apr 2014",
+      "highlights": [
+        "Operated advanced manufacturing equipment at Ericsson \u2014 precision, reliability and systematic troubleshooting.",
+        "Technical training across hardware and Linux-based industrial systems."
+      ],
+      "highlights_sv": [
+        "Opererade avancerad tillverkningsutrustning p\u00e5 Ericsson \u2014 precision, tillf\u00f6rlitlighet och systematisk fels\u00f6kning.",
+        "Teknisk utbildning inom h\u00e5rdvara och Linux-baserade industriella system."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Documentation Hub for Mainframe Teams",
-      "description": "A web-based internal tool replacing scattered documents with a searchable, structured platform built for mainframe developers and managers alike.",
+      "name": "Internal Documentation Platform",
+      "name_sv": "Intern dokumentationsplattform",
+      "description": "Web application replacing scattered Word documents and physical binders with a searchable knowledge base. Built for mainframe teams, now used daily across the department.",
+      "description_sv": "Webbapplikation som ersatte utspridda Word-dokument och fysiska p\u00e4rmar med en s\u00f6kbar kunskapsbas. Byggd f\u00f6r stordatorteam, anv\u00e4nds nu dagligen av hela avdelningen.",
       "tech": ["HTML", "CSS", "JavaScript"]
-    },
-    {
-      "name": "Core-to-Modern Integration",
-      "description": "Production integration connecting stable mainframe transaction paths to modern service layers \u2014 reliability preserved, capabilities extended.",
-      "tech": ["IBM z/OS", "REST APIs", "Node.js", "SQL"]
     }
   ],
-  "education": [],
+  "education": [
+    {
+      "school": "Changemaker Educations",
+      "degree": "Full-stack Developer Programme",
+      "degree_sv": "Fullstackutvecklare",
+      "years": "2021 \u2013 2023"
+    }
+  ],
   "skills": {
-    "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
-    "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS"],
-    "concepts": ["System ownership", "Cross-platform delivery", "Internal tooling & DX", "Operational leadership", "Architecture evolution"]
+    "languages": ["COBOL", "HLASM", "JavaScript", "TypeScript", "Python", "SQL"],
+    "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS", "Docker", "Git"],
+    "concepts": ["System ownership & architecture", "Technical leadership & mentoring", "CI/CD & Agile delivery", "Incident response & risk analysis", "Cross-platform integration", "Internal tooling & developer experience"],
+    "concepts_sv": ["System\u00e4gande & arkitektur", "Teknisk ledning & mentorskap", "CI/CD & agil leverans", "Incidenthantering & riskanalys", "Plattformsoberoende integration", "Intern verktygsbygge & utvecklarupplevelse"]
   }
 }

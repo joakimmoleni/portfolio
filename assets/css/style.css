@@ -161,7 +161,24 @@ html, body { width: 100%; max-width: 100%; }
 section[id]   { scroll-margin-top: 120px; }
 
 .section-text  { font-size: var(--fs-5); }
-.section-title { margin-block-end: 16px; letter-spacing: 0.02em; }
+.section-title {
+  margin-block-end: 16px;
+  letter-spacing: 0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: var(--mainLinkColor);
+  border-radius: 1px;
+  opacity: 0.7;
+}
 .card-text     { color: var(--secondaryTextColor); }
 .grid-list     { display: grid; gap: 30px; }
 
@@ -672,13 +689,31 @@ section[id]   { scroll-margin-top: 120px; }
   background: linear-gradient(180deg, color-mix(in srgb, var(--secondaryBgColor) 60%, transparent), color-mix(in srgb, var(--secondaryBgColor) 30%, transparent));
   box-shadow: var(--shadow-1);
   min-height: 100%;
-  transition: transform var(--transition-1), border-color var(--transition-1), box-shadow var(--transition-1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color var(--transition-1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mainLinkColor), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .about-card:is(:hover, :focus-within) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--mainLinkColor) 36%, var(--mainBorderColor));
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-2), 0 0 0 1px color-mix(in srgb, var(--mainLinkColor) 8%, transparent);
+}
+
+.about-card:is(:hover, :focus-within)::before {
+  opacity: 0.5;
 }
 
 .about-card .card-icon     { max-width: max-content; }
@@ -689,7 +724,10 @@ section[id]   { scroll-margin-top: 120px; }
   #PROJECTS
 \*-----------------------------------*/
 
-.project { border-block: 1px solid var(--mainBorderColor); }
+.project {
+  border-block: 1px solid color-mix(in srgb, var(--mainBorderColor) 60%, transparent);
+  position: relative;
+}
 
 .project .title-wrapper       { margin-block-end: 40px; }
 .project .title-wrapper > div { display: grid; gap: 8px; }
@@ -706,13 +744,13 @@ section[id]   { scroll-margin-top: 120px; }
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--mainBorderColor) 80%, transparent);
   box-shadow: var(--shadow-2);
-  transition: transform var(--transition-1), border-color var(--transition-1), box-shadow var(--transition-1);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color var(--transition-1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:is(:hover, :focus-within) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--mainLinkColor) 32%, var(--mainBorderColor));
-  box-shadow: var(--shadow-3);
+  box-shadow: var(--shadow-3), 0 0 0 1px color-mix(in srgb, var(--mainLinkColor) 6%, transparent);
 }
 
 .project-card-1,
@@ -732,8 +770,9 @@ section[id]   { scroll-margin-top: 120px; }
   padding: 7px 12px;
   border-radius: var(--radius-pill);
   width: max-content;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid color-mix(in srgb, var(--mainBorderColor) 72%, transparent);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  letter-spacing: 0.04em;
 }
 
 .project-card .card-title {
@@ -782,8 +821,22 @@ section[id]   { scroll-margin-top: 120px; }
   gap: 40px;
   line-height: 2.2rem;
   border: 1px solid color-mix(in srgb, var(--mainBorderColor) 80%, transparent);
-  background-image: linear-gradient(135deg, rgba(74, 172, 114, 0.10), transparent 40%);
+  background-image: linear-gradient(135deg, rgba(74, 172, 114, 0.08), transparent 40%);
   box-shadow: var(--shadow-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mainLinkColor), transparent);
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .contact-content {
@@ -798,19 +851,20 @@ section[id]   { scroll-margin-top: 120px; }
 .contact .section-title { margin-block-start: 20px; }
 
 .input-field {
-  background-color: var(--mainBorderColor);
+  background-color: color-mix(in srgb, var(--mainBorderColor) 60%, var(--mainBgColor));
   color: var(--mainTextColor);
   font-size: var(--fs-7);
   padding: 14px 18px;
   border-radius: var(--radius-6);
   outline: none;
-  border: 1px solid transparent;
-  transition: border-color var(--transition-1), background-color var(--transition-1);
+  border: 1px solid color-mix(in srgb, var(--mainBorderColor) 80%, transparent);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-field:focus {
-  border-color: color-mix(in srgb, var(--mainLinkColor) 45%, var(--mainBorderColor));
-  background-color: color-mix(in srgb, var(--mainBorderColor) 88%, transparent);
+  border-color: color-mix(in srgb, var(--mainLinkColor) 55%, var(--mainBorderColor));
+  background-color: color-mix(in srgb, var(--mainBorderColor) 80%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mainLinkColor) 10%, transparent);
 }
 
 .input-field::placeholder { color: #9aa0a6; }
@@ -828,8 +882,9 @@ textarea.input-field {
 
 .footer {
   padding-block: 40px;
-  border-top: 1px solid color-mix(in srgb, var(--mainBorderColor) 75%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--mainBorderColor) 50%, transparent);
   color: var(--secondaryTextColor);
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--secondaryBgColor) 30%, transparent));
 }
 
 .copyright { margin-block-end: 12px; }

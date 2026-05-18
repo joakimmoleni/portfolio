@@ -28,7 +28,7 @@ html:has(body.page-resume) {
   --mutedTextColor: #a7b0be;
   --borderColor:    rgba(255, 255, 255, 0.08);
   --surfaceColor:   #14181d;
-  --shadowColor:    0 26px 60px rgba(0, 0, 0, 0.24);
+  --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
 [data-theme="light"] {
@@ -37,39 +37,113 @@ html:has(body.page-resume) {
   --borderColor:    rgba(22, 32, 42, 0.08);
   --mutedTextColor: #4a5560;
   --surfaceColor:   #ffffff;
-  --shadowColor:    0 18px 40px rgba(24, 34, 44, 0.12);
+  --shadowColor:    0 24px 56px rgba(24, 34, 44, 0.10), 0 6px 16px rgba(24, 34, 44, 0.06);
 }
 
 /*-----------------------------------*\
   #HEADER OVERRIDES (page-resume)
 \*-----------------------------------*/
 
-/* Always fixed, full-width on resume page */
-.page-resume .header {
+/* Hide the shared site header entirely on resume page */
+.page-resume .header { display: none !important; }
+
+/*-----------------------------------*\
+  #RESUME TOP BAR (fixed)
+\*-----------------------------------*/
+
+.resume-topbar {
   position: fixed;
   top: 0;
   left: 0;
-  max-width: unset;
-  border-radius: 0;
-  transform: none;
-  animation: none;
+  right: 0;
+  z-index: 100;
+  padding: 0.6rem 1.5rem;
+  background: color-mix(in srgb, var(--mainBgColor) 85%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--borderColor) 50%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform 0.3s ease;
 }
 
-/* Scale nav elements back — style.css rem values are for 10px root */
-.page-resume .logo            { font-size: 0.875rem; }
-.page-resume .header          { padding-block: 1.25rem; }
-.page-resume .navbar-link     { font-size: 0.875rem; letter-spacing: 0.09rem; }
-.page-resume .nav-close-btn   { font-size: 1.25rem; }
-.page-resume .nav-open-btn    { font-size: 1.5rem; }
-.page-resume .theme-switch svg,
-.page-resume .social-link svg { width: 1.125rem; height: 1.125rem; }
+.resume-topbar.topbar-hidden {
+  transform: translateY(-100%);
+}
+
+.resume-topbar-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Back link */
+.resume-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--mainTextColor);
+  text-decoration: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.resume-back-link:hover {
+  opacity: 1;
+  color: var(--accentColor);
+}
+
+/* Center: variant tabs */
+.resume-topbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Right side group */
+.resume-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Theme switch in topbar */
+.resume-topbar .theme-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--mainTextColor);
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.resume-topbar .theme-switch:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--borderColor) 40%, transparent);
+}
 
 /*-----------------------------------*\
   #MAIN LAYOUT
 \*-----------------------------------*/
 
 main {
-  padding: 100px 1rem 4rem;
+  padding: 70px 1rem 4rem;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(74, 172, 114, 0.06), transparent 40%),
+    radial-gradient(circle, color-mix(in srgb, var(--mainBorderColor) 28%, transparent) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  background-position: top center, center;
+  min-height: 100vh;
 }
 
 /* Undo style.css global display resets that break resume inline text */
@@ -87,110 +161,45 @@ main img    { display: inline-block; }
 }
 
 /*-----------------------------------*\
-  #RESUME HEADER (mode switch + meta)
+  #LANGUAGE SWITCH
 \*-----------------------------------*/
-
-.resume-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  padding: 1rem 0;
-  background: color-mix(in srgb, var(--mainBgColor) 88%, transparent);
-  border-bottom: 1px solid var(--borderColor);
-  backdrop-filter: blur(12px);
-  position: sticky;
-  top: 0;
-  z-index: 3;
-}
-
-.resume-header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/*-----------------------------------*\
-  #MODE SWITCH (Read / Edit)
-\*-----------------------------------*/
-
-.resume-mode-switch {
+.resume-lang-switch {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.15rem;
   padding: 0.2rem;
-  border: 1px solid var(--borderColor);
+  border: 1px solid color-mix(in srgb, var(--borderColor) 80%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--surfaceColor) 88%, transparent);
+  background: color-mix(in srgb, var(--surfaceColor) 82%, transparent);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-.mode-btn {
+.lang-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;
   border-radius: 999px;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.7rem;
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   color: var(--mainTextColor);
-  opacity: 0.6;
+  opacity: 0.5;
   background: transparent;
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
 }
 
-.mode-btn:hover { opacity: 0.85; }
+.lang-btn:hover { opacity: 0.8; }
 
-.mode-btn.active {
+.lang-btn.active {
   background: var(--accentColor);
   color: #fff;
   opacity: 1;
+  box-shadow: 0 1px 4px rgba(74, 172, 114, 0.2);
 }
-
-/*-----------------------------------*\
-  #READ META + EDIT PANEL
-\*-----------------------------------*/
-
-.resume-read-meta {
-  display: grid;
-  gap: 0.12rem;
-  margin-left: auto;
-  margin-right: 0.5rem;
-}
-
-.read-meta-kicker {
-  margin: 0;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12rem;
-  color: var(--accentColor);
-}
-
-.read-meta-text {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--mutedTextColor);
-}
-
-.resume-edit-panel {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-left: auto;
-}
-
-/* Mode visibility */
-body[data-resume-mode="read"] .resume-edit-panel,
-body[data-resume-mode="read"] .resume-status  { display: none; }
-body[data-resume-mode="edit"] .resume-read-meta { display: none; }
-body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 
 /*-----------------------------------*\
   #VERSION TABS
@@ -222,22 +231,23 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 .tab-item { display: inline-block; }
 
 .tab-btn {
-  padding: 0.5rem 0.8rem;
+  padding: 0.35rem 0.7rem;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
   color: var(--mutedTextColor);
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
 .tab-btn:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--mainTextColor);
+  border-color: color-mix(in srgb, var(--borderColor) 60%, transparent);
 }
 
 [data-theme="light"] .tab-btn:hover {
@@ -248,6 +258,7 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   background: var(--accentColor);
   color: #fff;
   border-color: var(--accentColor);
+  box-shadow: 0 2px 8px rgba(74, 172, 114, 0.2);
 }
 
 /*-----------------------------------*\
@@ -263,18 +274,17 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 .action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.8rem;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
   color: var(--mutedTextColor);
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 44px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
@@ -282,6 +292,7 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--accentColor);
   color: var(--accentColor);
+  transform: translateY(-1px);
 }
 
 [data-theme="light"] .action-btn:hover {
@@ -293,12 +304,14 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   color: #fff;
   border-color: var(--accentColor);
   font-weight: 500;
+  box-shadow: 0 2px 8px rgba(74, 172, 114, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .action-btn-primary:hover {
   background: color-mix(in srgb, var(--accentColor) 82%, #000);
   border-color: color-mix(in srgb, var(--accentColor) 82%, #000);
   color: #fff;
+  box-shadow: 0 6px 20px rgba(74, 172, 114, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .action-btn svg { width: 18px; height: 18px; }
@@ -309,7 +322,16 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   #RESUME DOCUMENT
 \*-----------------------------------*/
 
-.resume-document { display: grid; gap: 0.5rem; }
+.resume-document { display: grid; gap: 0.75rem; }
+
+.resume {
+  animation: resumeEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes resumeEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 .resume-status {
   padding: 0.6rem 0;
@@ -327,7 +349,10 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   background: var(--cardBg);
   color: var(--cardTextColor);
   box-shadow: var(--shadowColor);
-  line-height: 1.45;
+  line-height: 1.35;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /*-----------------------------------*\
@@ -335,47 +360,63 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 \*-----------------------------------*/
 
 .resume-left {
-  padding: 14mm 11mm 14mm 14mm;
+  padding: 11mm 9mm 11mm 12mm;
   background: var(--sidebarBg);
   border-right: 1px solid var(--dividerColor);
+  position: relative;
+}
+
+.resume-left::after {
+  content: "";
+  position: absolute;
+  top: 11mm;
+  right: 0;
+  width: 1px;
+  height: calc(100% - 22mm);
+  background: linear-gradient(180deg, transparent, var(--accentColor), transparent);
+  opacity: 0.15;
 }
 
 .resume-right {
-  padding: 14mm 14mm 14mm 11mm;
+  padding: 11mm 12mm 11mm 9mm;
 }
 
 .resume-chip {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
-  border: 1px solid rgba(74, 172, 114, 0.25);
+  border: 1px solid rgba(74, 172, 114, 0.3);
   color: var(--accentColor);
-  padding: 0.28rem 0.6rem;
-  font-size: 0.62rem;
+  padding: 0.22rem 0.6rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.12rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.6rem;
+  background: rgba(74, 172, 114, 0.05);
 }
 
 .resume-name {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 1.85rem;
+  font-size: 1.7rem;
   line-height: 1;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.02em;
 }
 
 .resume-title {
-  font-size: 0.77rem;
+  font-size: 0.72rem;
   color: #47515c;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
 }
 
 .resume-section-title {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.14rem;
-  margin: 1rem 0 0.45rem;
+  margin: 0.7rem 0 0.3rem;
   color: #5f6a75;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(74, 172, 114, 0.15);
 }
 
 .contact-item,
@@ -388,8 +429,8 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 
 .contact-item,
 .skill-item {
-  font-size: 0.84rem;
-  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
   color: #33404c;
   word-break: break-word;
 }
@@ -407,21 +448,21 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
   content: "";
   position: absolute;
   left: 0;
-  top: 0.5rem;
-  width: 0.42rem;
-  height: 0.42rem;
+  top: 0.45rem;
+  width: 0.35rem;
+  height: 0.35rem;
   border-radius: 999px;
   background: var(--accentColor);
 }
 
 .profile-text {
-  font-size: 0.95rem;
-  line-height: 1.45;
+  font-size: 0.85rem;
+  line-height: 1.4;
   color: #32404b;
 }
 
 .job {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.6rem;
   page-break-inside: avoid;
 }
 
@@ -436,27 +477,27 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 .job-company,
 .education-school {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
 }
 
 .job-years,
 .education-years {
-  font-size: 0.77rem;
+  font-size: 0.72rem;
   color: #66717d;
   white-space: nowrap;
 }
 
 .job-position {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   color: #50606d;
-  margin: 0.15rem 0 0.35rem;
+  margin: 0.1rem 0 0.25rem;
 }
 
 .job-highlights li {
-  font-size: 0.82rem;
-  margin-bottom: 0.28rem;
+  font-size: 0.76rem;
+  margin-bottom: 0.2rem;
   color: #32404b;
 }
 
@@ -467,29 +508,35 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 .resume-project-list { display: grid; gap: 0.7rem; }
 
 .resume-project-item {
-  padding: 0.75rem 0.9rem;
+  padding: 0.55rem 0.75rem;
   border: 1px solid rgba(26, 32, 39, 0.08);
-  border-radius: 12px;
+  border-radius: 10px;
   background: rgba(17, 22, 28, 0.025);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resume-project-item:hover {
+  border-color: rgba(74, 172, 114, 0.2);
+  box-shadow: 0 2px 8px rgba(74, 172, 114, 0.06);
 }
 
 .resume-project-name {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   color: #1f2a33;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.12rem;
 }
 
 .resume-project-description {
   font-family: "Roboto Condensed", sans-serif;
-  font-size: 0.82rem;
-  line-height: 1.4;
+  font-size: 0.76rem;
+  line-height: 1.35;
   color: #32404b;
 }
 
 .resume-project-tech {
-  margin-top: 0.25rem;
-  font-size: 0.72rem;
+  margin-top: 0.2rem;
+  font-size: 0.66rem;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   color: #66717d;
@@ -508,37 +555,34 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 @media (max-width: 900px) {
   .resume-wrapper { max-width: 100%; gap: 2rem; }
 
-  .resume-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-    padding: 1.2rem;
+  .resume-topbar { padding: 0.6rem 1.2rem 0.5rem; }
+
+  .resume-topbar-content {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: space-between;
   }
 
-  .resume-header-content {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.5rem;
+  .resume-topbar-center {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-top: 0.45rem;
+    padding-right: 1rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--borderColor) 40%, transparent);
   }
 
-  .resume-mode-switch { align-self: flex-start; }
-  .resume-read-meta   { margin: 0; }
+  .resume-topbar-center::-webkit-scrollbar { display: none; }
 
-  .resume-edit-panel {
-    width: 100%;
-    margin: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.8rem;
+  .resume-topbar-center .tabs-list { gap: 0.35rem; }
+  .resume-topbar-center .tab-btn {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
   }
-
-  .version-tabs { flex-wrap: wrap; gap: 0.8rem; }
-  .tabs-list    { flex-wrap: wrap; width: 100%; }
-
-  .resume-actions { width: 100%; }
-  .action-btn     { flex: 1; justify-content: center; font-size: 0.8rem; }
-  .action-btn span,
-  .action-btn-secondary span { display: none; }
 
   .resume-inner {
     width: 100%;
@@ -557,29 +601,23 @@ body[data-resume-mode="edit"] .resume-edit-panel { display: flex; }
 
 @media (max-width: 600px) {
   main { padding: 80px 0.75rem 2rem; }
-  .resume-wrapper { gap: 1.5rem; }
+  .resume-topbar { padding: 0.5rem 0.75rem 0.4rem; }
+  .action-btn span { display: none; }
 
-  .resume-header {
-    padding: 1rem;
-    border-radius: 16px;
+  .resume-back-link span { display: none; }
+  .resume-back-link svg { width: 22px; height: 22px; }
+  .resume-back-link {
+    padding: 0.45rem;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--borderColor) 30%, transparent);
   }
+
+  .resume-topbar-right { gap: 0.4rem; }
+  .lang-btn { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
 }
 
 @media (max-width: 575px) {
   main { padding-inline: 0.6rem; }
-
-  .resume-header {
-    border-radius: 16px;
-    padding: 1rem;
-    flex-direction: column;
-  }
-
-  .resume-header-content {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-    width: 100%;
-  }
 }
 
 /*-----------------------------------*\

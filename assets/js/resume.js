@@ -1,39 +1,83 @@
 ﻿// Resume-specific logic (theme/nav handled by shared script.js)
 const resumeContent = document.getElementById('resumeContent');
 const resumeStatus = document.getElementById('resumeStatus');
-const readModeBtn = document.getElementById('readModeBtn');
-const editModeBtn = document.getElementById('editModeBtn');
-const resumeEditPanel = document.getElementById('resumeEditPanel');
+const langEnBtn = document.getElementById('langEnBtn');
+const langSvBtn = document.getElementById('langSvBtn');
+
+// Auto-hide topbar on scroll (mobile only)
+(function() {
+  const topbar = document.querySelector('.resume-topbar');
+  if (!topbar) return;
+  let lastY = 0;
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (window.innerWidth <= 900) {
+        if (y > lastY && y > 60) {
+          topbar.classList.add('topbar-hidden');
+        } else {
+          topbar.classList.remove('topbar-hidden');
+        }
+      } else {
+        topbar.classList.remove('topbar-hidden');
+      }
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+// Language state
+window.__resumeLang = localStorage.getItem('resumeLang') || 'en';
+
+function setResumeLang(lang) {
+  const safeLang = lang === 'sv' ? 'sv' : 'en';
+  window.__resumeLang = safeLang;
+  localStorage.setItem('resumeLang', safeLang);
+  document.body.setAttribute('data-resume-lang', safeLang);
+
+  if (langEnBtn && langSvBtn) {
+    const isEn = safeLang === 'en';
+    langEnBtn.classList.toggle('active', isEn);
+    langSvBtn.classList.toggle('active', !isEn);
+    langEnBtn.setAttribute('aria-pressed', String(isEn));
+    langSvBtn.setAttribute('aria-pressed', String(!isEn));
+  }
+
+  // Re-render if data is loaded
+  if (window.__currentResumeData) {
+    renderResume(window.__currentResumeData, window.__currentVariantId || 'default');
+  }
+}
+
+setResumeLang(window.__resumeLang);
+langEnBtn?.addEventListener('click', () => setResumeLang('en'));
+langSvBtn?.addEventListener('click', () => setResumeLang('sv'));
+
+// Helper: get localized field value
+function t(obj, field) {
+  if (!obj) return '';
+  const lang = window.__resumeLang;
+  if (lang === 'sv' && obj[field + '_sv']) return obj[field + '_sv'];
+  return obj[field] || '';
+}
+
+function tArr(obj, field) {
+  if (!obj) return [];
+  const lang = window.__resumeLang;
+  if (lang === 'sv' && Array.isArray(obj[field + '_sv'])) return obj[field + '_sv'];
+  return Array.isArray(obj[field]) ? obj[field] : [];
+}
 
 function setStatus(message, type = 'info') {
   if (!resumeStatus) return;
   resumeStatus.textContent = message;
   resumeStatus.dataset.state = type;
 }
-
-function setResumeMode(mode) {
-  const safeMode = mode === 'edit' ? 'edit' : 'read';
-  document.body.setAttribute('data-resume-mode', safeMode);
-  localStorage.setItem('resumeMode', safeMode);
-
-  if (resumeEditPanel) {
-    resumeEditPanel.hidden = safeMode !== 'edit';
-  }
-
-  if (readModeBtn && editModeBtn) {
-    const isRead = safeMode === 'read';
-    readModeBtn.classList.toggle('active', isRead);
-    editModeBtn.classList.toggle('active', !isRead);
-    readModeBtn.setAttribute('aria-pressed', String(isRead));
-    editModeBtn.setAttribute('aria-pressed', String(!isRead));
-  }
-}
-
-const savedResumeMode = localStorage.getItem('resumeMode') || 'read';
-setResumeMode(savedResumeMode);
-
-readModeBtn?.addEventListener('click', () => setResumeMode('read'));
-editModeBtn?.addEventListener('click', () => setResumeMode('edit'));
 
 // Load and render resume data
 async function loadResume() {
@@ -180,7 +224,9 @@ function exportPdf() {
 }
 
 function renderResume(data, variantId = 'default') {
-  const { personal, profile, coreStack, experience, skills, education, projects } = data;
+  const { personal, experience, skills, education, projects } = data;
+  const profile = t(data, 'profile');
+  const coreStack = tArr(data, 'coreStack');
 
   // Variant-specific behavior
   const variant = (data.variants || []).find(v => v.id === variantId) || { id: 'default' };
@@ -189,33 +235,51 @@ function renderResume(data, variantId = 'default') {
   const isModern = /modern/i.test(normalizedVariantId);
   const isMainframe = /mainframe|standard/i.test(normalizedVariantId);
   const isPlatform = /platform/i.test(normalizedVariantId);
-  const concepts = Array.isArray(skills?.concepts) ? skills.concepts : [];
+  const concepts = tArr(skills, 'concepts');
+
+  const isSv = window.__resumeLang === 'sv';
+
+  // Localized section labels
+  const labels = isSv
+    ? { contact: 'Kontakt', coreStack: 'Kärnkompetens', languages: 'Språk', focus: 'Fokus', profile: 'Profil', experience: 'Erfarenhet', education: 'Utbildning', projects: 'Utvalda projekt' }
+    : { contact: 'Contact', coreStack: 'Core Stack', languages: 'Languages', focus: 'Focus', profile: 'Profile', experience: 'Experience', education: 'Education', projects: 'Selected Projects' };
+
+  const chipLabel = isMainframe
+    ? (isSv ? 'Kärnsystemsprofil' : 'Core systems profile')
+    : isModern
+    ? (isSv ? 'Backendprofil' : 'Backend profile')
+    : isPlatform
+    ? (isSv ? 'Plattformsprofil' : 'Platform profile')
+    : (isSv ? 'CV-profil' : 'Resume profile');
 
   const leftParts = [];
 
+  const personalTitle = t(personal, 'title');
+  const personalLocation = isSv && personal.location_sv ? personal.location_sv : personal.location;
+
   leftParts.push(`
     <div class="resume-left">
-      <p class="resume-chip">${isMainframe ? 'Core systems profile' : isModern ? 'Backend profile' : isPlatform ? 'Platform profile' : 'Resume profile'}</p>
+      <p class="resume-chip">${chipLabel}</p>
       <h1 class="resume-name">${personal.name}</h1>
-      <p class="resume-title">${personal.title}</p>
+      <p class="resume-title">${personalTitle}</p>
   `);
 
   // Contact
   leftParts.push(`
       <section>
-        <h2 class="resume-section-title">Contact</h2>
-        <div class="contact-item contact-location">${personal.location}</div>
+        <h2 class="resume-section-title">${labels.contact}</h2>
+        <div class="contact-item contact-location">${personalLocation}</div>
         <div class="contact-item contact-email"><a href="mailto:${personal.email}" class="contact-link">${personal.email}</a></div>
         <div class="contact-item contact-github"><a href="https://${personal.github}" target="_blank" class="contact-link">${personal.github}</a></div>
         <div class="contact-item contact-linkedin"><a href="https://${personal.linkedin}" target="_blank" class="contact-link">${personal.linkedin}</a></div>
       </section>
   `);
 
-  // Core stack / skills prioritized for modern
+  // Core stack
   if (coreStack && coreStack.length) {
     leftParts.push(`
       <section>
-        <h2 class="resume-section-title">Core Stack</h2>
+        <h2 class="resume-section-title">${labels.coreStack}</h2>
         <ul class="skill-list">
           ${coreStack.map(skill => `<li class="skill-item">${skill}</li>`).join('')}
         </ul>
@@ -223,11 +287,11 @@ function renderResume(data, variantId = 'default') {
     `);
   }
 
-  // Languages / specialties
+  // Languages
   if (skills && skills.languages && skills.languages.length) {
     leftParts.push(`
       <section>
-        <h2 class="resume-section-title">Languages</h2>
+        <h2 class="resume-section-title">${labels.languages}</h2>
         <ul class="skill-list">
           ${skills.languages.map(lang => `<li class="skill-item">${lang}</li>`).join('')}
         </ul>
@@ -238,7 +302,7 @@ function renderResume(data, variantId = 'default') {
   if (concepts.length) {
     leftParts.push(`
       <section>
-        <h2 class="resume-section-title">Focus</h2>
+        <h2 class="resume-section-title">${labels.focus}</h2>
         <ul class="skill-list">
           ${concepts.map(concept => `<li class="skill-item">${concept}</li>`).join('')}
         </ul>
@@ -252,27 +316,29 @@ function renderResume(data, variantId = 'default') {
   const rightParts = [];
   rightParts.push('<div class="resume-right">');
 
-  // In mainframe variant, show profile first too
   rightParts.push(`
     <section>
-      <h2 class="resume-section-title">Profile</h2>
+      <h2 class="resume-section-title">${labels.profile}</h2>
       <p class="profile-text">${profile}</p>
     </section>
   `);
 
   // Experience
-  rightParts.push('<section><h2 class="resume-section-title">Experience</h2>');
+  rightParts.push(`<section><h2 class="resume-section-title">${labels.experience}</h2>`);
 
   experience.forEach(job => {
-    const highlights = Array.isArray(job.highlights) ? job.highlights : [];
-    const items = isModern ? highlights.slice(0, 2) : highlights;
+    const highlights = tArr(job, 'highlights');
+    const items = highlights;
+    const jobRole = t(job, 'role');
+    const jobCompany = isSv && job.company_sv ? job.company_sv : job.company;
+    const jobYears = isSv && job.years_sv ? job.years_sv : job.years;
     rightParts.push(`
       <div class="job">
         <div class="job-header">
-          <span class="job-company">${job.company}</span>
-          <span class="job-years">${job.years}</span>
+          <span class="job-company">${jobCompany}</span>
+          <span class="job-years">${jobYears}</span>
         </div>
-        <div class="job-position">${job.role}</div>
+        <div class="job-position">${jobRole}</div>
         <ul class="job-highlights">
           ${items.map(h => `<li>${h}</li>`).join('')}
         </ul>
@@ -282,25 +348,30 @@ function renderResume(data, variantId = 'default') {
 
   rightParts.push('</section>');
 
-  // Education (if mainframe variant, show more detail)
+  // Education
   if (education && education.length) {
-    rightParts.push('<section><h2 class="resume-section-title">Education</h2>');
+    rightParts.push(`<section><h2 class="resume-section-title">${labels.education}</h2>`);
     education.forEach(ed => {
-      rightParts.push(`<div class="education-item"><div class="education-school">${ed.school || ''}</div><div class="education-years">${ed.years || ''}</div></div>`);
+      const edSchool = ed.school || '';
+      const edDegree = isSv && ed.degree_sv ? ed.degree_sv : (ed.degree || '');
+      const edLabel = edDegree ? `${edSchool} — ${edDegree}` : edSchool;
+      rightParts.push(`<div class="education-item"><div class="education-school">${edLabel}</div><div class="education-years">${ed.years || ''}</div></div>`);
     });
     rightParts.push('</section>');
   }
 
   if (Array.isArray(projects) && projects.length) {
-    rightParts.push('<section><h2 class="resume-section-title">Selected Projects</h2><div class="resume-project-list">');
+    rightParts.push(`<section><h2 class="resume-section-title">${labels.projects}</h2><div class="resume-project-list">`);
     projects.forEach(project => {
+      const projectName = t(project, 'name');
+      const projectDesc = t(project, 'description');
       const tech = Array.isArray(project.tech) && project.tech.length
         ? `<p class="resume-project-tech">${project.tech.join(' · ')}</p>`
         : '';
       rightParts.push(`
         <article class="resume-project-item">
-          <h3 class="resume-project-name">${project.name}</h3>
-          <p class="resume-project-description">${project.description || ''}</p>
+          <h3 class="resume-project-name">${projectName}</h3>
+          <p class="resume-project-description">${projectDesc}</p>
           ${tech}
         </article>
       `);

@@ -1,46 +1,126 @@
 {
   "personal": {
-    "name": "Joakim Moléni",
-    "title": "Software Engineer — High-Reliability Service Integration",
+    "name": "Joakim Mol\u00e9ni",
+    "title": "Senior Software Engineer | Backend & Service Integration",
+    "title_sv": "Senior mjukvaruingenj\u00f6r | Backend & tj\u00e4nsteintegration",
     "location": "Stockholm, Sweden",
+    "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I connect the mainframe to the modern world \u2014 building the service layers and APIs that let decades-old banking infrastructure talk to everything new. I\u2019ve shipped both sides: assembler at the core and Node.js in the cloud. That range is rare, and it\u2019s what makes the integration work stick.",
+  "profile": "Backend engineer who ships both sides of the integration \u2014 assembler at the transaction layer and Node.js at the service boundary. Currently at SEB connecting core mainframe systems to modern distributed services. Previous experience building and deploying APIs on AWS, full technical ownership as CTO of a gaming platform, and Linux server operations at Paf. The combination of low-level systems understanding and modern delivery tooling is what makes the integration work hold up in production.",
+  "profile_sv": "Backendutvecklare som levererar b\u00e5da sidor av integrationen \u2014 assembler p\u00e5 transaktionslagret och Node.js p\u00e5 tj\u00e4nstegr\u00e4nsen. Just nu p\u00e5 SEB d\u00e4r k\u00e4rnstordatorsystem kopplas till moderna distribuerade tj\u00e4nster. Tidigare erfarenhet av att bygga och drifts\u00e4tta API:er p\u00e5 AWS, fullt tekniskt \u00e4garskap som CTO f\u00f6r en spelplattform, och Linux-serverdrift p\u00e5 Paf. Kombinationen av l\u00e5gniv\u00e5f\u00f6rst\u00e5else och moderna leveransverktyg \u00e4r det som g\u00f6r att integrationsarbetet h\u00e5ller i produktion.",
   "coreStack": [
-    "Mainframe-to-modern integration",
-    "API design & service contracts",
-    "Full-stack delivery",
-    "Cloud infrastructure (AWS)",
-    "System ownership"
+    "Node.js, TypeScript, REST APIs",
+    "AWS (Lambda, S3, CloudFormation)",
+    "IBM z/OS integration",
+    "Docker, CI/CD, Git",
+    "System security & architecture",
+    "Linux server administration"
+  ],
+  "coreStack_sv": [
+    "Node.js, TypeScript, REST-API:er",
+    "AWS (Lambda, S3, CloudFormation)",
+    "IBM z/OS-integration",
+    "Docker, CI/CD, Git",
+    "Systems\u00e4kerhet & arkitektur",
+    "Linux-serveradministration"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "years": "Aug 2024 – Present",
+      "role": "Senior Software Engineer (COBOL & HLASM / IBM z/OS)",
+      "role_sv": "Senior mjukvaruingenj\u00f6r (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 \u2013 Present",
+      "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Built integration paths between core mainframe systems and modern distributed services \u2014 reliable contracts that both sides can trust.",
-        "Own the full picture: assembler at the transaction layer, APIs at the service boundary, and web frontends for internal tooling.",
-        "Drive traceability and observability improvements so production issues get found fast, not discovered by customers."
+        "Build and maintain integration paths between core mainframe transaction systems and modern distributed services \u2014 reliable contracts that both sides depend on.",
+        "Own the full stack: assembler at the transaction layer, APIs at the service boundary, and web frontends for internal developer tooling.",
+        "Drive observability improvements so production issues surface through monitoring, not through customers reporting problems."
+      ],
+      "highlights_sv": [
+        "Bygger och underh\u00e5ller integrationsv\u00e4gar mellan stordatorns transaktionssystem och moderna distribuerade tj\u00e4nster \u2014 tillf\u00f6rlitliga kontrakt som b\u00e5da sidor \u00e4r beroende av.",
+        "\u00c4ger hela stacken: assembler p\u00e5 transaktionslagret, API:er p\u00e5 tj\u00e4nstegr\u00e4nsen och webbfrontends f\u00f6r interna utvecklarverktyg.",
+        "Driver b\u00e4ttre observerbarhet s\u00e5 att produktionsproblem uppt\u00e4cks via monitorering \u2014 inte genom att kunder rapporterar fel."
       ]
     },
     {
       "company": "Fragsheet",
       "role": "Full-stack Developer",
-      "years": "Jan 2023 – Jul 2023",
+      "role_sv": "Full-stack-utvecklare",
+      "years": "Jan 2023 \u2013 Jul 2023",
       "highlights": [
-        "Designed and shipped Node.js APIs powering a real-time analytics product \u2014 stable interfaces under fast iteration.",
-        "Built AWS deployment pipelines and owned the full delivery path from code to production."
+        "Designed and shipped Node.js/TypeScript APIs for a real-time analytics product. Owned AWS deployment pipelines from commit to production.",
+        "Managed integration between data pipelines and customer-facing services under variable load and tight iteration cycles."
+      ],
+      "highlights_sv": [
+        "Designade och levererade Node.js/TypeScript-API:er f\u00f6r en realtidsanalysprodukt. \u00c4gde AWS-deploy-pipelines fr\u00e5n commit till produktion.",
+        "Hanterade integrationen mellan datapipelines och kundn\u00e4ra tj\u00e4nster under varierande last och snabba iterationscykler."
+      ]
+    },
+    {
+      "company": "Changemaker Educations",
+      "role": "Full-stack Developer (programme)",
+      "role_sv": "Fullstackutvecklare (utbildning)",
+      "years": "Sep 2021 \u2013 Jul 2023",
+      "highlights": [
+        "Built full-stack applications with relational databases, REST APIs and CI/CD pipelines. Docker containerisation and Linux deployment.",
+        "Scrum-based delivery in cross-functional teams. Graduated top of class."
+      ],
+      "highlights_sv": [
+        "Byggde fullstack-applikationer med relationsdatabaser, REST-API:er och CI/CD-pipelines. Docker-containerisering och Linux-drifts\u00e4ttning.",
+        "Scrum-baserad leverans i tv\u00e4rfunktionella team. Tog examen som b\u00e4st i klassen."
+      ]
+    },
+    {
+      "company": "Evil Table Poker",
+      "role": "Chief Technology Officer",
+      "role_sv": "Teknikchef (CTO)",
+      "years": "2007 \u2013 2008",
+      "highlights": [
+        "Full technical ownership of an online gaming platform \u2014 system architecture, infrastructure, backend development and security from scratch.",
+        "Responsible for all technology decisions, server infrastructure and cybersecurity posture."
+      ],
+      "highlights_sv": [
+        "Fullt tekniskt \u00e4garskap f\u00f6r en online-spelplattform \u2014 systemarkitektur, infrastruktur, backendutveckling och s\u00e4kerhet fr\u00e5n grunden.",
+        "Ansvarig f\u00f6r alla teknikbeslut, serverinfrastruktur och s\u00e4kerhetsarbete."
+      ]
+    },
+    {
+      "company": "Paf",
+      "role": "Web Administrator",
+      "role_sv": "Webbadministrat\u00f6r",
+      "years": "2005 \u2013 2006",
+      "highlights": [
+        "Linux server administration and web operations for a major Nordic gaming company \u2014 high-availability systems serving thousands of concurrent users."
+      ],
+      "highlights_sv": [
+        "Linux-serveradministration och webbdrift f\u00f6r ett stort nordiskt spelbolag \u2014 system med h\u00f6g tillg\u00e4nglighet som hanterade tusentals samtidiga anv\u00e4ndare."
       ]
     }
   ],
-  "projects": [],
-  "education": [],
+  "projects": [
+    {
+      "name": "Internal Documentation Platform",
+      "name_sv": "Intern dokumentationsplattform",
+      "description": "Web application replacing legacy documents with a searchable, structured knowledge base. Built with modern web tech, used daily by mainframe teams at SEB.",
+      "description_sv": "Webbapplikation som ersatte utspridda dokument med en s\u00f6kbar, strukturerad kunskapsbas. Byggd med modern webbteknik, anv\u00e4nds dagligen av stordatorteam p\u00e5 SEB.",
+      "tech": ["HTML", "CSS", "JavaScript"]
+    }
+  ],
+  "education": [
+    {
+      "school": "Changemaker Educations",
+      "degree": "Full-stack Developer Programme",
+      "degree_sv": "Fullstackutvecklare",
+      "years": "2021 \u2013 2023"
+    }
+  ],
   "skills": {
-    "languages": ["COBOL", "HLASM", "Python", "JavaScript", "SQL"],
-    "platforms": ["IBM z/OS", "IMS", "Linux", "Node.js", "AWS"],
-    "concepts": ["Mainframe-to-modern integration", "API design & reliability", "Full-stack delivery", "Cloud infrastructure"]
+    "languages": ["JavaScript", "TypeScript", "COBOL", "HLASM", "Python", "SQL", "HTML/CSS"],
+    "platforms": ["Node.js", "AWS", "Docker", "IBM z/OS", "Linux", "Git", "REST APIs"],
+    "concepts": ["Service integration & API design", "CI/CD & automated deployment", "System security & architecture", "Full-stack delivery", "Mainframe-to-modern bridging", "Observability & monitoring"],
+    "concepts_sv": ["Tj\u00e4nsteintegration & API-design", "CI/CD & automatiserad drifts\u00e4ttning", "Systems\u00e4kerhet & arkitektur", "Full-stack-leverans", "Integration stordator\u2013modernt", "Observerbarhet & monitorering"]
   }
 }

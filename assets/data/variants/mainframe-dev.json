@@ -1,41 +1,110 @@
 {
   "personal": {
     "name": "Joakim Mol\u00e9ni",
-    "title": "Systems Engineer \u2014 IBM z/OS, Assembler & COBOL",
+    "title": "Senior Software Engineer | IBM z/OS, Assembler & COBOL",
+    "title_sv": "Senior mjukvaruingenj\u00f6r | IBM z/OS, Assembler & COBOL",
     "location": "Stockholm, Sweden",
+    "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I write assembler and COBOL at the deepest layer of core banking \u2014 the code that processes real money, every day, with zero margin for error. One of a small group of engineers in Sweden working at this level. COBOL got me in the door. Assembler is where I found my edge.",
-  "coreStack": ["IBM z/OS Assembler (HLASM)", "COBOL", "IMS", "Transaction-critical systems", "System ownership"],
+  "profile": "Assembler and COBOL engineer at the deepest layer of core banking \u2014 writing the transaction logic that processes real money with zero margin for error. One of roughly seven engineers in Sweden operating at this level on IBM z/OS. Deployed to production at Handelsbanken within my first week of COBOL training. Now part of the top mainframe team at SEB, routinely resolving issues other teams escalate. Previous technical precision work at Ericsson and early mainframe exposure at PostNord.",
+  "profile_sv": "Assembler- och COBOL-ingenj\u00f6r p\u00e5 den djupaste niv\u00e5n i k\u00e4rnbanksystemen \u2014 skriver transaktionslogiken som hanterar riktiga pengar utan marginal f\u00f6r fel. En av ungef\u00e4r sju ingenj\u00f6rer i Sverige som arbetar p\u00e5 denna niv\u00e5 p\u00e5 IBM z/OS. Levererade till produktion p\u00e5 Handelsbanken inom f\u00f6rsta veckan av COBOL-utbildningen. Nu del av det fr\u00e4msta stordatorteamet p\u00e5 SEB \u2014 l\u00f6ser rutinm\u00e4ssigt problem som andra team eskalerar. Tidigare tekniskt precisionsarbete p\u00e5 Ericsson och tidig stordatorexponering p\u00e5 PostNord.",
+  "coreStack": [
+    "IBM z/OS Assembler (HLASM)",
+    "COBOL",
+    "IMS & DB2",
+    "JCL & batch processing",
+    "TSO/ISPF, Endevor",
+    "Linux, Git, CI/CD"
+  ],
+  "coreStack_sv": [
+    "IBM z/OS Assembler (HLASM)",
+    "COBOL",
+    "IMS & DB2",
+    "JCL & batchbearbetning",
+    "TSO/ISPF, Endevor",
+    "Linux, Git, CI/CD"
+  ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Systems Engineer (HLASM & COBOL / IBM z/OS)",
+      "role": "Senior Software Engineer (HLASM & COBOL / IBM z/OS)",
+      "role_sv": "Senior mjukvaruingenj\u00f6r (HLASM & COBOL / IBM z/OS)",
       "years": "Aug 2024 \u2013 Present",
+      "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Write and maintain assembler and COBOL at the core of SEB\u2019s banking platform \u2014 code where a single defect can halt the bank.",
-        "Part of a five-person team recognised as among the strongest mainframe developers at SEB, routinely solving problems others can\u2019t.",
-        "Review COBOL across teams, catch missed edge cases, and drive quality in production-critical transaction paths.",
-        "Lead risk analysis and incident investigation for core ledger systems \u2014 full trace of what happened, where, and why."
+        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily.",
+        "Part of a five-person team recognised as among the strongest mainframe engineers at SEB. Routinely resolve production issues that other teams escalate.",
+        "Conduct code reviews for COBOL teams. Identify edge cases, enforce quality standards on production-critical paths.",
+        "Lead risk analysis and root-cause investigations for core ledger systems \u2014 full traceability from symptom to fix."
+      ],
+      "highlights_sv": [
+        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen.",
+        "Del av ett femmannateam som anses vara bland de starkaste stordatoringenj\u00f6rerna p\u00e5 SEB. L\u00f6ser rutinm\u00e4ssigt produktionsproblem som andra team eskalerar.",
+        "Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Identifierar edge cases och driver kvalitetsstandarder p\u00e5 produktionskritiska fl\u00f6den.",
+        "Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem \u2014 full sp\u00e5rbarhet fr\u00e5n symptom till fix."
       ]
     },
     {
       "company": "Handelsbanken",
-      "role": "System Engineer",
+      "role": "Systems Engineer (COBOL / IBM z/OS)",
+      "role_sv": "Systemingenj\u00f6r (COBOL / IBM z/OS)",
       "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Pushing to production within the first week of COBOL training \u2014 the fastest in the cohort.",
-        "Built and maintained transaction logic for deposits and payments that directly affected daily banking operations."
+        "Deployed to production within the first week \u2014 fastest ramp-up in a cohort of 12 new engineers.",
+        "Developed and maintained transaction logic for deposits and payments on core banking infrastructure.",
+        "Operated across mainframe, Linux and distributed environments. Handled production incidents end-to-end under real operational pressure."
+      ],
+      "highlights_sv": [
+        "Levererade till produktion inom f\u00f6rsta veckan \u2014 snabbaste uppstarten i en kohort p\u00e5 12 nya ingenj\u00f6rer.",
+        "Utvecklade och underh\u00f6ll transaktionslogik f\u00f6r ins\u00e4ttningar och betalningar i k\u00e4rnbanksinfrastrukturen.",
+        "Arbetade \u00f6ver stordator, Linux och distribuerade milj\u00f6er. Hanterade produktionsincidenter end-to-end under verkligt operativt tryck."
+      ]
+    },
+    {
+      "company": "PostNord TPL AB",
+      "role": "Returns Manager",
+      "role_sv": "Returansvarig",
+      "years": "Apr 2020 \u2013 Sep 2021",
+      "highlights": [
+        "First professional exposure to IBM mainframe systems \u2014 high-volume batch processing under strict SLAs.",
+        "Managed logistics operations at scale with process ownership and continuous improvement focus."
+      ],
+      "highlights_sv": [
+        "F\u00f6rsta professionella kontakten med IBM stordatorsystem \u2014 batchbearbetning i h\u00f6g volym under strikta SLA:er.",
+        "Ansvarade f\u00f6r logistikverksamhet i stor skala med process\u00e4garskap och fokus p\u00e5 st\u00e4ndiga f\u00f6rb\u00e4ttringar."
+      ]
+    },
+    {
+      "company": "Ericsson",
+      "role": "Machine Technician",
+      "role_sv": "Maskintekniker",
+      "years": "Apr 2011 \u2013 Apr 2014",
+      "highlights": [
+        "Operated advanced manufacturing equipment at Ericsson \u2014 precision, reliability and systematic troubleshooting as non-negotiable daily requirements.",
+        "Technical training across hardware and Linux-based industrial systems."
+      ],
+      "highlights_sv": [
+        "Opererade avancerad tillverkningsutrustning p\u00e5 Ericsson \u2014 precision, tillf\u00f6rlitlighet och systematisk fels\u00f6kning som dagliga krav.",
+        "Teknisk utbildning inom h\u00e5rdvara och Linux-baserade industriella system."
       ]
     }
   ],
   "projects": [],
-  "education": [],
+  "education": [
+    {
+      "school": "Changemaker Educations",
+      "degree": "Full-stack Developer Programme",
+      "degree_sv": "Fullstackutvecklare",
+      "years": "2021 \u2013 2023"
+    }
+  ],
   "skills": {
-    "languages": ["HLASM", "COBOL", "SQL"],
-    "platforms": ["IBM z/OS", "IMS", "Linux"],
-    "concepts": ["Transaction-critical systems", "Core banking operations", "System ownership", "Performance under load"]
+    "languages": ["HLASM", "COBOL", "SQL", "JCL", "JavaScript"],
+    "platforms": ["IBM z/OS", "IMS", "DB2", "TSO/ISPF", "Endevor", "Linux", "Git"],
+    "concepts": ["Transaction-critical systems", "Core banking operations", "Root-cause analysis", "System ownership", "Code review & quality assurance", "Batch & online processing"],
+    "concepts_sv": ["Transaktionskritiska system", "K\u00e4rnbanksverksamhet", "Rotorsaksanalys", "System\u00e4gande", "Kodgranskning & kvalitetss\u00e4kring", "Batch- & onlinebearbetning"]
   }
 }
