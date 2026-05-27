@@ -32,8 +32,8 @@
       "description": "Technical leadership, platform ownership and cross-system delivery."
     }
   ],
-  "profile": "Senior software engineer at SEB writing assembler and COBOL on IBM z/OS \u2014 the transaction layer where a single defect halts real financial flows. One of roughly seven engineers in Sweden working at this depth. Technical range from bare-metal mainframe to Node.js services and modern web applications. 20 years of professional experience spanning CTO roles, executive leadership, and hands-on systems engineering at two of Sweden\u2019s largest banks.",
-  "profile_sv": "Senior mjukvaruingenj\u00f6r p\u00e5 SEB \u2014 skriver assembler och COBOL p\u00e5 IBM z/OS, transaktionslagret d\u00e4r en enda defekt stoppar verkliga finansiella fl\u00f6den. En av ungef\u00e4r sju ingenj\u00f6rer i Sverige som arbetar p\u00e5 detta djup. Tekniskt spann fr\u00e5n maskinn\u00e4ra stordatorkod till Node.js-tj\u00e4nster och moderna webbapplikationer. 20 \u00e5rs yrkeserfarenhet som sp\u00e4nner \u00f6ver CTO-roller, verksamhetsledning och hands-on systemutveckling p\u00e5 tv\u00e5 av Sveriges st\u00f6rsta banker.",
+  "profile": "Assembler and COBOL engineer operating at the deepest layer of core banking at one of Sweden's largest financial institutions. Writes the transaction logic that processes billions of SEK daily with zero margin for error. Track record: production deployment within first week of COBOL training. Now on the top mainframe team at a major Nordic bank, routinely resolving issues other teams escalate. Full code review authority over production-critical paths.",
+  "profile_sv": "Assembler- och COBOL-ingenjör på den djupaste nivån i kärnbanken hos ett av Sveriges största finansinstitut. Skriver transaktionslogiken som hanterar miljarder SEK dagligen utan marginal för fel. Meritlista: produktionsleverans inom första veckan av COBOL-utbildningen. Nu i det främsta stordatorteamet på en stor nordisk bank, löser rutinmässigt problem som andra team eskalerar. Full kodgranskningsauktoritet över produktionskritiska flöden.",
   "coreStack": [
     "IBM z/OS (HLASM, COBOL, IMS, JCL)",
     "Transaction-critical architecture",
@@ -200,8 +200,8 @@
     {
       "name": "Internal Documentation Platform",
       "name_sv": "Intern dokumentationsplattform",
-      "description": "Web application replacing legacy Word documents and physical binders with a searchable knowledge base for mainframe teams. Used daily by the department.",
-      "description_sv": "Webbapplikation som ersatte Word-dokument och fysiska p\u00e4rmar med en s\u00f6kbar kunskapsbas f\u00f6r stordatorteam. Anv\u00e4nds dagligen av avdelningen.",
+      "description": "850+ page engineering knowledge platform. Custom router, renderer, search engine, syntax highlighter, presentation engine, and build pipeline. Dependencies: zero. Lines of framework code borrowed: zero.",
+      "description_sv": "Kunskapsplattform med 850+ sidor. Egenbyggd router, renderare, sökmotor, syntaxfärgare, presentationsmotor och byggpipeline. Beroenden: noll. Rader lånad ramverkskod: noll.",
       "tech": ["HTML", "CSS", "JavaScript"]
     }
   ],

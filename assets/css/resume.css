@@ -17,25 +17,25 @@ html:has(body.page-resume) {
 
 :root {
   /* Accent aliases (match style.css values) */
-  --accentColor:    #4aac72;
-  --accentSoft:     rgba(74, 172, 114, 0.14);
+  --accentColor:    #c9a66b;
+  --accentSoft:     rgba(201, 166, 107, 0.12);
 
   /* Resume-document colours */
   --cardBg:         #fbfbfa;
   --cardTextColor:  #1a2027;
-  --sidebarBg:      #eef2f2;
+  --sidebarBg:      #f2f0ec;
   --dividerColor:   rgba(26, 32, 39, 0.08);
-  --mutedTextColor: #a7b0be;
+  --mutedTextColor: #9a9b9f;
   --borderColor:    rgba(255, 255, 255, 0.08);
-  --surfaceColor:   #14181d;
+  --surfaceColor:   #11151c;
   --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
 [data-theme="light"] {
-  --accentColor:    #2a7a4e;
-  --accentSoft:     rgba(42, 122, 78, 0.1);
+  --accentColor:    #8b6914;
+  --accentSoft:     rgba(139, 105, 20, 0.1);
   --borderColor:    rgba(22, 32, 42, 0.08);
-  --mutedTextColor: #4a5560;
+  --mutedTextColor: #55585f;
   --surfaceColor:   #ffffff;
   --shadowColor:    0 24px 56px rgba(24, 34, 44, 0.10), 0 6px 16px rgba(24, 34, 44, 0.06);
 }
@@ -84,7 +84,7 @@ html:has(body.page-resume) {
   gap: 0.3rem;
   color: var(--mainTextColor);
   text-decoration: none;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -181,7 +181,7 @@ main img    { display: inline-block; }
   border: 0;
   border-radius: 999px;
   padding: 0.4rem 0.7rem;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -236,7 +236,7 @@ main img    { display: inline-block; }
   border-radius: 8px;
   background: transparent;
   color: var(--mutedTextColor);
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -280,7 +280,7 @@ main img    { display: inline-block; }
   border-radius: 8px;
   background: transparent;
   color: var(--mutedTextColor);
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -396,7 +396,7 @@ main img    { display: inline-block; }
 }
 
 .resume-name {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 1.7rem;
   line-height: 1;
   margin-bottom: 0.2rem;
@@ -424,7 +424,7 @@ main img    { display: inline-block; }
 .job-highlights li,
 .profile-text,
 .education-item {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
 }
 
 .contact-item,
@@ -476,7 +476,7 @@ main img    { display: inline-block; }
 
 .job-company,
 .education-school {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
 }
@@ -489,7 +489,7 @@ main img    { display: inline-block; }
 }
 
 .job-position {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.78rem;
   color: #50606d;
   margin: 0.1rem 0 0.25rem;
@@ -521,14 +521,14 @@ main img    { display: inline-block; }
 }
 
 .resume-project-name {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.84rem;
   color: #1f2a33;
   margin-bottom: 0.12rem;
 }
 
 .resume-project-description {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.76rem;
   line-height: 1.35;
   color: #32404b;

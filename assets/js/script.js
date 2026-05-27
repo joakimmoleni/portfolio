@@ -79,6 +79,16 @@ function switchTheme() {
 
 themeToggleBtn?.addEventListener('click', switchTheme);
 
+// Keyboard shortcut: press 'T' to toggle theme
+document.addEventListener('keydown', (e) => {
+  if (e.key === 't' || e.key === 'T') {
+    // Don't trigger if user is typing in an input/textarea
+    const tag = document.activeElement?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return;
+    switchTheme();
+  }
+});
+
 window.mailtoSubmit = function mailtoSubmit(event) {
   event.preventDefault();
 
@@ -178,10 +188,10 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   if (!typingEl) return;
 
   const lines = [
-    'IBM z/OS assembler at the core',
-    'full-stack tools for mainframe teams',
-    'systems that absolutely cannot fail',
-    'whatever needs building, I build it'
+    'transaction infrastructure at register level',
+    'the layer beneath everything else',
+    'systems that process billions daily',
+    'code where every byte is intentional'
   ];
 
   if (reducedMotion) {
