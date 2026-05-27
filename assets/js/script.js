@@ -28,6 +28,8 @@ function applyTheme(theme) {
     iconMoon.classList.toggle('hidden', theme === 'dark');
     iconSun.classList.toggle('hidden', theme === 'light');
   }
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#050608' : '#f9f7f3');
 }
 
 function toggleTheme() {
