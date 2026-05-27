@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPTIME — Joakim Moléni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amber: #c9a66b;
+      --amber-dim: rgba(201, 166, 107, 0.1);
+      --amber-glow: rgba(201, 166, 107, 0.4);
+      --slate-deep: #0a0d12;
+      --slate-mid: #11151c;
+      --slate-light: #1e2330;
+      --slate-lighter: #2a2f3d;
+      --text-primary: #e8e6e1;
+      --text-secondary: #9a9b9f;
+      --text-dim: #5a5d65;
+      --green: #4a9;
+      --red: #d4544a;
+      --glass: rgba(17, 21, 28, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.06);
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--slate-deep);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* ===== BOOT SEQUENCE ===== */
+    .boot-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      animation: bootFade 0.6s ease forwards;
+      animation-delay: 2.8s;
+    }
+
+    @keyframes bootFade {
+      to { opacity: 0; pointer-events: none; }
+    }
+
+    .boot-text {
+      font-size: 0.85rem;
+      color: var(--amber);
+      opacity: 0;
+      animation: bootLine 0.3s ease forwards;
+    }
+
+    .boot-text:nth-child(1) { animation-delay: 0.2s; }
+    .boot-text:nth-child(2) { animation-delay: 0.5s; }
+    .boot-text:nth-child(3) { animation-delay: 0.9s; }
+    .boot-text:nth-child(4) { animation-delay: 1.3s; }
+    .boot-text:nth-child(5) { animation-delay: 1.7s; color: var(--green); }
+
+    @keyframes bootLine {
+      to { opacity: 1; }
+    }
+
+    /* ===== DASHBOARD GRID ===== */
+    .dashboard {
+      width: 100vw;
+      min-height: 100vh;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+      grid-auto-flow: dense;
+    }
+
+    /* ===== PANEL BASE ===== */
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .panel:hover {
+      border-color: rgba(201, 166, 107, 0.2);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .panel-header .status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .status-dot.amber { background: var(--amber); }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== HERO PANEL ===== */
+    .panel-hero {
+      grid-column: 1 / -1;
+      padding: 4rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40vh;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(201, 166, 107, 0.04), transparent 50%),
+        var(--glass);
+    }
+
+    .hero-left h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-left p {
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      color: var(--text-secondary);
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .metric {
+      padding: 1.5rem;
+      border: 1px solid var(--slate-light);
+      border-radius: 6px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .metric-value {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== IDENTITY PANEL ===== */
+    .panel-identity {
+      grid-column: span 8;
+      min-height: 250px;
+    }
+
+    .identity-content h2 {
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .identity-content p {
+      font-size: clamp(0.85rem, 1vw, 0.95rem);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===== QUOTE PANEL ===== */
+    .panel-quote {
+      grid-column: span 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+
+    .panel-quote blockquote {
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    .panel-quote blockquote em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    /* ===== ARCHITECTURE PANEL ===== */
+    .panel-arch {
+      grid-column: span 5;
+      min-height: 300px;
+    }
+
+    .stack-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .stack-layer {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      cursor: default;
+      gap: 1rem;
+    }
+
+    .stack-layer:hover {
+      background: var(--amber-dim);
+      transform: translateX(4px);
+    }
+
+    .stack-layer .depth {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .stack-layer:nth-child(1) .depth { background: var(--amber); width: 40px; }
+    .stack-layer:nth-child(2) .depth { background: var(--amber); width: 34px; opacity: 0.8; }
+    .stack-layer:nth-child(3) .depth { background: var(--amber); width: 28px; opacity: 0.6; }
+    .stack-layer:nth-child(4) .depth { background: var(--amber); width: 22px; opacity: 0.4; }
+    .stack-layer:nth-child(5) .depth { background: var(--amber); width: 16px; opacity: 0.3; }
+
+    .stack-layer .name {
+      color: var(--text-primary);
+      font-weight: 700;
+      min-width: 80px;
+    }
+
+    .stack-layer .tech {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+    }
+
+    /* ===== PROCESS PANELS (Projects) ===== */
+    .panel-process {
+      grid-column: span 7;
+      min-height: 300px;
+    }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .process-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+      transition: border-color 0.3s ease;
+    }
+
+    .process-item:hover { border-color: var(--amber-dim); }
+
+    .process-pid {
+      font-size: 0.7rem;
+      color: var(--amber);
+      background: var(--amber-dim);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .process-info h3 {
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .process-info p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .process-status {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--green);
+    }
+
+    /* ===== SKILLS PANEL ===== */
+    .panel-skills {
+      grid-column: span 4;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .skill-item {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .skill-item:hover {
+      border-color: var(--amber-dim);
+      color: var(--text-primary);
+    }
+
+    .skill-item.primary {
+      border-color: rgba(201, 166, 107, 0.2);
+      color: var(--amber);
+    }
+
+    /* ===== PHILOSOPHY PANEL ===== */
+    .panel-philosophy {
+      grid-column: span 8;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .philosophy-card {
+      padding: 1.2rem;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.2);
+      border-left: 2px solid var(--amber);
+    }
+
+    .philosophy-card h4 {
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .philosophy-card p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== SIGNAL PANEL (Contact) ===== */
+    .panel-signal {
+      grid-column: span 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .signal-indicator {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 20px var(--amber-glow), 0 0 40px rgba(201,166,107,0.2);
+      animation: signalBeat 2s ease-in-out infinite;
+    }
+
+    @keyframes signalBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .signal-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .signal-links a {
+      color: var(--amber);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--slate-light);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .signal-links a:hover {
+      border-color: var(--amber);
+      background: var(--amber-dim);
+    }
+
+    /* ===== LIVE TICKER ===== */
+    .ticker {
+      grid-column: 1 / -1;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      overflow: hidden;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.4);
+      border-radius: 4px;
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ticker-item .val {
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    /* ===== CANVAS BACKGROUND ===== */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .dashboard { position: relative; z-index: 1; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .dashboard {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .panel-hero { grid-column: 1 / -1; flex-direction: column; gap: 2rem; padding: 2.5rem 2rem; }
+      .panel-identity { grid-column: 1 / -1; }
+      .panel-quote { grid-column: 1 / -1; min-height: 150px; }
+      .panel-arch { grid-column: span 6; }
+      .panel-process { grid-column: span 6; }
+      .panel-skills { grid-column: span 3; }
+      .panel-philosophy { grid-column: span 6; }
+      .panel-signal { grid-column: span 3; }
+      .ticker { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem;
+      }
+
+      .panel-hero { min-height: auto; padding: 2rem 1.5rem; }
+      .hero-metrics { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .panel-identity, .panel-quote, .panel-arch,
+      .panel-process, .panel-skills, .panel-philosophy, .panel-signal {
+        grid-column: 1 / -1;
+      }
+
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .ticker { gap: 1rem; overflow-x: auto; }
+      .ticker-item { font-size: 0.65rem; }
+
+      .panel { padding: 1.2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .boot-overlay { animation: none; opacity: 0; pointer-events: none; }
+      .boot-text { animation: none; opacity: 1; }
+      .status-dot, .signal-indicator { animation: none; }
+      #bgCanvas { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Boot Overlay -->
+  <div class="boot-overlay">
+    <div class="boot-text">UPTIME MONITOR v1.0</div>
+    <div class="boot-text">LOADING PROCESSES...</div>
+    <div class="boot-text">DEPENDENCIES: 0</div>
+    <div class="boot-text">FRAMEWORKS: NONE REQUIRED</div>
+    <div class="boot-text">SYSTEM ONLINE ●</div>
+  </div>
+
+  <!-- Background canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+
+    <!-- HERO -->
+    <div class="panel panel-hero">
+      <div class="hero-left">
+        <h1>Joakim Moléni</h1>
+        <p>Systems engineer writing IBM z/OS assembler in production core banking. Full-stack platform builder with zero dependencies. The layer beneath everything else.</p>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-value" id="uptimeCounter">12y 4m</div>
+          <div class="metric-label">Uptime</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">~15</div>
+          <div class="metric-label">Engineers in Sweden</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">0</div>
+          <div class="metric-label">Dependencies</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">850+</div>
+          <div class="metric-label">Pages Built</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDENTITY -->
+    <div class="panel panel-identity">
+      <div class="panel-header">
+        <span>PROCESS: IDENTITY</span>
+        <span class="status"><span class="status-dot"></span> RUNNING</span>
+      </div>
+      <div class="identity-content">
+        <h2>I write the code that keeps banks running</h2>
+        <p>I've been building things since I was five — custom PCs, LAN networks for hundreds, web dev before most people had email. After years running a business, I came back to what I always loved.</p>
+        <p>Within my first week of COBOL training, I was deploying to production. Today I write assembler at the deepest layer of one of Sweden's largest banks. COBOL got me in the door. Assembler is where I found my edge.</p>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="panel panel-quote">
+      <div class="panel-header" style="position: absolute; top: 1.5rem; left: 1.5rem; right: 1.5rem;">
+        <span>SYS.LOG</span>
+        <span class="status"><span class="status-dot amber"></span></span>
+      </div>
+      <blockquote>"I don't <em>install</em> solutions. I <em>understand</em> problems."</blockquote>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="panel panel-arch">
+      <div class="panel-header">
+        <span>ARCHITECTURE</span>
+        <span class="status"><span class="status-dot"></span> ALL LAYERS</span>
+      </div>
+      <div class="stack-layers">
+        <div class="stack-layer">
+          <div class="depth"></div>
+          <span class="name">Hardware</span>
+          <span class="tech">IBM z15, S/390</span>
+        </div>
+        <div class="stack-layer">
+          <div class="depth"></div>
+          <span class="name">OS</span>
+          <span class="tech">z/OS, MVS, JES2</span>
+        </div>
+        <div class="stack-layer">
+          <div class="depth"></div>
+          <span class="name">Middleware</span>
+          <span class="tech">IMS, DB2, CICS</span>
+        </div>
+        <div class="stack-layer">
+          <div class="depth"></div>
+          <span class="name">Application</span>
+          <span class="tech">HLASM, COBOL, PL/I</span>
+        </div>
+        <div class="stack-layer">
+          <div class="depth"></div>
+          <span class="name">Interface</span>
+          <span class="tech">Vanilla JS, CSS, HTML</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS / PROCESSES -->
+    <div class="panel panel-process">
+      <div class="panel-header">
+        <span>ACTIVE PROCESSES</span>
+        <span class="status"><span class="status-dot"></span> 3 RUNNING</span>
+      </div>
+      <div class="process-list">
+        <div class="process-item">
+          <span class="process-pid">PID 001</span>
+          <div class="process-info">
+            <h3>Documentation & Knowledge Platform</h3>
+            <p>850+ pages, custom router, renderer, search, syntax highlighter, build pipeline. Zero npm.</p>
+          </div>
+          <span class="process-status">● LIVE</span>
+        </div>
+        <div class="process-item">
+          <span class="process-pid">PID 002</span>
+          <div class="process-info">
+            <h3>Pan-European Payment Infrastructure</h3>
+            <p>Instant payment processing. Fault-tolerant, deterministic, regulated latency ceilings.</p>
+          </div>
+          <span class="process-status">● LIVE</span>
+        </div>
+        <div class="process-item">
+          <span class="process-pid">PID 003</span>
+          <div class="process-info">
+            <h3>Core Ledger Migration (HLASM → COBOL)</h3>
+            <p>Strategic platform rewrite. Replacing the engine mid-flight. Zero downtime migration.</p>
+          </div>
+          <span class="process-status">● LIVE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="panel panel-skills">
+      <div class="panel-header">
+        <span>CAPABILITIES</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-item primary">HLASM</div>
+        <div class="skill-item primary">COBOL</div>
+        <div class="skill-item primary">z/OS</div>
+        <div class="skill-item primary">IMS/DB2</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">CSS</div>
+        <div class="skill-item">HTML</div>
+        <div class="skill-item">PowerShell</div>
+        <div class="skill-item">JCL</div>
+        <div class="skill-item">Endevor</div>
+        <div class="skill-item">Git</div>
+        <div class="skill-item">ISPF</div>
+      </div>
+    </div>
+
+    <!-- PHILOSOPHY -->
+    <div class="panel panel-philosophy">
+      <div class="panel-header">
+        <span>OPERATING PRINCIPLES</span>
+      </div>
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <h4>Zero Dependencies</h4>
+          <p>Not a constraint — a statement about what I understand. I build what others install.</p>
+        </div>
+        <div class="philosophy-card">
+          <h4>Full Stack</h4>
+          <p>From register allocation in HLASM to custom hash-based routers in vanilla JS. The full stack.</p>
+        </div>
+        <div class="philosophy-card">
+          <h4>Correct First</h4>
+          <p>In my world, "deploy and hope" doesn't exist. Every change is tested, reviewed, staged with rollback paths planned.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNAL (Contact) -->
+    <div class="panel panel-signal">
+      <div class="panel-header" style="position: absolute; top: 1.5rem; left: 1.5rem; right: 1.5rem;">
+        <span>TRANSMIT</span>
+        <span class="status"><span class="status-dot amber"></span> READY</span>
+      </div>
+      <div class="signal-indicator"></div>
+      <div class="signal-links">
+        <a href="https://www.linkedin.com/in/joakimmoleni" target="_blank">LinkedIn →</a>
+        <a href="https://github.com/joakimmoleni" target="_blank">GitHub →</a>
+        <a href="mailto:jcrooge@gmail.com">Email →</a>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="panel ticker">
+      <div class="ticker-item">UPTIME <span class="val" id="tickerUptime">99.997%</span></div>
+      <div class="ticker-item">TRANSACTIONS <span class="val">~∞</span></div>
+      <div class="ticker-item">DEPENDENCIES <span class="val">0</span></div>
+      <div class="ticker-item">FRAMEWORK <span class="val">NONE</span></div>
+      <div class="ticker-item">DEPLOY ENV <span class="val">PROD</span></div>
+      <div class="ticker-item">BUILD TOOL <span class="val">CUSTOM</span></div>
+      <div class="ticker-item">NPM PACKAGES <span class="val">0</span></div>
+      <div class="ticker-item">STATUS <span class="val" style="color: var(--green);">ONLINE</span></div>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+
+    // ===== BACKGROUND PARTICLE CANVAS =====
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animFrame;
+    let paused = false;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Only run particles on desktop + no reduced motion
+    const canAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    && window.innerWidth > 768;
+
+    if (canAnimate) {
+      // Create particles
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 0.5,
+        });
+      }
+
+      function drawParticles() {
+        if (paused) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw connections
+        ctx.strokeStyle = 'rgba(201, 166, 107, 0.06)';
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw & move particles
+        ctx.fillStyle = 'rgba(201, 166, 107, 0.3)';
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        animFrame = requestAnimationFrame(drawParticles);
+      }
+
+      // Pause when tab hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          paused = true;
+          cancelAnimationFrame(animFrame);
+        } else {
+          paused = false;
+          drawParticles();
+        }
+      });
+
+      drawParticles();
+    }
+
+    // ===== HOVER PROXIMITY EFFECT =====
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const panels = document.querySelectorAll('.panel');
+      document.addEventListener('mousemove', (e) => {
+        panels.forEach(panel => {
+          const rect = panel.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = e.clientX - cx;
+          const dy = e.clientY - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 400;
+
+          if (dist < maxDist) {
+            const intensity = 1 - (dist / maxDist);
+            panel.style.borderColor = `rgba(201, 166, 107, ${intensity * 0.15})`;
+          } else {
+            panel.style.borderColor = '';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

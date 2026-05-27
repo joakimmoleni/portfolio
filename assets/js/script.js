@@ -1,97 +1,280 @@
 'use strict';
 
-/**
- * Helpers
- */
-const $  = (sel, root = document) => root.querySelector(sel);
+/*===================================================
+  INSTRUCTION STREAM — Portfolio Script
+  Joakim Moléni | Zero dependencies
+===================================================*/
+
+const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => root.querySelectorAll(sel);
 
-// Keep canonical-looking root URL when index is opened directly.
-if (window.location.protocol.startsWith('http') && window.location.pathname.endsWith('/index.html')) {
-  const cleanPath = window.location.pathname.replace(/index\.html$/, '');
-  const cleanUrl = `${cleanPath}${window.location.search}${window.location.hash}`;
-  window.history.replaceState(null, '', cleanUrl);
-}
+/*-----------------------------------*\
+  #THEME
+\*-----------------------------------*/
 
-/**
- * Add event listener on multiple elements
- */
-const addEventOnElements = (elements, eventType, callback) => {
-  elements.forEach(el => el && el.addEventListener(eventType, callback));
-};
-
-/**
- * NAVBAR TOGGLE FOR MOBILE
- */
-const navbar   = $("[data-navbar]");
-const navTogglers = $$("[data-nav-toggler]");
-const overlay  = $("[data-overlay]");
-const body     = document.body;
-
-const toggleNavbar = () => {
-  if (!navbar || !overlay) return;
-
-  const isActive = navbar.classList.toggle("active");
-  overlay.classList.toggle("active");
-  body.classList.toggle("nav-active");
-
-  // a11y: uppdatera aria-expanded på open-btn
-  const openBtn = $(".nav-open-btn");
-  if (openBtn) {
-    openBtn.setAttribute("aria-expanded", String(isActive));
-  }
-};
-
-addEventOnElements(navTogglers, "click", toggleNavbar);
-
-
-/**
- * THEME SELECTOR / DARK MODE
- */
-const themeToggleBtn = document.querySelector('.theme-switch');
-const prefersDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-const lightIcon = document.getElementById('lightmode');
-const darkIcon  = document.getElementById('darkmode');
-
-// Initiera theme från localStorage eller system default
+const themeBtn = $('#themeToggle');
+const iconMoon = $('#iconMoon');
+const iconSun = $('#iconSun');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const savedTheme = localStorage.getItem('theme');
-const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
 
-applyTheme(currentTheme);
+applyTheme(initialTheme);
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
-
-  // visa rätt ikon (visa sol i mörkt läge, måne i ljust)
-  if (lightIcon && darkIcon) {
-    lightIcon.classList.toggle('hidden', theme !== 'dark');
-    darkIcon.classList.toggle('hidden', theme !== 'light');
+  if (iconMoon && iconSun) {
+    iconMoon.classList.toggle('hidden', theme === 'dark');
+    iconSun.classList.toggle('hidden', theme === 'light');
   }
 }
 
-function switchTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  applyTheme(newTheme);
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
 }
 
-themeToggleBtn?.addEventListener('click', switchTheme);
+themeBtn?.addEventListener('click', toggleTheme);
 
-// Keyboard shortcut: press 'T' to toggle theme
+// Keyboard shortcut: T to toggle
 document.addEventListener('keydown', (e) => {
-  if (e.key === 't' || e.key === 'T') {
-    // Don't trigger if user is typing in an input/textarea
-    const tag = document.activeElement?.tagName;
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return;
-    switchTheme();
+  if ((e.key === 't' || e.key === 'T') && !isTyping()) toggleTheme();
+});
+
+function isTyping() {
+  const tag = document.activeElement?.tagName;
+  return tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable;
+}
+
+/*-----------------------------------*\
+  #SCROLL TRACKING & ADDRESS BAR
+\*-----------------------------------*/
+
+const stream = $('#stream');
+const panels = $$('.panel');
+const addrButtons = $$('.addr');
+const addrPC = $('#addrPC');
+const progressBar = $('#progressBar');
+
+let ticking = false;
+let currentPanelIdx = -1; // force first updateUI to apply .active
+
+function isHorizontal() {
+  return stream && stream.scrollWidth > stream.clientWidth + 50;
+}
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+function getScrollProgress() {
+  if (isMobile()) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    return max > 0 ? window.scrollY / max : 0;
+  }
+  if (isHorizontal()) {
+    const max = stream.scrollWidth - stream.clientWidth;
+    return max > 0 ? stream.scrollLeft / max : 0;
+  }
+  const max = stream.scrollHeight - stream.clientHeight;
+  return max > 0 ? stream.scrollTop / max : 0;
+}
+
+function getActivePanel() {
+  if (isMobile()) {
+    // Find which panel is most in view
+    const scrollY = window.scrollY;
+    let best = 0;
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i].offsetTop <= scrollY + window.innerHeight * 0.4) {
+        best = i;
+      }
+    }
+    return best;
+  }
+  if (isHorizontal()) {
+    return Math.round(stream.scrollLeft / stream.clientWidth);
+  }
+  return Math.round(stream.scrollTop / stream.clientHeight);
+}
+
+function updateUI() {
+  const progress = getScrollProgress();
+  const activeIdx = Math.min(getActivePanel(), panels.length - 1);
+
+  // Progress bar
+  if (progressBar) {
+    progressBar.style.width = (progress * 100) + '%';
+  }
+
+  // Address buttons
+  if (activeIdx !== currentPanelIdx) {
+    currentPanelIdx = activeIdx;
+    addrButtons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === activeIdx);
+    });
+  }
+
+  // PC display with blinking cursor
+  if (addrPC) {
+    const hex = (activeIdx * 4).toString(16).toUpperCase().padStart(2, '0');
+    addrPC.innerHTML = 'PC: 0x' + hex + '<span class="pc-cursor">_</span>';
+  }
+
+  ticking = false;
+}
+
+stream?.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(updateUI);
+    ticking = true;
   }
 });
 
+// Mobile: window scrolls instead of stream
+window.addEventListener('scroll', () => {
+  if (!isMobile()) return;
+  if (!ticking) {
+    requestAnimationFrame(updateUI);
+    ticking = true;
+  }
+});
+
+// Initial state
+requestAnimationFrame(updateUI);
+
+// Deal-in animation: stagger panels on load
+// If arriving via hash (e.g. from resume), skip animations and jump directly
+const hashTarget = location.hash && document.querySelector(location.hash);
+if (hashTarget && hashTarget.classList.contains('panel')) {
+  // Instantly reveal all panels, no animation
+  panels.forEach(panel => {
+    panel.classList.add('dealt');
+    panel.style.animation = 'none';
+    const inner = panel.querySelector('.boot-sequence, .boot-hero');
+  });
+  // Skip boot animations
+  document.querySelectorAll('.boot-line, .boot-hero').forEach(el => {
+    el.style.animation = 'none';
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+  // Scroll to target without smooth (instant jump)
+  hashTarget.scrollIntoView({ behavior: 'instant', inline: 'start', block: 'start' });
+  // Clean hash from URL without triggering navigation
+  history.replaceState(null, '', location.pathname);
+} else {
+  panels.forEach((panel, i) => {
+    setTimeout(() => panel.classList.add('dealt'), 100 + i * 200);
+  });
+}
+
+/*-----------------------------------*\
+  #NAVIGATION
+\*-----------------------------------*/
+
+// Click address buttons to navigate
+addrButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const idx = parseInt(btn.dataset.idx);
+    if (idx >= 0 && idx < panels.length) {
+      panels[idx].scrollIntoView({
+        behavior: 'smooth',
+        inline: 'start',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Keyboard: arrow keys to navigate panels
+document.addEventListener('keydown', (e) => {
+  if (isTyping()) return;
+
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    e.preventDefault();
+    const next = Math.min(currentPanelIdx + 1, panels.length - 1);
+    panels[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const prev = Math.max(currentPanelIdx - 1, 0);
+    panels[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
+  }
+});
+
+/*-----------------------------------*\
+  #WHEEL → HORIZONTAL (desktop only)
+  Scroll down = scroll right. Smooth and direct.
+  Temporarily disables snap while wheeling so
+  small deltas accumulate without fighting snap.
+\*-----------------------------------*/
+
+if (stream) {
+  let snapTimer = null;
+  let locked = false;
+
+  stream.addEventListener('wheel', (e) => {
+    if (!isHorizontal()) return;
+
+    // Only translate vertical wheel into horizontal
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+
+      // If already locked from a recent scroll, ignore
+      if (locked) return;
+      locked = true;
+
+      // One tick = one panel, then lock for 600ms
+      const direction = Math.sign(e.deltaY);
+      const target = Math.min(Math.max(currentPanelIdx + direction, 0), panels.length - 1);
+      panels[target].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
+
+      snapTimer = setTimeout(() => { locked = false; }, 600);
+    }
+  }, { passive: false });
+}
+
+/*-----------------------------------*\
+  #REGISTER ANIMATION
+\*-----------------------------------*/
+
+const regValues = $$('.reg__val');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (regValues.length && !reducedMotion) {
+  let frame = 0;
+  function cycleRegisters() {
+    frame++;
+    // Flash a random register every ~2s
+    if (frame % 120 === 0) {
+      const idx = Math.floor(Math.random() * regValues.length);
+      const el = regValues[idx];
+      el.style.color = 'var(--accent)';
+      el.style.textShadow = '0 0 6px var(--accent-glow)';
+      setTimeout(() => {
+        el.style.color = '';
+        el.style.textShadow = '';
+      }, 400);
+    }
+    requestAnimationFrame(cycleRegisters);
+  }
+  cycleRegisters();
+}
+
+/*-----------------------------------*\
+  #COPYRIGHT YEAR
+\*-----------------------------------*/
+
+const yearEl = $('#copyrightYear');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/*-----------------------------------*\
+  #MAILTO FORM (if needed later)
+\*-----------------------------------*/
+
 window.mailtoSubmit = function mailtoSubmit(event) {
   event.preventDefault();
-
   const form = event.currentTarget;
   const name = form?.querySelector('#name')?.value?.trim() || '';
   const email = form?.querySelector('#email_address')?.value?.trim() || '';
@@ -108,149 +291,3 @@ window.mailtoSubmit = function mailtoSubmit(event) {
   window.location.href = `mailto:jcrooge@gmail.com?subject=${subject}&body=${body}`;
   return false;
 };
-
-
-/**
- * HEADER
- * Fixed header after 100px, hide on scroll-down, show on scroll-up
- */
-const header = $("[data-header]");
-
-if (header) {
-  let lastScroll = 0;
-  let ticking = false;
-
-  function updateHeader() {
-    const scrollY = window.scrollY;
-    header.classList.toggle("active", scrollY > 100);
-
-    if (scrollY > 100) {
-      header.style.top = scrollY > lastScroll ? "-100px" : "0px";
-    } else {
-      header.style.top = "";
-    }
-
-    lastScroll = scrollY;
-    ticking = false;
-  }
-
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  });
-}
-
-/**
- * SCROLL REVEAL
- */
-const revealElements = $$("[data-reveal]");
-const revealDelayElements = $$("[data-reveal-delay]");
-
-// disable animation if user prefers reduced motion
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-if (!reducedMotion) {
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-        entry.target.style.animationPlayState = "running";
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  revealElements.forEach(el => revealObserver.observe(el));
-
-  revealDelayElements.forEach(el => {
-    const delay = el.dataset.revealDelay || '0.75';
-    el.style.animationDelay = delay + 's';
-    el.style.webkitAnimationDelay = delay + 's';
-  });
-} else {
-  // om användaren inte vill ha animationer – visa direkt
-  revealElements.forEach(el => el.classList.add("revealed"));
-}
-
-// Dynamic copyright year
-const yearEl = document.getElementById('copyrightYear');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-
-/**
- * HERO TYPING ANIMATION (single-line loop)
- */
-(function heroTypingLoop() {
-  const typingWrap = $('.hero-typing');
-  const typingEl = $('.hero-typing-text');
-  const cursorEl = $('.hero-cursor');
-  if (!typingEl) return;
-
-  const lines = [
-    'transaction infrastructure at register level',
-    'the layer beneath everything else',
-    'systems that process billions daily',
-    'code where every byte is intentional'
-  ];
-
-  if (reducedMotion) {
-    typingEl.textContent = lines[0];
-    return;
-  }
-
-  const START_DELAY = 500;
-  const TYPE_SPEED = 48;
-  const ERASE_SPEED = 24;
-  const HOLD_AFTER_TYPE = 1600;
-  const HOLD_BETWEEN_LINES = 300;
-  const LAST_LINE_LOOP_PAUSE = 2000;
-
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-  async function typeLine(text) {
-    cursorEl?.classList.add('is-typing');
-    for (let i = 1; i <= text.length; i += 1) {
-      typingEl.textContent = text.slice(0, i);
-      await sleep(TYPE_SPEED);
-    }
-    cursorEl?.classList.remove('is-typing');
-  }
-
-  async function eraseLine(text) {
-    for (let i = text.length; i >= 0; i -= 1) {
-      typingEl.textContent = text.slice(0, i);
-      await sleep(ERASE_SPEED);
-    }
-  }
-
-  async function runLoop() {
-    let index = 0;
-    await sleep(START_DELAY);
-    typingWrap?.classList.add('is-active');
-
-    const hasStaticFirstLine = typingEl.textContent.trim() === lines[0];
-    if (hasStaticFirstLine) {
-      await sleep(HOLD_AFTER_TYPE);
-      await eraseLine(lines[0]);
-      await sleep(HOLD_BETWEEN_LINES);
-      index = 1;
-    }
-
-    while (true) {
-      const line = lines[index];
-      await typeLine(line);
-      await sleep(HOLD_AFTER_TYPE);
-      await eraseLine(line);
-
-      const isLastLine = index === lines.length - 1;
-      await sleep(isLastLine ? LAST_LINE_LOOP_PAUSE : HOLD_BETWEEN_LINES);
-
-      index = (index + 1) % lines.length;
-    }
-  }
-
-  runLoop();
-})();
-
-

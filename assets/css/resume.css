@@ -3,12 +3,12 @@
   Loaded AFTER style.css on resume.html
 \*-----------------------------------*/
 
-/*
- * style.css sets html { font-size: 10px } (rem = 10px trick).
- * Resume was designed for 16px base, so we override on this page.
- */
-html:has(body.page-resume) {
-  font-size: 16px !important;
+/*-----------------------------------*\
+  #BODY OVERRIDE (resume needs scroll)
+\*-----------------------------------*/
+body.page-resume {
+  overflow: auto;
+  height: auto;
 }
 
 /*-----------------------------------*\
@@ -41,13 +41,6 @@ html:has(body.page-resume) {
 }
 
 /*-----------------------------------*\
-  #HEADER OVERRIDES (page-resume)
-\*-----------------------------------*/
-
-/* Hide the shared site header entirely on resume page */
-.page-resume .header { display: none !important; }
-
-/*-----------------------------------*\
   #RESUME TOP BAR (fixed)
 \*-----------------------------------*/
 
@@ -58,7 +51,7 @@ html:has(body.page-resume) {
   right: 0;
   z-index: 100;
   padding: 0.6rem 1.5rem;
-  background: color-mix(in srgb, var(--mainBgColor) 85%, transparent);
+  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--borderColor) 50%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -82,7 +75,7 @@ html:has(body.page-resume) {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--mainTextColor);
+  color: var(--text-primary);
   text-decoration: none;
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.82rem;
@@ -119,7 +112,7 @@ html:has(body.page-resume) {
   justify-content: center;
   background: none;
   border: none;
-  color: var(--mainTextColor);
+  color: var(--text-primary);
   opacity: 0.6;
   cursor: pointer;
   padding: 0.3rem;
@@ -140,13 +133,13 @@ main {
   padding: 70px 1rem 4rem;
   background-image:
     radial-gradient(ellipse at 20% 0%, rgba(74, 172, 114, 0.06), transparent 40%),
-    radial-gradient(circle, color-mix(in srgb, var(--mainBorderColor) 28%, transparent) 1px, transparent 1px);
+    radial-gradient(circle, color-mix(in srgb, var(--border) 28%, transparent) 1px, transparent 1px);
   background-size: 100% 100%, 28px 28px;
   background-position: top center, center;
   min-height: 100vh;
 }
 
-/* Undo style.css global display resets that break resume inline text */
+/* Undo style-new.css global resets that break resume inline text */
 main a,
 main span   { display: inline; }
 main button { display: inline-flex; }
@@ -185,7 +178,7 @@ main img    { display: inline-block; }
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--mainTextColor);
+  color: var(--text-primary);
   opacity: 0.5;
   background: transparent;
   cursor: pointer;
@@ -246,7 +239,7 @@ main img    { display: inline-block; }
 
 .tab-btn:hover {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--mainTextColor);
+  color: var(--text-primary);
   border-color: color-mix(in srgb, var(--borderColor) 60%, transparent);
 }
 

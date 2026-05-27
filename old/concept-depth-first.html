@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEPTH FIRST — Joakim Moléni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --amber: #c9a66b;
+      --amber-dim: rgba(201, 166, 107, 0.15);
+      --amber-glow: rgba(201, 166, 107, 0.4);
+      --slate-deep: #0a0d12;
+      --slate-mid: #11151c;
+      --slate-light: #1e2330;
+      --text-primary: #e8e6e1;
+      --text-secondary: #9a9b9f;
+      --panel-progress: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--slate-deep);
+      color: var(--text-primary);
+    }
+
+    /* Horizontal scroll container */
+    .stream {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .stream::-webkit-scrollbar { height: 0; }
+
+    /* Each panel = one viewport */
+    .panel {
+      min-width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background-color 0.6s ease;
+    }
+
+    .panel-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      max-width: 90vw;
+    }
+
+    /* ===== PANEL 0: BOOT ===== */
+    .panel-boot {
+      background: #000;
+      flex-direction: column;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .panel-boot .panel-content {
+      text-align: left;
+      width: 100%;
+      max-width: 100vw;
+      padding: 3rem;
+    }
+
+    .boot-line {
+      color: var(--amber);
+      font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+      opacity: 0;
+      transform: translateY(4px);
+      animation: bootIn 0.3s ease forwards;
+      line-height: 1.8;
+    }
+
+    .boot-line:nth-child(1) { animation-delay: 0.3s; }
+    .boot-line:nth-child(2) { animation-delay: 0.7s; }
+    .boot-line:nth-child(3) { animation-delay: 1.1s; }
+    .boot-line:nth-child(4) { animation-delay: 1.6s; }
+    .boot-line:nth-child(5) { animation-delay: 2.2s; }
+
+    .boot-name {
+      font-size: clamp(2.5rem, 8vw, 7rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--text-primary);
+      opacity: 0;
+      animation: bootIn 0.8s ease forwards;
+      animation-delay: 2.8s;
+      margin-top: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .boot-subtitle {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--text-secondary);
+      opacity: 0;
+      animation: bootIn 0.5s ease forwards;
+      animation-delay: 3.4s;
+      margin-top: 0.5rem;
+    }
+
+    .boot-cta {
+      opacity: 0;
+      animation: bootIn 0.5s ease forwards;
+      animation-delay: 4s;
+      margin-top: 2rem;
+      color: var(--amber);
+      font-size: 0.9rem;
+    }
+
+    @keyframes bootIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanline overlay */
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ===== PANEL 1: METAL ===== */
+    .panel-metal {
+      background: #050708;
+    }
+
+    .panel-metal::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(90deg, rgba(201,166,107,0.02) 0px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(0deg, rgba(201,166,107,0.02) 0px, transparent 1px, transparent 60px);
+      pointer-events: none;
+    }
+
+    .metal-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 90vw;
+      max-width: 90vw;
+    }
+
+    .metal-text h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--amber);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .metal-text p {
+      font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .metal-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-block {
+      border: 1px solid var(--slate-light);
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .stat-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--amber);
+      opacity: 0.6;
+    }
+
+    .stat-value {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== PANEL 2: KERNEL (transition zone) ===== */
+    .panel-kernel {
+      background: linear-gradient(135deg, #0a0d12 0%, #12161f 100%);
+    }
+
+    .kernel-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      width: 80vw;
+    }
+
+    .kernel-quote {
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+      max-width: 70vw;
+    }
+
+    .kernel-quote em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .kernel-subtext {
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      color: var(--text-secondary);
+      max-width: 50vw;
+      line-height: 1.7;
+    }
+
+    /* ===== PANEL 3: RUNTIME ===== */
+    .panel-runtime {
+      background: var(--slate-deep);
+    }
+
+    .runtime-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      width: 90vw;
+      align-items: center;
+    }
+
+    .runtime-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .runtime-text p {
+      font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .runtime-cards {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .runtime-card {
+      background: var(--slate-mid);
+      border: 1px solid var(--slate-light);
+      padding: 1.5rem;
+      border-radius: 6px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .runtime-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--amber);
+    }
+
+    .runtime-card h3 {
+      font-size: 1rem;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .runtime-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== PANEL 4: APPLICATION ===== */
+    .panel-application {
+      background: linear-gradient(180deg, #0d1117 0%, #0a0d12 100%);
+    }
+
+    .app-content {
+      width: 90vw;
+    }
+
+    .app-content h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--slate-mid);
+      border: 1px solid var(--slate-light);
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--amber);
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--amber), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover::after { opacity: 1; }
+
+    .project-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-card h3 {
+      font-size: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .dep-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--amber-dim);
+      border-radius: 3px;
+      color: var(--amber);
+    }
+
+    /* ===== PANEL 5: INTERFACE (contact) ===== */
+    .panel-interface {
+      background: var(--slate-deep);
+    }
+
+    .interface-content {
+      text-align: center;
+      width: 80vw;
+    }
+
+    .interface-content h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .interface-content .tagline {
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--amber);
+      font-size: 1rem;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--slate-light);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--amber);
+      background: var(--amber-dim);
+    }
+
+    /* ===== REGISTER BAR ===== */
+    .register-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 40px;
+      background: rgba(10, 13, 18, 0.95);
+      border-top: 1px solid var(--slate-light);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      gap: 1rem;
+      z-index: 100;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      backdrop-filter: blur(8px);
+    }
+
+    .reg-item {
+      display: flex;
+      gap: 0.3rem;
+      transition: color 0.3s ease;
+    }
+
+    .reg-item.active { color: var(--amber); }
+
+    .reg-name { opacity: 0.6; }
+    .reg-val { font-weight: 700; }
+
+    .scroll-indicator {
+      margin-left: auto;
+      color: var(--amber);
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    /* ===== POINTER TRACE (desktop) ===== */
+    .trace {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .metal-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .metal-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .runtime-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .kernel-quote { max-width: 90vw; }
+      .kernel-subtext { max-width: 90vw; }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .register-bar {
+        overflow-x: auto;
+        gap: 0.8rem;
+        padding: 0 1rem;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .panel-content { padding: 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .boot-line, .boot-name, .boot-subtitle, .boot-cta {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stream" id="stream">
+    <!-- PANEL 0: BOOT -->
+    <section class="panel panel-boot">
+      <div class="scanlines"></div>
+      <div class="panel-content">
+        <div class="boot-line">CHECKING DEPENDENCIES... NONE FOUND.</div>
+        <div class="boot-line">LOADING FRAMEWORK... NOT REQUIRED.</div>
+        <div class="boot-line">VERIFYING STACK DEPTH... FULL.</div>
+        <div class="boot-line">INITIALIZING SYSTEM...</div>
+        <div class="boot-line" style="color: #4a9;">READY.</div>
+        <div class="boot-name">Joakim Moléni</div>
+        <div class="boot-subtitle">Assembler engineer by day. Full-stack platform builder by night. Zero dependencies in either world.</div>
+        <div class="boot-cta">→ scroll to traverse the stack</div>
+      </div>
+    </section>
+
+    <!-- PANEL 1: METAL -->
+    <section class="panel panel-metal">
+      <div class="scanlines"></div>
+      <div class="panel-content metal-content">
+        <div class="metal-text">
+          <h2>// METAL</h2>
+          <p>I write assembler at the deepest layer of one of Sweden's largest banks — one of roughly fifteen engineers in the country at this level on IBM z/OS.</p>
+          <p>The code I write processes real financial flows — payments, settlements, core ledger operations. If it breaks, the bank stops. That constraint shapes everything I build.</p>
+        </div>
+        <div class="metal-stats">
+          <div class="stat-block">
+            <div class="stat-value">z/OS</div>
+            <div class="stat-label">Platform</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">HLASM</div>
+            <div class="stat-label">Primary Language</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">~15</div>
+            <div class="stat-label">Engineers in Sweden</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Uptime Requirement</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: KERNEL -->
+    <section class="panel panel-kernel">
+      <div class="panel-content kernel-content">
+        <blockquote class="kernel-quote">
+          "I don't <em>install</em> solutions.<br>I <em>understand</em> problems."
+        </blockquote>
+        <p class="kernel-subtext">
+          I've been building since I was five — custom PCs, LAN networks for hundreds, web dev before most people had email. COBOL got me in the door. Assembler is where I found my edge.
+        </p>
+      </div>
+    </section>
+
+    <!-- PANEL 3: RUNTIME -->
+    <section class="panel panel-runtime">
+      <div class="panel-content runtime-content">
+        <div class="runtime-text">
+          <h2>Full-Stack From Scratch</h2>
+          <p>I build entire platforms with zero dependencies — custom routers, markdown renderers, syntax highlighters, search engines, presentation engines, build pipelines — all in vanilla JavaScript.</p>
+          <p>When I say vanilla, I mean: no npm, no bundler, no framework, no CDN, no external anything. Just me and the browser APIs.</p>
+        </div>
+        <div class="runtime-cards">
+          <div class="runtime-card">
+            <h3>router.js</h3>
+            <p>Hash-based SPA router with legacy redirect support and deep linking.</p>
+          </div>
+          <div class="runtime-card">
+            <h3>renderer.js</h3>
+            <p>Markdown-to-HTML with frontmatter parsing, code blocks, tables.</p>
+          </div>
+          <div class="runtime-card">
+            <h3>search.js</h3>
+            <p>Full-text search with pre-built indexes and fuzzy matching.</p>
+          </div>
+          <div class="runtime-card">
+            <h3>highlight.js</h3>
+            <p>Multi-language syntax highlighter — JS, HTML, YAML, HLASM, COBOL, JCL.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 4: APPLICATION -->
+    <section class="panel panel-application">
+      <div class="panel-content app-content">
+        <h2>Selected Work</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-meta"><span>850+ pages</span><span>6 domains</span></div>
+            <h3>Documentation & Knowledge Platform</h3>
+            <p>Complete engineering hub for a mainframe team. Custom router, renderer, search engine, syntax highlighter, presentation engine, and build pipeline.</p>
+            <span class="dep-badge">dependencies: 0</span>
+          </div>
+          <div class="project-card">
+            <div class="project-meta"><span>Core Banking</span><span>Instant Payments</span></div>
+            <h3>Pan-European Payment Infrastructure</h3>
+            <p>Built infrastructure for instant payment processing — fault-tolerant paths, deterministic transaction behaviour, regulatory traceability within hard latency ceilings.</p>
+            <span class="dep-badge">production: 24/7</span>
+          </div>
+          <div class="project-card">
+            <div class="project-meta"><span>HLASM → COBOL</span><span>Strategic</span></div>
+            <h3>Core Ledger Migration</h3>
+            <p>Migrating a bank's core ledger from assembler to COBOL. A controlled architectural evolution — replacing the engine mid-flight while it processes billions.</p>
+            <span class="dep-badge">downtime: 0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 5: INTERFACE -->
+    <section class="panel panel-interface">
+      <div class="panel-content interface-content">
+        <h2>Let's Talk</h2>
+        <p class="tagline">Best reached via LinkedIn. If you want to talk systems engineering, core banking architecture, or why I think dependencies are technical debt — I'm always up for it.</p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/joakimmoleni" class="contact-link" target="_blank">LinkedIn →</a>
+          <a href="https://github.com/joakimmoleni" class="contact-link" target="_blank">GitHub →</a>
+          <a href="mailto:jcrooge@gmail.com" class="contact-link">Email →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Register Bar -->
+  <div class="register-bar">
+    <div class="reg-item active" data-panel="0"><span class="reg-name">R0</span> <span class="reg-val">BOOT</span></div>
+    <div class="reg-item" data-panel="1"><span class="reg-name">R1</span> <span class="reg-val">METAL</span></div>
+    <div class="reg-item" data-panel="2"><span class="reg-name">R2</span> <span class="reg-val">KERNEL</span></div>
+    <div class="reg-item" data-panel="3"><span class="reg-name">R3</span> <span class="reg-val">RUNTIME</span></div>
+    <div class="reg-item" data-panel="4"><span class="reg-name">R4</span> <span class="reg-val">APP</span></div>
+    <div class="reg-item" data-panel="5"><span class="reg-name">R5</span> <span class="reg-val">IFACE</span></div>
+    <div class="scroll-indicator" id="scrollPos">0x00</div>
+  </div>
+
+  <!-- Pointer trace elements -->
+  <div class="trace" id="trace1"></div>
+  <div class="trace" id="trace2"></div>
+  <div class="trace" id="trace3"></div>
+
+  <script>
+    'use strict';
+    const stream = document.getElementById('stream');
+    const panels = document.querySelectorAll('.panel');
+    const regItems = document.querySelectorAll('.reg-item');
+    const scrollPos = document.getElementById('scrollPos');
+
+    // Update register bar on scroll
+    let ticking = false;
+    stream.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const progress = stream.scrollLeft / (stream.scrollWidth - stream.clientWidth);
+          const activeIndex = Math.round(progress * (panels.length - 1));
+          
+          regItems.forEach((item, i) => {
+            item.classList.toggle('active', i === activeIndex);
+          });
+
+          const hex = (activeIndex * 4).toString(16).toUpperCase().padStart(2, '0');
+          scrollPos.textContent = '0x' + hex;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Click register bar to navigate
+    regItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const panelIdx = parseInt(item.dataset.panel);
+        panels[panelIdx].scrollIntoView({ behavior: 'smooth', inline: 'start' });
+      });
+      item.style.cursor = 'pointer';
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        stream.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
+      } else if (e.key === 'ArrowLeft') {
+        stream.scrollBy({ left: -window.innerWidth, behavior: 'smooth' });
+      }
+    });
+
+    // Pointer trace effect (desktop only)
+    if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const traces = [
+        document.getElementById('trace1'),
+        document.getElementById('trace2'),
+        document.getElementById('trace3')
+      ];
+      
+      let mouseX = 0, mouseY = 0;
+      const positions = traces.map(() => ({ x: 0, y: 0 }));
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateTraces() {
+        positions.forEach((pos, i) => {
+          const target = i === 0 ? { x: mouseX, y: mouseY } : positions[i - 1];
+          const speed = 0.15 - (i * 0.04);
+          pos.x += (target.x - pos.x) * speed;
+          pos.y += (target.y - pos.y) * speed;
+          traces[i].style.left = pos.x + 'px';
+          traces[i].style.top = pos.y + 'px';
+          traces[i].style.opacity = (0.4 - i * 0.12).toString();
+          traces[i].style.transform = `scale(${1 - i * 0.2})`;
+        });
+        requestAnimationFrame(animateTraces);
+      }
+      animateTraces();
+    }
+  </script>
+</body>
+</html>

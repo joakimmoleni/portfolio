@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
 
@@ -11,28 +10,41 @@
   <meta name="description" content="Impact-focused resume for Joakim Moléni. Transaction-critical core banking systems, IBM z/OS engineering and reliable legacy-modern integration.">
 
   <!-- Theme colors for mobile UI -->
-  <meta name="theme-color" content="#131415" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f7f7f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#050608" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f9f7f3" media="(prefers-color-scheme: light)">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- Fonts -->
+  <!-- Fonts (non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+  </noscript>
 
-  <!-- Main CSS (shared nav styles) -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <!-- Resume-specific CSS -->
   <link rel="stylesheet" href="./assets/css/resume.css">
+
+  <!-- Inline theme to prevent FOUC -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body class="page-resume">
 
   <!-- Fixed top bar -->
   <header class="resume-topbar no-print">
     <div class="resume-topbar-content">
-      <a href="./" class="resume-back-link" aria-label="Back to portfolio">
+      <a href="./#panel-signal" class="resume-back-link" aria-label="Back to portfolio">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
@@ -54,10 +66,10 @@
         </div>
 
         <button class="theme-switch" id="themeToggle" aria-label="Toggle dark/light mode">
-          <svg id="darkmode" class="icon-moon" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;">
+          <svg id="iconMoon" class="icon-moon hidden" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
-          <svg id="lightmode" class="icon-sun hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+          <svg id="iconSun" class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>

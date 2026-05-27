@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#050608"/>
+  <rect x="2" y="2" width="28" height="28" rx="4" fill="none" stroke="#c9a66b" stroke-width="1.5" opacity="0.4"/>
+  <text x="16" y="24" font-family="'Courier New', monospace" font-size="22" font-weight="700" fill="#c9a66b" text-anchor="middle">J</text>
+  <circle cx="26" cy="6" r="2.5" fill="#c9a66b" opacity="0.8"/>
+</svg>
