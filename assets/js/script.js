@@ -110,18 +110,18 @@ function updateUI() {
     progressBar.style.width = (progress * 100) + '%';
   }
 
-  // Address buttons
+  // Address buttons + PC display — only update when the active panel changes
   if (activeIdx !== currentPanelIdx) {
     currentPanelIdx = activeIdx;
     addrButtons.forEach((btn, i) => {
       btn.classList.toggle('active', i === activeIdx);
     });
-  }
 
-  // PC display with blinking cursor
-  if (addrPC) {
-    const hex = (activeIdx * 4).toString(16).toUpperCase().padStart(2, '0');
-    addrPC.innerHTML = 'PC: 0x' + hex + '<span class="pc-cursor">_</span>';
+    // PC display with blinking cursor
+    if (addrPC) {
+      const hex = (activeIdx * 4).toString(16).toUpperCase().padStart(2, '0');
+      addrPC.innerHTML = 'PC: 0x' + hex + '<span class="pc-cursor">_</span>';
+    }
   }
 
   ticking = false;

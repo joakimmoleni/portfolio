@@ -730,19 +730,17 @@ body {
   left: 0;
   width: 100vw;
   height: var(--bar-height);
-  background: color-mix(in srgb, var(--bg-primary) 95%, transparent);
+  background: color-mix(in srgb, var(--bg-primary) 98%, transparent);
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(1rem, 3vw, 2.5rem);
   z-index: 100;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
 }
 
-/* Subtle CRT scan-line shimmer across the bar */
+/* Subtle CRT scan-line shimmer across the bar (static — no per-frame repaint) */
 .address-bar::before {
   content: '';
   position: absolute;
@@ -755,12 +753,6 @@ body {
     rgba(201, 166, 107, 0.015) 4px
   );
   pointer-events: none;
-  animation: bar-scan 8s linear infinite;
-}
-
-@keyframes bar-scan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(4px); }
 }
 
 .address-bar__left {
