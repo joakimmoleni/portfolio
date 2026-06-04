@@ -61,6 +61,12 @@ const progressBar = $('#progressBar');
 
 let ticking = false;
 let currentPanelIdx = -1; // force first updateUI to apply .active
+let wheelIdleTimer = null;
+let wheelSessionActive = false;
+let wheelSessionStartLeft = 0;
+let wheelSessionDirection = 0;
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function isHorizontal() {
   return stream && stream.scrollWidth > stream.clientWidth + 50;
@@ -83,6 +89,40 @@ function getScrollProgress() {
   return max > 0 ? stream.scrollTop / max : 0;
 }
 
+function getPanelOffset(idx) {
+  return panels[idx]?.offsetLeft || 0;
+}
+
+function getClosestPanelIndex(left = stream?.scrollLeft || 0) {
+  let bestIdx = 0;
+  let bestDistance = Infinity;
+
+  panels.forEach((panel, idx) => {
+    const distance = Math.abs(panel.offsetLeft - left);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIdx = idx;
+    }
+  });
+
+  return bestIdx;
+}
+
+function getClosestPanelIndexByTop(top = stream?.scrollTop || 0) {
+  let bestIdx = 0;
+  let bestDistance = Infinity;
+
+  panels.forEach((panel, idx) => {
+    const distance = Math.abs(panel.offsetTop - top);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIdx = idx;
+    }
+  });
+
+  return bestIdx;
+}
+
 function getActivePanel() {
   if (isMobile()) {
     // Find which panel is most in view
@@ -96,9 +136,26 @@ function getActivePanel() {
     return best;
   }
   if (isHorizontal()) {
-    return Math.round(stream.scrollLeft / stream.clientWidth);
+    return getClosestPanelIndex();
   }
-  return Math.round(stream.scrollTop / stream.clientHeight);
+  return getClosestPanelIndexByTop();
+}
+
+function scrollPanelTo(idx, behavior = 'smooth') {
+  const target = Math.min(Math.max(idx, 0), panels.length - 1);
+  const scrollBehavior = reducedMotion ? 'auto' : behavior;
+
+  if (isMobile()) {
+    panels[target].scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+    return;
+  }
+
+  if (isHorizontal()) {
+    stream.scrollTo({ left: getPanelOffset(target), behavior: scrollBehavior });
+    return;
+  }
+
+  stream.scrollTo({ top: panels[target].offsetTop, behavior: scrollBehavior });
 }
 
 function updateUI() {
@@ -163,7 +220,7 @@ if (hashTarget && hashTarget.classList.contains('panel')) {
     el.style.transform = 'none';
   });
   // Scroll to target without smooth (instant jump)
-  hashTarget.scrollIntoView({ behavior: 'instant', inline: 'start', block: 'start' });
+  scrollPanelTo([...panels].indexOf(hashTarget), 'auto');
   // Clean hash from URL without triggering navigation
   history.replaceState(null, '', location.pathname);
 } else {
@@ -181,11 +238,7 @@ addrButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     const idx = parseInt(btn.dataset.idx);
     if (idx >= 0 && idx < panels.length) {
-      panels[idx].scrollIntoView({
-        behavior: 'smooth',
-        inline: 'start',
-        block: 'start'
-      });
+      scrollPanelTo(idx);
     }
   });
 });
@@ -197,44 +250,80 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
     e.preventDefault();
     const next = Math.min(currentPanelIdx + 1, panels.length - 1);
-    panels[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
+    scrollPanelTo(next);
   } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
     e.preventDefault();
     const prev = Math.max(currentPanelIdx - 1, 0);
-    panels[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
+    scrollPanelTo(prev);
   }
 });
 
 /*-----------------------------------*\
   #WHEEL → HORIZONTAL (desktop only)
-  Scroll down = scroll right. Smooth and direct.
-  Temporarily disables snap while wheeling so
-  small deltas accumulate without fighting snap.
+  Pixel-based wheel translation keeps trackpads,
+  mouse wheels, and inertial wheels on one path.
 \*-----------------------------------*/
 
 if (stream) {
-  let snapTimer = null;
-  let locked = false;
-
   stream.addEventListener('wheel', (e) => {
     if (!isHorizontal()) return;
 
-    // Only translate vertical wheel into horizontal
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
+    const delta = normalizeWheelDelta(e);
+    if (delta === 0) return;
 
-      // If already locked from a recent scroll, ignore
-      if (locked) return;
-      locked = true;
+    e.preventDefault();
 
-      // One tick = one panel, then lock for 600ms
-      const direction = Math.sign(e.deltaY);
-      const target = Math.min(Math.max(currentPanelIdx + direction, 0), panels.length - 1);
-      panels[target].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'start' });
-
-      snapTimer = setTimeout(() => { locked = false; }, 600);
+    if (!wheelSessionActive) {
+      wheelSessionActive = true;
+      wheelSessionStartLeft = stream.scrollLeft;
+      wheelSessionDirection = 0;
     }
+
+    wheelSessionDirection = Math.sign(delta) || wheelSessionDirection;
+    stream.classList.add('is-wheel-scrolling');
+    stream.scrollLeft += delta;
+
+    window.clearTimeout(wheelIdleTimer);
+    wheelIdleTimer = window.setTimeout(settleWheelScroll, 140);
   }, { passive: false });
+}
+
+function normalizeWheelDelta(e) {
+  const rawDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  if (e.deltaMode === WheelEvent.DOM_DELTA_LINE) return rawDelta * 32;
+  if (e.deltaMode === WheelEvent.DOM_DELTA_PAGE) return rawDelta * stream.clientWidth;
+  return rawDelta;
+}
+
+function settleWheelScroll() {
+  if (!stream || !wheelSessionActive) return;
+
+  const movement = stream.scrollLeft - wheelSessionStartLeft;
+  const threshold = Math.min(stream.clientWidth * 0.12, 120);
+  let targetIdx = getClosestPanelIndex();
+
+  if (Math.abs(movement) > threshold && wheelSessionDirection !== 0) {
+    targetIdx = getDirectionalPanelIndex(stream.scrollLeft, wheelSessionDirection);
+  }
+
+  stream.classList.remove('is-wheel-scrolling');
+  wheelSessionActive = false;
+  wheelSessionDirection = 0;
+  scrollPanelTo(targetIdx);
+}
+
+function getDirectionalPanelIndex(left, direction) {
+  if (direction > 0) {
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i].offsetLeft > left + 1) return i;
+    }
+    return panels.length - 1;
+  }
+
+  for (let i = panels.length - 1; i >= 0; i--) {
+    if (panels[i].offsetLeft < left - 1) return i;
+  }
+  return 0;
 }
 
 /*-----------------------------------*\
@@ -242,7 +331,6 @@ if (stream) {
 \*-----------------------------------*/
 
 const regValues = $$('.reg__val');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (regValues.length && !reducedMotion) {
   let frame = 0;
