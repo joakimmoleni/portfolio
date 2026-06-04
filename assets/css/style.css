@@ -107,7 +107,7 @@ body {
   height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -124,7 +124,7 @@ body {
   scroll-snap-align: start;
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: safe center;
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
@@ -150,9 +150,6 @@ body {
   width: 100%;
   max-width: 90vw;
   padding: var(--panel-pad);
-  /* Center vertically when content fits; scroll the panel (not a nested box)
-     without clipping the top when it doesn't. */
-  margin-block: auto;
 }
 
 .panel__inner--wide {
