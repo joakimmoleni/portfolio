@@ -75,10 +75,6 @@ const progressBar = $('#progressBar');
 
 let ticking = false;
 let currentPanelIdx = -1; // force first updateUI to apply .active
-let wheelIdleTimer = null;
-let wheelSessionActive = false;
-let wheelSessionStartLeft = 0;
-let wheelSessionDirection = 0;
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -274,9 +270,22 @@ document.addEventListener('keydown', (e) => {
 
 /*-----------------------------------*\
   #WHEEL → HORIZONTAL (desktop only)
-  Pixel-based wheel translation keeps trackpads,
-  mouse wheels, and inertial wheels on one path.
+  One wheel gesture = one panel step. Inertia
+  tails (trackpad glide, free-spinning wheels)
+  are swallowed until a fresh gesture starts.
 \*-----------------------------------*/
+
+const WHEEL_STEP_INTENT = 30;  // accumulated px that count as a deliberate step
+const WHEEL_COOLDOWN = 450;    // ms after a step where all input is inertia
+const WHEEL_GESTURE_GAP = 200; // ms of silence that ends a gesture
+
+let wheelArmed = true;
+let wheelAccum = 0;
+let wheelPrevMag = 0;
+let wheelPrevDir = 0;
+let wheelLastTime = 0;
+let wheelStepTime = 0;
+let wheelTargetIdx = null;
 
 if (stream) {
   stream.addEventListener('wheel', (e) => {
@@ -289,23 +298,49 @@ if (stream) {
       return;
     }
 
+    e.preventDefault();
+
     const delta = normalizeWheelDelta(e);
     if (delta === 0) return;
 
-    e.preventDefault();
+    const now = performance.now();
+    const mag = Math.abs(delta);
+    const dir = Math.sign(delta);
+    const gap = now - wheelLastTime;
 
-    if (!wheelSessionActive) {
-      wheelSessionActive = true;
-      wheelSessionStartLeft = stream.scrollLeft;
-      wheelSessionDirection = 0;
+    // Fresh gesture: silence before this event, a direction flip, or a
+    // sharp magnitude jump (a new flick during a decaying inertia tail).
+    const flipped = wheelPrevDir !== 0 && dir !== wheelPrevDir;
+    if (gap > WHEEL_GESTURE_GAP || flipped || mag > wheelPrevMag * 1.5 + 10) {
+      wheelArmed = true;
+      wheelAccum = 0;
+      // A flip can never be inertia from the previous gesture — drop the
+      // cooldown so an immediate "go back" responds right away.
+      if (flipped) wheelStepTime = 0;
     }
 
-    wheelSessionDirection = Math.sign(delta) || wheelSessionDirection;
-    stream.classList.add('is-wheel-scrolling');
-    stream.scrollLeft += delta;
+    wheelLastTime = now;
+    wheelPrevMag = mag;
+    wheelPrevDir = dir;
 
-    window.clearTimeout(wheelIdleTimer);
-    wheelIdleTimer = window.setTimeout(settleWheelScroll, 140);
+    if (!wheelArmed || now - wheelStepTime < WHEEL_COOLDOWN) return;
+
+    wheelAccum += delta;
+    if (Math.abs(wheelAccum) < WHEEL_STEP_INTENT) return;
+
+    // Step exactly one panel, then swallow the rest of this gesture.
+    // Base the step on the previous target while its animation may still
+    // be running, so a quick second flick goes to the *next* panel.
+    const base = (wheelTargetIdx !== null && now - wheelStepTime < 1000)
+      ? wheelTargetIdx
+      : getActivePanel();
+    const target = Math.min(Math.max(base + dir, 0), panels.length - 1);
+
+    wheelArmed = false;
+    wheelAccum = 0;
+    wheelStepTime = now;
+    wheelTargetIdx = target;
+    scrollPanelTo(target);
   }, { passive: false });
 }
 
@@ -326,37 +361,6 @@ function normalizeWheelDelta(e) {
   if (e.deltaMode === WheelEvent.DOM_DELTA_LINE) return rawDelta * 32;
   if (e.deltaMode === WheelEvent.DOM_DELTA_PAGE) return rawDelta * stream.clientWidth;
   return rawDelta;
-}
-
-function settleWheelScroll() {
-  if (!stream || !wheelSessionActive) return;
-
-  const movement = stream.scrollLeft - wheelSessionStartLeft;
-  const threshold = Math.min(stream.clientWidth * 0.12, 120);
-  let targetIdx = getClosestPanelIndex();
-
-  if (Math.abs(movement) > threshold && wheelSessionDirection !== 0) {
-    targetIdx = getDirectionalPanelIndex(stream.scrollLeft, wheelSessionDirection);
-  }
-
-  stream.classList.remove('is-wheel-scrolling');
-  wheelSessionActive = false;
-  wheelSessionDirection = 0;
-  scrollPanelTo(targetIdx);
-}
-
-function getDirectionalPanelIndex(left, direction) {
-  if (direction > 0) {
-    for (let i = 0; i < panels.length; i++) {
-      if (panels[i].offsetLeft > left + 1) return i;
-    }
-    return panels.length - 1;
-  }
-
-  for (let i = panels.length - 1; i >= 0; i--) {
-    if (panels[i].offsetLeft < left - 1) return i;
-  }
-  return 0;
 }
 
 /*-----------------------------------*\

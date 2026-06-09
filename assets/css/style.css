@@ -115,11 +115,6 @@ body {
   scrollbar-width: none;
 }
 
-.stream.is-wheel-scrolling {
-  scroll-snap-type: none;
-  scroll-behavior: auto;
-}
-
 .stream::-webkit-scrollbar { width: 0; height: 0; }
 
 /*-----------------------------------*\
