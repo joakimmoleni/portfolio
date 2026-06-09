@@ -15,15 +15,27 @@ const $$ = (sel, root = document) => root.querySelectorAll(sel);
 const themeBtn = $('#themeToggle');
 const iconMoon = $('#iconMoon');
 const iconSun = $('#iconSun');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const savedTheme = localStorage.getItem('theme');
-const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
 
-applyTheme(initialTheme);
+// localStorage can throw (private browsing, blocked storage) — never let it kill the script
+function storageGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function storageSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ }
+}
+
+const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const savedTheme = storageGet('theme');
+
+applyTheme(savedTheme || (colorSchemeQuery.matches ? 'dark' : 'light'));
+
+// Follow OS theme changes until the user picks a theme explicitly
+colorSchemeQuery.addEventListener('change', (e) => {
+  if (!storageGet('theme')) applyTheme(e.matches ? 'dark' : 'light');
+});
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
   if (iconMoon && iconSun) {
     iconMoon.classList.toggle('hidden', theme === 'dark');
     iconSun.classList.toggle('hidden', theme === 'light');
@@ -33,14 +45,16 @@ function applyTheme(theme) {
 }
 
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  applyTheme(current === 'dark' ? 'light' : 'dark');
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  storageSet('theme', next);
 }
 
 themeBtn?.addEventListener('click', toggleTheme);
 
-// Keyboard shortcut: T to toggle
+// Keyboard shortcut: T to toggle (ignore Cmd/Ctrl/Alt combos like new-tab)
 document.addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
   if ((e.key === 't' || e.key === 'T') && !isTyping()) toggleTheme();
 });
 
@@ -211,7 +225,6 @@ if (hashTarget && hashTarget.classList.contains('panel')) {
   panels.forEach(panel => {
     panel.classList.add('dealt');
     panel.style.animation = 'none';
-    const inner = panel.querySelector('.boot-sequence, .boot-hero');
   });
   // Skip boot animations
   document.querySelectorAll('.boot-line, .boot-hero').forEach(el => {
@@ -244,8 +257,9 @@ addrButtons.forEach(btn => {
 });
 
 // Keyboard: arrow keys to navigate panels
+// (no-op on pages without panels, e.g. resume.html — let the browser scroll natively)
 document.addEventListener('keydown', (e) => {
-  if (isTyping()) return;
+  if (!panels.length || isTyping()) return;
 
   if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
     e.preventDefault();
@@ -268,6 +282,13 @@ if (stream) {
   stream.addEventListener('wheel', (e) => {
     if (!isHorizontal()) return;
 
+    // A dominantly-vertical gesture over content that can still scroll
+    // vertically (e.g. a panel taller than a short window) stays native —
+    // otherwise that content would be unreachable by wheel.
+    if (Math.abs(e.deltaY) >= Math.abs(e.deltaX) && canScrollVertically(e.target, e.deltaY)) {
+      return;
+    }
+
     const delta = normalizeWheelDelta(e);
     if (delta === 0) return;
 
@@ -286,6 +307,18 @@ if (stream) {
     window.clearTimeout(wheelIdleTimer);
     wheelIdleTimer = window.setTimeout(settleWheelScroll, 140);
   }, { passive: false });
+}
+
+function canScrollVertically(target, deltaY) {
+  let el = target instanceof Element ? target : null;
+  while (el && el !== stream) {
+    if (el.scrollHeight > el.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) {
+      if (deltaY < 0 && el.scrollTop > 0) return true;
+      if (deltaY > 0 && el.scrollTop + el.clientHeight < el.scrollHeight - 1) return true;
+    }
+    el = el.parentElement;
+  }
+  return false;
 }
 
 function normalizeWheelDelta(e) {
@@ -333,23 +366,16 @@ function getDirectionalPanelIndex(left, direction) {
 const regValues = $$('.reg__val');
 
 if (regValues.length && !reducedMotion) {
-  let frame = 0;
-  function cycleRegisters() {
-    frame++;
-    // Flash a random register every ~2s
-    if (frame % 120 === 0) {
-      const idx = Math.floor(Math.random() * regValues.length);
-      const el = regValues[idx];
-      el.style.color = 'var(--accent)';
-      el.style.textShadow = '0 0 6px var(--accent-glow)';
-      setTimeout(() => {
-        el.style.color = '';
-        el.style.textShadow = '';
-      }, 400);
-    }
-    requestAnimationFrame(cycleRegisters);
-  }
-  cycleRegisters();
+  // Flash a random register every 2s
+  setInterval(() => {
+    const el = regValues[Math.floor(Math.random() * regValues.length)];
+    el.style.color = 'var(--accent)';
+    el.style.textShadow = '0 0 6px var(--accent-glow)';
+    setTimeout(() => {
+      el.style.color = '';
+      el.style.textShadow = '';
+    }, 400);
+  }, 2000);
 }
 
 /*-----------------------------------*\
@@ -358,26 +384,3 @@ if (regValues.length && !reducedMotion) {
 
 const yearEl = $('#copyrightYear');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/*-----------------------------------*\
-  #MAILTO FORM (if needed later)
-\*-----------------------------------*/
-
-window.mailtoSubmit = function mailtoSubmit(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const name = form?.querySelector('#name')?.value?.trim() || '';
-  const email = form?.querySelector('#email_address')?.value?.trim() || '';
-  const message = form?.querySelector('#message')?.value?.trim() || '';
-
-  const subject = encodeURIComponent(`Portfolio contact from ${name || 'website visitor'}`);
-  const body = encodeURIComponent([
-    `Name: ${name}`,
-    `Email: ${email}`,
-    '',
-    message
-  ].join('\n'));
-
-  window.location.href = `mailto:jcrooge@gmail.com?subject=${subject}&body=${body}`;
-  return false;
-};

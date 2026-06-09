@@ -31,13 +31,13 @@ const langSvBtn = document.getElementById('langSvBtn');
   }, { passive: true });
 })();
 
-// Language state
-window.__resumeLang = localStorage.getItem('resumeLang') || 'en';
+// Language state (storageGet/storageSet are defined in script.js, loaded first)
+window.__resumeLang = storageGet('resumeLang') || 'en';
 
 function setResumeLang(lang) {
   const safeLang = lang === 'sv' ? 'sv' : 'en';
   window.__resumeLang = safeLang;
-  localStorage.setItem('resumeLang', safeLang);
+  storageSet('resumeLang', safeLang);
   document.body.setAttribute('data-resume-lang', safeLang);
 
   if (langEnBtn && langSvBtn) {
@@ -136,19 +136,20 @@ function initVariantsFromData(variants) {
 
   list.innerHTML = '';
   variants.forEach((variant, idx) => {
-    const li = document.createElement('li');
-    li.className = 'tab-item';
-    li.innerHTML = `
-      <button class="tab-btn${idx === 0 ? ' active' : ''}" type="button" role="tab" data-variant="${variant.id}">
-        ${variant.title}
-      </button>
-    `;
-    li.querySelector('button').addEventListener('click', async () => {
-      await selectVariant(variant.id);
-    });
-    list.appendChild(li);
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+    btn.type = 'button';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', String(idx === 0));
+    btn.dataset.variant = variant.id;
+    btn.textContent = variant.title;
+    btn.addEventListener('click', () => selectVariant(variant.id));
+    list.appendChild(btn);
   });
 }
+
+// Variant JSONs never change within a session — fetch each once
+const variantCache = new Map();
 
 async function selectVariant(variantId) {
   const variants = window.__resumeVariants || [];
@@ -156,12 +157,18 @@ async function selectVariant(variantId) {
   if (!variant) return;
 
   document.querySelectorAll('#variantList .tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.variant === variantId);
+    const active = btn.dataset.variant === variantId;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', String(active));
   });
 
   try {
     setStatus(`Loading ${variant.title}...`, 'loading');
-    const variantData = await fetchJson(variant.path);
+    let variantData = variantCache.get(variant.id);
+    if (!variantData) {
+      variantData = await fetchJson(variant.path);
+      variantCache.set(variant.id, variantData);
+    }
     const mergedData = mergeResumeData(window.__baseResumeData || {}, variantData);
     window.__currentResumeData = mergedData;
     window.__currentVariantId = variant.id;
@@ -207,24 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function exportPdf() {
-  const controls = document.querySelectorAll('header, .no-print');
-  const prevStyles = [];
-  controls.forEach(el => {
-    prevStyles.push([el, el.style.display]);
-    el.style.display = 'none';
-  });
-
-  try {
-    window.print();
-  } catch (err) {
-    console.error('print failed', err);
-  } finally {
-    prevStyles.forEach(([el, val]) => { el.style.display = val || ''; });
-  }
+  // Print CSS (@media print in resume.css) already hides the UI chrome
+  window.print();
 }
 
 function renderResume(data, variantId = 'default') {
-  const { personal, experience, skills, education, projects } = data;
+  const { personal = {}, experience = [], skills = {}, education = [], projects = [] } = data || {};
   const profile = t(data, 'profile');
   const coreStack = tArr(data, 'coreStack');
 
@@ -255,23 +250,27 @@ function renderResume(data, variantId = 'default') {
   const leftParts = [];
 
   const personalTitle = t(personal, 'title');
-  const personalLocation = isSv && personal.location_sv ? personal.location_sv : personal.location;
+  const personalLocation = (isSv && personal.location_sv ? personal.location_sv : personal.location) || '';
 
   leftParts.push(`
     <div class="resume-left">
       <p class="resume-chip">${chipLabel}</p>
-      <h1 class="resume-name">${personal.name}</h1>
+      <h1 class="resume-name">${personal.name || ''}</h1>
       <p class="resume-title">${personalTitle}</p>
   `);
 
-  // Contact
+  // Contact — only render entries that exist in the data
+  const contactItems = [
+    personalLocation && `<div class="contact-item contact-location">${personalLocation}</div>`,
+    personal.email && `<div class="contact-item contact-email"><a href="mailto:${personal.email}" class="contact-link">${personal.email}</a></div>`,
+    personal.github && `<div class="contact-item contact-github"><a href="https://${personal.github}" target="_blank" rel="noopener noreferrer" class="contact-link">${personal.github}</a></div>`,
+    personal.linkedin && `<div class="contact-item contact-linkedin"><a href="https://${personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-link">${personal.linkedin}</a></div>`
+  ].filter(Boolean);
+
   leftParts.push(`
       <section>
         <h2 class="resume-section-title">${labels.contact}</h2>
-        <div class="contact-item contact-location">${personalLocation}</div>
-        <div class="contact-item contact-email"><a href="mailto:${personal.email}" class="contact-link">${personal.email}</a></div>
-        <div class="contact-item contact-github"><a href="https://${personal.github}" target="_blank" class="contact-link">${personal.github}</a></div>
-        <div class="contact-item contact-linkedin"><a href="https://${personal.linkedin}" target="_blank" class="contact-link">${personal.linkedin}</a></div>
+        ${contactItems.join('')}
       </section>
   `);
 
@@ -388,52 +387,3 @@ function renderResume(data, variantId = 'default') {
 
 // Load resume on page load
 document.addEventListener('DOMContentLoaded', loadResume);
-
-// Print helper: try to scale resume to fit one printed A4 page
-window.printOnePage = function printOnePage() {
-  const element = document.querySelector('.resume');
-  if (!element) return window.print();
-
-  // Try to compute a scale so the resume fits one A4 page
-  const a4Px = 11.693 * 96; // height in px
-  const marginPx = 20; // smaller internal margin
-  const available = a4Px - marginPx * 2;
-  const height = element.getBoundingClientRect().height;
-  let scale = 1;
-  if (height > available) {
-    scale = available / height;
-    scale = Math.max(0.5, Math.min(1, scale));
-  }
-
-  // Temporarily apply CSS transform to scale content for capture
-  const prevTransform = element.style.transform || '';
-  const prevTransformOrigin = element.style.transformOrigin || '';
-  element.style.transformOrigin = 'top left';
-  element.style.transform = `scale(${scale})`;
-
-  // In-place one-page print: scale element, hide UI, print, then restore
-  try {
-    const controls = document.querySelectorAll('header, .no-print');
-    const prevStyles = [];
-    controls.forEach(el => { prevStyles.push([el, el.style.display]); el.style.display = 'none'; });
-
-    // give browser a tick to apply styles
-    requestAnimationFrame(() => {
-      try {
-        window.print();
-      } catch (err) {
-        console.error('print failed', err);
-      } finally {
-        // restore transform and UI
-        element.style.transform = prevTransform;
-        element.style.transformOrigin = prevTransformOrigin;
-        prevStyles.forEach(([el, val]) => { el.style.display = val || ''; });
-      }
-    });
-  } catch (err) {
-    console.error('one-page export failed', err);
-    element.style.transform = prevTransform;
-    element.style.transformOrigin = prevTransformOrigin;
-    window.print();
-  }
-};

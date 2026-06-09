@@ -15,9 +15,17 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Joakim Moléni — Assembler Engineer, Core Banking Infrastructure">
   <meta property="og:description" content="Writing the code that executes beneath every transaction. IBM z/OS assembler in production banking.">
-  <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/about.svg">
+  <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://joakimmoleni.github.io/portfolio/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Joakim Moléni — Assembler Engineer, Core Banking Infrastructure">
+  <meta name="twitter:description" content="Writing the code that executes beneath every transaction. IBM z/OS assembler in production banking.">
+  <meta name="twitter:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://joakimmoleni.github.io/portfolio/">
@@ -41,7 +49,9 @@
   <!-- Inline theme to prevent FOUC -->
   <script>
     (function() {
-      var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
