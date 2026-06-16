@@ -35,14 +35,16 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Build and maintain integration paths between core mainframe transaction systems and modern distributed services \u2014 reliable contracts that both sides depend on.",
-        "Own the full stack: assembler at the transaction layer, APIs at the service boundary, and web frontends for internal developer tooling.",
+        "Build and maintain integration paths between core mainframe transaction systems and modern distributed services — reliable contracts that both sides depend on.",
+        "Co-leading a 50-person platform migration from assembler to modern COBOL — bridging legacy and modern architectures as senior dev with tech lead responsibilities.",
+        "Built AI-assisted developer tooling adopted by 50+ engineers. Own the full stack: assembler at the transaction layer, APIs at the service boundary, web frontends for internal tooling.",
         "Drive observability improvements so production issues surface through monitoring, not through customers reporting problems."
       ],
       "highlights_sv": [
-        "Bygger och underh\u00e5ller integrationsv\u00e4gar mellan stordatorns transaktionssystem och moderna distribuerade tj\u00e4nster \u2014 tillf\u00f6rlitliga kontrakt som b\u00e5da sidor \u00e4r beroende av.",
-        "\u00c4ger hela stacken: assembler p\u00e5 transaktionslagret, API:er p\u00e5 tj\u00e4nstegr\u00e4nsen och webbfrontends f\u00f6r interna utvecklarverktyg.",
-        "Driver b\u00e4ttre observerbarhet s\u00e5 att produktionsproblem uppt\u00e4cks via monitorering \u2014 inte genom att kunder rapporterar fel."
+        "Bygger och underhåller integrationsvägar mellan stordatorns transaktionssystem och moderna distribuerade tjänster — tillförlitliga kontrakt som båda sidor är beroende av.",
+        "Medleder en 50-personers plattformsmigrering från assembler till modern COBOL — bryggar äldre och moderna arkitekturer som senior utvecklare med tech lead-ansvar.",
+        "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer. Äger hela stacken: assembler på transaktionslagret, API:er på tjänstegränsen, webbfrontends för interna verktyg.",
+        "Driver bättre observerbarhet så att produktionsproblem upptäcks via monitorering — inte genom att kunder rapporterar fel."
       ]
     },
     {
@@ -64,16 +66,16 @@
     },
     {
       "company": "Fragsheet",
-      "role": "Full-stack Developer",
-      "role_sv": "Full-stack-utvecklare",
+      "role": "Full-stack Developer & ML Engineer",
+      "role_sv": "Full-stack-utvecklare & ML-ingenj\u00f6r",
       "years": "Jan 2023 \u2013 Jul 2023",
       "highlights": [
-        "Designed and shipped Node.js/TypeScript APIs for a real-time analytics product. Owned AWS deployment pipelines from commit to production.",
-        "Managed integration between data pipelines and customer-facing services under variable load and tight iteration cycles."
+        "Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics \u2014 real-time performance insights for League of Legends. 100,000 registered users.",
+        "Rewrote the entire web platform in vanilla JavaScript. Owned the full infrastructure migration from DigitalOcean to AWS end-to-end."
       ],
       "highlights_sv": [
-        "Designade och levererade Node.js/TypeScript-API:er f\u00f6r en realtidsanalysprodukt. \u00c4gde AWS-deploy-pipelines fr\u00e5n commit till produktion.",
-        "Hanterade integrationen mellan datapipelines och kundn\u00e4ra tj\u00e4nster under varierande last och snabba iterationscykler."
+        "Medbyggde ML-coachingmodeller (PyTorch, scikit-learn) f\u00f6r live-spelanalys \u2014 realtids-prestandainsikter f\u00f6r League of Legends. 100 000 registrerade anv\u00e4ndare.",
+        "Skrev om hela webbplattformen i vanilla JavaScript. \u00c4gde hela infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS end-to-end."
       ]
     },
     {

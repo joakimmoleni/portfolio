@@ -9,8 +9,8 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Assembler and COBOL engineer operating at the deepest layer of core banking at one of Sweden's largest financial institutions. Writes the transaction logic that processes billions of SEK daily with zero margin for error. Deployed to production within first week of COBOL training. Now part of the top mainframe team at a major Nordic bank, routinely resolving issues other teams escalate. Full code review authority over production-critical paths.",
-  "profile_sv": "Assembler- och COBOL-ingenjör på den djupaste nivån i kärnbanken hos ett av Sveriges största finansinstitut. Skriver transaktionslogiken som hanterar miljarder SEK dagligen utan marginal för fel. Levererade till produktion inom första veckan av COBOL-utbildningen. Nu del av det främsta stordatorteamet på en stor nordisk bank, löser rutinmässigt problem som andra team eskalerar. Full kodgranskningsauktoritet över produktionskritiska flöden.",
+  "profile": "Assembler and COBOL engineer operating at the deepest layer of core banking at one of Sweden's largest financial institutions. Deployed to production in week one. On-call within three months. Teaching assembler to seniors within six. Now co-leading a 50-person platform migration while maintaining transaction paths that process billions of SEK daily. Mentors across seniority levels and built AI-assisted developer tooling used by 50+ mainframe engineers. Full code review authority over production-critical paths.",
+  "profile_sv": "Assembler- och COBOL-ingenjör på den djupaste nivån i kärnbanken hos ett av Sveriges största finansinstitut. Levererade till produktion vecka ett. Jour inom tre månader. Undervisade assembler för seniora ingenjörer inom sex. Leder nu en 50-personers plattformsmigrering och underhåller transaktionsflöden som hanterar miljarder SEK dagligen. Mentorerar över senioritetsnivåer och byggde AI-assisterade verktyg som används av 50+ stordatorutvecklare. Full kodgranskningsauktoritet över produktionskritiska flöden.",
   "coreStack": [
     "IBM z/OS Assembler (HLASM)",
     "COBOL",
@@ -35,16 +35,16 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily.",
-        "Part of a five-person team recognised as among the strongest mainframe engineers at SEB. Routinely resolve production issues that other teams escalate.",
-        "Conduct code reviews for COBOL teams. Identify edge cases, enforce quality standards on production-critical paths.",
-        "Lead risk analysis and root-cause investigations for core ledger systems \u2014 full traceability from symptom to fix."
+        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily. On-call for Sweden's monetary systems.",
+        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL \u2014 senior dev performing tech lead and architect responsibilities.",
+        "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
+        "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for core ledger systems."
       ],
       "highlights_sv": [
-        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen.",
-        "Del av ett femmannateam som anses vara bland de starkaste stordatoringenj\u00f6rerna p\u00e5 SEB. L\u00f6ser rutinm\u00e4ssigt produktionsproblem som andra team eskalerar.",
-        "Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Identifierar edge cases och driver kvalitetsstandarder p\u00e5 produktionskritiska fl\u00f6den.",
-        "Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem \u2014 full sp\u00e5rbarhet fr\u00e5n symptom till fix."
+        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen. Jour f\u00f6r Sveriges monet\u00e4ra system.",
+        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL \u2014 senior utvecklare med tech lead- och arkitektansvar.",
+        "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
+        "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem."
       ]
     },
     {

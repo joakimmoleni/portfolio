@@ -35,16 +35,16 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Own architecture and delivery decisions across transaction-critical core banking systems where mainframe and modern services coexist.",
-        "Built internal documentation platform that replaced scattered Word files and physical binders \u2014 now used daily by the department.",
-        "Lead risk analysis for core banking modules. Drive incident investigations end-to-end from detection through resolution and prevention.",
-        "Conduct code reviews across teams. Mentor junior developers on production-quality standards and mainframe best practices."
+        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL \u2014 own architecture and delivery decisions across transaction-critical core banking systems.",
+        "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
+        "Built internal documentation platform replacing Word, SharePoint, Confluence and analog binders \u2014 850+ pages with system health dashboards, used daily by the entire department.",
+        "Mentor juniors and seniors. Run knowledge sessions. Drive incident investigations end-to-end from detection through resolution and prevention."
       ],
       "highlights_sv": [
-        "\u00c4ger arkitektur- och leveransbeslut \u00f6ver transaktionskritiska k\u00e4rnbankssystem d\u00e4r stordator och moderna tj\u00e4nster samexisterar.",
-        "Byggde intern dokumentationsplattform som ersatte utspridda Word-filer och fysiska p\u00e4rmar \u2014 anv\u00e4nds nu dagligen av avdelningen.",
-        "Leder riskanalys f\u00f6r k\u00e4rnbanksmoduler. Driver incidentutredningar end-to-end fr\u00e5n detektering via l\u00f6sning till prevention.",
-        "Genomf\u00f6r kodgranskningar \u00e5t flera team. Mentorerar juniora utvecklare i produktionskvalitet och stordator-best-practices."
+        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL \u2014 \u00e4ger arkitektur- och leveransbeslut \u00f6ver transaktionskritiska k\u00e4rnbankssystem.",
+        "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
+        "Byggde intern dokumentationsplattform som ersatte Word, SharePoint, Confluence och analoga p\u00e4rmar \u2014 850+ sidor med systemh\u00e4lso-dashboards, anv\u00e4nds dagligen av hela avdelningen.",
+        "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Driver incidentutredningar end-to-end fr\u00e5n detektering via l\u00f6sning till prevention."
       ]
     },
     {

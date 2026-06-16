@@ -58,16 +58,18 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily.",
-        "Part of a five-person team recognised as among the strongest mainframe engineers at SEB, routinely resolving production issues that other teams escalate.",
-        "Conduct code reviews for COBOL teams. Lead risk analysis and root-cause investigations for core ledger systems.",
-        "Built an internal documentation platform (HTML/JS) replacing scattered Word files, now used daily by the department."
+        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily. On-call for Sweden's monetary systems.",
+        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL \u2014 senior dev performing tech lead and architect responsibilities.",
+        "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
+        "Built an internal documentation platform replacing Word, SharePoint, Confluence and analog binders \u2014 850+ pages, used daily by the entire department.",
+        "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for core ledger systems."
       ],
       "highlights_sv": [
-        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen.",
-        "Del av ett femmannateam som anses vara bland de starkaste stordatoringenj\u00f6rerna p\u00e5 SEB \u2014 l\u00f6ser rutinm\u00e4ssigt produktionsproblem som andra team eskalerar.",
-        "Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem.",
-        "Byggde en intern dokumentationsplattform (HTML/JS) som ersatte utspridda Word-filer \u2014 anv\u00e4nds nu dagligen av avdelningen."
+        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen. Jour f\u00f6r Sveriges monet\u00e4ra system.",
+        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL \u2014 senior utvecklare med tech lead- och arkitektansvar.",
+        "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
+        "Byggde en intern dokumentationsplattform som ersatte Word, SharePoint, Confluence och analoga p\u00e4rmar \u2014 850+ sidor, anv\u00e4nds dagligen av hela avdelningen.",
+        "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem."
       ]
     },
     {
@@ -88,16 +90,16 @@
     },
     {
       "company": "Fragsheet",
-      "role": "Full-stack Developer",
-      "role_sv": "Full-stack-utvecklare",
+      "role": "Full-stack Developer & ML Engineer",
+      "role_sv": "Full-stack-utvecklare & ML-ingenj\u00f6r",
       "years": "Jan 2023 \u2013 Jul 2023",
       "highlights": [
-        "Designed and shipped Node.js APIs for a real-time analytics product. Owned AWS deployment pipelines end-to-end.",
-        "Managed integration between data pipelines and customer-facing services under variable load and tight deadlines."
+        "Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics \u2014 real-time performance insights for League of Legends players. 100,000 registered users.",
+        "Rewrote the entire web platform in vanilla JavaScript. Owned the full infrastructure migration from DigitalOcean to AWS."
       ],
       "highlights_sv": [
-        "Designade och levererade Node.js-API:er f\u00f6r en realtidsanalysprodukt. \u00c4gde AWS-deploy-pipelines end-to-end.",
-        "Hanterade integrationen mellan datapipelines och kundn\u00e4ra tj\u00e4nster under varierande last och pressade deadlines."
+        "Medbyggde ML-coachingmodeller (PyTorch, scikit-learn) f\u00f6r live-spelanalys \u2014 realtids-prestandainsikter f\u00f6r League of Legends-spelare. 100 000 registrerade anv\u00e4ndare.",
+        "Skrev om hela webbplattformen i vanilla JavaScript. \u00c4gde hela infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS."
       ]
     },
     {

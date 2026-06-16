@@ -85,24 +85,25 @@
         <div class="identity-text">
           <h2 class="identity-text__title">I write the code that keeps banks running</h2>
           <p>I've been building things since I was five — custom PCs, LAN networks for hundreds, web dev before most people had email. After years running a business, I came back to what I always loved.</p>
-          <p>Within my first week of COBOL training, I was deploying to production. Today I write assembler at the deepest layer of one of Sweden's largest banks — one of roughly fifteen people in the country at this level.</p>
+          <p>Within my first week of COBOL training, I was deploying to production. On-call within three months. Teaching assembler to senior engineers within six. Headhunted by a specialist HLASM team within two years. Today I write assembler at the deepest layer of one of Sweden's largest banks — in a community so small they're migrating away from the language because they can't find enough people to learn it.</p>
+          <p>I mentor both juniors and seniors, run knowledge sessions, review code across teams, and lead the AI tooling effort that serves our mainframe developers daily. I build things — and I make the people around me build better.</p>
           <p class="identity-text__accent">COBOL got me in the door. Assembler is where I found my edge.</p>
           <div class="identity-metrics">
             <div class="identity-metric">
-              <span class="identity-metric__value">~15</span>
-              <span class="identity-metric__label">Engineers in Sweden</span>
+              <span class="identity-metric__value">50+</span>
+              <span class="identity-metric__label">Engineers using my tools</span>
             </div>
             <div class="identity-metric">
               <span class="identity-metric__value">24/7</span>
               <span class="identity-metric__label">Uptime requirement</span>
             </div>
             <div class="identity-metric">
-              <span class="identity-metric__value">0</span>
-              <span class="identity-metric__label">Dependencies</span>
+              <span class="identity-metric__value">3 mo</span>
+              <span class="identity-metric__label">To on-call</span>
             </div>
             <div class="identity-metric">
-              <span class="identity-metric__value">850+</span>
-              <span class="identity-metric__label">Pages built</span>
+              <span class="identity-metric__value">[REDACTED]</span>
+              <span class="identity-metric__label">Migration I co-lead</span>
             </div>
           </div>
         </div>
@@ -112,13 +113,13 @@
           <div class="reg"><span class="reg__name">R2</span><span class="reg__val">HLASM</span><span class="reg__comment">// primary.lang</span></div>
           <div class="reg"><span class="reg__name">R3</span><span class="reg__val">COBOL</span><span class="reg__comment">// secondary.lang</span></div>
           <div class="reg"><span class="reg__name">R4</span><span class="reg__val">JS/CSS</span><span class="reg__comment">// evening.lang</span></div>
-          <div class="reg"><span class="reg__name">R5</span><span class="reg__val">0x000F</span><span class="reg__comment">// engineers.swe</span></div>
+          <div class="reg"><span class="reg__name">R5</span><span class="reg__val">0x????</span><span class="reg__comment">// engineers.swe</span></div>
           <div class="reg"><span class="reg__name">R6</span><span class="reg__val">0x0352</span><span class="reg__comment">// pages.built</span></div>
           <div class="reg"><span class="reg__name">R7</span><span class="reg__val">0x0000</span><span class="reg__comment">// dependencies</span></div>
           <div class="reg"><span class="reg__name">R8</span><span class="reg__val">PROD</span><span class="reg__comment">// deploy.env</span></div>
           <div class="reg"><span class="reg__name">R9</span><span class="reg__val">24/7</span><span class="reg__comment">// uptime.req</span></div>
           <div class="reg"><span class="reg__name">R10</span><span class="reg__val">z/OS</span><span class="reg__comment">// platform</span></div>
-          <div class="reg"><span class="reg__name">R11</span><span class="reg__val">IMS</span><span class="reg__comment">// middleware</span></div>
+          <div class="reg"><span class="reg__name">R11</span><span class="reg__val">[CLASSIFIED]</span><span class="reg__comment">// middleware</span></div>
           <div class="reg"><span class="reg__name">R12</span><span class="reg__val">BASE</span><span class="reg__comment">// addressability</span></div>
           <div class="reg"><span class="reg__name">R13</span><span class="reg__val">SAVE</span><span class="reg__comment">// save area</span></div>
           <div class="reg"><span class="reg__name">R14</span><span class="reg__val">RETN</span><span class="reg__comment">// return addr</span></div>
@@ -132,19 +133,19 @@
       <div class="dual">
         <div class="dual__side dual__left">
           <h3 class="dual__heading">// DAY</h3>
-          <p>IBM z/OS. HLASM. COBOL. IMS. DB2. The transaction paths that move billions of SEK with zero tolerance for failure.</p>
+          <p>IBM z/OS. HLASM. COBOL. The transaction paths that keep a country's financial system running. Zero tolerance for failure.</p>
           <pre class="dual__code"><code>         USING *,R12
-         L     R15,=V(ACCTPOST)
+         L     R15,=V(DISPATCH)
          BALR  R14,R15
          LTR   R15,R15
          BNZ   ERRTRAP
-*        — if this fails, the bank stops</code></pre>
-          <p>When something breaks at 2 AM, my team is who gets called.</p>
+*        — if this fails, you'd hear about it</code></pre>
+          <p>When something breaks, my team is who gets called. I can't tell you more than that.</p>
         </div>
         <div class="dual__divider" aria-hidden="true"></div>
         <div class="dual__side dual__right">
           <h3 class="dual__heading">Night</h3>
-          <p>Vanilla JavaScript. Custom routers. Markdown renderers. Syntax highlighters. Search engines. Build pipelines. Zero npm packages.</p>
+          <p>Vanilla JavaScript. Custom routers. Markdown renderers. Syntax highlighters. Search engines. Build pipelines. ML models with PyTorch. Zero npm packages when I choose to own the full stack.</p>
           <pre class="dual__code"><code>const router = {
   routes: new Map(),
   navigate(path) {
@@ -153,8 +154,8 @@
     history.pushState(null, '', path);
   }
 };
-// — no React. no dependencies. just me.</code></pre>
-          <p>Most people's side projects use more dependencies than my production platform.</p>
+// — no React. no dependencies. just understanding.</code></pre>
+          <p>I know React, TypeScript, the whole modern stack. I choose depth when the project is mine.</p>
         </div>
       </div>
       <div class="dual__merge">
@@ -169,19 +170,19 @@
         <div class="work-cards">
           <div class="work-card">
             <h3>Real money. Real-time.</h3>
-            <p>The code I write processes real financial flows — payments, settlements, core ledger operations. Not API calls to a payment provider — the actual assembler and COBOL paths where debits and credits are executed.</p>
+            <p>The code I write processes real financial flows — payments, settlements, core ledger operations. Not API calls to a payment provider — the actual assembler and COBOL paths where transactions are executed. The scale is the kind I'm not supposed to talk about.</p>
           </div>
           <div class="work-card">
             <h3>Downtime is a regulatory event</h3>
-            <p>The systems I work on can't go down. Regulatory requirements, financial settlement windows, inter-bank obligations. Availability at this level isn't about load balancers — it's about writing code that is correct the first time.</p>
+            <p>The systems I work on can't go down. Regulatory requirements, financial settlement windows, inter-bank obligations. I took over on-call responsibility within three months — and that's all I'll say about our incident response.</p>
           </div>
           <div class="work-card">
-            <h3>Bridging 1970 and 2026</h3>
-            <p>I write assembler designed in the 1960s and JavaScript that shipped this week. The gap between those worlds is where I live — understanding both deeply enough to evolve one without destroying the other.</p>
+            <h3>Leading a major platform migration</h3>
+            <p>Co-leading the architectural shift from assembler-driven processing to modern COBOL — a controlled evolution of a live system. Senior dev doing tech lead and architect work because the situation demands it.</p>
           </div>
           <div class="work-card">
-            <h3>Clock cycles, not sprint cycles</h3>
-            <p>I optimise at the register level in assembler and build entire web platforms in vanilla JS. Performance isn't a metric I check after shipping — it's a constraint I design around.</p>
+            <h3>I choose my tools. I don't refuse yours.</h3>
+            <p>Zero dependencies in my personal projects is a design choice, not a limitation. I know React, TypeScript, and the modern stack well. But when I own the full system, I choose to understand every layer — and that depth makes me better in any stack.</p>
           </div>
         </div>
       </div>
@@ -191,46 +192,46 @@
     <section class="panel panel--projects" id="panel-projects" aria-label="Selected work">
       <div class="panel__inner panel__inner--wide">
         <h2 class="projects__title">Selected Work</h2>
-        <p class="projects__intro">Most of my production work lives inside proprietary banking systems you'll never see the source code for. What you can see is how I think.</p>
+        <p class="projects__intro">Most of my production work lives inside systems I'm not allowed to describe in detail. What you can see is how I think.</p>
         <div class="project-list">
           <article class="project-card">
             <span class="project-card__depth">Instant Payments</span>
-            <h3>Pan-European Payment Infrastructure</h3>
-            <p>Built infrastructure for instant payment processing in core banking — the kind where "retry later" doesn't exist and regulatory deadlines are measured in seconds. Fault tolerance, full traceability, deterministic behaviour under volume.</p>
+            <h3>Real-Time Payment Infrastructure</h3>
+            <p>Built infrastructure for instant payment processing in core banking — the kind where "retry later" doesn't exist and regulatory deadlines leave no margin. Fault tolerance, full traceability, deterministic behaviour under volume.</p>
             <div class="project-card__tags">
-              <span>HLASM</span><span>COBOL</span><span>IMS</span><span>DB2</span>
+              <span>HLASM</span><span>COBOL</span><span>Real-time</span><span>Regulated</span>
             </div>
           </article>
           <article class="project-card">
             <span class="project-card__depth">Architecture</span>
             <h3>Core Ledger Migration — Platform Rewrite</h3>
-            <p>Migrating a bank's core ledger from assembler to COBOL. A controlled architectural evolution where the system processes billions while you're replacing its engine mid-flight. Both sides. Same engineer.</p>
+            <p>Co-leading an architectural shift from assembler-driven core banking to a modern platform. Understanding the legacy system at register level to safely replace it — while it's still processing live traffic. The details stay inside the building.</p>
             <div class="project-card__tags">
               <span>HLASM→COBOL</span><span>Zero downtime</span><span>Strategic</span>
             </div>
           </article>
           <article class="project-card">
-            <span class="project-card__depth">Full-Stack / AI</span>
-            <h3>AI Coaching Platform — Full Rewrite</h3>
-            <p>Rewrote the entire platform in vanilla JavaScript. Built the backend, trained and fine-tuned the LLM coaching models, and owned the full migration from DigitalOcean to AWS. End-to-end ownership of a live AI product.</p>
+            <span class="project-card__depth">Full-Stack / ML</span>
+            <h3>Fragsheet — AI Coaching Platform</h3>
+            <p>Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics. Rewrote the entire web platform in vanilla JavaScript. Owned the full migration from DigitalOcean to AWS. 100,000 registered users. End-to-end ownership of a live product.</p>
             <div class="project-card__tags">
-              <span>Vanilla JS</span><span>AWS</span><span>LLM</span><span>0 deps</span>
+              <span>PyTorch</span><span>Vanilla JS</span><span>AWS</span><span>100k users</span>
             </div>
           </article>
           <article class="project-card">
             <span class="project-card__depth">Developer Tooling</span>
             <h3>Documentation & Knowledge Platform</h3>
-            <p>850+ page engineering hub. Custom router, renderer, search engine, syntax highlighter (HLASM/COBOL/JCL), presentation engine, build pipeline. Zero dependencies. Every component hand-written.</p>
+            <p>850+ page engineering hub used daily across the department. Replaced Word docs, SharePoint, Confluence and analog binders. Custom router, search engine, syntax highlighter (HLASM/COBOL/JCL), presentation engine, build pipeline. Zero dependencies.</p>
             <div class="project-card__tags">
-              <span>850+ pages</span><span>Vanilla JS</span><span>PowerShell</span><span>0 npm</span>
+              <span>Daily use</span><span>Vanilla JS</span><span>Replaced 5 tools</span><span>0 npm</span>
             </div>
           </article>
           <article class="project-card">
             <span class="project-card__depth">HLASM / Production</span>
             <h3>Production Assembler in Live Banking</h3>
-            <p>Writing and maintaining HLASM production paths. Transaction-level diagnostics, IMS troubleshooting, controlled change delivery where rollback means manual intervention. Part of a five-person team that handles what other teams escalate.</p>
+            <p>Writing and maintaining HLASM production paths in transaction-critical systems. Diagnostics, troubleshooting, controlled change delivery into environments where you don't get a second attempt. Part of the team that handles what others escalate.</p>
             <div class="project-card__tags">
-              <span>HLASM</span><span>IMS</span><span>Endevor</span><span>PROD</span>
+              <span>HLASM</span><span>Production</span><span>Critical path</span>
             </div>
           </article>
         </div>
@@ -242,7 +243,7 @@
       <div class="panel__inner signal-content">
         <h2 class="signal__title">Signal</h2>
         <div class="signal__pulse" aria-hidden="true"></div>
-        <p class="signal__text">I let the work speak. But if you want to talk about core banking, platform engineering, or building without dependencies — reach out.</p>
+        <p class="signal__text">I spend my time building, mentoring, and pushing systems forward. If you want to talk about core banking, mainframe modernisation, platform engineering, or anything where reliability is a hard requirement — I'm always up for it.</p>
         <div class="signal__links">
           <a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
             <span class="signal__cmd">&gt;</span> ssh joakim@linkedin

@@ -20,22 +20,30 @@ body.page-resume {
   --accentColor:    var(--accent);
   --accentSoft:     var(--accent-dim);
 
-  /* Resume-document colours */
-  --cardBg:         #fbfbfa;
-  --cardTextColor:  #1a2027;
-  --sidebarBg:      #f2f0ec;
-  --dividerColor:   rgba(26, 32, 39, 0.08);
+  /* Resume-document colours (dark mode — darker card) */
+  --cardBg:         #14181f;
+  --cardTextColor:  #ddd9d3;
+  --sidebarBg:      #10141a;
+  --sidebarText:    #b8b4ae;
+  --dividerColor:   rgba(201, 166, 107, 0.10);
   --mutedTextColor: #9a9b9f;
   --borderColor:    rgba(255, 255, 255, 0.08);
   --surfaceColor:   #11151c;
-  --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.14);
+  --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --cardBorder:     1px solid rgba(201, 166, 107, 0.12);
 }
 
 [data-theme="light"] {
+  --cardBg:         #fbfbfa;
+  --cardTextColor:  #1a2027;
+  --sidebarBg:      #f2f0ec;
+  --sidebarText:    #33404c;
+  --dividerColor:   rgba(26, 32, 39, 0.08);
   --borderColor:    rgba(22, 32, 42, 0.08);
   --mutedTextColor: #55585f;
   --surfaceColor:   #ffffff;
   --shadowColor:    0 24px 56px rgba(24, 34, 44, 0.10), 0 6px 16px rgba(24, 34, 44, 0.06);
+  --cardBorder:     1px solid rgba(0, 0, 0, 0.04);
 }
 
 /*-----------------------------------*\
@@ -49,10 +57,10 @@ body.page-resume {
   right: 0;
   z-index: 100;
   padding: 0.6rem 1.5rem;
-  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--borderColor) 50%, transparent);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: color-mix(in srgb, var(--cardBg) 92%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accentColor) 10%, var(--dividerColor));
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
   transition: transform 0.3s ease;
 }
 
@@ -73,7 +81,7 @@ body.page-resume {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--text-primary);
+  color: var(--cardTextColor);
   text-decoration: none;
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.82rem;
@@ -110,7 +118,7 @@ body.page-resume {
   justify-content: center;
   background: none;
   border: none;
-  color: var(--text-primary);
+  color: var(--cardTextColor);
   opacity: 0.6;
   cursor: pointer;
   padding: 0.3rem;
@@ -120,7 +128,7 @@ body.page-resume {
 
 .resume-topbar .theme-switch:hover {
   opacity: 1;
-  background: color-mix(in srgb, var(--borderColor) 40%, transparent);
+  background: color-mix(in srgb, var(--accentColor) 10%, transparent);
 }
 
 /*-----------------------------------*\
@@ -159,9 +167,9 @@ main img    { display: inline-block; }
   align-items: center;
   gap: 0.15rem;
   padding: 0.2rem;
-  border: 1px solid color-mix(in srgb, var(--borderColor) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accentColor) 12%, var(--dividerColor));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--surfaceColor) 82%, transparent);
+  background: color-mix(in srgb, var(--sidebarBg) 80%, transparent);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
@@ -176,7 +184,7 @@ main img    { display: inline-block; }
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--text-primary);
+  color: var(--cardTextColor);
   opacity: 0.5;
   background: transparent;
   cursor: pointer;
@@ -224,7 +232,7 @@ main img    { display: inline-block; }
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
-  color: var(--mutedTextColor);
+  color: var(--sidebarText);
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.02em;
@@ -338,10 +346,10 @@ main img    { display: inline-block; }
   background: var(--cardBg);
   color: var(--cardTextColor);
   box-shadow: var(--shadowColor);
-  line-height: 1.35;
-  border-radius: 4px;
+  line-height: 1.45;
+  border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: var(--cardBorder);
 }
 
 /*-----------------------------------*\
@@ -376,12 +384,12 @@ main img    { display: inline-block; }
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--accentColor) 30%, transparent);
   color: var(--accentColor);
-  padding: 0.22rem 0.6rem;
-  font-size: 0.58rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.12rem;
+  letter-spacing: 0.1rem;
   margin-bottom: 0.6rem;
-  background: color-mix(in srgb, var(--accentColor) 5%, transparent);
+  background: color-mix(in srgb, var(--accentColor) 8%, transparent);
 }
 
 .resume-name {
@@ -390,22 +398,23 @@ main img    { display: inline-block; }
   line-height: 1;
   margin-bottom: 0.2rem;
   letter-spacing: -0.02em;
+  color: var(--cardTextColor);
 }
 
 .resume-title {
-  font-size: 0.72rem;
-  color: #47515c;
+  font-size: 0.74rem;
+  color: var(--mutedTextColor);
   margin-bottom: 0.7rem;
 }
 
 .resume-section-title {
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.14rem;
-  margin: 0.7rem 0 0.3rem;
-  color: #5f6a75;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--accentColor) 15%, transparent);
+  letter-spacing: 0.12rem;
+  margin: 0.9rem 0 0.4rem;
+  color: var(--mutedTextColor);
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--accentColor) 18%, transparent);
 }
 
 .contact-item,
@@ -418,9 +427,9 @@ main img    { display: inline-block; }
 
 .contact-item,
 .skill-item {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   margin-bottom: 0.25rem;
-  color: #33404c;
+  color: var(--sidebarText);
   word-break: break-word;
 }
 
@@ -445,9 +454,10 @@ main img    { display: inline-block; }
 }
 
 .profile-text {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #32404b;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--cardTextColor);
+  opacity: 0.85;
 }
 
 .job {
@@ -468,26 +478,29 @@ main img    { display: inline-block; }
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
+  color: var(--cardTextColor);
 }
 
 .job-years,
 .education-years {
   font-size: 0.72rem;
-  color: #66717d;
+  color: var(--mutedTextColor);
   white-space: nowrap;
 }
 
 .job-position {
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.78rem;
-  color: #50606d;
+  color: var(--accentColor);
+  opacity: 0.8;
   margin: 0.1rem 0 0.25rem;
 }
 
 .job-highlights li {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   margin-bottom: 0.2rem;
-  color: #32404b;
+  color: var(--cardTextColor);
+  opacity: 0.8;
 }
 
 /*-----------------------------------*\
@@ -497,10 +510,10 @@ main img    { display: inline-block; }
 .resume-project-list { display: grid; gap: 0.7rem; }
 
 .resume-project-item {
-  padding: 0.55rem 0.75rem;
-  border: 1px solid rgba(26, 32, 39, 0.08);
-  border-radius: 10px;
-  background: rgba(17, 22, 28, 0.025);
+  padding: 0.6rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--accentColor) 10%, var(--dividerColor));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accentColor) 3%, transparent);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -512,15 +525,16 @@ main img    { display: inline-block; }
 .resume-project-name {
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.84rem;
-  color: #1f2a33;
+  color: var(--cardTextColor);
   margin-bottom: 0.12rem;
 }
 
 .resume-project-description {
   font-family: "Inter", -apple-system, sans-serif;
   font-size: 0.76rem;
-  line-height: 1.35;
-  color: #32404b;
+  line-height: 1.4;
+  color: var(--cardTextColor);
+  opacity: 0.8;
 }
 
 .resume-project-tech {
@@ -528,7 +542,7 @@ main img    { display: inline-block; }
   font-size: 0.66rem;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
-  color: #66717d;
+  color: var(--mutedTextColor);
 }
 
 .resume-error {
