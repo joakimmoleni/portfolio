@@ -32,8 +32,8 @@
       "description": "Technical leadership, platform ownership and cross-system delivery."
     }
   ],
-  "profile": "Assembler and COBOL engineer operating at the deepest layer of core banking at one of Sweden's largest financial institutions. Writes the transaction logic that processes billions of SEK daily with zero margin for error. Track record: production deployment within first week of COBOL training. Now on the top mainframe team at a major Nordic bank, routinely resolving issues other teams escalate. Full code review authority over production-critical paths.",
-  "profile_sv": "Assembler- och COBOL-ingenjör på den djupaste nivån i kärnbanken hos ett av Sveriges största finansinstitut. Skriver transaktionslogiken som hanterar miljarder SEK dagligen utan marginal för fel. Meritlista: produktionsleverans inom första veckan av COBOL-utbildningen. Nu i det främsta stordatorteamet på en stor nordisk bank, löser rutinmässigt problem som andra team eskalerar. Full kodgranskningsauktoritet över produktionskritiska flöden.",
+  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks. Works on the transaction paths for payments and ledger operations, with production on-call responsibility. Reviews code across teams, mentors, and builds internal tooling. Comfortable at both ends of the stack: HLASM at the bottom, vanilla JavaScript at the top.",
+  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker. Arbetar med transaktionsflödena för betalningar och redovisning, med jouransvar i produktion. Granskar kod över teamgränser, mentorerar och bygger interna verktyg. Trivs i båda ändar av stacken: HLASM i botten, vanilla JavaScript i toppen.",
   "coreStack": [
     "IBM z/OS (HLASM, COBOL, IMS, JCL)",
     "Transaction-critical architecture",
@@ -58,15 +58,15 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily. On-call for Sweden's monetary systems.",
-        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL \u2014 senior dev performing tech lead and architect responsibilities.",
+        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily, with production on-call.",
+        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL, with architecture and delivery responsibility.",
         "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
         "Built an internal documentation platform replacing Word, SharePoint, Confluence and analog binders \u2014 850+ pages, used daily by the entire department.",
         "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for core ledger systems."
       ],
       "highlights_sv": [
-        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen. Jour f\u00f6r Sveriges monet\u00e4ra system.",
-        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL \u2014 senior utvecklare med tech lead- och arkitektansvar.",
+        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen, med jour i produktion.",
+        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL, med arkitektur- och leveransansvar.",
         "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
         "Byggde en intern dokumentationsplattform som ersatte Word, SharePoint, Confluence och analoga p\u00e4rmar \u2014 850+ sidor, anv\u00e4nds dagligen av hela avdelningen.",
         "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem."
@@ -78,12 +78,12 @@
       "role_sv": "Systemingenj\u00f6r (COBOL / IBM z/OS)",
       "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Deployed to production within the first week \u2014 fastest ramp-up in a cohort of 12 new engineers.",
+        "Deployed to production within the first week of COBOL training.",
         "Developed and maintained transaction logic for deposits and payments on core banking infrastructure.",
         "Operated across mainframe, Linux and distributed environments. Handled production incidents end-to-end."
       ],
       "highlights_sv": [
-        "Levererade till produktion inom f\u00f6rsta veckan \u2014 snabbaste uppstarten i en kohort p\u00e5 12 nya ingenj\u00f6rer.",
+        "Levererade till produktion inom f\u00f6rsta veckan av COBOL-utbildningen.",
         "Utvecklade och underh\u00f6ll transaktionslogik f\u00f6r ins\u00e4ttningar och betalningar i k\u00e4rnbanksinfrastrukturen.",
         "Arbetade \u00f6ver stordator, Linux och distribuerade milj\u00f6er. Hanterade produktionsincidenter end-to-end."
       ]
@@ -136,11 +136,11 @@
       "role_sv": "Senior aff\u00e4rsspecialist",
       "years": "Feb 2017 \u2013 Mar 2019",
       "highlights": [
-        "Technical solution design and end-to-end project delivery for energy installations. Top performer nationally.",
+        "Technical solution design and end-to-end project delivery for energy installations. Highest revenue in the company.",
         "Managed full project lifecycle from proposal through execution and client handover."
       ],
       "highlights_sv": [
-        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer. B\u00e4st i landet.",
+        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer. H\u00f6gst oms\u00e4ttning i bolaget.",
         "\u00c4gde hela projektlivscykeln fr\u00e5n offert via genomf\u00f6rande till kund\u00f6verl\u00e4mning."
       ]
     },
@@ -202,8 +202,8 @@
     {
       "name": "Internal Documentation Platform",
       "name_sv": "Intern dokumentationsplattform",
-      "description": "850+ page engineering knowledge platform. Custom router, renderer, search engine, syntax highlighter, presentation engine, and build pipeline. Dependencies: zero. Lines of framework code borrowed: zero.",
-      "description_sv": "Kunskapsplattform med 850+ sidor. Egenbyggd router, renderare, sökmotor, syntaxfärgare, presentationsmotor och byggpipeline. Beroenden: noll. Rader lånad ramverkskod: noll.",
+      "description": "850+ page engineering knowledge platform. Custom router, renderer, search engine, syntax highlighter, presentation engine and build pipeline. No external dependencies.",
+      "description_sv": "Kunskapsplattform med 850+ sidor. Egenbyggd router, renderare, sökmotor, syntaxfärgare, presentationsmotor och byggpipeline. Inga externa beroenden.",
       "tech": ["HTML", "CSS", "JavaScript"]
     }
   ],

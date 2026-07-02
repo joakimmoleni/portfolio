@@ -9,8 +9,8 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Systems-level engineer with deep experience in low-level programming (HLASM, COBOL) transitioning naturally to modern backend roles. Understands performance, memory management, and system design at a depth most application developers never reach. Builds web platforms from scratch \u2014 custom HTTP routing, server-side rendering logic, full-text search indexing, automated build pipelines \u2014 without frameworks or dependencies. The same precision applied to z/OS transaction processing applies to everything built above it.",
-  "profile_sv": "Ingenjör på systemnivå med djup erfarenhet av lågnivåprogrammering (HLASM, COBOL) som naturligt övergår till moderna backendroller. Förstår prestanda, minneshantering och systemdesign på ett djup de flesta applikationsutvecklare aldrig når. Bygger webbplattformar från grunden — egen HTTP-routing, server-side-renderingslogik, fulltextsökindexering, automatiserade byggpipelines — utan ramverk eller beroenden. Samma precision som tillämpas på z/OS-transaktionsbearbetning gäller allt som byggs ovanpå.",
+  "profile": "Backend engineer with a systems background: HLASM and COBOL in core banking. Used to reasoning about performance, memory and failure modes at machine level. Builds web platforms from scratch \u2014 HTTP routing, server-side rendering, full-text search, build pipelines \u2014 usually without frameworks. Comfortable owning the integration between mainframe transaction systems and modern services.",
+  "profile_sv": "Backendingenjör med systembakgrund: HLASM och COBOL i kärnbank. Van att resonera om prestanda, minne och felmoder på maskinnivå. Bygger webbplattformar från grunden — HTTP-routing, server-side-rendering, fulltextsök, byggpipelines — oftast utan ramverk. Bekväm med att äga integrationen mellan stordatorns transaktionssystem och moderna tjänster.",
   "coreStack": [
     "Node.js, TypeScript, REST APIs",
     "AWS (Lambda, S3, CloudFormation)",
@@ -36,13 +36,13 @@
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
         "Build and maintain integration paths between core mainframe transaction systems and modern distributed services — reliable contracts that both sides depend on.",
-        "Co-leading a 50-person platform migration from assembler to modern COBOL — bridging legacy and modern architectures as senior dev with tech lead responsibilities.",
+        "Co-leading a 50-person platform migration from assembler to modern COBOL — bridging legacy and modern architectures.",
         "Built AI-assisted developer tooling adopted by 50+ engineers. Own the full stack: assembler at the transaction layer, APIs at the service boundary, web frontends for internal tooling.",
         "Drive observability improvements so production issues surface through monitoring, not through customers reporting problems."
       ],
       "highlights_sv": [
         "Bygger och underhåller integrationsvägar mellan stordatorns transaktionssystem och moderna distribuerade tjänster — tillförlitliga kontrakt som båda sidor är beroende av.",
-        "Medleder en 50-personers plattformsmigrering från assembler till modern COBOL — bryggar äldre och moderna arkitekturer som senior utvecklare med tech lead-ansvar.",
+        "Medleder en 50-personers plattformsmigrering från assembler till modern COBOL — bryggar äldre och moderna arkitekturer.",
         "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer. Äger hela stacken: assembler på transaktionslagret, API:er på tjänstegränsen, webbfrontends för interna verktyg.",
         "Driver bättre observerbarhet så att produktionsproblem upptäcks via monitorering — inte genom att kunder rapporterar fel."
       ]
@@ -54,12 +54,12 @@
       "years": "Aug 2023 – Aug 2024",
       "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "Deployed to production within the first week — fastest ramp-up in a cohort of 12 new engineers.",
+        "Deployed to production within the first week of COBOL training.",
         "Developed transaction logic for deposits and payments. Operated across mainframe, Linux and distributed environments.",
         "Handled production incidents end-to-end — from detection through resolution across system boundaries."
       ],
       "highlights_sv": [
-        "Levererade till produktion inom första veckan — snabbaste uppstarten i en kohort på 12 nya ingenjörer.",
+        "Levererade till produktion inom första veckan av COBOL-utbildningen.",
         "Utvecklade transaktionslogik för insättningar och betalningar. Arbetade över stordator, Linux och distribuerade miljöer.",
         "Hanterade produktionsincidenter end-to-end — från detektering till lösning över systemgränser."
       ]

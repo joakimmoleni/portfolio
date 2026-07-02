@@ -9,8 +9,8 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Platform engineer who builds and owns the full delivery chain \u2014 from PowerShell build automation and artifact generation through deployment pipelines and production monitoring. Designed and implemented a multi-stage build system serving 850+ documents with zero external dependencies. Day job: IBM z/OS with Endevor-based change management, JCL batch orchestration, and ISPF-driven deployment workflows under strict SLA. 14 years of operational leadership before engineering \u2014 thinks in outcomes, not tickets.",
-  "profile_sv": "Plattformsingenjör som bygger och äger hela leveranskedjan — från PowerShell-byggautomation och artefaktgenerering genom deployment-pipelines och produktionsövervakning. Designade och implementerade ett flerstegs byggsystem som serverar 850+ dokument utan externa beroenden. Dagligt arbete: IBM z/OS med Endevor-baserad ändringshantering, JCL-batchorkestrering och ISPF-driven leverans under strikta SLA:er. 14 års operativ ledning innan ingenjörsrollen — tänker i resultat, inte ärenden.",
+  "profile": "Platform engineer who builds and owns the full delivery chain \u2014 from PowerShell build automation and artifact generation through deployment pipelines and production monitoring. Designed and implemented a multi-stage build system serving 850+ documents with zero external dependencies. Day job: IBM z/OS with Endevor-based change management, JCL batch orchestration, and ISPF-driven deployment workflows under strict SLA. 14 years of operational leadership before engineering.",
+  "profile_sv": "Plattformsingenjör som bygger och äger hela leveranskedjan — från PowerShell-byggautomation och artefaktgenerering genom deployment-pipelines och produktionsövervakning. Designade och implementerade ett flerstegs byggsystem som serverar 850+ dokument utan externa beroenden. Dagligt arbete: IBM z/OS med Endevor-baserad ändringshantering, JCL-batchorkestrering och ISPF-driven leverans under strikta SLA:er. 14 års operativ ledning innan ingenjörsrollen.",
   "coreStack": [
     "System ownership & architecture",
     "Cross-platform delivery (z/OS + cloud)",
@@ -53,12 +53,12 @@
       "role_sv": "Systemingenj\u00f6r (COBOL / IBM z/OS)",
       "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Deployed to production within the first week \u2014 fastest ramp-up in a cohort of 12. Delivered backend and integration work across Linux and mainframe environments.",
-        "Handled production incidents and end-to-end troubleshooting across system boundaries under real operational pressure."
+        "Deployed to production within the first week of COBOL training. Delivered backend and integration work across Linux and mainframe environments.",
+        "Handled production incidents and end-to-end troubleshooting across system boundaries."
       ],
       "highlights_sv": [
-        "Levererade till produktion inom f\u00f6rsta veckan \u2014 snabbaste uppstarten i en kohort p\u00e5 12. Levererade backend- och integrationsarbete \u00f6ver Linux- och stordatormilj\u00f6er.",
-        "Hanterade produktionsincidenter och end-to-end-fels\u00f6kning \u00f6ver systemgr\u00e4nser under verkligt operativt tryck."
+        "Levererade till produktion inom f\u00f6rsta veckan av COBOL-utbildningen. Levererade backend- och integrationsarbete \u00f6ver Linux- och stordatormilj\u00f6er.",
+        "Hanterade produktionsincidenter och end-to-end-fels\u00f6kning \u00f6ver systemgr\u00e4nser."
       ]
     },
     {
@@ -81,11 +81,11 @@
       "role_sv": "Senior aff\u00e4rsspecialist",
       "years": "Feb 2017 \u2013 Mar 2019",
       "highlights": [
-        "Technical solution design and end-to-end project delivery for energy installations across Sweden. Top performer nationally \u2014 highest revenue in the company.",
+        "Technical solution design and end-to-end project delivery for energy installations across Sweden. Highest revenue in the company.",
         "Full project lifecycle ownership from client proposal through execution and handover."
       ],
       "highlights_sv": [
-        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer \u00f6ver hela Sverige. B\u00e4st i landet \u2014 h\u00f6gst oms\u00e4ttning i bolaget.",
+        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer \u00f6ver hela Sverige. H\u00f6gst oms\u00e4ttning i bolaget.",
         "\u00c4gde hela projektlivscykeln fr\u00e5n kundoffert via genomf\u00f6rande till \u00f6verl\u00e4mning."
       ]
     },

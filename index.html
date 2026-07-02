@@ -7,14 +7,14 @@
 
   <title>Joakim Moléni | Portfolio</title>
   <meta name="title" content="Joakim Moléni | Portfolio">
-  <meta name="description" content="Systems engineer writing IBM z/OS assembler in production core banking. Full-stack platform builder with zero dependencies.">
+  <meta name="description" content="Systems engineer. IBM z/OS assembler in production core banking by day, the web stack from scratch by night.">
 
   <!-- Theme color for mobile UI (updated by script.js on toggle) -->
   <meta name="theme-color" content="#f9f7f3">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Joakim Moléni — Assembler Engineer, Core Banking Infrastructure">
-  <meta property="og:description" content="Writing the code that executes beneath every transaction. IBM z/OS assembler in production banking.">
+  <meta property="og:title" content="Joakim Moléni — Systems Engineer">
+  <meta property="og:description" content="IBM z/OS assembler in production core banking. The web stack from scratch after hours.">
   <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -23,8 +23,8 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Joakim Moléni — Assembler Engineer, Core Banking Infrastructure">
-  <meta name="twitter:description" content="Writing the code that executes beneath every transaction. IBM z/OS assembler in production banking.">
+  <meta name="twitter:title" content="Joakim Moléni — Systems Engineer">
+  <meta name="twitter:description" content="IBM z/OS assembler in production core banking. The web stack from scratch after hours.">
   <meta name="twitter:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
 
   <!-- Canonical -->
@@ -75,7 +75,7 @@
         </div>
         <div class="boot-hero">
           <h1 class="boot-hero__name">Joakim<br>Moléni</h1>
-          <p class="boot-hero__subtitle">Assembler engineer by day. Full-stack platform builder by night.<br>Zero dependencies in either world.</p>
+          <p class="boot-hero__subtitle">Assembler by day. The web stack, from scratch, by night.<br>Zero dependencies in either world.</p>
           <p class="boot-hero__cta">→ scroll to traverse the stack</p>
         </div>
       </div>
@@ -85,11 +85,10 @@
     <section class="panel panel--identity" id="panel-identity" aria-label="About me">
       <div class="panel__identity-grid">
         <div class="identity-text">
-          <h2 class="identity-text__title">I write the code that keeps banks running</h2>
-          <p>I've been building things since I was five — custom PCs, LAN networks for hundreds, web dev before most people had email. After years running a business, I came back to what I always loved.</p>
-          <p>Within my first week of COBOL training, I was deploying to production. On-call within three months. Teaching assembler to senior engineers within six. Headhunted by a specialist HLASM team within two years. Today I write assembler at the deepest layer of one of Sweden's largest banks — in a community so small they're migrating away from the language because they can't find enough people to learn it.</p>
-          <p>I mentor both juniors and seniors, run knowledge sessions, review code across teams, and lead the AI tooling effort that serves our mainframe developers daily. I build things — and I make the people around me build better.</p>
-          <p class="identity-text__accent">COBOL got me in the door. Assembler is where I found my edge.</p>
+          <h2 class="identity-text__title">Assembler, in production, at a bank</h2>
+          <p>I've been building things since before school — machines, networks, websites. I ran a business for years. Then I went back to the part I actually cared about.</p>
+          <p>COBOL first. Production within a week, on-call within three months. Assembler after that — the layer beneath everything else at one of Sweden's largest banks. The language is being phased out because too few people can carry it. Until then, someone has to.</p>
+          <p>The rest of my time goes to mentoring, code review across teams, and the tools our mainframe developers use every day. Some of them I wrote.</p>
           <div class="identity-metrics">
             <div class="identity-metric">
               <span class="identity-metric__value">50+</span>
@@ -135,19 +134,19 @@
       <div class="dual">
         <div class="dual__side dual__left">
           <h3 class="dual__heading">// DAY</h3>
-          <p>IBM z/OS. HLASM. COBOL. The transaction paths that keep a country's financial system running. Zero tolerance for failure.</p>
+          <p>IBM z/OS. HLASM. COBOL. Payment and ledger paths in core banking, expected to work every time.</p>
           <pre class="dual__code"><code>         USING *,R12
          L     R15,=V(DISPATCH)
          BALR  R14,R15
          LTR   R15,R15
          BNZ   ERRTRAP
-*        — if this fails, you'd hear about it</code></pre>
-          <p>When something breaks, my team is who gets called. I can't tell you more than that.</p>
+*        — this path has no retry</code></pre>
+          <p>When something breaks at this level, my team gets the call.</p>
         </div>
         <div class="dual__divider" aria-hidden="true"></div>
         <div class="dual__side dual__right">
           <h3 class="dual__heading">Night</h3>
-          <p>Vanilla JavaScript. Custom routers. Markdown renderers. Syntax highlighters. Search engines. Build pipelines. ML models with PyTorch. Zero npm packages when I choose to own the full stack.</p>
+          <p>Vanilla JavaScript. Routers, markdown renderers, syntax highlighters, search — written, not installed. PyTorch when a project calls for it.</p>
           <pre class="dual__code"><code>const router = {
   routes: new Map(),
   navigate(path) {
@@ -156,8 +155,8 @@
     history.pushState(null, '', path);
   }
 };
-// — no React. no dependencies. just understanding.</code></pre>
-          <p>I know React, TypeScript, the whole modern stack. I choose depth when the project is mine.</p>
+// — no framework. it routes anyway.</code></pre>
+          <p>I work fine in any modern stack. When the project is mine, I'd rather own every layer.</p>
         </div>
       </div>
       <div class="dual__merge">
@@ -172,19 +171,19 @@
         <div class="work-cards">
           <div class="work-card">
             <h3>Real money. Real-time.</h3>
-            <p>The code I write processes real financial flows — payments, settlements, core ledger operations. Not API calls to a payment provider — the actual assembler and COBOL paths where transactions are executed. The scale is the kind I'm not supposed to talk about.</p>
+            <p>Payments, settlement, ledger. Not calls to someone else's API — the assembler and COBOL paths where the transaction actually happens.</p>
           </div>
           <div class="work-card">
             <h3>Downtime is a regulatory event</h3>
-            <p>The systems I work on can't go down. Regulatory requirements, financial settlement windows, inter-bank obligations. I took over on-call responsibility within three months — and that's all I'll say about our incident response.</p>
+            <p>The systems I work on don't get to stop. Settlement windows, inter-bank obligations, regulators. I carried on-call after three months.</p>
           </div>
           <div class="work-card">
-            <h3>Leading a major platform migration</h3>
-            <p>Co-leading the architectural shift from assembler-driven processing to modern COBOL — a controlled evolution of a live system. Senior dev doing tech lead and architect work because the situation demands it.</p>
+            <h3>Rebuilding a platform while it runs</h3>
+            <p>Co-leading the shift from assembler-driven processing to modern COBOL. The system stays live the whole way. That constraint shapes every decision.</p>
           </div>
           <div class="work-card">
-            <h3>I choose my tools. I don't refuse yours.</h3>
-            <p>Zero dependencies in my personal projects is a design choice, not a limitation. I know React, TypeScript, and the modern stack well. But when I own the full system, I choose to understand every layer — and that depth makes me better in any stack.</p>
+            <h3>Tools are a choice</h3>
+            <p>Zero dependencies is a choice, not a limitation. I use whatever stack the work calls for. When the system is mine, I want to understand every layer of it.</p>
           </div>
         </div>
       </div>
@@ -194,12 +193,12 @@
     <section class="panel panel--projects" id="panel-projects" aria-label="Selected work">
       <div class="panel__inner panel__inner--wide">
         <h2 class="projects__title">Selected Work</h2>
-        <p class="projects__intro">Most of my production work lives inside systems I'm not allowed to describe in detail. What you can see is how I think.</p>
+        <p class="projects__intro">Most of what I build runs where you can't see it. This is how I think.</p>
         <div class="project-list">
           <article class="project-card">
             <span class="project-card__depth">Instant Payments</span>
             <h3>Real-Time Payment Infrastructure</h3>
-            <p>Built infrastructure for instant payment processing in core banking — the kind where "retry later" doesn't exist and regulatory deadlines leave no margin. Fault tolerance, full traceability, deterministic behaviour under volume.</p>
+            <p>Instant payment processing in core banking. No retry-later, no margin on the deadlines. Fault tolerance, traceability, deterministic behaviour under load.</p>
             <div class="project-card__tags">
               <span>HLASM</span><span>COBOL</span><span>Real-time</span><span>Regulated</span>
             </div>
@@ -207,7 +206,7 @@
           <article class="project-card">
             <span class="project-card__depth">Architecture</span>
             <h3>Core Ledger Migration — Platform Rewrite</h3>
-            <p>Co-leading an architectural shift from assembler-driven core banking to a modern platform. Understanding the legacy system at register level to safely replace it — while it's still processing live traffic. The details stay inside the building.</p>
+            <p>Co-leading the move from assembler-driven core banking to a modern platform. Understanding the old system at register level, replacing it while it carries live traffic.</p>
             <div class="project-card__tags">
               <span>HLASM→COBOL</span><span>Zero downtime</span><span>Strategic</span>
             </div>
@@ -215,7 +214,7 @@
           <article class="project-card">
             <span class="project-card__depth">Full-Stack / ML</span>
             <h3>Fragsheet — AI Coaching Platform</h3>
-            <p>Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics. Rewrote the entire web platform in vanilla JavaScript. Owned the full migration from DigitalOcean to AWS. 100,000 registered users. End-to-end ownership of a live product.</p>
+            <p>Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics. Rewrote the web platform in vanilla JavaScript. Moved the infrastructure from DigitalOcean to AWS. 100,000 registered users.</p>
             <div class="project-card__tags">
               <span>PyTorch</span><span>Vanilla JS</span><span>AWS</span><span>100k users</span>
             </div>
@@ -223,15 +222,15 @@
           <article class="project-card">
             <span class="project-card__depth">Developer Tooling</span>
             <h3>Documentation & Knowledge Platform</h3>
-            <p>850+ page engineering hub used daily across the department. Replaced Word docs, SharePoint, Confluence and analog binders. Custom router, search engine, syntax highlighter (HLASM/COBOL/JCL), presentation engine, build pipeline. Zero dependencies.</p>
+            <p>850+ pages of engineering documentation, used daily across the department. Replaced Word documents, SharePoint and binders. Custom router, search, syntax highlighting for HLASM, COBOL and JCL, build pipeline. No dependencies.</p>
             <div class="project-card__tags">
-              <span>Daily use</span><span>Vanilla JS</span><span>Replaced 5 tools</span><span>0 npm</span>
+              <span>Daily use</span><span>Vanilla JS</span><span>0 npm</span>
             </div>
           </article>
           <article class="project-card">
             <span class="project-card__depth">HLASM / Production</span>
             <h3>Production Assembler in Live Banking</h3>
-            <p>Writing and maintaining HLASM production paths in transaction-critical systems. Diagnostics, troubleshooting, controlled change delivery into environments where you don't get a second attempt. Part of the team that handles what others escalate.</p>
+            <p>Writing and maintaining HLASM production paths in transaction-critical systems. Diagnostics, troubleshooting, controlled change into environments that don't offer second attempts.</p>
             <div class="project-card__tags">
               <span>HLASM</span><span>Production</span><span>Critical path</span>
             </div>
@@ -245,7 +244,7 @@
       <div class="panel__inner signal-content">
         <h2 class="signal__title">Signal</h2>
         <div class="signal__pulse" aria-hidden="true"></div>
-        <p class="signal__text">I spend my time building, mentoring, and pushing systems forward. If you want to talk about core banking, mainframe modernisation, platform engineering, or anything where reliability is a hard requirement — I'm always up for it.</p>
+        <p class="signal__text">I spend my days keeping old systems alive and my evenings building new ones. If you want to talk about either, write.</p>
         <div class="signal__links">
           <a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
             <span class="signal__cmd">&gt;</span> ssh joakim@linkedin
