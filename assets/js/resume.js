@@ -248,17 +248,8 @@ function renderResume(data, variantId = 'default') {
     ? (isSv ? 'Plattformsprofil' : 'Platform profile')
     : (isSv ? 'CV-profil' : 'Resume profile');
 
-  const leftParts = [];
-
   const personalTitle = t(personal, 'title');
   const personalLocation = (isSv && personal.location_sv ? personal.location_sv : personal.location) || '';
-
-  leftParts.push(`
-    <div class="resume-left">
-      <p class="resume-chip">${chipLabel}</p>
-      <h1 class="resume-name">${personal.name || ''}</h1>
-      <p class="resume-title">${personalTitle}</p>
-  `);
 
   // Contact — only render entries that exist in the data
   const contactItems = [
@@ -268,12 +259,21 @@ function renderResume(data, variantId = 'default') {
     personal.linkedin && `<div class="contact-item contact-linkedin"><a href="https://${personal.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-link">${personal.linkedin}</a></div>`
   ].filter(Boolean);
 
-  leftParts.push(`
-      <section>
-        <h2 class="resume-section-title">${labels.contact}</h2>
+  // Full-width document header: identity left, contact right
+  const headParts = [`
+    <header class="resume-head">
+      <div class="resume-head__main">
+        <p class="resume-chip">${chipLabel}</p>
+        <h1 class="resume-name">${personal.name || ''}</h1>
+        <p class="resume-title">${personalTitle}</p>
+      </div>
+      <div class="resume-head__contact" aria-label="${labels.contact}">
         ${contactItems.join('')}
-      </section>
-  `);
+      </div>
+    </header>
+  `];
+
+  const leftParts = ['<div class="resume-left">'];
 
   // Core stack
   if (coreStack && coreStack.length) {
@@ -382,7 +382,9 @@ function renderResume(data, variantId = 'default') {
   rightParts.push('</div>');
 
   if (resumeContent) {
-    resumeContent.innerHTML = leftParts.join('') + rightParts.join('');
+    resumeContent.innerHTML =
+      headParts.join('') +
+      '<div class="resume-body">' + leftParts.join('') + rightParts.join('') + '</div>';
   }
 }
 

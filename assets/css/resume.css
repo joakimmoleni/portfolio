@@ -1,6 +1,8 @@
 /*-----------------------------------*\
   #RESUME — Page-specific overrides
   Loaded AFTER style.css on resume.html
+  Same instruction-stream language as the
+  portfolio: mono labels, gold/teal, grid.
 \*-----------------------------------*/
 
 /*-----------------------------------*\
@@ -21,29 +23,27 @@ body.page-resume {
   --accentSoft:     var(--accent-dim);
 
   /* Resume-document colours (dark mode — darker card) */
-  --cardBg:         #14181f;
+  --cardBg:         #0e1118;
   --cardTextColor:  #ddd9d3;
-  --sidebarBg:      #10141a;
+  --sidebarBg:      #0a0d13;
   --sidebarText:    #b8b4ae;
-  --dividerColor:   rgba(201, 166, 107, 0.10);
+  --dividerColor:   rgba(201, 166, 107, 0.12);
   --mutedTextColor: #9a9b9f;
   --borderColor:    rgba(255, 255, 255, 0.08);
-  --surfaceColor:   #11151c;
-  --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
-  --cardBorder:     1px solid rgba(201, 166, 107, 0.12);
+  --shadowColor:    0 32px 80px rgba(0, 0, 0, 0.55), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --cardBorder:     1px solid rgba(201, 166, 107, 0.16);
 }
 
 [data-theme="light"] {
-  --cardBg:         #fbfbfa;
+  --cardBg:         #fdfcfa;
   --cardTextColor:  #1a2027;
-  --sidebarBg:      #f2f0ec;
+  --sidebarBg:      #f4f1ec;
   --sidebarText:    #33404c;
-  --dividerColor:   rgba(26, 32, 39, 0.08);
+  --dividerColor:   rgba(139, 105, 20, 0.16);
   --borderColor:    rgba(22, 32, 42, 0.08);
   --mutedTextColor: #55585f;
-  --surfaceColor:   #ffffff;
   --shadowColor:    0 24px 56px rgba(24, 34, 44, 0.10), 0 6px 16px rgba(24, 34, 44, 0.06);
-  --cardBorder:     1px solid rgba(0, 0, 0, 0.04);
+  --cardBorder:     1px solid rgba(0, 0, 0, 0.05);
 }
 
 /*-----------------------------------*\
@@ -56,9 +56,10 @@ body.page-resume {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 0.6rem 1.5rem;
-  background: color-mix(in srgb, var(--cardBg) 92%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--accentColor) 10%, var(--dividerColor));
+  padding: 0.55rem 1.5rem;
+  font-family: var(--ff-mono);
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  border-bottom: 1px solid var(--border);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
   transition: transform 0.3s ease;
@@ -76,25 +77,26 @@ body.page-resume {
   margin: 0 auto;
 }
 
-/* Back link */
+/* Back link — reads like an address-bar entry */
 .resume-back-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  color: var(--cardTextColor);
-  text-decoration: none;
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  opacity: 0.7;
-  transition: opacity 0.2s, color 0.2s;
+  gap: 0.35rem;
+  color: var(--text-dim);
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   white-space: nowrap;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
 }
 
 .resume-back-link:hover {
-  opacity: 1;
   color: var(--accentColor);
+  background: var(--accent-dim);
 }
 
 /* Center: variant tabs */
@@ -118,17 +120,16 @@ body.page-resume {
   justify-content: center;
   background: none;
   border: none;
-  color: var(--cardTextColor);
-  opacity: 0.6;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0.3rem;
-  border-radius: 6px;
-  transition: opacity 0.2s, background 0.2s;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
 }
 
 .resume-topbar .theme-switch:hover {
-  opacity: 1;
-  background: color-mix(in srgb, var(--accentColor) 10%, transparent);
+  color: var(--accentColor);
+  background: var(--accent-dim);
 }
 
 /*-----------------------------------*\
@@ -136,10 +137,10 @@ body.page-resume {
 \*-----------------------------------*/
 
 main {
-  padding: 70px 1rem 4rem;
+  padding: 80px 1rem 4rem;
   background-image:
-    radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--accentColor) 6%, transparent), transparent 40%),
-    radial-gradient(circle, color-mix(in srgb, var(--border) 28%, transparent) 1px, transparent 1px);
+    radial-gradient(ellipse 60% 40% at 50% 0%, var(--glow-soft), transparent 70%),
+    radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
   background-size: 100% 100%, 28px 28px;
   background-position: top center, center;
   min-height: 100vh;
@@ -166,11 +167,10 @@ main img    { display: inline-block; }
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  padding: 0.2rem;
-  border: 1px solid color-mix(in srgb, var(--accentColor) 12%, var(--dividerColor));
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--sidebarBg) 80%, transparent);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 0.15rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: transparent;
 }
 
 .lang-btn {
@@ -178,30 +178,28 @@ main img    { display: inline-block; }
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 999px;
-  padding: 0.4rem 0.7rem;
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 0.72rem;
+  border-radius: 2px;
+  padding: 0.32rem 0.6rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--cardTextColor);
-  opacity: 0.5;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
   background: transparent;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.lang-btn:hover { opacity: 0.8; }
+.lang-btn:hover { color: var(--text-secondary); }
 
 .lang-btn.active {
-  background: var(--accentColor);
-  color: #fff;
-  opacity: 1;
-  box-shadow: 0 1px 4px color-mix(in srgb, var(--accentColor) 20%, transparent);
+  background: var(--accent-dim);
+  color: var(--accentColor);
+  text-shadow: 0 0 8px var(--accent-glow);
 }
 
 /*-----------------------------------*\
-  #VERSION TABS
+  #VERSION TABS — address-bar style
 \*-----------------------------------*/
 
 .version-tabs {
@@ -210,116 +208,101 @@ main img    { display: inline-block; }
   gap: 1rem;
 }
 
-.version-label {
-  color: var(--mutedTextColor);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  margin: 0;
-  white-space: nowrap;
-}
-
 .tabs-list {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .tab-btn {
+  position: relative;
   padding: 0.35rem 0.7rem;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  border: none;
+  border-radius: 3px;
   background: transparent;
-  color: var(--sidebarText);
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  font-family: var(--ff-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.25s var(--ease-out), background 0.25s var(--ease-out);
   white-space: nowrap;
 }
 
-.tab-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary);
-  border-color: color-mix(in srgb, var(--borderColor) 60%, transparent);
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--accentColor);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: width 0.3s var(--ease-out);
+  box-shadow: 0 0 4px var(--accent-glow);
 }
 
-[data-theme="light"] .tab-btn:hover {
-  background: rgba(0, 0, 0, 0.04);
+.tab-btn:hover {
+  color: var(--text-secondary);
+  background: var(--accent-dim);
 }
+
+.tab-btn:hover::after { width: 50%; }
 
 .tab-btn.active {
-  background: var(--accentColor);
-  color: #fff;
-  border-color: var(--accentColor);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--accentColor) 20%, transparent);
+  color: var(--accentColor);
+  text-shadow: 0 0 8px var(--accent-glow);
 }
+
+.tab-btn.active::after { width: 75%; }
 
 /*-----------------------------------*\
-  #ACTIONS (Export buttons)
+  #ACTIONS (Export button)
 \*-----------------------------------*/
-
-.resume-actions {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
 
 .action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.4rem 0.7rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 3px;
   background: transparent;
   color: var(--mutedTextColor);
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+  font-family: var(--ff-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
-.action-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--accentColor);
-  color: var(--accentColor);
-  transform: translateY(-1px);
-}
-
-[data-theme="light"] .action-btn:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
 .action-btn-primary {
   background: var(--accentColor);
-  color: #fff;
+  color: var(--on-accent);
   border-color: var(--accentColor);
-  font-weight: 500;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--accentColor) 20%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .action-btn-primary:hover {
-  background: color-mix(in srgb, var(--accentColor) 82%, #000);
-  border-color: color-mix(in srgb, var(--accentColor) 82%, #000);
-  color: #fff;
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--accentColor) 28%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--accentColor) 85%, #fff);
+  border-color: color-mix(in srgb, var(--accentColor) 85%, #fff);
+  box-shadow: 0 4px 16px var(--accent-glow);
+  transform: translateY(-1px);
 }
 
-.action-btn svg { width: 18px; height: 18px; }
-
-.action-btn-secondary { padding: 0.6rem 0.7rem; }
+.action-btn svg { width: 16px; height: 16px; }
 
 /*-----------------------------------*\
   #RESUME DOCUMENT
 \*-----------------------------------*/
 
-.resume-document { display: grid; gap: 0.75rem; }
+.resume-document { display: grid; gap: 0.5rem; }
 
 .resume {
   animation: resumeEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -330,34 +313,123 @@ main img    { display: inline-block; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Status readout — terminal style */
 .resume-status {
-  padding: 0.6rem 0;
-  color: var(--mutedTextColor);
-  font-size: 0.75rem;
+  padding: 0.5rem 0;
+  color: var(--text-dim);
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
   text-align: left;
+}
+
+.resume-status:not(:empty)::before {
+  content: '> ';
+  color: var(--accentColor);
 }
 
 .resume-inner {
   width: min(100%, 210mm);
   min-height: 297mm;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 32% 68%;
   background: var(--cardBg);
   color: var(--cardTextColor);
   box-shadow: var(--shadowColor);
   line-height: 1.45;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   border: var(--cardBorder);
 }
 
 /*-----------------------------------*\
-  #RESUME CONTENT (Left / Right)
+  #DOCUMENT HEADER (full width)
 \*-----------------------------------*/
 
+.resume-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding: 10mm 12mm 6mm;
+  border-bottom: 1px solid var(--dividerColor);
+  background:
+    linear-gradient(135deg, transparent 55%, color-mix(in srgb, var(--accentColor) 4%, transparent)),
+    var(--sidebarBg);
+}
+
+.resume-chip {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accentColor);
+  margin-bottom: 0.5rem;
+}
+
+.resume-chip::before { content: '// '; }
+
+.resume-name {
+  font-family: var(--ff-sans);
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+  color: var(--cardTextColor);
+  background: linear-gradient(135deg, var(--cardTextColor) 40%, var(--accentColor) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.resume-title {
+  font-family: var(--ff-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  color: var(--mutedTextColor);
+}
+
+/* Contact block — terminal links, right aligned */
+.resume-head__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.contact-item {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  color: var(--sidebarText);
+  word-break: break-word;
+}
+
+.contact-item::before {
+  content: '> ';
+  color: var(--accentColor);
+}
+
+.contact-link {
+  color: var(--sidebarText);
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover { color: var(--accentColor); }
+
+/*-----------------------------------*\
+  #DOCUMENT BODY (two columns)
+\*-----------------------------------*/
+
+.resume-body {
+  display: grid;
+  grid-template-columns: 31% 69%;
+  min-height: calc(297mm - 42mm);
+}
+
 .resume-left {
-  padding: 11mm 9mm 11mm 12mm;
+  padding: 8mm 8mm 10mm 12mm;
   background: var(--sidebarBg);
   border-right: 1px solid var(--dividerColor);
   position: relative;
@@ -366,103 +438,92 @@ main img    { display: inline-block; }
 .resume-left::after {
   content: "";
   position: absolute;
-  top: 11mm;
-  right: 0;
+  top: 8mm;
+  right: -1px;
   width: 1px;
-  height: calc(100% - 22mm);
+  height: calc(100% - 18mm);
   background: linear-gradient(180deg, transparent, var(--accentColor), transparent);
-  opacity: 0.15;
+  opacity: 0.25;
 }
 
 .resume-right {
-  padding: 11mm 12mm 11mm 9mm;
+  padding: 8mm 12mm 10mm 9mm;
 }
 
-.resume-chip {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accentColor) 30%, transparent);
-  color: var(--accentColor);
-  padding: 0.25rem 0.65rem;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  margin-bottom: 0.6rem;
-  background: color-mix(in srgb, var(--accentColor) 8%, transparent);
-}
-
-.resume-name {
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 1.7rem;
-  line-height: 1;
-  margin-bottom: 0.2rem;
-  letter-spacing: -0.02em;
-  color: var(--cardTextColor);
-}
-
-.resume-title {
-  font-size: 0.74rem;
-  color: var(--mutedTextColor);
-  margin-bottom: 0.7rem;
-}
-
+/* Section titles — mono // labels, like the portfolio eyebrows */
 .resume-section-title {
-  font-size: 0.65rem;
+  font-family: var(--ff-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12rem;
-  margin: 0.9rem 0 0.4rem;
+  letter-spacing: 0.16em;
+  margin: 1.1rem 0 0.5rem;
+  color: var(--accentColor);
+}
+
+.resume-section-title::before {
+  content: '// ';
   color: var(--mutedTextColor);
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--accentColor) 18%, transparent);
 }
 
-.contact-item,
-.skill-item,
-.job-highlights li,
-.profile-text,
-.education-item {
-  font-family: "Inter", -apple-system, sans-serif;
-}
+section:first-child > .resume-section-title { margin-top: 0.2rem; }
 
-.contact-item,
+/*-----------------------------------*\
+  #SIDEBAR LISTS
+\*-----------------------------------*/
+
 .skill-item {
-  font-size: 0.8rem;
-  margin-bottom: 0.25rem;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
   color: var(--sidebarText);
   word-break: break-word;
-}
-
-.contact-link { color: var(--accentColor); }
-
-.skill-item,
-.job-highlights li {
   position: relative;
-  padding-left: 1rem;
+  padding-left: 0.9rem;
 }
 
-.skill-item::before,
-.job-highlights li::before {
+.skill-item::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.45rem;
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 999px;
+  top: 0.42rem;
+  width: 0.28rem;
+  height: 0.28rem;
   background: var(--accentColor);
+  opacity: 0.7;
 }
+
+/*-----------------------------------*\
+  #RIGHT COLUMN
+\*-----------------------------------*/
 
 .profile-text {
+  font-family: var(--ff-sans);
   font-size: 0.88rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--cardTextColor);
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
+/* Experience — timeline rail with node per job */
 .job {
-  margin-bottom: 0.6rem;
+  position: relative;
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--dividerColor);
   page-break-inside: avoid;
+}
+
+.job::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 0.42rem;
+  width: 5px;
+  height: 5px;
+  background: var(--accentColor);
+  box-shadow: 0 0 6px var(--accent-glow);
 }
 
 .job-header,
@@ -475,7 +536,7 @@ main img    { display: inline-block; }
 
 .job-company,
 .education-school {
-  font-family: "Inter", -apple-system, sans-serif;
+  font-family: var(--ff-sans);
   font-size: 0.92rem;
   font-weight: 700;
   color: var(--cardTextColor);
@@ -483,71 +544,110 @@ main img    { display: inline-block; }
 
 .job-years,
 .education-years {
-  font-size: 0.72rem;
+  font-family: var(--ff-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
   color: var(--mutedTextColor);
   white-space: nowrap;
 }
 
 .job-position {
-  font-family: "Inter", -apple-system, sans-serif;
-  font-size: 0.78rem;
-  color: var(--accentColor);
-  opacity: 0.8;
-  margin: 0.1rem 0 0.25rem;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--green);
+  margin: 0.08rem 0 0.3rem;
 }
 
 .job-highlights li {
+  font-family: var(--ff-sans);
   font-size: 0.78rem;
-  margin-bottom: 0.2rem;
+  line-height: 1.5;
+  margin-bottom: 0.22rem;
   color: var(--cardTextColor);
-  opacity: 0.8;
+  opacity: 0.82;
+  position: relative;
+  padding-left: 0.9rem;
+}
+
+.job-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.48rem;
+  width: 0.28rem;
+  height: 0.28rem;
+  background: var(--accentColor);
+  opacity: 0.55;
+}
+
+/* Education */
+.education-item {
+  font-family: var(--ff-sans);
+  padding-left: 1rem;
+  border-left: 1px solid var(--dividerColor);
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.education-item::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 0.42rem;
+  width: 5px;
+  height: 5px;
+  background: var(--accentColor);
+  box-shadow: 0 0 6px var(--accent-glow);
 }
 
 /*-----------------------------------*\
   #RESUME PROJECTS
 \*-----------------------------------*/
 
-.resume-project-list { display: grid; gap: 0.7rem; }
+.resume-project-list { display: grid; gap: 0.6rem; }
 
 .resume-project-item {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--accentColor) 10%, var(--dividerColor));
+  padding: 0.65rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--accentColor) 14%, var(--borderColor));
   border-radius: 8px;
   background: color-mix(in srgb, var(--accentColor) 3%, transparent);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .resume-project-item:hover {
-  border-color: color-mix(in srgb, var(--accentColor) 20%, transparent);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--accentColor) 6%, transparent);
+  border-color: color-mix(in srgb, var(--accentColor) 30%, transparent);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accentColor) 8%, transparent);
 }
 
 .resume-project-name {
-  font-family: "Inter", -apple-system, sans-serif;
+  font-family: var(--ff-sans);
   font-size: 0.84rem;
+  font-weight: 600;
   color: var(--cardTextColor);
-  margin-bottom: 0.12rem;
+  margin-bottom: 0.15rem;
 }
 
 .resume-project-description {
-  font-family: "Inter", -apple-system, sans-serif;
+  font-family: var(--ff-sans);
   font-size: 0.76rem;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--cardTextColor);
   opacity: 0.8;
 }
 
 .resume-project-tech {
-  margin-top: 0.2rem;
-  font-size: 0.66rem;
-  letter-spacing: 0.05rem;
+  margin-top: 0.3rem;
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--mutedTextColor);
 }
 
 .resume-error {
-  grid-column: 1 / -1;
   padding: 2rem;
+  font-family: var(--ff-mono);
   color: #d94f4f;
 }
 
@@ -576,30 +676,36 @@ main img    { display: inline-block; }
     padding-top: 0.45rem;
     padding-right: 1rem;
     margin-top: 0.25rem;
-    border-top: 1px solid color-mix(in srgb, var(--borderColor) 40%, transparent);
+    border-top: 1px solid var(--border);
   }
 
   .resume-topbar-center::-webkit-scrollbar { display: none; }
 
-  .resume-topbar-center .tabs-list { gap: 0.35rem; }
-  .resume-topbar-center .tab-btn {
-    padding: 0.4rem 0.85rem;
-    font-size: 0.8rem;
+  .resume-inner { width: 100%; min-height: auto; }
+
+  .resume-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2rem;
   }
 
-  .resume-inner {
-    width: 100%;
-    min-height: auto;
+  .resume-head__contact { align-items: flex-start; }
+
+  .resume-body {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .resume-left {
     border-right: 0;
     border-bottom: 1px solid var(--dividerColor);
-    padding: 2rem;
+    padding: 1.5rem 2rem;
   }
 
-  .resume-right { padding: 2rem; }
+  .resume-left::after { display: none; }
+
+  .resume-right { padding: 1.5rem 2rem 2rem; }
 }
 
 @media (max-width: 600px) {
@@ -608,15 +714,14 @@ main img    { display: inline-block; }
   .action-btn span { display: none; }
 
   .resume-back-link span { display: none; }
-  .resume-back-link svg { width: 22px; height: 22px; }
-  .resume-back-link {
-    padding: 0.45rem;
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--borderColor) 30%, transparent);
-  }
+  .resume-back-link svg { width: 20px; height: 20px; }
 
   .resume-topbar-right { gap: 0.4rem; }
-  .lang-btn { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
+  .lang-btn { padding: 0.3rem 0.55rem; font-size: 0.68rem; }
+
+  .resume-name { font-size: 1.9rem; }
+  .resume-head { padding: 1.5rem; }
+  .resume-left, .resume-right { padding-inline: 1.5rem; }
 }
 
 @media (max-width: 575px) {
@@ -624,11 +729,28 @@ main img    { display: inline-block; }
 }
 
 /*-----------------------------------*\
-  #PRINT
+  #PRINT — always the light document,
+  regardless of on-screen theme
 \*-----------------------------------*/
 
 @media print {
   @page { size: A4; margin: 8mm; }
+
+  :root, [data-theme="dark"], [data-theme="light"] {
+    --accentColor:    #8b6914;
+    --accent-glow:    transparent;
+    --accent-dim:     rgba(139, 105, 20, 0.08);
+    --green:          #2d7a5a;
+    --cardBg:         #ffffff;
+    --cardTextColor:  #1a2027;
+    --sidebarBg:      #f4f1ec;
+    --sidebarText:    #33404c;
+    --dividerColor:   rgba(139, 105, 20, 0.2);
+    --borderColor:    rgba(22, 32, 42, 0.1);
+    --mutedTextColor: #55585f;
+    --shadowColor:    none;
+    --cardBorder:     none;
+  }
 
   html, body {
     background: #ffffff !important;
@@ -638,8 +760,8 @@ main img    { display: inline-block; }
     print-color-adjust: exact;
   }
 
-  header, .no-print, .resume-status { display: none !important; }
-  main { padding: 0; }
+  .resume-topbar, .no-print, .resume-status { display: none !important; }
+  main { padding: 0; background: none; min-height: auto; }
 
   .resume-wrapper, .resume {
     display: block;
@@ -648,11 +770,31 @@ main img    { display: inline-block; }
     box-shadow: none;
   }
 
+  .resume { animation: none; }
+
   .resume-inner {
     width: 100%;
     min-height: auto;
     box-shadow: none;
-    grid-template-columns: 32% 68%;
+    border: none;
+    border-radius: 0;
+  }
+
+  .resume-name {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    color: #1a2027;
+  }
+
+  .resume-body { min-height: auto; }
+
+  .job::before,
+  .education-item::before,
+  .skill-item::before,
+  .job-highlights li::before {
+    box-shadow: none;
   }
 }
 
