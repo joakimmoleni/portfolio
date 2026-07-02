@@ -30,6 +30,8 @@
   /* Spacing */
   --panel-pad: clamp(1.5rem, 4vw, 4rem);
   --bar-height: 40px;
+  /* Bottom bar + iOS home-indicator inset */
+  --bar-total: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -87,6 +89,7 @@ body {
   overflow: hidden;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
 }
 
 :focus-visible {
@@ -105,6 +108,7 @@ body {
   flex-direction: row;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
@@ -132,7 +136,7 @@ body {
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: var(--bar-height);
+  padding-bottom: var(--bar-total);
 }
 
 /* Load-in: panel content deals in from the left */
@@ -288,10 +292,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .identity-metric__value {
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  overflow-wrap: anywhere;
   font-weight: 700;
   color: var(--accent);
   font-family: var(--ff-mono);
@@ -457,7 +463,7 @@ body {
 
 .dual__merge {
   position: absolute;
-  bottom: calc(var(--bar-height) + 3rem);
+  bottom: calc(var(--bar-total) + 3rem);
   left: 0;
   right: 0;
   text-align: center;
@@ -710,7 +716,7 @@ body {
 }
 
 .signal__link--accent {
-  border: 1px solid rgba(201, 166, 107, 0.3);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   margin-top: 0.5rem;
 }
 
@@ -743,7 +749,8 @@ body {
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: var(--bar-height);
+  height: var(--bar-total);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--bg-primary);
   background: color-mix(in srgb, var(--bg-primary) 98%, transparent);
   border-top: 1px solid var(--border);
@@ -896,7 +903,7 @@ body {
 
 .progress-bar {
   position: fixed;
-  bottom: var(--bar-height);
+  bottom: var(--bar-total);
   left: 0;
   height: 2px;
   width: 0%;
@@ -964,7 +971,7 @@ body {
     flex-shrink: 0;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding-bottom: calc(var(--bar-height) + 1rem);
+    padding-bottom: calc(var(--bar-total) + 1rem);
     overflow: visible;
   }
 
@@ -989,10 +996,6 @@ body {
     grid-template-columns: 1fr;
     height: auto;
     padding: var(--panel-pad);
-  }
-
-  .identity-registers {
-    display: none;
   }
 
   .identity-text {
@@ -1151,6 +1154,18 @@ body {
   }
 }
 
+/* Touch devices in horizontal mode (tablets, landscape phones):
+   snap so a swipe can't rest between panels */
+@media (hover: none) and (min-width: 769px) {
+  .stream {
+    scroll-snap-type: x mandatory;
+  }
+
+  .panel {
+    scroll-snap-align: start;
+  }
+}
+
 /* Large desktop */
 @media (min-width: 1400px) {
   .panel__inner { max-width: 85vw; }
@@ -1164,5 +1179,27 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .stream {
     scroll-behavior: auto;
+  }
+
+  .boot-line,
+  .boot-hero {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .panel > * {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .dual__divider,
+  .signal__pulse,
+  .addr.active .addr__hex,
+  .progress-bar,
+  .progress-bar::after,
+  .pc-cursor {
+    animation: none;
   }
 }
