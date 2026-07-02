@@ -39,6 +39,7 @@ function setResumeLang(lang) {
   window.__resumeLang = safeLang;
   storageSet('resumeLang', safeLang);
   document.body.setAttribute('data-resume-lang', safeLang);
+  document.documentElement.lang = safeLang;
 
   if (langEnBtn && langSvBtn) {
     const isEn = safeLang === 'en';

@@ -53,13 +53,15 @@
       try { t = localStorage.getItem('theme'); } catch (e) {}
       if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'dark' ? '#050608' : '#f9f7f3');
     })();
   </script>
 </head>
 <body>
 
   <!-- ===== HORIZONTAL INSTRUCTION STREAM ===== -->
-  <div class="stream" id="stream" role="main">
+  <main class="stream" id="stream">
 
     <!-- 0x00: BOOT -->
     <section class="panel panel--boot" id="panel-boot" aria-label="Introduction">
@@ -263,7 +265,7 @@
       </div>
     </section>
 
-  </div>
+  </main>
 
   <!-- ===== PROGRESS BAR ===== -->
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>

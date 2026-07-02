@@ -36,6 +36,7 @@ colorSchemeQuery.addEventListener('change', (e) => {
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
+  themeBtn?.setAttribute('aria-pressed', String(theme === 'dark'));
   if (iconMoon && iconSun) {
     iconMoon.classList.toggle('hidden', theme === 'dark');
     iconSun.classList.toggle('hidden', theme === 'light');
@@ -215,7 +216,11 @@ requestAnimationFrame(updateUI);
 
 // Deal-in animation: stagger panels on load
 // If arriving via hash (e.g. from resume), skip animations and jump directly
-const hashTarget = location.hash && document.querySelector(location.hash);
+// (an arbitrary hash like #foo=bar is an invalid selector — treat as no target)
+let hashTarget = null;
+try {
+  hashTarget = location.hash && document.querySelector(location.hash);
+} catch (e) { /* invalid selector in hash */ }
 if (hashTarget && hashTarget.classList.contains('panel')) {
   // Instantly reveal all panels, no animation
   panels.forEach(panel => {
