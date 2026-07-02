@@ -162,6 +162,11 @@ function scrollPanelTo(idx, behavior = 'smooth') {
   }
 
   if (isHorizontal()) {
+    // Arrive at the top of the target panel — a leftover scroll position
+    // from an earlier visit reads as broken rendering
+    if (panels[target].scrollTop > 0) {
+      panels[target].scrollTo({ top: 0, behavior: scrollBehavior });
+    }
     stream.scrollTo({ left: getPanelOffset(target), behavior: scrollBehavior });
     return;
   }
@@ -352,7 +357,9 @@ if (stream) {
 function canScrollVertically(target, deltaY) {
   let el = target instanceof Element ? target : null;
   while (el && el !== stream) {
-    if (el.scrollHeight > el.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) {
+    // Overflow smaller than the bottom bar padding is invisible anyway —
+    // don't let a few px swallow the horizontal step
+    if (el.scrollHeight > el.clientHeight + 24 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) {
       if (deltaY < 0 && el.scrollTop > 0) return true;
       if (deltaY > 0 && el.scrollTop + el.clientHeight < el.scrollHeight - 1) return true;
     }

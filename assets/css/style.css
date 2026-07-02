@@ -1166,6 +1166,66 @@ body {
   }
 }
 
+/* Short desktop viewports (laptops): compact the tall panels so each
+   fits one screen — otherwise the wheel scrolls down before stepping */
+@media (min-width: 769px) and (max-height: 900px) {
+  .boot-line {
+    line-height: 1.9;
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  }
+
+  .boot-sequence { margin-bottom: 1.5rem; }
+
+  .boot-hero__name { font-size: clamp(2.8rem, 14vh, 8rem); }
+
+  .boot-hero__subtitle { margin-top: 1rem; }
+
+  .boot-hero__cta { margin-top: 1.4rem; }
+
+  .identity-text__title {
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    margin-bottom: 1rem;
+  }
+
+  .identity-text p {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 0.8rem;
+  }
+
+  .identity-metrics {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+  }
+
+  .signal-content { gap: 1.1rem; }
+
+  .signal__title { font-size: clamp(2rem, 10vh, 4.5rem); }
+
+  .signal__link { padding: 0.3rem 1.2rem; }
+
+  .signal__status { margin-top: 0.4rem; }
+
+  .signal__copyright { margin-top: 0.6rem; }
+}
+
+/* Very short desktop viewports */
+@media (min-width: 769px) and (max-height: 720px) {
+  .panel__inner,
+  .identity-text {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .boot-line { line-height: 1.6; }
+
+  .boot-sequence { margin-bottom: 1rem; }
+
+  .signal-content { gap: 0.8rem; }
+
+  .signal__text { font-size: 0.95rem; }
+}
+
 /* Large desktop */
 @media (min-width: 1400px) {
   .panel__inner { max-width: 85vw; }
