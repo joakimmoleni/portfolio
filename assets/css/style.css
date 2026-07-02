@@ -21,7 +21,14 @@
   --accent-dim:     rgba(201, 166, 107, 0.12);
   --accent-glow:    rgba(201, 166, 107, 0.4);
   --green:          #4a9;
+  --green-dim:      rgba(68, 170, 153, 0.12);
   --on-accent:      #050608;
+
+  /* Panel depth layers */
+  --grid-dot:       rgba(232, 230, 225, 0.045);
+  --glow-soft:      rgba(201, 166, 107, 0.07);
+  --wm-color:       rgba(201, 166, 107, 0.05);
+  --shadow-hover:   0 14px 34px -14px rgba(0, 0, 0, 0.6);
 
   /* Typography */
   --ff-mono: 'IBM Plex Mono', monospace;
@@ -52,7 +59,13 @@
   --accent-dim:     rgba(139, 105, 20, 0.08);
   --accent-glow:    rgba(139, 105, 20, 0.25);
   --green:          #2d7a5a;
+  --green-dim:      rgba(45, 122, 90, 0.1);
   --on-accent:      #ffffff;
+
+  --grid-dot:       rgba(26, 28, 33, 0.055);
+  --glow-soft:      rgba(139, 105, 20, 0.05);
+  --wm-color:       rgba(139, 105, 20, 0.07);
+  --shadow-hover:   0 14px 30px -16px rgba(26, 28, 33, 0.25);
 }
 
 /*-----------------------------------*\
@@ -139,6 +152,34 @@ body {
   padding-bottom: var(--bar-total);
 }
 
+/* Depth layer: faint dot grid on every panel */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+/* Depth layer: giant hex-address watermark, bottom right */
+.panel::after {
+  content: attr(data-addr);
+  position: absolute;
+  right: 0.1em;
+  bottom: calc(var(--bar-total) - 0.12em);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--ff-mono);
+  font-weight: 700;
+  font-size: clamp(4.5rem, 17vw, 14rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--wm-color);
+}
+
 /* Load-in: panel content deals in from the left */
 .panel > * {
   min-width: 0;
@@ -164,12 +205,32 @@ body {
   max-width: 95vw;
 }
 
+/* Mono section label above titles */
+.section-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
 /*-----------------------------------*\
   #PANEL: BOOT (0x00)
 \*-----------------------------------*/
 
 .panel--boot {
   background: #000;
+}
+
+/* Warm glow behind the hero name */
+.panel--boot::before {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 32% 42%, var(--glow-soft), transparent 70%),
+    radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
+  background-size: 100% 100%, 28px 28px;
 }
 
 [data-theme="light"] .panel--boot {
@@ -235,6 +296,16 @@ body {
   opacity: 0.7;
 }
 
+.cta-arrow {
+  display: inline-block;
+  animation: ctaNudge 2.4s ease-in-out infinite;
+}
+
+@keyframes ctaNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
 /*-----------------------------------*\
   #PANEL: IDENTITY (0x04)
 \*-----------------------------------*/
@@ -244,6 +315,8 @@ body {
 }
 
 .panel__identity-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 55%) minmax(0, 45%);
   width: 100%;
@@ -365,6 +438,8 @@ body {
 }
 
 .dual {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 4px 1fr;
   width: 100vw;
@@ -409,7 +484,7 @@ body {
 }
 
 .dual__right .dual__heading {
-  color: var(--text-primary);
+  color: var(--green);
   font-size: clamp(1.3rem, 2.2vw, 1.8rem);
   font-weight: 600;
 }
@@ -444,6 +519,7 @@ body {
 .dual__right .dual__code {
   color: var(--green);
   background: rgba(0, 0, 0, 0.15);
+  border-color: color-mix(in srgb, var(--green) 20%, var(--border));
 }
 
 [data-theme="light"] .dual__right .dual__code {
@@ -507,14 +583,16 @@ body {
 .work-card {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 1.8rem;
-  transition: border-color var(--transition-fast), transform var(--transition-med);
+  transition: border-color var(--transition-fast), transform var(--transition-med),
+              box-shadow var(--transition-med);
 }
 
 .work-card:hover {
-  border-color: var(--accent-dim);
-  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .work-card h3 {
@@ -546,7 +624,7 @@ body {
 
 .projects__title {
   font-family: var(--ff-sans);
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.4rem;
@@ -569,17 +647,19 @@ body {
 .project-card {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 1.05rem;
   position: relative;
   overflow: hidden;
-  transition: border-color var(--transition-fast), transform var(--transition-med);
+  transition: border-color var(--transition-fast), transform var(--transition-med),
+              box-shadow var(--transition-med);
 }
 
 .project-card:hover {
   border-color: var(--accent);
   border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .project-card::after {
@@ -648,6 +728,18 @@ body {
 
 .panel--signal {
   background: #000;
+}
+
+/* Centered glow behind the signal pulse */
+.panel--signal::before {
+  background-image:
+    radial-gradient(ellipse 55% 45% at 50% 42%, var(--glow-soft), transparent 70%),
+    radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
+  background-size: 100% 100%, 28px 28px;
+}
+
+.panel--signal .section-eyebrow {
+  margin-bottom: -1.2rem; /* pull tight against the title despite the flex gap */
 }
 
 [data-theme="light"] .panel--signal {
@@ -1200,6 +1292,8 @@ body {
 
   .signal-content { gap: 1.1rem; }
 
+  .panel--signal .section-eyebrow { margin-bottom: -0.4rem; }
+
   .signal__title { font-size: clamp(2rem, 10vh, 4.5rem); }
 
   .signal__link { padding: 0.3rem 1.2rem; }
@@ -1259,7 +1353,8 @@ body {
   .addr.active .addr__hex,
   .progress-bar,
   .progress-bar::after,
-  .pc-cursor {
+  .pc-cursor,
+  .cta-arrow {
     animation: none;
   }
 }
