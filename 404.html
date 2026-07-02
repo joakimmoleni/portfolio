@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex">
+  <title>0x404 | Joakim Moléni</title>
+  <!-- Self-contained: a 404 can be served at any path, so no relative assets -->
+  <style>
+    :root {
+      --bg: #050608;
+      --text: #9a9b9f;
+      --heading: #e8e6e1;
+      --accent: #c9a66b;
+      --green: #4a9;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f9f7f3;
+        --text: #55585f;
+        --heading: #1a1c21;
+        --accent: #8b6914;
+        --green: #2d7a5a;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    main { max-width: 60ch; }
+    .line { color: var(--accent); }
+    .line--err { color: var(--heading); font-weight: 700; }
+    .line--ok { color: var(--green); }
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      color: var(--heading);
+      letter-spacing: -0.03em;
+      margin: 1.5rem 0 0.5rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+    }
+    a:hover { background: var(--accent); color: var(--bg); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="line">FETCHING PAGE...</div>
+    <div class="line--err">ABEND S0C4 — ADDRESS NOT FOUND.</div>
+    <div class="line--ok">RECOVERY ROUTINE LOADED.</div>
+    <h1>0x404</h1>
+    <p>This address was never mapped. Or it was, and I moved it.</p>
+    <a href="/portfolio/">&gt; branch to entry point</a>
+  </main>
+</body>
+</html>
