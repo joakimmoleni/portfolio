@@ -15,25 +15,28 @@
       "title": "Core Systems",
       "template": "mainframe-dev",
       "path": "./assets/data/variants/mainframe-dev.json",
-      "description": "Mainframe engineering, transaction-critical banking systems."
+      "description": "HLASM, COBOL and production ownership in transaction-critical banking.",
+      "description_sv": "HLASM, COBOL och produktionsansvar i transaktionskritisk bankverksamhet."
     },
     {
       "id": "modern-dev",
       "title": "Modern Backend",
       "template": "modern-dev",
       "path": "./assets/data/variants/modern-dev.json",
-      "description": "Backend services, API design and cloud delivery."
+      "description": "Backend, cloud and product delivery grounded in systems engineering.",
+      "description_sv": "Backend, moln och produktleverans med systemteknik som grund."
     },
     {
       "id": "platform-dev",
-      "title": "Platform & Delivery",
+      "title": "Platform & Leadership",
       "template": "platform-dev",
       "path": "./assets/data/variants/platform-dev.json",
-      "description": "Technical leadership, platform ownership and cross-system delivery."
+      "description": "Developer platforms, technical leadership and operational ownership.",
+      "description_sv": "Utvecklarplattformar, teknisk ledning och operativt ägarskap."
     }
   ],
-  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks. Works on the transaction paths for payments and ledger operations, with production on-call responsibility. Reviews code across teams, mentors, and builds internal tooling. Comfortable at both ends of the stack: HLASM at the bottom, vanilla JavaScript at the top.",
-  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker. Arbetar med transaktionsflödena för betalningar och redovisning, med jouransvar i produktion. Granskar kod över teamgränser, mentorerar och bygger interna verktyg. Trivs i båda ändar av stacken: HLASM i botten, vanilla JavaScript i toppen.",
+  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks, with production on-call responsibility. A leading technical contributor to a live assembler-to-COBOL migration. Reviews code across teams, mentors, and builds internal tooling. Comfortable at both ends of the stack: HLASM at the bottom, vanilla JavaScript at the top.",
+  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker, med jouransvar i produktion. Ledande teknisk bidragsgivare i en pågående migrering från assembler till COBOL. Granskar kod över teamgränser, mentorerar och bygger interna verktyg. Trivs i båda ändar av stacken: HLASM i botten, vanilla JavaScript i toppen.",
   "coreStack": [
     "IBM z/OS (HLASM, COBOL, IMS, JCL)",
     "Transaction-critical architecture",
@@ -58,18 +61,18 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform \u2014 transaction paths handling billions of SEK daily, with production on-call.",
-        "Co-leading a 50-person platform migration from assembler-driven architecture to modern COBOL, with architecture and delivery responsibility.",
+        "Write and maintain assembler and COBOL in SEB\u2019s core banking platform, with production on-call responsibility.",
+        "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
         "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
         "Built an internal documentation platform replacing Word, SharePoint, Confluence and analog binders \u2014 850+ pages, used daily by the entire department.",
-        "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for core ledger systems."
+        "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for production core systems."
       ],
       "highlights_sv": [
-        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform \u2014 transaktionsfl\u00f6den som hanterar miljarder SEK dagligen, med jour i produktion.",
-        "Medleder en 50-personers plattformsmigrering fr\u00e5n assembler-driven arkitektur till modern COBOL, med arkitektur- och leveransansvar.",
+        "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform, med jouransvar i produktion.",
+        "\u00c4r en ledande teknisk bidragsgivare i en p\u00e5g\u00e5ende migrering fr\u00e5n assembler-driven bearbetning till modern COBOL och g\u00e5r in i teknisk koordinering vid behov.",
         "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
         "Byggde en intern dokumentationsplattform som ersatte Word, SharePoint, Confluence och analoga p\u00e4rmar \u2014 850+ sidor, anv\u00e4nds dagligen av hela avdelningen.",
-        "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r centrala redovisningssystem."
+        "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r produktionskritiska k\u00e4rnsystem."
       ]
     },
     {
@@ -78,42 +81,28 @@
       "role_sv": "Systemingenj\u00f6r (COBOL / IBM z/OS)",
       "years": "Aug 2023 \u2013 Aug 2024",
       "highlights": [
-        "Deployed to production within the first week of COBOL training.",
-        "Developed and maintained transaction logic for deposits and payments on core banking infrastructure.",
-        "Operated across mainframe, Linux and distributed environments. Handled production incidents end-to-end."
+        "My first production change went live in the week after COBOL training.",
+        "Developed and maintained production COBOL for transaction-critical core banking workloads.",
+        "Joined daytime on-call within three months. Handled production incidents across mainframe, Linux and distributed environments."
       ],
       "highlights_sv": [
-        "Levererade till produktion inom f\u00f6rsta veckan av COBOL-utbildningen.",
-        "Utvecklade och underh\u00f6ll transaktionslogik f\u00f6r ins\u00e4ttningar och betalningar i k\u00e4rnbanksinfrastrukturen.",
-        "Arbetade \u00f6ver stordator, Linux och distribuerade milj\u00f6er. Hanterade produktionsincidenter end-to-end."
+        "Min f\u00f6rsta produktions\u00e4ndring driftsattes veckan efter COBOL-utbildningen.",
+        "Utvecklade och underh\u00f6ll produktions-COBOL f\u00f6r transaktionskritiska k\u00e4rnbanksarbetslaster.",
+        "Gick in i dagjour inom tre m\u00e5nader. Hanterade produktionsincidenter \u00f6ver stordator, Linux och distribuerade milj\u00f6er."
       ]
     },
     {
       "company": "Fragsheet",
-      "role": "Full-stack Developer & ML Engineer",
-      "role_sv": "Full-stack-utvecklare & ML-ingenj\u00f6r",
+      "role": "Frontend App Developer Intern (LIA)",
+      "role_sv": "Frontend App Developer-praktikant (LIA)",
       "years": "Jan 2023 \u2013 Jul 2023",
       "highlights": [
-        "Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics \u2014 real-time performance insights for League of Legends players. 100,000 registered users.",
-        "Rewrote the entire web platform in vanilla JavaScript. Owned the full infrastructure migration from DigitalOcean to AWS."
+        "Integrated ML coaching models into the product through connectors and adapters, working closely with the ML engineer to operationalize live League of Legends insights for 100,000 registered users.",
+        "Rewrote the entire web platform in vanilla JavaScript and owned the infrastructure migration from DigitalOcean to AWS."
       ],
       "highlights_sv": [
-        "Medbyggde ML-coachingmodeller (PyTorch, scikit-learn) f\u00f6r live-spelanalys \u2014 realtids-prestandainsikter f\u00f6r League of Legends-spelare. 100 000 registrerade anv\u00e4ndare.",
-        "Skrev om hela webbplattformen i vanilla JavaScript. \u00c4gde hela infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS."
-      ]
-    },
-    {
-      "company": "Changemaker Educations",
-      "role": "Full-stack Developer (programme)",
-      "role_sv": "Fullstackutvecklare (utbildning)",
-      "years": "Sep 2021 \u2013 Jul 2023",
-      "highlights": [
-        "Built full-stack applications with relational databases, REST APIs and CI/CD pipelines. Scrum delivery in cross-functional teams.",
-        "Maintained Linux-hosted production environments. Graduated top of class."
-      ],
-      "highlights_sv": [
-        "Byggde fullstack-applikationer med relationsdatabaser, REST-API:er och CI/CD-pipelines. Scrum-leverans i tv\u00e4rfunktionella team.",
-        "Underh\u00f6ll Linux-hostade produktionsmilj\u00f6er. Tog examen som b\u00e4st i klassen."
+        "Integrerade ML-coachingmodeller i produkten genom connectors och adaptrar, i n\u00e4ra samarbete med ML-ingenj\u00f6ren, f\u00f6r live-insikter till 100 000 registrerade League of Legends-anv\u00e4ndare.",
+        "Skrev om hela webbplattformen i vanilla JavaScript och \u00e4gde infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS."
       ]
     },
     {
@@ -136,11 +125,11 @@
       "role_sv": "Senior aff\u00e4rsspecialist",
       "years": "Feb 2017 \u2013 Mar 2019",
       "highlights": [
-        "Technical solution design and end-to-end project delivery for energy installations. Highest revenue in the company.",
+        "Technical solution design and end-to-end project delivery for energy installations.",
         "Managed full project lifecycle from proposal through execution and client handover."
       ],
       "highlights_sv": [
-        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer. H\u00f6gst oms\u00e4ttning i bolaget.",
+        "Teknisk l\u00f6sningsdesign och end-to-end-projektleverans f\u00f6r energiinstallationer.",
         "\u00c4gde hela projektlivscykeln fr\u00e5n offert via genomf\u00f6rande till kund\u00f6verl\u00e4mning."
       ]
     },
@@ -210,8 +199,8 @@
   "education": [
     {
       "school": "Changemaker Educations",
-      "degree": "Full-stack Developer Programme",
-      "degree_sv": "Fullstackutvecklare",
+      "degree": "Frontend App Developer Programme",
+      "degree_sv": "Frontend App Developer",
       "years": "2021 \u2013 2023"
     }
   ],

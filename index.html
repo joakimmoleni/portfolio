@@ -5,48 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
 
-  <title>Joakim Moléni | Portfolio</title>
-  <meta name="title" content="Joakim Moléni | Portfolio">
-  <meta name="description" content="Systems engineer. IBM z/OS assembler in production core banking by day, the web stack from scratch by night.">
+  <title>Joakim Moléni — Core Systems Engineer</title>
+  <meta name="title" content="Joakim Moléni — Core Systems Engineer">
+  <meta name="description" content="HLASM and COBOL in live core banking. Production on-call, platform modernization and developer tooling — from register-level systems to web, cloud and ML.">
+  <meta name="theme-color" content="#f6f3ed">
 
-  <!-- Theme color for mobile UI (updated by script.js on toggle) -->
-  <meta name="theme-color" content="#f9f7f3">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Joakim Moléni — Systems Engineer">
-  <meta property="og:description" content="IBM z/OS assembler in production core banking. The web stack from scratch after hours.">
+  <meta property="og:title" content="Joakim Moléni — Core Systems Engineer">
+  <meta property="og:description" content="I write code where money actually moves: HLASM and COBOL in live core banking, with production and on-call responsibility.">
   <meta property="og:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
+  <meta property="og:image:alt" content="Joakim Moléni — core systems engineer working in live banking systems">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://joakimmoleni.github.io/portfolio/">
+  <meta property="og:locale" content="en_GB">
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Joakim Moléni — Systems Engineer">
-  <meta name="twitter:description" content="IBM z/OS assembler in production core banking. The web stack from scratch after hours.">
+  <meta name="twitter:title" content="Joakim Moléni — Core Systems Engineer">
+  <meta name="twitter:description" content="HLASM and COBOL in live core banking. Production ownership, live modernization and tools for other engineers.">
   <meta name="twitter:image" content="https://joakimmoleni.github.io/portfolio/assets/images/og-card.png">
+  <meta name="twitter:image:alt" content="Joakim Moléni — core systems engineer working in live banking systems">
 
-  <!-- Canonical -->
   <link rel="canonical" href="https://joakimmoleni.github.io/portfolio/">
+  <link rel="sitemap" type="application/xml" href="https://joakimmoleni.github.io/portfolio/sitemap.xml">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
-  <!-- Fonts (non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap">
+    <style>
+      body { overflow: auto !important; height: auto !important; }
+      .stream { display: block !important; height: auto !important; overflow: visible !important; }
+      .panel { min-height: 100vh; height: auto !important; min-width: 0 !important; width: 100% !important; }
+      .panel > *, .boot-hero, .boot-sequence { opacity: 1 !important; transform: none !important; animation: none !important; }
+      .address-bar, .progress-bar { display: none !important; }
+    </style>
   </noscript>
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260830">
 
-  <!-- Inline theme to prevent FOUC -->
   <script>
     (function() {
       var t = null;
@@ -54,244 +55,277 @@
       if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
       var m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.setAttribute('content', t === 'dark' ? '#050608' : '#f9f7f3');
+      if (m) m.setAttribute('content', t === 'dark' ? '#07090c' : '#f6f3ed');
     })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Joakim Moléni",
+    "url": "https://joakimmoleni.github.io/portfolio/",
+    "jobTitle": "Senior Software Engineer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Stockholm",
+      "addressCountry": "SE"
+    },
+    "sameAs": [
+      "https://github.com/joakimmoleni",
+      "https://www.linkedin.com/in/joakimmoleni"
+    ],
+    "knowsAbout": [
+      "IBM z/OS",
+      "HLASM",
+      "COBOL",
+      "Core banking systems",
+      "Production incident response",
+      "Developer tooling",
+      "JavaScript",
+      "AWS",
+      "Machine learning"
+    ]
+  }
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#panel-identity">Skip to the portfolio</a>
 
-  <!-- ===== HORIZONTAL INSTRUCTION STREAM ===== -->
-  <main class="stream" id="stream">
-
-    <!-- 0x00: BOOT -->
-    <section class="panel panel--boot" id="panel-boot" aria-label="Introduction">
-      <div class="panel__inner">
-        <div class="boot-sequence">
-          <div class="boot-line">CHECKING DEPENDENCIES... NONE FOUND.</div>
-          <div class="boot-line">LOADING FRAMEWORK... NOT REQUIRED.</div>
-          <div class="boot-line">STACK DEPTH: FULL (R0–R15 AVAILABLE)</div>
-          <div class="boot-line">INITIALIZING SYSTEM...</div>
-          <div class="boot-line boot-line--ok">READY.</div>
-        </div>
+  <main class="stream" id="stream" aria-describedby="journeyHelp">
+    <section class="panel panel--boot" id="panel-boot" aria-labelledby="entryTitle" data-addr="0x00">
+      <div class="panel__inner boot-layout">
         <div class="boot-hero">
-          <h1 class="boot-hero__name">Joakim<br>Moléni</h1>
-          <p class="boot-hero__subtitle">Assembler by day. The web stack, from scratch, by night.<br>Zero dependencies in either world.</p>
-          <p class="boot-hero__cta"><span class="cta-arrow" aria-hidden="true">→</span> scroll to traverse the stack</p>
+          <p class="boot-hero__role">Joakim Moléni <span>Systems engineer · Stockholm</span></p>
+          <h1 class="boot-hero__name" id="entryTitle">
+            <span>I write code where</span>
+            <strong>money actually moves.</strong>
+          </h1>
+          <p class="boot-hero__subtitle">HLASM and COBOL in live core banking. Production on-call. Modernizing the platform without asking it to stop.</p>
+          <p class="boot-hero__cta" id="journeyHelp">
+            <span class="cta-arrow" aria-hidden="true">→</span>
+            Scroll, swipe, use the arrow keys or choose an address below.
+          </p>
         </div>
+
+        <aside class="boot-sequence" aria-label="Current operating context">
+          <p class="boot-sequence__label">Execution context</p>
+          <dl class="boot-trace">
+            <div><dt>Layer</dt><dd>Core banking</dd></div>
+            <div><dt>Runtime</dt><dd>IBM z/OS</dd></div>
+            <div><dt>Languages</dt><dd>HLASM / COBOL</dd></div>
+            <div><dt>Mode</dt><dd>Production / on-call</dd></div>
+            <div><dt>Range</dt><dd>Registers → web / cloud / ML</dd></div>
+            <div class="boot-trace__status"><dt>Status</dt><dd>Responsible</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
-    <!-- 0x04: IDENTITY -->
-    <section class="panel panel--identity" id="panel-identity" aria-label="About me" data-addr="0x04">
+    <section class="panel panel--identity" id="panel-identity" aria-labelledby="identityTitle" data-addr="0x04">
       <div class="panel__identity-grid">
         <div class="identity-text">
-          <p class="section-eyebrow" aria-hidden="true">0x04 // ABOUT</p>
-          <h2 class="identity-text__title">Assembler, in production, at a bank</h2>
-          <p>I've been building things since before school — machines, networks, websites. I ran a business for years. Then I went back to the part I actually cared about.</p>
-          <p>COBOL first. Production within a week, on-call within three months. Assembler after that — the layer beneath everything else at one of Sweden's largest banks. The language is being phased out because too few people can carry it. Until then, someone has to.</p>
-          <p>The rest of my time goes to mentoring, code review across teams, and the tools our mainframe developers use every day. Some of them I wrote.</p>
-          <div class="identity-metrics">
+          <p class="section-eyebrow">0x04 / Context</p>
+          <h2 class="identity-text__title" id="identityTitle">I work where abstractions run out.</h2>
+          <p>The code beneath the API still decides whether a transaction completes and the overnight run finishes. That is where I work: HLASM and COBOL on IBM z/OS, with production and on-call responsibility.</p>
+          <p>My career did not begin when LinkedIn started calling me a developer. I had already built web systems, administered Linux, owned businesses, led operations and shipped work with consequences. The title caught up later.</p>
+          <p>COBOL was the route back in. My first change went to production in the week after training. I joined daytime on-call within three months and moved into first-call night duty after two years. Today I am a leading technical contributor to the move from an assembler-driven platform to modern COBOL while the system remains live.</p>
+
+          <dl class="identity-metrics" aria-label="Selected evidence">
             <div class="identity-metric">
-              <span class="identity-metric__value">50+</span>
-              <span class="identity-metric__label">Engineers using my tools</span>
+              <dt class="identity-metric__value">PROD</dt>
+              <dd class="identity-metric__label">Code and on-call ownership</dd>
             </div>
             <div class="identity-metric">
-              <span class="identity-metric__value">24/7</span>
-              <span class="identity-metric__label">Uptime requirement</span>
+              <dt class="identity-metric__value">50+</dt>
+              <dd class="identity-metric__label">Engineers using my tools</dd>
             </div>
             <div class="identity-metric">
-              <span class="identity-metric__value">3 mo</span>
-              <span class="identity-metric__label">To on-call</span>
+              <dt class="identity-metric__value">850+</dt>
+              <dd class="identity-metric__label">Knowledge-platform pages</dd>
             </div>
             <div class="identity-metric">
-              <span class="identity-metric__value">[REDACTED]</span>
-              <span class="identity-metric__label">Migration I co-lead</span>
+              <dt class="identity-metric__value">100k</dt>
+              <dd class="identity-metric__label">Fragsheet registrations</dd>
             </div>
-          </div>
+          </dl>
         </div>
-        <div class="identity-registers" aria-hidden="true">
-          <div class="reg"><span class="reg__name">R0</span><span class="reg__val">00000000</span><span class="reg__comment">// return code</span></div>
-          <div class="reg"><span class="reg__name">R1</span><span class="reg__val">0x1988</span><span class="reg__comment">// year.init</span></div>
-          <div class="reg"><span class="reg__name">R2</span><span class="reg__val">HLASM</span><span class="reg__comment">// primary.lang</span></div>
-          <div class="reg"><span class="reg__name">R3</span><span class="reg__val">COBOL</span><span class="reg__comment">// secondary.lang</span></div>
-          <div class="reg"><span class="reg__name">R4</span><span class="reg__val">JS/CSS</span><span class="reg__comment">// evening.lang</span></div>
-          <div class="reg"><span class="reg__name">R5</span><span class="reg__val">0x????</span><span class="reg__comment">// engineers.swe</span></div>
-          <div class="reg"><span class="reg__name">R6</span><span class="reg__val">0x0352</span><span class="reg__comment">// pages.built</span></div>
-          <div class="reg"><span class="reg__name">R7</span><span class="reg__val">0x0000</span><span class="reg__comment">// dependencies</span></div>
-          <div class="reg"><span class="reg__name">R8</span><span class="reg__val">PROD</span><span class="reg__comment">// deploy.env</span></div>
-          <div class="reg"><span class="reg__name">R9</span><span class="reg__val">24/7</span><span class="reg__comment">// uptime.req</span></div>
-          <div class="reg"><span class="reg__name">R10</span><span class="reg__val">z/OS</span><span class="reg__comment">// platform</span></div>
-          <div class="reg"><span class="reg__name">R11</span><span class="reg__val">[CLASSIFIED]</span><span class="reg__comment">// middleware</span></div>
-          <div class="reg"><span class="reg__name">R12</span><span class="reg__val">BASE</span><span class="reg__comment">// addressability</span></div>
-          <div class="reg"><span class="reg__name">R13</span><span class="reg__val">SAVE</span><span class="reg__comment">// save area</span></div>
-          <div class="reg"><span class="reg__name">R14</span><span class="reg__val">RETN</span><span class="reg__comment">// return addr</span></div>
-          <div class="reg"><span class="reg__name">R15</span><span class="reg__val">ENTRY</span><span class="reg__comment">// entry point</span></div>
+
+        <div class="identity-registers" aria-label="Working range, expressed as a mainframe register map">
+          <p class="registers__label">Register map / current state</p>
+          <div class="reg"><span class="reg__name">R0</span><span class="reg__val">SYSTEMS</span><span class="reg__comment">// role</span></div>
+          <div class="reg"><span class="reg__name">R1</span><span class="reg__val">HLASM</span><span class="reg__comment">// core.lang</span></div>
+          <div class="reg"><span class="reg__name">R2</span><span class="reg__val">COBOL</span><span class="reg__comment">// core.lang</span></div>
+          <div class="reg"><span class="reg__name">R3</span><span class="reg__val">z/OS</span><span class="reg__comment">// platform</span></div>
+          <div class="reg"><span class="reg__name">R4</span><span class="reg__val">PROD</span><span class="reg__comment">// environment</span></div>
+          <div class="reg"><span class="reg__name">R5</span><span class="reg__val">ON-CALL</span><span class="reg__comment">// responsibility</span></div>
+          <div class="reg"><span class="reg__name">R6</span><span class="reg__val">LIVE</span><span class="reg__comment">// migration.mode</span></div>
+          <div class="reg"><span class="reg__name">R7</span><span class="reg__val">50+</span><span class="reg__comment">// tooling.reach</span></div>
+          <div class="reg"><span class="reg__name">R8</span><span class="reg__val">850+</span><span class="reg__comment">// docs.shipped</span></div>
+          <div class="reg"><span class="reg__name">R9</span><span class="reg__val">100k</span><span class="reg__comment">// product.users</span></div>
+          <div class="reg"><span class="reg__name">R10</span><span class="reg__val">AWS</span><span class="reg__comment">// cloud</span></div>
+          <div class="reg"><span class="reg__name">R11</span><span class="reg__val">PYTORCH</span><span class="reg__comment">// ml</span></div>
+          <div class="reg"><span class="reg__name">R12</span><span class="reg__val">JS/CSS</span><span class="reg__comment">// web</span></div>
+          <div class="reg"><span class="reg__name">R13</span><span class="reg__val">OPS</span><span class="reg__comment">// history</span></div>
+          <div class="reg"><span class="reg__name">R14</span><span class="reg__val">OWN</span><span class="reg__comment">// operating.style</span></div>
+          <div class="reg"><span class="reg__name">R15</span><span class="reg__val">READY</span><span class="reg__comment">// status</span></div>
         </div>
       </div>
     </section>
 
-    <!-- 0x08: DUAL MODE -->
-    <section class="panel panel--dual" id="panel-dual" aria-label="Day and night work">
+    <section class="panel panel--dual" id="panel-dual" aria-labelledby="rangeTitle" data-addr="0x08">
+      <h2 class="sr-only" id="rangeTitle">One operating model across every layer</h2>
       <div class="dual">
         <div class="dual__side dual__left">
-          <h3 class="dual__heading">// DAY</h3>
-          <p>IBM z/OS. HLASM. COBOL. Payment and ledger paths in core banking, expected to work every time.</p>
-          <pre class="dual__code"><code>         USING *,R12
-         L     R15,=V(DISPATCH)
-         BALR  R14,R15
-         LTR   R15,R15
-         BNZ   ERRTRAP
-*        — this path has no retry</code></pre>
-          <p>When something breaks at this level, my team gets the call.</p>
+          <p class="section-eyebrow">0x08.A / Core systems</p>
+          <h3 class="dual__heading">Register-level reasoning.</h3>
+          <p>Transaction-critical workloads in HLASM and COBOL. Diagnostics, controlled change and incident response in systems that do not get to be approximately correct.</p>
+          <dl class="constraint-list">
+            <div><dt>Constraint</dt><dd>The system stays live.</dd></div>
+            <div><dt>Failure mode</dt><dd>Production gets the call.</dd></div>
+            <div><dt>Standard</dt><dd>Traceable, reviewable, deterministic.</dd></div>
+          </dl>
         </div>
+
         <div class="dual__divider" aria-hidden="true"></div>
+
         <div class="dual__side dual__right">
-          <h3 class="dual__heading">Night</h3>
-          <p>Vanilla JavaScript. Routers, markdown renderers, syntax highlighters, search — written, not installed. PyTorch when a project calls for it.</p>
-          <pre class="dual__code"><code>const router = {
-  routes: new Map(),
-  navigate(path) {
-    const handler = this.match(path);
-    handler.render(this.container);
-    history.pushState(null, '', path);
-  }
-};
-// — no framework. it routes anyway.</code></pre>
-          <p>I work fine in any modern stack. When the project is mine, I'd rather own every layer.</p>
+          <p class="section-eyebrow">0x08.B / Platforms &amp; products</p>
+          <h3 class="dual__heading">The whole path, when it matters.</h3>
+          <p>Web platforms, internal developer tools, AWS infrastructure and ML models. I use frameworks when they earn their place; I build from first principles when understanding and ownership are the point.</p>
+          <dl class="constraint-list">
+            <div><dt>Built</dt><dd>Router, search, renderer, build pipeline.</dd></div>
+            <div><dt>Operated</dt><dd>Linux, AWS and production services.</dd></div>
+            <div><dt>Principle</dt><dd>Choose tools. Own consequences.</dd></div>
+          </dl>
         </div>
       </div>
-      <div class="dual__merge">
-        <p><em>Same brain.</em> Different registers.</p>
-      </div>
+      <p class="dual__merge"><span>Different runtimes.</span> Same requirement: understand the system and own the consequence.</p>
     </section>
 
-    <!-- 0x0C: WORK -->
-    <section class="panel panel--work" id="panel-work" aria-label="What I work on" data-addr="0x0C">
+    <section class="panel panel--work" id="panel-work" aria-labelledby="workTitle" data-addr="0x0C">
       <div class="panel__inner panel__inner--wide">
-        <p class="section-eyebrow" aria-hidden="true">0x0C // WORK</p>
-        <h2 class="work__title">What I Work On</h2>
+        <p class="section-eyebrow">0x0C / Systems</p>
+        <h2 class="work__title" id="workTitle">The systems are old. The problems are not.</h2>
         <div class="work-cards">
-          <div class="work-card">
-            <h3>Real money. Real-time.</h3>
-            <p>Payments, settlement, ledger. Not calls to someone else's API — the assembler and COBOL paths where the transaction actually happens.</p>
-          </div>
-          <div class="work-card">
-            <h3>Downtime is a regulatory event</h3>
-            <p>The systems I work on don't get to stop. Settlement windows, inter-bank obligations, regulators. I carried on-call after three months.</p>
-          </div>
-          <div class="work-card">
-            <h3>Rebuilding a platform while it runs</h3>
-            <p>Co-leading the shift from assembler-driven processing to modern COBOL. The system stays live the whole way. That constraint shapes every decision.</p>
-          </div>
-          <div class="work-card">
-            <h3>Tools are a choice</h3>
-            <p>Zero dependencies is a choice, not a limitation. I use whatever stack the work calls for. When the system is mine, I want to understand every layer of it.</p>
-          </div>
+          <article class="work-card">
+            <span class="work-card__index" aria-hidden="true">01</span>
+            <div><p class="work-card__type">Critical paths</p><h3>Real money, below the API.</h3><p>Transaction-critical processing in HLASM and COBOL — described at the level the work can safely be discussed in public.</p></div>
+          </article>
+          <article class="work-card">
+            <span class="work-card__index" aria-hidden="true">02</span>
+            <div><p class="work-card__type">Modernization</p><h3>Replace the engine while it runs.</h3><p>A leading technical contributor to a controlled move from assembler-driven processing to modern COBOL, stepping into coordination and technical decisions when needed.</p></div>
+          </article>
+          <article class="work-card">
+            <span class="work-card__index" aria-hidden="true">03</span>
+            <div><p class="work-card__type">Production ownership</p><h3>The incident does not end at the ticket.</h3><p>On-call response, cross-system diagnostics, root-cause investigation and controlled change back into live environments.</p></div>
+          </article>
+          <article class="work-card">
+            <span class="work-card__index" aria-hidden="true">04</span>
+            <div><p class="work-card__type">Engineer leverage</p><h3>Build the tool the team is missing.</h3><p>Developer tooling used by 50+ engineers and an 850+ page knowledge platform built to replace scattered documents and institutional memory.</p></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 0x10: PROJECTS -->
-    <section class="panel panel--projects" id="panel-projects" aria-label="Selected work" data-addr="0x10">
+    <section class="panel panel--projects" id="panel-projects" aria-labelledby="projectsTitle" data-addr="0x10">
       <div class="panel__inner panel__inner--wide">
-        <p class="section-eyebrow" aria-hidden="true">0x10 // PROJECTS</p>
-        <h2 class="projects__title">Selected Work</h2>
-        <p class="projects__intro">Most of what I build runs where you can't see it. This is how I think.</p>
+        <p class="section-eyebrow">0x10 / Proof</p>
+        <h2 class="projects__title" id="projectsTitle">Proof, under constraints.</h2>
+        <p class="projects__intro">The banking source stays inside the bank. The responsibility, constraints and engineering choices can still be described precisely.</p>
+
         <div class="project-list">
           <article class="project-card">
-            <span class="project-card__depth">Instant Payments</span>
-            <h3>Real-Time Payment Infrastructure</h3>
-            <p>Instant payment processing in core banking. No retry-later, no margin on the deadlines. Fault tolerance, traceability, deterministic behaviour under load.</p>
-            <div class="project-card__tags">
-              <span>HLASM</span><span>COBOL</span><span>Real-time</span><span>Regulated</span>
-            </div>
+            <p class="project-card__depth">Employer work · confidential</p>
+            <h3>Core banking platform migration</h3>
+            <p>A leading technical contributor to the move from assembler-driven processing to modern COBOL, with additional coordination responsibility when needed while the platform remains live.</p>
+            <dl class="project-card__facts">
+              <div><dt>Constraint</dt><dd>Live system</dd></div>
+              <div><dt>Judgment</dt><dd>Controlled change under constraint</dd></div>
+            </dl>
           </article>
+
           <article class="project-card">
-            <span class="project-card__depth">Architecture</span>
-            <h3>Core Ledger Migration — Platform Rewrite</h3>
-            <p>Co-leading the move from assembler-driven core banking to a modern platform. Understanding the old system at register level, replacing it while it carries live traffic.</p>
-            <div class="project-card__tags">
-              <span>HLASM→COBOL</span><span>Zero downtime</span><span>Strategic</span>
-            </div>
+            <p class="project-card__depth">Internal system · built</p>
+            <h3>Engineering knowledge platform</h3>
+            <p>850+ pages with custom routing, full-text search, markdown rendering, syntax highlighting and a build pipeline — used daily across the department.</p>
+            <dl class="project-card__facts">
+              <div><dt>Constraint</dt><dd>Replace fragmented knowledge</dd></div>
+              <div><dt>Ownership</dt><dd>Architecture through delivery</dd></div>
+            </dl>
           </article>
+
           <article class="project-card">
-            <span class="project-card__depth">Full-Stack / ML</span>
-            <h3>Fragsheet — AI Coaching Platform</h3>
-            <p>Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics. Rewrote the web platform in vanilla JavaScript. Moved the infrastructure from DigitalOcean to AWS. 100,000 registered users.</p>
-            <div class="project-card__tags">
-              <span>PyTorch</span><span>Vanilla JS</span><span>AWS</span><span>100k users</span>
-            </div>
+            <p class="project-card__depth">Developer tooling · built</p>
+            <h3>Tools for mainframe engineers</h3>
+            <p>AI-assisted review, instructions and architecture guidance designed for the actual mainframe workflow, adopted by 50+ engineers.</p>
+            <dl class="project-card__facts">
+              <div><dt>Constraint</dt><dd>Specialist codebase</dd></div>
+              <div><dt>Evidence</dt><dd>50+ engineers</dd></div>
+            </dl>
           </article>
+
           <article class="project-card">
-            <span class="project-card__depth">Developer Tooling</span>
-            <h3>Documentation & Knowledge Platform</h3>
-            <p>850+ pages of engineering documentation, used daily across the department. Replaced Word documents, SharePoint and binders. Custom router, search, syntax highlighting for HLASM, COBOL and JCL, build pipeline. No dependencies.</p>
-            <div class="project-card__tags">
-              <span>Daily use</span><span>Vanilla JS</span><span>0 npm</span>
-            </div>
-          </article>
-          <article class="project-card">
-            <span class="project-card__depth">HLASM / Production</span>
-            <h3>Production Assembler in Live Banking</h3>
-            <p>Writing and maintaining HLASM production paths in transaction-critical systems. Diagnostics, troubleshooting, controlled change into environments that don't offer second attempts.</p>
-            <div class="project-card__tags">
-              <span>HLASM</span><span>Production</span><span>Critical path</span>
-            </div>
+            <p class="project-card__depth">LIA internship · product work</p>
+            <h3>Fragsheet</h3>
+            <p>Integrated ML coaching models through product connectors and adapters, rewrote the full web platform in vanilla JavaScript and migrated the infrastructure from DigitalOcean to AWS. 100,000 registered users.</p>
+            <dl class="project-card__facts">
+              <div><dt>Range</dt><dd>PyTorch → web → AWS</dd></div>
+              <div><dt>Evidence</dt><dd>100k registrations</dd></div>
+            </dl>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- 0x14: CONTACT -->
-    <section class="panel panel--signal" id="panel-signal" aria-label="Contact" data-addr="0x14">
+    <section class="panel panel--signal" id="panel-signal" aria-labelledby="contactTitle" data-addr="0x14">
       <div class="panel__inner signal-content">
-        <p class="section-eyebrow" aria-hidden="true">0x14 // PING</p>
-        <h2 class="signal__title">Ping</h2>
-        <div class="signal__pulse" aria-hidden="true"></div>
-        <p class="signal__text">I spend my days keeping old systems alive and my evenings building new ones. If you want to talk about either, write.</p>
+        <p class="section-eyebrow">0x14 / Contact</p>
+        <h2 class="signal__title" id="contactTitle">Send the difficult thing.</h2>
+        <p class="signal__text">I am interested in core systems, live modernization, developer platforms and products that need someone willing to own the whole path.</p>
+        <p class="signal__text signal__text--quiet">If the work is mostly rearranging abstractions, I may not be your person. If correctness, migration risk or technical ownership actually matter, we should talk.</p>
+
         <div class="signal__links">
-          <a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
-            <span class="signal__cmd">&gt;</span> ssh joakim@linkedin
-          </a>
-          <a href="https://github.com/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
-            <span class="signal__cmd">&gt;</span> cat github/repos
+          <a href="./resume.html" class="signal__link signal__link--accent">
+            <span class="signal__cmd">01</span><span><strong>Resume</strong><small>Choose the relevant emphasis</small></span>
           </a>
           <a href="mailto:jcrooge@gmail.com" class="signal__link">
-            <span class="signal__cmd">&gt;</span> ping jcrooge@gmail.com
+            <span class="signal__cmd">02</span><span><strong>Email</strong><small>jcrooge@gmail.com</small></span>
           </a>
-          <a href="./resume.html" class="signal__link signal__link--accent">
-            <span class="signal__cmd">&gt;</span> open resume tool
+          <a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
+            <span class="signal__cmd">03</span><span><strong>LinkedIn</strong><small>Conversation and work history</small></span>
+          </a>
+          <a href="https://github.com/joakimmoleni" target="_blank" rel="noopener noreferrer" class="signal__link">
+            <span class="signal__cmd">04</span><span><strong>GitHub</strong><small>Public code</small></span>
           </a>
         </div>
-        <p class="signal__status">System is live. Waiting for input.</p>
+
+        <p class="signal__status"><span aria-hidden="true"></span> Available for consequential systems, hard migrations and real ownership.</p>
         <p class="signal__copyright">© <span id="copyrightYear">2026</span> Joakim Moléni</p>
       </div>
     </section>
-
   </main>
 
-  <!-- ===== PROGRESS BAR ===== -->
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
-  <!-- ===== ADDRESS BAR (navigation) ===== -->
-  <nav class="address-bar" id="addressBar" aria-label="Section navigation">
+  <nav class="address-bar" id="addressBar" aria-label="Portfolio sections">
     <div class="address-bar__left">
-      <button class="addr" data-idx="0" aria-label="Go to Boot section"><span class="addr__hex">0x00</span> <span class="addr__label">BOOT</span></button>
-      <button class="addr" data-idx="1" aria-label="Go to Identity section"><span class="addr__hex">0x04</span> <span class="addr__label">ABOUT</span></button>
-      <button class="addr" data-idx="2" aria-label="Go to Dual Mode section"><span class="addr__hex">0x08</span> <span class="addr__label">DUAL</span></button>
-      <button class="addr" data-idx="3" aria-label="Go to Work section"><span class="addr__hex">0x0C</span> <span class="addr__label">WORK</span></button>
-      <button class="addr" data-idx="4" aria-label="Go to Projects section"><span class="addr__hex">0x10</span> <span class="addr__label">PROJECTS</span></button>
-      <button class="addr" data-idx="5" aria-label="Go to Contact section"><span class="addr__hex">0x14</span> <span class="addr__label">PING</span></button>
+      <a class="addr" href="#panel-boot" data-idx="0" aria-label="Go to entry section"><span class="addr__hex">0x00</span><span class="addr__label">ENTRY</span></a>
+      <a class="addr" href="#panel-identity" data-idx="1" aria-label="Go to context section"><span class="addr__hex">0x04</span><span class="addr__label">CONTEXT</span></a>
+      <a class="addr" href="#panel-dual" data-idx="2" aria-label="Go to range section"><span class="addr__hex">0x08</span><span class="addr__label">RANGE</span></a>
+      <a class="addr" href="#panel-work" data-idx="3" aria-label="Go to systems section"><span class="addr__hex">0x0C</span><span class="addr__label">SYSTEMS</span></a>
+      <a class="addr" href="#panel-projects" data-idx="4" aria-label="Go to proof section"><span class="addr__hex">0x10</span><span class="addr__label">PROOF</span></a>
+      <a class="addr" href="#panel-signal" data-idx="5" aria-label="Go to contact section"><span class="addr__hex">0x14</span><span class="addr__label">CONTACT</span></a>
     </div>
     <div class="address-bar__right">
-      <span id="addrPC">PC: 0x00</span>
-      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light mode">
-        <svg class="theme-icon theme-icon--moon hidden" id="iconMoon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="theme-icon theme-icon--sun" id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span id="addrPC" aria-live="polite">PC: 0x00</span>
+      <button class="theme-btn" id="themeToggle" type="button" aria-label="Use light theme">
+        <svg class="theme-icon theme-icon--moon hidden" id="iconMoon" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="theme-icon theme-icon--sun" id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
     </div>
   </nav>
 
-  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/script.js?v=20260830" defer></script>
 </body>
 </html>

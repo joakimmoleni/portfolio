@@ -4,10 +4,11 @@ Personal portfolio and interactive resume builder. Static site built with HTML, 
 
 ## Features
 
-- Responsive portfolio with dark/light theme
-- Multi-variant resume system (Core Systems, Modern Backend, Platform & Delivery)
+- Responsive instruction-stream portfolio with persistent dark/light theme
+- Multi-variant resume system (Core Systems, Modern Backend, Platform & Leadership)
 - Print-optimized PDF export for resumes
-- Accessible: keyboard navigation, reduced-motion support, semantic HTML
+- Keyboard, touch and wheel navigation with reduced-motion and no-JavaScript fallbacks
+- Local validation for links, assets, resume data and unsafe unverified claims
 
 ## Structure
 
@@ -19,11 +20,21 @@ Personal portfolio and interactive resume builder. Static site built with HTML, 
 
 ## Run locally
 
-Open `index.html` in a browser, or serve with any static file server:
+Serve the repository so the resume JSON can load:
 
 ```sh
-npx serve .
+python3 -m http.server 8000
 ```
+
+Open `http://localhost:8000/`.
+
+## Validate
+
+```sh
+node scripts/validate-site.mjs
+```
+
+The validator is dependency-free and checks local asset paths, JSON variants, duplicate IDs, canonical metadata and a small denylist of claims that require factual verification.
 
 ## Contact
 

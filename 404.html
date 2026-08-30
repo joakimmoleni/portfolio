@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#07090c">
   <title>0x404 | Joakim Moléni</title>
   <!-- Self-contained: a 404 can be served at any path, so no relative assets -->
   <style>
     :root {
-      --bg: #050608;
-      --text: #9a9b9f;
-      --heading: #e8e6e1;
-      --accent: #c9a66b;
-      --green: #4a9;
+      --bg: #07090c;
+      --text: #a8a8a4;
+      --heading: #e9e5dd;
+      --accent: #d0ad70;
+      --green: #65bda7;
     }
     @media (prefers-color-scheme: light) {
       :root {
@@ -57,6 +58,7 @@
       border-radius: 4px;
     }
     a:hover { background: var(--accent); color: var(--bg); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   </style>
 </head>
 <body>
@@ -65,8 +67,13 @@
     <div class="line--err">ABEND S0C4 — ADDRESS NOT FOUND.</div>
     <div class="line--ok">RECOVERY ROUTINE LOADED.</div>
     <h1>0x404</h1>
-    <p>This address was never mapped. Or it was, and I moved it.</p>
-    <a href="/portfolio/">&gt; branch to entry point</a>
+    <p>This address was never mapped. The system is fine; your pointer is not.</p>
+    <a href="/portfolio/" id="recoveryLink">&gt; branch to entry point</a>
   </main>
+  <script>
+    if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') {
+      document.getElementById('recoveryLink').href = '/';
+    }
+  </script>
 </body>
 </html>

@@ -1,94 +1,92 @@
 'use strict';
 
-/*===================================================
-  INSTRUCTION STREAM — Portfolio Script
-  Joakim Moléni | Zero dependencies
-===================================================*/
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-const $ = (sel, root = document) => root.querySelector(sel);
-const $$ = (sel, root = document) => root.querySelectorAll(sel);
-
-/*-----------------------------------*\
-  #THEME
-\*-----------------------------------*/
+/* Theme */
 
 const themeBtn = $('#themeToggle');
 const iconMoon = $('#iconMoon');
 const iconSun = $('#iconSun');
 
-// localStorage can throw (private browsing, blocked storage) — never let it kill the script
 function storageGet(key) {
-  try { return localStorage.getItem(key); } catch (e) { return null; }
+  try { return localStorage.getItem(key); } catch (error) { return null; }
 }
+
 function storageSet(key, value) {
-  try { localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ }
+  try { localStorage.setItem(key, value); } catch (error) { /* Storage is optional. */ }
+}
+
+function isTyping() {
+  const active = document.activeElement;
+  return active?.matches('input, textarea, select, [contenteditable="true"]') || false;
 }
 
 const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const savedTheme = storageGet('theme');
-
-applyTheme(savedTheme || (colorSchemeQuery.matches ? 'dark' : 'light'));
-
-// Follow OS theme changes until the user picks a theme explicitly
-colorSchemeQuery.addEventListener('change', (e) => {
-  if (!storageGet('theme')) applyTheme(e.matches ? 'dark' : 'light');
-});
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reducedMotion = reducedMotionQuery.matches;
 
 function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  themeBtn?.setAttribute('aria-pressed', String(theme === 'dark'));
-  if (iconMoon && iconSun) {
-    iconMoon.classList.toggle('hidden', theme === 'dark');
-    iconSun.classList.toggle('hidden', theme === 'light');
-  }
+  const safeTheme = theme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', safeTheme);
+  themeBtn?.setAttribute('aria-pressed', String(safeTheme === 'dark'));
+  themeBtn?.setAttribute('aria-label', safeTheme === 'dark' ? 'Use light theme' : 'Use dark theme');
+  iconMoon?.classList.toggle('hidden', safeTheme === 'dark');
+  iconSun?.classList.toggle('hidden', safeTheme === 'light');
+
   const metaTheme = document.querySelector('meta[name="theme-color"]');
-  if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#050608' : '#f9f7f3');
+  metaTheme?.setAttribute('content', safeTheme === 'dark' ? '#07090c' : '#f6f3ed');
 }
 
 function toggleTheme() {
-  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
   applyTheme(next);
   storageSet('theme', next);
 }
 
+applyTheme(storageGet('theme') || (colorSchemeQuery.matches ? 'dark' : 'light'));
 themeBtn?.addEventListener('click', toggleTheme);
 
-// Keyboard shortcut: T to toggle (ignore Cmd/Ctrl/Alt combos like new-tab)
-document.addEventListener('keydown', (e) => {
-  if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if ((e.key === 't' || e.key === 'T') && !isTyping()) toggleTheme();
+const listenForMediaChange = (query, handler) => {
+  if (typeof query.addEventListener === 'function') query.addEventListener('change', handler);
+  else if (typeof query.addListener === 'function') query.addListener(handler);
+};
+
+listenForMediaChange(colorSchemeQuery, event => {
+  if (!storageGet('theme')) applyTheme(event.matches ? 'dark' : 'light');
 });
 
-function isTyping() {
-  const tag = document.activeElement?.tagName;
-  return tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable;
-}
+listenForMediaChange(reducedMotionQuery, event => { reducedMotion = event.matches; });
 
-/*-----------------------------------*\
-  #SCROLL TRACKING & ADDRESS BAR
-\*-----------------------------------*/
+document.addEventListener('keydown', event => {
+  if (event.metaKey || event.ctrlKey || event.altKey || isTyping()) return;
+  if (event.key.toLowerCase() === 't') toggleTheme();
+});
+
+/* Portfolio navigation */
 
 const stream = $('#stream');
 const panels = $$('.panel');
 const addrButtons = $$('.addr');
 const addrPC = $('#addrPC');
+const addressList = $('.address-bar__left');
 const progressBar = $('#progressBar');
 
 let ticking = false;
-let currentPanelIdx = -1; // force first updateUI to apply .active
+let currentPanelIdx = -1;
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function isHorizontal() {
-  return stream && stream.scrollWidth > stream.clientWidth + 50;
+function isStacked() {
+  return window.innerWidth <= 900;
 }
 
-function isMobile() {
-  return window.innerWidth <= 768;
+function isHorizontal() {
+  return Boolean(stream && !isStacked() && stream.scrollWidth > stream.clientWidth + 50);
 }
 
 function getScrollProgress() {
-  if (isMobile()) {
+  if (!stream) return 0;
+  if (isStacked()) {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     return max > 0 ? window.scrollY / max : 0;
   }
@@ -100,303 +98,226 @@ function getScrollProgress() {
   return max > 0 ? stream.scrollTop / max : 0;
 }
 
-function getPanelOffset(idx) {
-  return panels[idx]?.offsetLeft || 0;
-}
-
-function getClosestPanelIndex(left = stream?.scrollLeft || 0) {
-  let bestIdx = 0;
+function getClosestPanelIndex(value, axis = 'left') {
+  let bestIndex = 0;
   let bestDistance = Infinity;
 
-  panels.forEach((panel, idx) => {
-    const distance = Math.abs(panel.offsetLeft - left);
+  panels.forEach((panel, index) => {
+    const offset = axis === 'top' ? panel.offsetTop : panel.offsetLeft;
+    const distance = Math.abs(offset - value);
     if (distance < bestDistance) {
       bestDistance = distance;
-      bestIdx = idx;
+      bestIndex = index;
     }
   });
 
-  return bestIdx;
-}
-
-function getClosestPanelIndexByTop(top = stream?.scrollTop || 0) {
-  let bestIdx = 0;
-  let bestDistance = Infinity;
-
-  panels.forEach((panel, idx) => {
-    const distance = Math.abs(panel.offsetTop - top);
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      bestIdx = idx;
-    }
-  });
-
-  return bestIdx;
+  return bestIndex;
 }
 
 function getActivePanel() {
-  if (isMobile()) {
-    // Find which panel is most in view
-    const scrollY = window.scrollY;
+  if (!panels.length) return 0;
+  if (isStacked()) {
+    const marker = window.scrollY + window.innerHeight * 0.38;
     let best = 0;
-    for (let i = 0; i < panels.length; i++) {
-      if (panels[i].offsetTop <= scrollY + window.innerHeight * 0.4) {
-        best = i;
-      }
-    }
+    panels.forEach((panel, index) => {
+      if (panel.offsetTop <= marker) best = index;
+    });
     return best;
   }
-  if (isHorizontal()) {
-    return getClosestPanelIndex();
-  }
-  return getClosestPanelIndexByTop();
+  if (isHorizontal()) return getClosestPanelIndex(stream?.scrollLeft || 0);
+  return getClosestPanelIndex(stream?.scrollTop || 0, 'top');
 }
 
-function scrollPanelTo(idx, behavior = 'smooth') {
-  const target = Math.min(Math.max(idx, 0), panels.length - 1);
+function setAddressHash(panel) {
+  if (!panel?.id || !history.replaceState) return;
+  history.replaceState(null, '', `${location.pathname}${location.search}#${panel.id}`);
+}
+
+function scrollPanelTo(index, behavior = 'smooth', updateHash = false) {
+  if (!panels.length || !stream) return;
+  const targetIndex = Math.min(Math.max(index, 0), panels.length - 1);
+  const panel = panels[targetIndex];
   const scrollBehavior = reducedMotion ? 'auto' : behavior;
 
-  if (isMobile()) {
-    panels[target].scrollIntoView({ behavior: scrollBehavior, block: 'start' });
-    return;
+  if (isStacked()) {
+    panel.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+  } else if (isHorizontal()) {
+    if (panel.scrollTop > 0) panel.scrollTo({ top: 0, behavior: scrollBehavior });
+    stream.scrollTo({ left: panel.offsetLeft, behavior: scrollBehavior });
+  } else {
+    stream.scrollTo({ top: panel.offsetTop, behavior: scrollBehavior });
   }
 
-  if (isHorizontal()) {
-    // Arrive at the top of the target panel — a leftover scroll position
-    // from an earlier visit reads as broken rendering
-    if (panels[target].scrollTop > 0) {
-      panels[target].scrollTo({ top: 0, behavior: scrollBehavior });
-    }
-    stream.scrollTo({ left: getPanelOffset(target), behavior: scrollBehavior });
-    return;
-  }
+  if (updateHash) setAddressHash(panel);
+}
 
-  stream.scrollTo({ top: panels[target].offsetTop, behavior: scrollBehavior });
+function ensureAddressVisible(button) {
+  if (!addressList || !button || addressList.scrollWidth <= addressList.clientWidth) return;
+  const listRect = addressList.getBoundingClientRect();
+  const buttonRect = button.getBoundingClientRect();
+  if (buttonRect.left < listRect.left || buttonRect.right > listRect.right) {
+    const left = button.offsetLeft - (addressList.clientWidth - button.offsetWidth) / 2;
+    addressList.scrollTo({ left, behavior: reducedMotion ? 'auto' : 'smooth' });
+  }
 }
 
 function updateUI() {
-  const progress = getScrollProgress();
-  const activeIdx = Math.min(getActivePanel(), panels.length - 1);
+  const activeIndex = Math.min(getActivePanel(), panels.length - 1);
+  if (progressBar) progressBar.style.width = `${getScrollProgress() * 100}%`;
 
-  // Progress bar
-  if (progressBar) {
-    progressBar.style.width = (progress * 100) + '%';
-  }
-
-  // Address buttons + PC display — only update when the active panel changes
-  if (activeIdx !== currentPanelIdx) {
-    currentPanelIdx = activeIdx;
-    addrButtons.forEach((btn, i) => {
-      btn.classList.toggle('active', i === activeIdx);
+  if (activeIndex !== currentPanelIdx) {
+    currentPanelIdx = activeIndex;
+    addrButtons.forEach((button, index) => {
+      const active = index === activeIndex;
+      button.classList.toggle('active', active);
+      if (active) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
     });
 
-    // PC display with blinking cursor
+    ensureAddressVisible(addrButtons[activeIndex]);
+
     if (addrPC) {
-      const hex = (activeIdx * 4).toString(16).toUpperCase().padStart(2, '0');
-      addrPC.innerHTML = 'PC: 0x' + hex + '<span class="pc-cursor">_</span>';
+      const hex = (activeIndex * 4).toString(16).toUpperCase().padStart(2, '0');
+      addrPC.innerHTML = `PC: 0x${hex}<span class="pc-cursor" aria-hidden="true">_</span>`;
     }
   }
 
   ticking = false;
 }
 
-stream?.addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(updateUI);
-    ticking = true;
-  }
-});
-
-// Mobile: window scrolls instead of stream
-window.addEventListener('scroll', () => {
-  if (!isMobile()) return;
-  if (!ticking) {
-    requestAnimationFrame(updateUI);
-    ticking = true;
-  }
-});
-
-// Initial state
-requestAnimationFrame(updateUI);
-
-// Deal-in animation: stagger panels on load
-// If arriving via hash (e.g. from resume), skip animations and jump directly
-// (an arbitrary hash like #foo=bar is an invalid selector — treat as no target)
-let hashTarget = null;
-try {
-  hashTarget = location.hash && document.querySelector(location.hash);
-} catch (e) { /* invalid selector in hash */ }
-if (hashTarget && hashTarget.classList.contains('panel')) {
-  // Instantly reveal all panels, no animation
-  panels.forEach(panel => {
-    panel.classList.add('dealt');
-    panel.style.animation = 'none';
-  });
-  // Skip boot animations
-  document.querySelectorAll('.boot-line, .boot-hero').forEach(el => {
-    el.style.animation = 'none';
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-  });
-  // Scroll to target without smooth (instant jump)
-  scrollPanelTo([...panels].indexOf(hashTarget), 'auto');
-  // Clean hash from URL without triggering navigation
-  history.replaceState(null, '', location.pathname);
-} else {
-  panels.forEach((panel, i) => {
-    setTimeout(() => panel.classList.add('dealt'), 100 + i * 200);
-  });
+function requestUIUpdate() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(updateUI);
 }
 
-/*-----------------------------------*\
-  #NAVIGATION
-\*-----------------------------------*/
+stream?.addEventListener('scroll', requestUIUpdate, { passive: true });
+window.addEventListener('scroll', () => { if (isStacked()) requestUIUpdate(); }, { passive: true });
+window.addEventListener('resize', requestUIUpdate, { passive: true });
 
-// Click address buttons to navigate
-addrButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const idx = parseInt(btn.dataset.idx);
-    if (idx >= 0 && idx < panels.length) {
-      scrollPanelTo(idx);
-    }
+addrButtons.forEach(button => {
+  button.addEventListener('click', event => {
+    event.preventDefault();
+    const index = Number.parseInt(button.dataset.idx || '', 10);
+    if (Number.isInteger(index)) scrollPanelTo(index, 'smooth', true);
   });
 });
 
-// Keyboard: arrow keys to navigate panels
-// (no-op on pages without panels, e.g. resume.html — let the browser scroll natively)
-document.addEventListener('keydown', (e) => {
+function panelIndexFromHash() {
+  if (!location.hash) return -1;
+  let target = null;
+  try { target = document.querySelector(location.hash); } catch (error) { return -1; }
+  return panels.indexOf(target);
+}
+
+window.addEventListener('hashchange', () => {
+  const index = panelIndexFromHash();
+  if (index >= 0) scrollPanelTo(index, 'auto');
+});
+
+document.addEventListener('keydown', event => {
   if (!panels.length || isTyping()) return;
 
-  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-    e.preventDefault();
-    const next = Math.min(currentPanelIdx + 1, panels.length - 1);
-    scrollPanelTo(next);
-  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-    e.preventDefault();
-    const prev = Math.max(currentPanelIdx - 1, 0);
-    scrollPanelTo(prev);
+  const addressFocused = document.activeElement?.classList.contains('addr');
+  const horizontalKeys = event.key === 'ArrowLeft' || event.key === 'ArrowRight';
+  const streamKeys = isHorizontal() && (horizontalKeys || event.key === 'ArrowUp' || event.key === 'ArrowDown');
+
+  if (streamKeys || (addressFocused && horizontalKeys)) {
+    event.preventDefault();
+    const direction = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : -1;
+    scrollPanelTo(currentPanelIdx + direction, 'smooth', true);
+    addrButtons[Math.min(Math.max(currentPanelIdx + direction, 0), panels.length - 1)]?.focus();
+  } else if (addressFocused && (event.key === 'Home' || event.key === 'End')) {
+    event.preventDefault();
+    const index = event.key === 'Home' ? 0 : panels.length - 1;
+    scrollPanelTo(index, 'smooth', true);
+    addrButtons[index]?.focus();
   }
 });
 
-/*-----------------------------------*\
-  #WHEEL → HORIZONTAL (desktop only)
-  One wheel gesture = one panel step. Inertia
-  tails (trackpad glide, free-spinning wheels)
-  are swallowed until a fresh gesture starts.
-\*-----------------------------------*/
+/* One intentional desktop wheel gesture advances one panel. */
 
-const WHEEL_STEP_INTENT = 30;  // accumulated px that count as a deliberate step
-const WHEEL_COOLDOWN = 450;    // ms after a step where all input is inertia
-const WHEEL_GESTURE_GAP = 200; // ms of silence that ends a gesture
+const WHEEL_STEP_INTENT = 30;
+const WHEEL_COOLDOWN = 450;
+const WHEEL_GESTURE_GAP = 200;
 
 let wheelArmed = true;
 let wheelAccum = 0;
-let wheelPrevMag = 0;
-let wheelPrevDir = 0;
+let wheelPrevMagnitude = 0;
+let wheelPrevDirection = 0;
 let wheelLastTime = 0;
 let wheelStepTime = 0;
-let wheelTargetIdx = null;
-
-if (stream) {
-  stream.addEventListener('wheel', (e) => {
-    if (!isHorizontal()) return;
-
-    // A dominantly-vertical gesture over content that can still scroll
-    // vertically (e.g. a panel taller than a short window) stays native —
-    // otherwise that content would be unreachable by wheel.
-    if (Math.abs(e.deltaY) >= Math.abs(e.deltaX) && canScrollVertically(e.target, e.deltaY)) {
-      return;
-    }
-
-    e.preventDefault();
-
-    const delta = normalizeWheelDelta(e);
-    if (delta === 0) return;
-
-    const now = performance.now();
-    const mag = Math.abs(delta);
-    const dir = Math.sign(delta);
-    const gap = now - wheelLastTime;
-
-    // Fresh gesture: silence before this event, a direction flip, or a
-    // sharp magnitude jump (a new flick during a decaying inertia tail).
-    const flipped = wheelPrevDir !== 0 && dir !== wheelPrevDir;
-    if (gap > WHEEL_GESTURE_GAP || flipped || mag > wheelPrevMag * 1.5 + 10) {
-      wheelArmed = true;
-      wheelAccum = 0;
-      // A flip can never be inertia from the previous gesture — drop the
-      // cooldown so an immediate "go back" responds right away.
-      if (flipped) wheelStepTime = 0;
-    }
-
-    wheelLastTime = now;
-    wheelPrevMag = mag;
-    wheelPrevDir = dir;
-
-    if (!wheelArmed || now - wheelStepTime < WHEEL_COOLDOWN) return;
-
-    wheelAccum += delta;
-    if (Math.abs(wheelAccum) < WHEEL_STEP_INTENT) return;
-
-    // Step exactly one panel, then swallow the rest of this gesture.
-    // Base the step on the previous target while its animation may still
-    // be running, so a quick second flick goes to the *next* panel.
-    const base = (wheelTargetIdx !== null && now - wheelStepTime < 1000)
-      ? wheelTargetIdx
-      : getActivePanel();
-    const target = Math.min(Math.max(base + dir, 0), panels.length - 1);
-
-    wheelArmed = false;
-    wheelAccum = 0;
-    wheelStepTime = now;
-    wheelTargetIdx = target;
-    scrollPanelTo(target);
-  }, { passive: false });
-}
+let wheelTargetIndex = null;
 
 function canScrollVertically(target, deltaY) {
-  let el = target instanceof Element ? target : null;
-  while (el && el !== stream) {
-    // Overflow smaller than the bottom bar padding is invisible anyway —
-    // don't let a few px swallow the horizontal step
-    if (el.scrollHeight > el.clientHeight + 24 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) {
-      if (deltaY < 0 && el.scrollTop > 0) return true;
-      if (deltaY > 0 && el.scrollTop + el.clientHeight < el.scrollHeight - 1) return true;
+  let element = target instanceof Element ? target : null;
+  while (element && element !== stream) {
+    const style = getComputedStyle(element);
+    const scrollable = element.scrollHeight > element.clientHeight + 24 && /(auto|scroll)/.test(style.overflowY);
+    if (scrollable) {
+      if (deltaY < 0 && element.scrollTop > 0) return true;
+      if (deltaY > 0 && element.scrollTop + element.clientHeight < element.scrollHeight - 1) return true;
     }
-    el = el.parentElement;
+    element = element.parentElement;
   }
   return false;
 }
 
-function normalizeWheelDelta(e) {
-  const rawDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-  if (e.deltaMode === WheelEvent.DOM_DELTA_LINE) return rawDelta * 32;
-  if (e.deltaMode === WheelEvent.DOM_DELTA_PAGE) return rawDelta * stream.clientWidth;
-  return rawDelta;
+function normalizeWheelDelta(event) {
+  const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+  if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return raw * 32;
+  if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) return raw * (stream?.clientWidth || window.innerWidth);
+  return raw;
 }
 
-/*-----------------------------------*\
-  #REGISTER ANIMATION
-\*-----------------------------------*/
+stream?.addEventListener('wheel', event => {
+  if (!isHorizontal()) return;
+  if (Math.abs(event.deltaY) >= Math.abs(event.deltaX) && canScrollVertically(event.target, event.deltaY)) return;
 
-const regValues = $$('.reg__val');
+  event.preventDefault();
+  const delta = normalizeWheelDelta(event);
+  if (!delta) return;
 
-if (regValues.length && !reducedMotion) {
-  // Flash a random register every 2s
-  setInterval(() => {
-    const el = regValues[Math.floor(Math.random() * regValues.length)];
-    el.style.color = 'var(--accent)';
-    el.style.textShadow = '0 0 6px var(--accent-glow)';
-    setTimeout(() => {
-      el.style.color = '';
-      el.style.textShadow = '';
-    }, 400);
-  }, 2000);
+  const now = performance.now();
+  const magnitude = Math.abs(delta);
+  const direction = Math.sign(delta);
+  const gap = now - wheelLastTime;
+  const flipped = wheelPrevDirection !== 0 && direction !== wheelPrevDirection;
+
+  if (gap > WHEEL_GESTURE_GAP || flipped || magnitude > wheelPrevMagnitude * 1.5 + 10) {
+    wheelArmed = true;
+    wheelAccum = 0;
+    if (flipped) wheelStepTime = 0;
+  }
+
+  wheelLastTime = now;
+  wheelPrevMagnitude = magnitude;
+  wheelPrevDirection = direction;
+
+  if (!wheelArmed || now - wheelStepTime < WHEEL_COOLDOWN) return;
+  wheelAccum += delta;
+  if (Math.abs(wheelAccum) < WHEEL_STEP_INTENT) return;
+
+  const baseIndex = wheelTargetIndex !== null && now - wheelStepTime < 1000 ? wheelTargetIndex : getActivePanel();
+  const targetIndex = Math.min(Math.max(baseIndex + direction, 0), panels.length - 1);
+  wheelArmed = false;
+  wheelAccum = 0;
+  wheelStepTime = now;
+  wheelTargetIndex = targetIndex;
+  scrollPanelTo(targetIndex, 'smooth', true);
+}, { passive: false });
+
+/* Entry state */
+
+if (panels.length) {
+  panels.forEach((panel, index) => {
+    window.setTimeout(() => panel.classList.add('dealt'), reducedMotion ? 0 : 40 + index * 70);
+  });
+
+  const initialIndex = panelIndexFromHash();
+  if (initialIndex >= 0) requestAnimationFrame(() => scrollPanelTo(initialIndex, 'auto'));
+  requestAnimationFrame(updateUI);
 }
 
-/*-----------------------------------*\
-  #COPYRIGHT YEAR
-\*-----------------------------------*/
-
-const yearEl = $('#copyrightYear');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+const yearElement = $('#copyrightYear');
+if (yearElement) yearElement.textContent = new Date().getFullYear();

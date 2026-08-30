@@ -9,8 +9,8 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Backend engineer with a systems background: HLASM and COBOL in core banking. Used to reasoning about performance, memory and failure modes at machine level. Builds web platforms from scratch \u2014 HTTP routing, server-side rendering, full-text search, build pipelines \u2014 usually without frameworks. Comfortable owning the integration between mainframe transaction systems and modern services.",
-  "profile_sv": "Backendingenjör med systembakgrund: HLASM och COBOL i kärnbank. Van att resonera om prestanda, minne och felmoder på maskinnivå. Bygger webbplattformar från grunden — HTTP-routing, server-side-rendering, fulltextsök, byggpipelines — oftast utan ramverk. Bekväm med att äga integrationen mellan stordatorns transaktionssystem och moderna tjänster.",
+  "profile": "Backend engineer with a systems background: HLASM and COBOL in live core banking, plus full-stack, AWS and ML delivery. Used to reasoning about performance, memory and failure modes at machine level. Has built web platforms from first principles — routing, rendering, search and build pipelines — and uses modern frameworks when they earn their place.",
+  "profile_sv": "Backendingenjör med systembakgrund: HLASM och COBOL i kärnbank i drift, kompletterat med fullstack-, AWS- och ML-leverans. Van att resonera om prestanda, minne och felmoder på maskinnivå. Har byggt webbplattformar från grunden — routing, rendering, sök och byggpipelines — och använder moderna ramverk när de tillför värde.",
   "coreStack": [
     "Node.js, TypeScript, REST APIs",
     "AWS (Lambda, S3, CloudFormation)",
@@ -35,16 +35,16 @@
       "years": "Aug 2024 \u2013 Present",
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
-        "Build and maintain integration paths between core mainframe transaction systems and modern distributed services — reliable contracts that both sides depend on.",
-        "Co-leading a 50-person platform migration from assembler to modern COBOL — bridging legacy and modern architectures.",
-        "Built AI-assisted developer tooling adopted by 50+ engineers. Own the full stack: assembler at the transaction layer, APIs at the service boundary, web frontends for internal tooling.",
-        "Drive observability improvements so production issues surface through monitoring, not through customers reporting problems."
+        "Write and maintain HLASM and COBOL in a production core-banking platform, with on-call responsibility.",
+        "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
+        "Built AI-assisted developer tooling adopted by 50+ engineers and an 850+ page knowledge platform with custom routing, search and build tooling.",
+        "Review code across teams, mentor engineers and drive production incidents through root cause and prevention."
       ],
       "highlights_sv": [
-        "Bygger och underhåller integrationsvägar mellan stordatorns transaktionssystem och moderna distribuerade tjänster — tillförlitliga kontrakt som båda sidor är beroende av.",
-        "Medleder en 50-personers plattformsmigrering från assembler till modern COBOL — bryggar äldre och moderna arkitekturer.",
-        "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer. Äger hela stacken: assembler på transaktionslagret, API:er på tjänstegränsen, webbfrontends för interna verktyg.",
-        "Driver bättre observerbarhet så att produktionsproblem upptäcks via monitorering — inte genom att kunder rapporterar fel."
+        "Skriver och underhåller HLASM och COBOL i en kärnbanksplattform i produktion, med jouransvar.",
+        "Är en ledande teknisk bidragsgivare i en pågående migrering från assembler-driven bearbetning till modern COBOL och går in i teknisk koordinering vid behov.",
+        "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer och en kunskapsplattform med 850+ sidor, egen routing, sök och byggverktyg.",
+        "Granskar kod över teamgränser, mentorerar ingenjörer och driver produktionsincidenter till rotorsak och prevention."
       ]
     },
     {
@@ -54,42 +54,28 @@
       "years": "Aug 2023 – Aug 2024",
       "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "Deployed to production within the first week of COBOL training.",
-        "Developed transaction logic for deposits and payments. Operated across mainframe, Linux and distributed environments.",
-        "Handled production incidents end-to-end — from detection through resolution across system boundaries."
+        "My first production change went live in the week after COBOL training.",
+        "Developed production COBOL for transaction-critical core banking workloads across mainframe, Linux and distributed environments.",
+        "Joined daytime on-call within three months and handled production incidents end-to-end across system boundaries."
       ],
       "highlights_sv": [
-        "Levererade till produktion inom första veckan av COBOL-utbildningen.",
-        "Utvecklade transaktionslogik för insättningar och betalningar. Arbetade över stordator, Linux och distribuerade miljöer.",
-        "Hanterade produktionsincidenter end-to-end — från detektering till lösning över systemgränser."
+        "Min första produktionsändring driftsattes veckan efter COBOL-utbildningen.",
+        "Utvecklade produktions-COBOL för transaktionskritiska kärnbanksarbetslaster över stordator, Linux och distribuerade miljöer.",
+        "Gick in i dagjour inom tre månader och hanterade produktionsincidenter end-to-end över systemgränser."
       ]
     },
     {
       "company": "Fragsheet",
-      "role": "Full-stack Developer & ML Engineer",
-      "role_sv": "Full-stack-utvecklare & ML-ingenj\u00f6r",
+      "role": "Frontend App Developer Intern (LIA)",
+      "role_sv": "Frontend App Developer-praktikant (LIA)",
       "years": "Jan 2023 \u2013 Jul 2023",
       "highlights": [
-        "Co-built ML coaching models (PyTorch, scikit-learn) for live game analytics \u2014 real-time performance insights for League of Legends. 100,000 registered users.",
-        "Rewrote the entire web platform in vanilla JavaScript. Owned the full infrastructure migration from DigitalOcean to AWS end-to-end."
+        "Integrated ML coaching models into the product through connectors and adapters, working closely with the ML engineer to operationalize live League of Legends insights for 100,000 registered users.",
+        "Rewrote the entire web platform in vanilla JavaScript and owned the infrastructure migration from DigitalOcean to AWS end-to-end."
       ],
       "highlights_sv": [
-        "Medbyggde ML-coachingmodeller (PyTorch, scikit-learn) f\u00f6r live-spelanalys \u2014 realtids-prestandainsikter f\u00f6r League of Legends. 100 000 registrerade anv\u00e4ndare.",
-        "Skrev om hela webbplattformen i vanilla JavaScript. \u00c4gde hela infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS end-to-end."
-      ]
-    },
-    {
-      "company": "Changemaker Educations",
-      "role": "Full-stack Developer (programme)",
-      "role_sv": "Fullstackutvecklare (utbildning)",
-      "years": "Sep 2021 \u2013 Jul 2023",
-      "highlights": [
-        "Built full-stack applications with relational databases, REST APIs and CI/CD pipelines. Docker containerisation and Linux deployment.",
-        "Scrum-based delivery in cross-functional teams. Graduated top of class."
-      ],
-      "highlights_sv": [
-        "Byggde fullstack-applikationer med relationsdatabaser, REST-API:er och CI/CD-pipelines. Docker-containerisering och Linux-drifts\u00e4ttning.",
-        "Scrum-baserad leverans i tv\u00e4rfunktionella team. Tog examen som b\u00e4st i klassen."
+        "Integrerade ML-coachingmodeller i produkten genom connectors och adaptrar, i n\u00e4ra samarbete med ML-ingenj\u00f6ren, f\u00f6r live-insikter till 100 000 registrerade League of Legends-anv\u00e4ndare.",
+        "Skrev om hela webbplattformen i vanilla JavaScript och \u00e4gde infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS end-to-end."
       ]
     },
     {
@@ -112,10 +98,10 @@
       "role_sv": "Webbadministrat\u00f6r",
       "years": "2005 \u2013 2006",
       "highlights": [
-        "Linux server administration and web operations for a major Nordic gaming company \u2014 high-availability systems serving thousands of concurrent users."
+        "Linux server administration and web operations for a major Nordic gaming company."
       ],
       "highlights_sv": [
-        "Linux-serveradministration och webbdrift f\u00f6r ett stort nordiskt spelbolag \u2014 system med h\u00f6g tillg\u00e4nglighet som hanterade tusentals samtidiga anv\u00e4ndare."
+        "Linux-serveradministration och webbdrift f\u00f6r ett stort nordiskt spelbolag."
       ]
     }
   ],
@@ -131,8 +117,8 @@
   "education": [
     {
       "school": "Changemaker Educations",
-      "degree": "Full-stack Developer Programme",
-      "degree_sv": "Fullstackutvecklare",
+      "degree": "Frontend App Developer Programme",
+      "degree_sv": "Frontend App Developer",
       "years": "2021 \u2013 2023"
     }
   ],
