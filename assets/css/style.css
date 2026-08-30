@@ -821,11 +821,18 @@ img, svg { display: block; max-width: 100%; }
   .identity-registers { display: none; }
   .identity-text__title, .work__title, .projects__title, .signal__title { font-size: clamp(2.2rem, 9vw, 4.3rem); }
 
-  .dual { grid-template-columns: 1fr; min-height: 0; }
+  .panel--dual {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+
+  .dual { flex: 0 0 auto; grid-template-columns: 1fr; width: 100%; min-height: 0; }
   .dual__divider { height: 1px; }
   .dual__side { padding: clamp(2.4rem, 8vw, 4rem) clamp(1.25rem, 6vw, 3rem); }
   .dual__heading { font-size: clamp(2rem, 8vw, 3.8rem); }
-  .dual__merge { position: static; padding: 1.2rem 1.5rem calc(var(--bar-total) + 1.4rem); background: var(--bg-primary); }
+  .dual__merge { position: static; width: 100%; padding: 1.2rem 1.5rem calc(var(--bar-total) + 1.4rem); background: var(--bg-primary); }
 
   .work-cards, .project-list, .signal__links { grid-template-columns: 1fr; }
   .signal__links { width: 100%; }
