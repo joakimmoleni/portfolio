@@ -9,15 +9,15 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks. First production change shipped in the week after training; joined daytime on-call within three months and first-call night duty after two years. A leading technical contributor to a live assembler-to-COBOL migration. Reviews code across teams, mentors, and built developer tooling used by 50+ mainframe engineers.",
-  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker. Första produktionsändringen driftsattes veckan efter utbildningen; gick in i dagjour inom tre månader och förstalinjens nattjour efter två år. Ledande teknisk bidragsgivare i en pågående migrering från assembler till COBOL. Granskar kod över teamgränser, mentorerar och byggde utvecklarverktyg som används av 50+ stordatoringenjörer.",
+  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks, with production on-call responsibility and a leading role in live modernization. Also owns integrated internal production applications on OpenShift, spanning JavaScript, database-backed workflows, CI pipelines and operational integrations.",
+  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker, med jouransvar i produktion och en ledande roll i modernisering under drift. Äger också integrerade interna produktionsapplikationer på OpenShift med JavaScript, databasdrivna arbetsflöden, CI-pipelines och verksamhetsintegrationer.",
   "coreStack": [
     "IBM z/OS Assembler (HLASM)",
     "COBOL",
     "IMS & DB2",
     "JCL & batch processing",
     "TSO/ISPF, Endevor",
-    "Linux, Git, CI/CD"
+    "OpenShift, JavaScript, CI/CD"
   ],
   "coreStack_sv": [
     "IBM z/OS Assembler (HLASM)",
@@ -25,7 +25,7 @@
     "IMS & DB2",
     "JCL & batchbearbetning",
     "TSO/ISPF, Endevor",
-    "Linux, Git, CI/CD"
+    "OpenShift, JavaScript, CI/CD"
   ],
   "experience": [
     {
@@ -37,12 +37,14 @@
       "highlights": [
         "Write and maintain assembler and COBOL in SEB\u2019s core banking platform, with production on-call responsibility.",
         "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
+        "Own integrated internal applications on OpenShift end-to-end, from JavaScript and databases through CI pipelines, deployment and production operation.",
         "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
         "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for production core systems."
       ],
       "highlights_sv": [
         "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform, med jouransvar i produktion.",
         "\u00c4r en ledande teknisk bidragsgivare i en p\u00e5g\u00e5ende migrering fr\u00e5n assembler-driven bearbetning till modern COBOL och g\u00e5r in i teknisk koordinering vid behov.",
+        "\u00c4ger integrerade interna applikationer p\u00e5 OpenShift end-to-end, fr\u00e5n JavaScript och databaser till CI-pipelines, drifts\u00e4ttning och f\u00f6rvaltning.",
         "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
         "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r produktionskritiska k\u00e4rnsystem."
       ]
@@ -103,7 +105,7 @@
   ],
   "skills": {
     "languages": ["HLASM", "COBOL", "SQL", "JCL", "JavaScript"],
-    "platforms": ["IBM z/OS", "IMS", "DB2", "TSO/ISPF", "Endevor", "Linux", "Git"],
+    "platforms": ["IBM z/OS", "IMS", "DB2", "TSO/ISPF", "Endevor", "OpenShift", "Linux", "Git"],
     "concepts": ["Transaction-critical systems", "Core banking operations", "Root-cause analysis", "System ownership", "Code review & quality assurance", "Batch & online processing"],
     "concepts_sv": ["Transaktionskritiska system", "K\u00e4rnbanksverksamhet", "Rotorsaksanalys", "System\u00e4gande", "Kodgranskning & kvalitetss\u00e4kring", "Batch- & onlinebearbetning"]
   }

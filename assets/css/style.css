@@ -563,6 +563,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .project-card:hover { background: var(--bg-elevated); }
+.project-card--wide { grid-column: 1 / -1; }
 .project-card__depth { margin-bottom: 0.5rem; color: var(--accent); }
 
 .project-card h3 {

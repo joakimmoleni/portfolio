@@ -4,20 +4,22 @@ The rendered resumes are sourced from `assets/data/`. These profiles document th
 
 ## Core Systems
 
-Assembler and COBOL engineer in core banking at one of Sweden's largest banks. First production change shipped in the week after training; joined daytime on-call within three months and first-call night duty after two years. A leading technical contributor to a live assembler-to-COBOL migration. Reviews code across teams, mentors, and built developer tooling used by 50+ mainframe engineers.
+Assembler and COBOL engineer in core banking at one of Sweden's largest banks. First production change shipped in the week after training; joined daytime on-call within three months and first-call night duty after two years. A leading technical contributor to a live assembler-to-COBOL migration. Also owns integrated internal production applications on OpenShift, spanning JavaScript, databases, CI pipelines and operational workflows.
 
 ## Modern Backend
 
-Backend engineer with a systems background: HLASM and COBOL in live core banking, plus full-stack, AWS and ML delivery. Used to reasoning about performance, memory and failure modes at machine level. Has built web platforms from first principles — routing, rendering, search and build pipelines — and uses modern frameworks when they earn their place.
+Backend and platform engineer with production ownership across IBM z/OS and OpenShift. Builds transaction-critical HLASM and COBOL as well as integrated JavaScript applications end-to-end, including database-backed workflows, CI pipelines, deployment and operation. Also brings AWS and ML product delivery.
 
 ## Platform & Leadership
 
-Platform engineer and technical leader who builds systems other engineers use. Designed an 850+ page engineering platform and developer tooling adopted by 50+ engineers, while carrying production responsibility on IBM z/OS. Brings operational judgment from business, logistics and team leadership that began long before the conventional developer title.
+Platform engineer and technical leader who owns systems from architecture through production. Builds integrated OpenShift applications with JavaScript, databases, CI pipelines and operational workflows, alongside production responsibility on IBM z/OS. Designed an 850+ page engineering platform and developer tooling adopted by 50+ engineers.
 
 ## Shared facts
 
 - Current production work: HLASM and COBOL on IBM z/OS
 - Production responsibility on transaction-critical core banking systems
+- End-to-end ownership of integrated internal production applications on OpenShift
+- JavaScript services, database-backed workflows, CI pipelines and production integrations
 - Live assembler-to-COBOL platform migration
 - Leading technical contributor who steps into coordination when needed
 - Cross-team reviews, mentoring and incident investigation

@@ -23,6 +23,8 @@ COBOL was the route back in. My first change went to production in the week afte
 Approved public evidence:
 
 - Production and on-call responsibility
+- End-to-end ownership of integrated internal production applications on OpenShift
+- JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership
 - Developer tooling used by 50+ engineers
 - 850+ page engineering knowledge platform
 - Fragsheet: 100,000 registered users
@@ -35,7 +37,7 @@ Transaction-critical workloads in HLASM and COBOL. Diagnostics, controlled chang
 
 ### The whole path, when it matters.
 
-Web platforms, internal developer tools, AWS infrastructure and ML models. I use frameworks when they earn their place; I build from first principles when understanding and ownership are the point.
+OpenShift applications, JavaScript services, database-backed workflows, CI pipelines, internal developer tools and AWS product delivery. I own the path from architecture and integration through deployment and production operation.
 
 **Different runtimes. Same requirement: understand the system and own the consequence.**
 
@@ -44,12 +46,13 @@ Web platforms, internal developer tools, AWS infrastructure and ML models. I use
 - **Real money, below the API.** Transaction-critical processing in HLASM and COBOL, described at the level the work can safely be discussed in public.
 - **Replace the engine while it runs.** A leading technical contributor to a controlled move from assembler-driven processing to modern COBOL, stepping into coordination and technical decisions when needed.
 - **The incident does not end at the ticket.** On-call response, cross-system diagnostics, root-cause investigation and controlled change back into live environments.
-- **Build the tool the team is missing.** Developer tooling used by 50+ engineers and an 850+ page knowledge platform built to replace scattered documents and institutional memory.
+- **Own the whole path.** Integrated internal applications on OpenShift: JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership.
 
 ## Proof
 
 - Core banking platform migration — employer work, described abstractly
 - Engineering knowledge platform — internal system, 850+ pages
+- Integrated operational platforms — internal production applications, described abstractly
 - Tools for mainframe engineers — internal tooling, 50+ engineers
 - Fragsheet — LIA internship; ML integration + full vanilla-JavaScript rewrite + AWS migration, 100,000 registrations
 

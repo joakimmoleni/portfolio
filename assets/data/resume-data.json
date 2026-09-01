@@ -1,8 +1,8 @@
 {
   "personal": {
     "name": "Joakim Mol\u00e9ni",
-    "title": "Senior Software Engineer | Core Banking & Full-Stack",
-    "title_sv": "Senior mjukvaruingenj\u00f6r | K\u00e4rnbank & Full-Stack",
+    "title": "Senior Software Engineer | Critical Systems & Platforms",
+    "title_sv": "Senior mjukvaruingenj\u00f6r | Kritiska system & plattformar",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
@@ -35,11 +35,12 @@
       "description_sv": "Utvecklarplattformar, teknisk ledning och operativt ägarskap."
     }
   ],
-  "profile": "Assembler and COBOL engineer in core banking at one of Sweden's largest banks, with production on-call responsibility. A leading technical contributor to a live assembler-to-COBOL migration. Reviews code across teams, mentors, and builds internal tooling. Comfortable at both ends of the stack: HLASM at the bottom, vanilla JavaScript at the top.",
-  "profile_sv": "Assembler- och COBOL-ingenjör i kärnbanken hos en av Sveriges största banker, med jouransvar i produktion. Ledande teknisk bidragsgivare i en pågående migrering från assembler till COBOL. Granskar kod över teamgränser, mentorerar och bygger interna verktyg. Trivs i båda ändar av stacken: HLASM i botten, vanilla JavaScript i toppen.",
+  "profile": "Systems and platform engineer with production ownership across IBM z/OS and OpenShift. Writes HLASM and COBOL in live core banking and owns integrated JavaScript applications end-to-end, including database-backed workflows, CI pipelines, deployment and operation. A leading technical contributor to a live assembler-to-COBOL migration who also builds systems used across engineering and leadership.",
+  "profile_sv": "System- och plattformsingenjör med produktionsansvar över IBM z/OS och OpenShift. Skriver HLASM och COBOL i kärnbank i drift och äger integrerade JavaScript-applikationer end-to-end, inklusive databasdrivna arbetsflöden, CI-pipelines, driftsättning och förvaltning. Ledande teknisk bidragsgivare i en pågående migrering från assembler till COBOL som också bygger system för ingenjörer och chefer.",
   "coreStack": [
     "IBM z/OS (HLASM, COBOL, IMS, JCL)",
     "Transaction-critical architecture",
+    "OpenShift, JavaScript, databases",
     "Node.js, REST APIs, AWS",
     "System ownership & incident response",
     "CI/CD, Git, Agile delivery",
@@ -48,10 +49,11 @@
   "coreStack_sv": [
     "IBM z/OS (HLASM, COBOL, IMS, JCL)",
     "Transaktionskritisk arkitektur",
+    "OpenShift, JavaScript, databaser",
     "Node.js, REST-API:er, AWS",
     "System\u00e4gande & incidenthantering",
     "CI/CD, Git, agil leverans",
-    "Intern verktygsbygge & utvecklarupplevelse"
+    "Interna plattformar & utvecklarupplevelse"
   ],
   "experience": [
     {
@@ -63,6 +65,7 @@
       "highlights": [
         "Write and maintain assembler and COBOL in SEB\u2019s core banking platform, with production on-call responsibility.",
         "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
+        "Own end-to-end delivery of integrated internal applications on OpenShift \u2014 JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership.",
         "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
         "Built an internal documentation platform replacing Word, SharePoint, Confluence and analog binders \u2014 850+ pages, used daily by the entire department.",
         "Mentor juniors and seniors. Run knowledge sessions. Conduct code reviews across COBOL teams. Lead risk analysis and root-cause investigations for production core systems."
@@ -70,6 +73,7 @@
       "highlights_sv": [
         "Skriver och underh\u00e5ller assembler och COBOL i SEB:s k\u00e4rnbanksplattform, med jouransvar i produktion.",
         "\u00c4r en ledande teknisk bidragsgivare i en p\u00e5g\u00e5ende migrering fr\u00e5n assembler-driven bearbetning till modern COBOL och g\u00e5r in i teknisk koordinering vid behov.",
+        "\u00c4ger end-to-end-leverans av integrerade interna applikationer p\u00e5 OpenShift \u2014 JavaScript, databasdrivna arbetsfl\u00f6den, CI-pipelines och produktionsintegrationer som anv\u00e4nds av ingenj\u00f6rer och chefer.",
         "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
         "Byggde en intern dokumentationsplattform som ersatte Word, SharePoint, Confluence och analoga p\u00e4rmar \u2014 850+ sidor, anv\u00e4nds dagligen av hela avdelningen.",
         "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Genomf\u00f6r kodgranskningar \u00e5t COBOL-team. Leder riskanalys och rotorsaksutredningar f\u00f6r produktionskritiska k\u00e4rnsystem."
@@ -193,6 +197,13 @@
   ],
   "projects": [
     {
+      "name": "Integrated Operational Platforms",
+      "name_sv": "Integrerade verksamhetsplattformar",
+      "description": "Production applications on OpenShift connecting JavaScript services, database-backed workflows and CI pipelines across engineering and leadership processes. Owned end-to-end from architecture and integration through deployment and operation.",
+      "description_sv": "Produktionsapplikationer p\u00e5 OpenShift som kopplar samman JavaScript-tj\u00e4nster, databasdrivna arbetsfl\u00f6den och CI-pipelines f\u00f6r ingenj\u00f6rs- och ledningsprocesser. \u00c4gda end-to-end fr\u00e5n arkitektur och integration till drifts\u00e4ttning och f\u00f6rvaltning.",
+      "tech": ["OpenShift", "JavaScript", "Databases", "CI/CD"]
+    },
+    {
       "name": "Internal Documentation Platform",
       "name_sv": "Intern dokumentationsplattform",
       "description": "850+ page engineering knowledge platform. Custom router, renderer, search engine, syntax highlighter, presentation engine and build pipeline. No external dependencies.",
@@ -210,14 +221,15 @@
   ],
   "skills": {
     "languages": ["HLASM", "COBOL", "JavaScript", "TypeScript", "Python", "SQL", "HTML/CSS"],
-    "platforms": ["IBM z/OS", "IMS", "Node.js", "Linux", "AWS", "Docker", "Git"],
+    "platforms": ["IBM z/OS", "IMS", "OpenShift", "Node.js", "Linux", "AWS", "Docker", "Git"],
     "concepts": [
       "Transaction-critical architecture",
       "Core banking systems",
       "System ownership & incident response",
       "CI/CD & Agile delivery",
       "Legacy-to-modern integration",
-      "API design & service contracts"
+      "API design & service contracts",
+      "Integrated operational workflows"
     ],
     "concepts_sv": [
       "Transaktionskritisk arkitektur",
@@ -225,7 +237,8 @@
       "System\u00e4gande & incidenthantering",
       "CI/CD & agil leverans",
       "Integration legacy\u2013modernt",
-      "API-design & tj\u00e4nstekontrakt"
+      "API-design & tj\u00e4nstekontrakt",
+      "Integrerade verksamhetsfl\u00f6den"
     ]
   }
 }

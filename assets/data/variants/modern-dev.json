@@ -1,29 +1,31 @@
 {
   "personal": {
     "name": "Joakim Mol\u00e9ni",
-    "title": "Senior Software Engineer | Backend & Service Integration",
-    "title_sv": "Senior mjukvaruingenj\u00f6r | Backend & tj\u00e4nsteintegration",
+    "title": "Senior Software Engineer | Backend & Platform Engineering",
+    "title_sv": "Senior mjukvaruingenj\u00f6r | Backend & plattformsutveckling",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Backend engineer with a systems background: HLASM and COBOL in live core banking, plus full-stack, AWS and ML delivery. Used to reasoning about performance, memory and failure modes at machine level. Has built web platforms from first principles — routing, rendering, search and build pipelines — and uses modern frameworks when they earn their place.",
-  "profile_sv": "Backendingenjör med systembakgrund: HLASM och COBOL i kärnbank i drift, kompletterat med fullstack-, AWS- och ML-leverans. Van att resonera om prestanda, minne och felmoder på maskinnivå. Har byggt webbplattformar från grunden — routing, rendering, sök och byggpipelines — och använder moderna ramverk när de tillför värde.",
+  "profile": "Backend and platform engineer with production ownership across IBM z/OS and OpenShift. Builds transaction-critical HLASM and COBOL as well as integrated JavaScript applications end-to-end, including database-backed workflows, CI pipelines, deployment and operation. Also brings AWS and ML product delivery.",
+  "profile_sv": "Backend- och plattformsingenjör med produktionsansvar över IBM z/OS och OpenShift. Bygger transaktionskritisk HLASM och COBOL samt integrerade JavaScript-applikationer end-to-end, inklusive databasdrivna arbetsflöden, CI-pipelines, driftsättning och förvaltning. Har också erfarenhet av AWS- och ML-produktleverans.",
   "coreStack": [
     "Node.js, TypeScript, REST APIs",
+    "OpenShift, Docker, CI/CD",
+    "SQL & database-backed workflows",
     "AWS (Lambda, S3, CloudFormation)",
     "IBM z/OS integration",
-    "Docker, CI/CD, Git",
     "System security & architecture",
     "Linux server administration"
   ],
   "coreStack_sv": [
     "Node.js, TypeScript, REST-API:er",
+    "OpenShift, Docker, CI/CD",
+    "SQL & databasdrivna arbetsfl\u00f6den",
     "AWS (Lambda, S3, CloudFormation)",
     "IBM z/OS-integration",
-    "Docker, CI/CD, Git",
     "Systems\u00e4kerhet & arkitektur",
     "Linux-serveradministration"
   ],
@@ -37,12 +39,14 @@
       "highlights": [
         "Write and maintain HLASM and COBOL in a production core-banking platform, with on-call responsibility.",
         "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
+        "Own end-to-end delivery of integrated internal applications on OpenShift \u2014 JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership.",
         "Built AI-assisted developer tooling adopted by 50+ engineers and an 850+ page knowledge platform with custom routing, search and build tooling.",
         "Review code across teams, mentor engineers and drive production incidents through root cause and prevention."
       ],
       "highlights_sv": [
         "Skriver och underhåller HLASM och COBOL i en kärnbanksplattform i produktion, med jouransvar.",
         "Är en ledande teknisk bidragsgivare i en pågående migrering från assembler-driven bearbetning till modern COBOL och går in i teknisk koordinering vid behov.",
+        "Äger end-to-end-leverans av integrerade interna applikationer på OpenShift — JavaScript, databasdrivna arbetsflöden, CI-pipelines och produktionsintegrationer som används av ingenjörer och chefer.",
         "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer och en kunskapsplattform med 850+ sidor, egen routing, sök och byggverktyg.",
         "Granskar kod över teamgränser, mentorerar ingenjörer och driver produktionsincidenter till rotorsak och prevention."
       ]
@@ -107,6 +111,13 @@
   ],
   "projects": [
     {
+      "name": "Integrated Operational Platforms",
+      "name_sv": "Integrerade verksamhetsplattformar",
+      "description": "Production applications on OpenShift connecting JavaScript services, database-backed workflows and CI pipelines across engineering and leadership processes. Owned end-to-end from architecture through operation.",
+      "description_sv": "Produktionsapplikationer p\u00e5 OpenShift som kopplar samman JavaScript-tj\u00e4nster, databasdrivna arbetsfl\u00f6den och CI-pipelines f\u00f6r ingenj\u00f6rs- och ledningsprocesser. \u00c4gda end-to-end fr\u00e5n arkitektur till f\u00f6rvaltning.",
+      "tech": ["OpenShift", "JavaScript", "Databases", "CI/CD"]
+    },
+    {
       "name": "Internal Documentation Platform",
       "name_sv": "Intern dokumentationsplattform",
       "description": "Web application replacing legacy documents with a searchable, structured knowledge base. Built with modern web tech, used daily by mainframe teams at SEB.",
@@ -124,7 +135,7 @@
   ],
   "skills": {
     "languages": ["JavaScript", "TypeScript", "COBOL", "HLASM", "Python", "SQL", "HTML/CSS"],
-    "platforms": ["Node.js", "AWS", "Docker", "IBM z/OS", "Linux", "Git", "REST APIs"],
+    "platforms": ["OpenShift", "Node.js", "AWS", "Docker", "IBM z/OS", "Linux", "Git", "REST APIs"],
     "concepts": ["Service integration & API design", "CI/CD & automated deployment", "System security & architecture", "Full-stack delivery", "Mainframe-to-modern bridging", "Observability & monitoring"],
     "concepts_sv": ["Tj\u00e4nsteintegration & API-design", "CI/CD & automatiserad drifts\u00e4ttning", "Systems\u00e4kerhet & arkitektur", "Full-stack-leverans", "Integration stordator\u2013modernt", "Observerbarhet & monitorering"]
   }

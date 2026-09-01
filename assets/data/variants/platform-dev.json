@@ -9,11 +9,11 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Platform engineer and technical leader who builds systems other engineers use. Designed an 850+ page engineering platform and developer tooling adopted by 50+ engineers, while carrying production responsibility on IBM z/OS. Brings operational judgment from business, logistics and team leadership that began long before the conventional developer title.",
-  "profile_sv": "Plattformsingenjör och teknisk ledare som bygger system andra ingenjörer använder. Designade en ingenjörsplattform med 850+ sidor och utvecklarverktyg som används av 50+ ingenjörer, parallellt med produktionsansvar på IBM z/OS. Tar med sig operativt omdöme från affärsverksamhet, logistik och teamledning som började långt före den konventionella utvecklartiteln.",
+  "profile": "Platform engineer and technical leader who owns systems from architecture through production. Builds integrated OpenShift applications with JavaScript, databases, CI pipelines and operational workflows, alongside production responsibility on IBM z/OS. Designed an 850+ page engineering platform and developer tooling adopted by 50+ engineers.",
+  "profile_sv": "Plattformsingenjör och teknisk ledare som äger system från arkitektur till produktion. Bygger integrerade OpenShift-applikationer med JavaScript, databaser, CI-pipelines och verksamhetsflöden, parallellt med produktionsansvar på IBM z/OS. Designade en ingenjörsplattform med 850+ sidor och utvecklarverktyg som används av 50+ ingenjörer.",
   "coreStack": [
     "System ownership & architecture",
-    "Cross-platform delivery (z/OS + cloud)",
+    "Cross-platform delivery (z/OS + OpenShift)",
     "Technical leadership & mentoring",
     "CI/CD, Git, Agile practices",
     "Internal tooling & developer experience",
@@ -21,7 +21,7 @@
   ],
   "coreStack_sv": [
     "System\u00e4gande & arkitektur",
-    "Plattformsoberoende leverans (z/OS + moln)",
+    "Plattformsoberoende leverans (z/OS + OpenShift)",
     "Teknisk ledning & mentorskap",
     "CI/CD, Git, agila metoder",
     "Intern verktygsbygge & utvecklarupplevelse",
@@ -36,12 +36,14 @@
       "years_sv": "Aug 2024 \u2013 nu",
       "highlights": [
         "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
+        "Own end-to-end delivery of integrated internal applications on OpenShift \u2014 JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership.",
         "Built AI-assisted developer tooling (custom Copilot instructions, code review automation, architecture guidance) adopted by 50+ mainframe engineers.",
         "Built an internal engineering platform replacing scattered documents and analog binders \u2014 850+ pages, used daily across the department.",
         "Mentor juniors and seniors. Run knowledge sessions. Drive incident investigations end-to-end from detection through resolution and prevention."
       ],
       "highlights_sv": [
         "\u00c4r en ledande teknisk bidragsgivare i en p\u00e5g\u00e5ende migrering fr\u00e5n assembler-driven bearbetning till modern COBOL och g\u00e5r in i teknisk koordinering vid behov.",
+        "\u00c4ger end-to-end-leverans av integrerade interna applikationer p\u00e5 OpenShift \u2014 JavaScript, databasdrivna arbetsfl\u00f6den, CI-pipelines och produktionsintegrationer som anv\u00e4nds av ingenj\u00f6rer och chefer.",
         "Byggde AI-assisterade utvecklarverktyg (Copilot-instruktioner, kodgranskningsautomation, arkitekturv\u00e4gledning) som anv\u00e4nds av 50+ stordatoringenj\u00f6rer.",
         "Byggde en intern ingenj\u00f6rsplattform som ersatte utspridda dokument och analoga p\u00e4rmar \u2014 850+ sidor som anv\u00e4nds dagligen inom avdelningen.",
         "Mentorerar juniora och seniora. H\u00e5ller kunskapssessioner. Driver incidentutredningar end-to-end fr\u00e5n detektering via l\u00f6sning till prevention."
@@ -129,6 +131,13 @@
   ],
   "projects": [
     {
+      "name": "Integrated Operational Platforms",
+      "name_sv": "Integrerade verksamhetsplattformar",
+      "description": "Production applications on OpenShift connecting JavaScript services, database-backed workflows and CI pipelines across engineering and leadership processes. Owned end-to-end from architecture through operation.",
+      "description_sv": "Produktionsapplikationer p\u00e5 OpenShift som kopplar samman JavaScript-tj\u00e4nster, databasdrivna arbetsfl\u00f6den och CI-pipelines f\u00f6r ingenj\u00f6rs- och ledningsprocesser. \u00c4gda end-to-end fr\u00e5n arkitektur till f\u00f6rvaltning.",
+      "tech": ["OpenShift", "JavaScript", "Databases", "CI/CD"]
+    },
+    {
       "name": "Internal Documentation Platform",
       "name_sv": "Intern dokumentationsplattform",
       "description": "Web application replacing scattered Word documents and physical binders with a searchable knowledge base. Built for mainframe teams, now used daily across the department.",
@@ -146,7 +155,7 @@
   ],
   "skills": {
     "languages": ["COBOL", "HLASM", "JavaScript", "TypeScript", "Python", "SQL"],
-    "platforms": ["IBM z/OS", "Linux", "Node.js", "AWS", "Docker", "Git"],
+    "platforms": ["IBM z/OS", "OpenShift", "Linux", "Node.js", "AWS", "Docker", "Git"],
     "concepts": ["System ownership & architecture", "Technical leadership & mentoring", "CI/CD & Agile delivery", "Incident response & risk analysis", "Cross-platform integration", "Internal tooling & developer experience"],
     "concepts_sv": ["System\u00e4gande & arkitektur", "Teknisk ledning & mentorskap", "CI/CD & agil leverans", "Incidenthantering & riskanalys", "Plattformsoberoende integration", "Intern verktygsbygge & utvecklarupplevelse"]
   }
