@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://joakimmoleni.github.io/portfolio/sitemap.xml
+Sitemap: https://portfolio.moleni.se/sitemap.xml

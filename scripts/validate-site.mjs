@@ -90,7 +90,7 @@ for (const file of publishableFiles) {
 }
 
 const indexHtml = await read('index.html');
-if (!indexHtml.includes('https://joakimmoleni.github.io/portfolio/')) errors.push('index.html: production canonical URL missing');
+if (!indexHtml.includes('https://portfolio.moleni.se/')) errors.push('index.html: production canonical URL missing');
 if (!indexHtml.includes('application/ld+json')) errors.push('index.html: structured data missing');
 
 const notFoundHtml = await read('404.html');
