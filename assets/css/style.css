@@ -839,9 +839,20 @@ img, svg { display: block; max-width: 100%; }
 
   .address-bar { padding-inline: 0.45rem; }
   .address-bar__left { flex: 1 1 auto; gap: 0; }
-  .addr { padding-inline: 0.65rem; font-size: 0.62rem; }
+  .addr { padding-inline: 0.65rem; font-size: 0.62rem; touch-action: manipulation; }
   #addrPC { display: none; }
-  .address-bar__right { margin-left: 0.2rem; }
+  .address-bar__right {
+    margin-left: 0.35rem;
+    padding-left: 0.35rem;
+    border-left: 1px solid var(--border-dim);
+  }
+
+  .theme-btn {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
 }
 
 @media (max-width: 540px) {
@@ -853,9 +864,45 @@ img, svg { display: block; max-width: 100%; }
   .work-card { grid-template-columns: 2rem 1fr; }
   .project-card__facts { grid-template-columns: 1fr; gap: 0.45rem; }
   .constraint-list > div { grid-template-columns: 6.6rem 1fr; gap: 0.7rem; }
-  .addr { display: grid; gap: 0; min-width: 4.55rem; justify-items: center; line-height: 1.1; }
-  .addr__hex { font-size: 0.56rem; }
-  .addr__label { font-size: 0.58rem; }
+  .address-bar { padding-inline: 0.25rem; }
+
+  .address-bar__left {
+    display: grid;
+    flex: 1 1 0;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .addr {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0.25rem 0.08rem;
+    place-content: center;
+    justify-items: center;
+    line-height: 1;
+  }
+
+  .addr::after { right: 0.2rem; left: 0.2rem; }
+  .addr__hex { display: none; }
+  .addr__label { font-size: clamp(0.5rem, 2.2vw, 0.58rem); letter-spacing: 0.01em; }
+
+  .address-bar__right {
+    align-self: stretch;
+    margin-left: 0.25rem;
+    padding-left: 0.25rem;
+  }
+
+  .theme-btn {
+    width: 44px;
+    height: 100%;
+    min-height: 44px;
+    background: var(--accent-dim);
+  }
+
+  .theme-btn:active { color: var(--accent); background: var(--accent-glow); }
+  .theme-icon { width: 17px; height: 17px; }
 }
 
 @media (min-width: 901px) and (max-height: 760px) {
