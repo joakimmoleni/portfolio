@@ -16,7 +16,7 @@ HLASM and COBOL in live core banking. Production on-call. Modernizing the platfo
 
 The code beneath the API still decides whether a transaction completes and the overnight run finishes. That is where I work: HLASM and COBOL on IBM z/OS, with production and on-call responsibility.
 
-My career did not begin when LinkedIn started calling me a developer. I had already built web systems, administered Linux, owned businesses, led operations and shipped work with consequences. The title caught up later.
+Before core banking, I built web systems, administered Linux and led business operations. That experience shapes how I approach engineering today: understanding the technical problem, the people relying on the system and what it takes to keep it running.
 
 COBOL was the route back in. My first change went to production in the week after training. I joined daytime on-call within three months and moved into first-call night duty after two years. Today I am a leading technical contributor to the move from an assembler-driven platform to modern COBOL while the system remains live.
 
@@ -62,6 +62,6 @@ Agentweb and Affärsbokföring are intentionally excluded while their repositori
 
 ### Send the difficult thing.
 
-I am interested in core systems, live modernization, developer platforms and products that need someone willing to own the whole path.
+I’m interested in critical systems, live modernization and developer platforms—work that combines hands-on engineering with responsibility for how systems run and evolve.
 
-If the work is mostly rearranging abstractions, I may not be your person. If correctness, migration risk or technical ownership actually matter, we should talk.
+My current experience is in banking. I’m also interested in applying that experience in energy, infrastructure and space.
