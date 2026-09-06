@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
 
-  <title>Joakim Moléni — Critical Systems &amp; Platform Engineer</title>
-  <meta name="title" content="Joakim Moléni — Critical Systems &amp; Platform Engineer">
-  <meta name="description" content="Critical systems and platform engineering across IBM z/OS and OpenShift — HLASM, COBOL, JavaScript, production ownership and live modernization.">
-  <meta name="theme-color" content="#ffffff">
+  <title>Joakim Moléni — Systemutvecklare · COBOL, HLASM &amp; webb</title>
+  <meta name="title" content="Joakim Moléni — Systemutvecklare · COBOL, HLASM &amp; webb">
+  <meta name="description" content="Systemutvecklare i Stockholm. COBOL, HLASM och z/OS, modern webbutveckling och AI-arbetsflöden. Utvalda arbeten, erfarenhet och CV.">
+  <meta name="theme-color" content="#3a6ea5">
 
-  <meta property="og:title" content="Joakim Moléni — Critical Systems &amp; Platform Engineer">
-  <meta property="og:description" content="From IBM z/OS to OpenShift: critical systems, modern applications and end-to-end production ownership.">
+  <meta property="og:title" content="Joakim Moléni — Systemutvecklare · COBOL, HLASM &amp; webb">
+  <meta property="og:description" content="COBOL, HLASM och z/OS. Webb, utvecklarverktyg och enkla lösningar som går att förvalta.">
   <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card.png">
   <meta property="og:image:alt" content="Joakim Moléni — critical systems and platform engineer">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio.moleni.se/">
-  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale" content="sv_SE">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Joakim Moléni — Critical Systems &amp; Platform Engineer">
-  <meta name="twitter:description" content="From IBM z/OS to OpenShift: critical systems, modern applications and end-to-end production ownership.">
+  <meta name="twitter:title" content="Joakim Moléni — Systemutvecklare · COBOL, HLASM &amp; webb">
+  <meta name="twitter:description" content="COBOL, HLASM och z/OS. Webb, utvecklarverktyg och enkla lösningar som går att förvalta.">
   <meta name="twitter:image" content="https://portfolio.moleni.se/assets/images/og-card.png">
   <meta name="twitter:image:alt" content="Joakim Moléni — critical systems and platform engineer">
 
@@ -30,13 +30,9 @@
   <link rel="sitemap" type="application/xml" href="https://portfolio.moleni.se/sitemap.xml">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260907">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260907-win2000">
   <script>
-    (function () {
-      var theme = 'light';
-      try { theme = localStorage.getItem('theme') || theme; } catch (e) {}
-      document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
-    })();
+    try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}
   </script>
 
   <script type="application/ld+json">
@@ -73,98 +69,105 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header wrap">
-    <a class="wordmark" href="#panel-boot" aria-label="Joakim Moléni, home">Joakim Moléni<span aria-hidden="true"> /</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#panel-projects">Work</a>
-      <a href="#panel-identity">About</a>
-      <a href="./resume.html">Résumé</a>
-      <button id="themeToggle" type="button" aria-label="Use dark theme" hidden>Dark</button>
+  <a class="skip-link" href="#main">Hoppa till innehåll</a>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-computer" viewBox="0 0 32 32"><path fill="#d4d0c8" stroke="#222" d="M3 2h25v21H3zM11 23h9v4h-9zM6 27h20v3H6z"/><path fill="#fff" d="M4 3h23v1H4v17H3V3z"/><path fill="#003b70" stroke="#808080" d="M6 5h19v14H6z"/><path fill="#66b4cb" d="M7 6h17v2H9v9H7z"/><path fill="#fff" d="M7 28h17v1H7z"/><path fill="#288846" d="M23 21h2v1h-2z"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 32 32"><path fill="#d6ae55" stroke="#655323" d="M2 7h11l3 3h14v17H2z"/><path fill="#fff0b0" d="M3 8h9v2H3z"/><path fill="#f4d783" stroke="#655323" d="M2 13h28l-3 15H4z"/><path fill="#fff6c7" d="M3 14h26v1H3z"/></symbol>
+    <symbol id="icon-document" viewBox="0 0 32 32"><path fill="#fff" stroke="#444" d="M7 2h14l6 6v22H7z"/><path fill="#d4d0c8" stroke="#444" d="M21 2v6h6"/><path fill="#406c9b" d="M11 11h12v2H11zM11 16h12v1H11zM11 20h12v1H11zM11 24h9v1h-9z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 32 32"><path fill="#fff4d1" stroke="#625c48" d="M2 7h28v20H2z"/><path fill="none" stroke="#8a8065" d="m2 8 14 11L30 8M2 26l10-10m8 0 10 10"/><path fill="#fff" d="M3 8h25v1H3z"/></symbol>
+  </svg>
+  <div class="desktop">
+    <nav class="desktop-shortcuts" aria-label="Genvägar på skrivbordet">
+      <a href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Min arbetsplats</span></a>
+      <a href="#panel-projects"><svg aria-hidden="true"><use href="#icon-folder"/></svg><span>Utvalda arbeten</span></a>
+      <a href="./resume.html?lang=sv"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>Mitt CV</span></a>
+      <a href="#panel-signal"><svg aria-hidden="true"><use href="#icon-mail"/></svg><span>Kontakt</span></a>
     </nav>
-  </header>
-
-  <main id="main">
-    <section class="intro wrap" id="panel-boot" aria-labelledby="entryTitle">
-      <div class="intro-copy">
-        <p class="eyebrow">Systems engineer · Stockholm</p>
-        <h1 id="entryTitle">Joakim<br>Moléni<span class="accent">.</span></h1>
-        <p class="intro-lead">I work on core banking systems at SEB.</p>
-        <p class="intro-detail">HLASM and COBOL on IBM z/OS, production on-call, and a migration from assembler to COBOL. I also build web applications and tools for other engineers.</p>
-        <a class="text-link" href="#panel-projects">Selected work <span aria-hidden="true">↘</span></a>
-      </div>
-      <figure class="intro-image">
-        <img src="./assets/images/computing-study.webp" alt="Illustration of wiring and metal backplanes inside a computer cabinet" width="1536" height="1024" fetchpriority="high">
-        <figcaption><span>Computing, up close</span><span>AI illustration</span></figcaption>
-      </figure>
-    </section>
-
-    <section class="work-section wrap" id="panel-work" aria-labelledby="workTitle">
-      <div class="section-heading" id="panel-projects">
-        <p class="eyebrow">01 / Work</p>
-        <h2 id="workTitle">What I work on.</h2>
-        <p>Most of my recent work is internal to SEB. I can describe my contribution here, but cannot share the source code.</p>
-      </div>
-      <div class="work-list">
-        <article class="work-entry">
-          <div class="work-label"><span class="work-number">01</span><div><p class="work-type">SEB · Core systems</p><h3>From assembler<br>to COBOL</h3></div></div>
-          <div class="work-copy"><p>I am one of the main technical contributors to the migration from assembler-driven processing to COBOL. I also help coordinate technical work while the platform remains in production.</p><p class="work-note">HLASM / COBOL / z/OS · Development and production on-call</p></div>
-        </article>
-        <article class="work-entry">
-          <div class="work-label"><span class="work-number">02</span><div><p class="work-type">SEB · Internal applications</p><h3>Applications on<br>OpenShift</h3></div></div>
-          <div class="work-copy"><p>I build applications for internal engineering and management workflows: JavaScript services, database-backed processes and integrations with existing systems. My work covers design, deployment and ongoing operation.</p><p class="work-note">JavaScript / OpenShift / Databases / CI</p></div>
-        </article>
-        <article class="work-entry">
-          <div class="work-label"><span class="work-number">03</span><div><p class="work-type">SEB · Developer tools</p><h3>A shared workspace<br>for mainframe engineers</h3></div></div>
-          <div class="work-copy"><p>I built AI-assisted development tools with Copilot instructions, code review automation and architecture guidance for mainframe work. More than 50 engineers use them.</p><p class="work-note">50+ engineers · Copilot / Code review / Documentation</p></div>
-        </article>
-        <article class="work-entry">
-          <div class="work-label"><span class="work-number">04</span><div><p class="work-type">SEB · Documentation</p><h3>Engineering knowledge,<br>in one place</h3></div></div>
-          <div class="work-copy"><p>An internal documentation platform with over 850 pages, bringing together material previously spread across several systems and binders. I built the routing, search, Markdown rendering and build pipeline. The department uses it daily.</p><p class="work-note">850+ pages · HTML / CSS / JavaScript</p></div>
-        </article>
-        <article class="work-entry">
-          <div class="work-label"><span class="work-number">05</span><div><p class="work-type">Fragsheet · Internship, 2023</p><h3>Web, ML integration<br>and AWS</h3></div></div>
-          <div class="work-copy"><p>I integrated ML coaching models into the product, rewrote the web platform in vanilla JavaScript and migrated the infrastructure from DigitalOcean to AWS. Fragsheet had 100,000 registered users.</p><p class="work-note">JavaScript / ML integration / AWS</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="about-section" id="panel-identity" aria-labelledby="aboutTitle">
-      <div class="about-grid wrap">
-        <div><p class="eyebrow">02 / Background</p><h2 id="aboutTitle">A less direct<br>route into banking.</h2></div>
-        <div class="about-copy">
-          <p>Before core banking, I built web systems, administered Linux and led business operations. I studied frontend development, then joined Handelsbanken through COBOL training.</p>
-          <p>My first production change went live the week after training. I joined daytime on-call within three months and moved into first-call night duty after two years.</p>
-          <dl class="career-list">
-            <div><dt>2024 — now</dt><dd><strong>SEB</strong><span>Software engineering · HLASM &amp; COBOL</span></dd></div>
-            <div><dt>2023 — 2024</dt><dd><strong>Handelsbanken</strong><span>Systems engineering · COBOL</span></dd></div>
-            <div><dt>2023</dt><dd><strong>Fragsheet</strong><span>Web development internship</span></dd></div>
-          </dl>
-          <a class="text-link" href="./resume.html">Full experience &amp; résumé <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="skills-section wrap" id="panel-dual" aria-labelledby="skillsTitle">
-      <p class="eyebrow" id="skillsTitle">Tools I work with</p>
-      <div class="skills-lines"><p>HLASM · COBOL · IBM z/OS · IMS · JCL</p><p>JavaScript · Node.js · OpenShift · Git · Linux · AWS</p></div>
-    </section>
-
-    <section class="contact-section wrap" id="panel-signal" aria-labelledby="contactTitle">
-      <figure class="horizon-image">
-        <img src="./assets/images/horizon-study.webp" alt="Illustration of a radio telescope in an open Nordic landscape" width="1536" height="1024" loading="lazy">
-        <figcaption><span>A wider field of interest</span><span>AI illustration</span></figcaption>
-      </figure>
-      <div class="contact-copy">
-        <p class="eyebrow">03 / Contact</p>
-        <h2 id="contactTitle">Get in touch.</h2>
-        <p>I’m interested in critical systems, system migrations and developer tools. Energy and space are also fields I would like to work in.</p>
-        <a class="contact-email" href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>
-        <div class="contact-links"><a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/joakimmoleni" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="./resume.html">Résumé ↗</a></div>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer wrap"><span>© <span id="copyrightYear">2026</span> Joakim Moléni</span><span>Stockholm, Sweden</span></footer>
-  <script src="./assets/js/portfolio.js?v=20260907" defer></script>
+    <div class="window main-window">
+      <header class="titlebar">
+        <span class="window-title"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Joakim Moléni — Min arbetsplats</span>
+        <button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button>
+      </header>
+      <nav class="window-menu" aria-label="Huvudnavigation">
+        <a href="#panel-boot">Översikt</a><a href="#panel-projects">Arbeten</a><a href="#panel-identity">Bakgrund</a><a href="#panel-signal">Kontakt</a>
+        <a href="./resume.html?lang=sv" class="menu-cv">CV</a>
+      </nav>
+      <div class="location-bar"><span>Plats</span><div class="location-value"><svg aria-hidden="true"><use href="#icon-folder"/></svg><span>Joakim Moléni / Portfolio</span></div></div>
+      <main id="main" class="document" tabindex="-1">
+        <section class="intro" id="panel-boot" aria-labelledby="entryTitle">
+          <div class="intro-copy">
+            <p class="eyebrow">Systemutvecklare · Stockholm</p>
+            <h1 id="entryTitle">Joakim Moléni</h1>
+            <p class="intro-lead">Stordatorer, webb och verktygen däremellan.</p>
+            <p>Jag arbetar med COBOL, HLASM och z/OS på SEB. Jag bygger också webbapplikationer och AI-arbetsflöden, med fokus på enkel arkitektur, underhållbarhet och mindre friktion.</p>
+            <div class="intro-actions"><a class="system-button primary-button" href="#panel-projects">Se utvalda arbeten</a><a class="system-button" href="./resume.html?lang=sv">Öppna CV</a></div>
+          </div>
+          <aside class="profile-summary" aria-label="Kort om mig">
+            <h2>I korthet</h2>
+            <dl><div><dt>Nu</dt><dd>Systemutveckling på SEB</dd></div><div><dt>Bakgrund</dt><dd>Teknik, webb och verksamhet</dd></div><div><dt>Arbetssätt</dt><dd>Enkel kod som går att förvalta</dd></div></dl>
+            <a href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>
+          </aside>
+        </section>
+        <section class="content-section" id="panel-work" aria-labelledby="workTitle">
+          <div class="section-heading" id="panel-projects"><svg aria-hidden="true"><use href="#icon-folder"/></svg><div><p class="eyebrow">Ett urval</p><h2 id="workTitle">Arbeten att titta närmare på</h2></div></div>
+          <div class="project-list">
+            <article class="project-entry">
+              <div class="project-label"><p class="file-meta">01 · Webb &amp; produkt · 2023</p><h3>Fragsheet</h3><p>JavaScript · ML-integration · AWS</p></div>
+              <div class="project-copy"><p>En spelplattform där coachingmodeller skulle bli en del av produkten.</p><p>Under min praktik integrerade jag modellerna tillsammans med ML-utvecklaren, skrev om webbplattformen i vanilla JavaScript och flyttade infrastrukturen från DigitalOcean till AWS.</p><p class="result"><strong>Resultat:</strong> modellernas insikter blev tillgängliga i produkten, med en omskriven webbplattform och drift på AWS.</p><a href="./resume.html?focus=modern-dev&amp;lang=sv">Min roll i CV:t</a></div>
+            </article>
+            <article class="project-entry">
+              <div class="project-label"><p class="file-meta">02 · Eget projekt</p><h3>Portfolio &amp; CV</h3><p>HTML · CSS · JavaScript</p></div>
+              <div class="project-copy"><p>Min erfarenhet spänner över flera områden. Ett enda CV behöver inte ge alla lika mycket plats.</p><p>Här samlar jag min portfolio och tre CV-inriktningar, på svenska och engelska, med gemensamma grunduppgifter.</p><p class="result"><strong>Resultat:</strong> välj relevant inriktning och skriv ut eller spara ett CV som PDF direkt i webbläsaren.</p><a href="https://github.com/joakimmoleni/portfolio" target="_blank" rel="noopener noreferrer">Läs koden på GitHub <span aria-hidden="true">↗</span></a></div>
+            </article>
+          </div>
+        </section>
+        <section class="content-section" id="panel-identity" aria-labelledby="experienceTitle">
+          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-document"/></svg><div><p class="eyebrow">Bakgrund</p><h2 id="experienceTitle">Vägen hit</h2></div></div>
+          <p class="section-intro">Jag har arbetat med teknik och verksamhet, studerat frontendutveckling och gått vidare till bankernas stordatorsystem. Den bakgrunden hjälper mig att se både koden och arbetet den ska stödja.</p>
+          <ol class="career-list">
+            <li><span class="career-date">2024–nu</span><div><h3>SEB</h3><p>Systemutveckling · COBOL, HLASM och IBM z/OS</p></div></li>
+            <li><span class="career-date">2023–2024</span><div><h3>Handelsbanken</h3><p>Systemutveckling · COBOL och IBM z/OS</p></div></li>
+            <li><span class="career-date">2023</span><div><h3>Fragsheet</h3><p>Praktik · webbutveckling, ML-integration och AWS</p></div></li>
+            <li><span class="career-date">2021–2023</span><div><h3>Changemaker Educations</h3><p>Frontend App Developer</p></div></li>
+          </ol>
+          <a class="system-button" href="./resume.html?lang=sv">Hela erfarenheten i mitt CV</a>
+        </section>
+        <section class="content-section" id="panel-dual" aria-labelledby="skillsTitle">
+          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="eyebrow">Kompetens</p><h2 id="skillsTitle">Det jag arbetar med</h2></div></div>
+          <div class="skills-grid">
+            <div><h3>Stordator</h3><p>Utveckling på IBM z/OS, plattformen bakom många långlivade verksamhetssystem.</p><p class="skill-tools">COBOL · HLASM (assembler) · IMS · JCL</p></div>
+            <div><h3>Webb &amp; plattformar</h3><p>Från gränssnitt och tjänster till driftsättning och förvaltning.</p><p class="skill-tools">JavaScript · Node.js · SQL · OpenShift</p></div>
+            <div><h3>Utvecklarens vardag</h3><p>Begriplig dokumentation, kodgranskning och AI-stöd som minskar handarbete.</p><p class="skill-tools">Git · Copilot · AI-arbetsflöden</p></div>
+          </div>
+        </section>
+        <section class="personal-note" aria-labelledby="personalTitle"><h2 id="personalTitle">Utanför koden</h2><p>Min väg till systemutveckling har gått via bland annat tillverkning, logistik och solenergi. Jag gillar att förstå hur saker fungerar. Energi och rymd är två områden jag gärna fortsätter att lära mig mer om.</p></section>
+        <section class="content-section contact-section" id="panel-signal" aria-labelledby="contactTitle">
+          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-mail"/></svg><div><p class="eyebrow">Kontakt</p><h2 id="contactTitle">Vi hörs.</h2></div></div>
+          <p>Om systemutveckling, ett projekt eller något du vill prata vidare om.</p>
+          <a class="contact-email" href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>
+          <div class="contact-links"><a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/joakimmoleni" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="./resume.html?lang=sv">CV på svenska</a><a href="./resume.html?lang=en" lang="en">CV in English</a></div>
+        </section>
+      </main>
+      <footer class="statusbar"><span>Klart.</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
+    </div>
+    <p class="desktop-caption">© <span id="copyrightYear">2026</span> Joakim Moléni</p>
+  </div>
+  <div class="taskbar" hidden>
+    <button class="system-button start-button" id="startButton" type="button" aria-expanded="false" aria-controls="startPanel"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Start</button>
+    <a class="task-button" href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Min arbetsplats</span></a>
+    <span class="taskbar-note">En sak i taget.</span>
+    <span class="tray">Stockholm <time id="clock" aria-label="Tid i Stockholm"></time></span>
+  </div>
+  <nav class="start-panel window" id="startPanel" aria-label="Start" hidden>
+    <p class="start-brand">Joakim <strong>Moléni</strong></p>
+    <div class="start-links"><a href="#panel-projects"><svg aria-hidden="true"><use href="#icon-folder"/></svg>Utvalda arbeten</a><a href="./resume.html?lang=sv"><svg aria-hidden="true"><use href="#icon-document"/></svg>Mitt CV</a><a href="#panel-signal"><svg aria-hidden="true"><use href="#icon-mail"/></svg>Kontakt</a><hr><button type="button" data-about>Om den här datorn…</button><button id="themeToggle" type="button" aria-pressed="false">Mörkt färgschema</button></div>
+  </nav>
+  <dialog class="window about-dialog" id="aboutDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
+    <div class="titlebar"><h2 id="dialogTitle">Om den här datorn</h2><button class="title-button" type="button" data-close aria-label="Stäng dialogrutan">×</button></div>
+    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Nyfiken sedan före bredbandet.</p></div></div>
+    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
+    <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
+  </dialog>
+  <script src="./assets/js/portfolio.js?v=20260907-win2000" defer></script>
 </body>
 </html>

@@ -74,6 +74,8 @@ const publishableFiles = [
   ...(resumeData.variants || []).map(variant => variant.path.replace(/^\.\//, ''))
 ];
 const unsupportedClaims = [
+  /850\+/i,
+  /50\+ (?:mainframe )?engineers/i,
   /billions of SEK/i,
   /50-person/i,
   /one of (?:roughly )?fifteen/i,
@@ -94,7 +96,7 @@ if (!indexHtml.includes('https://portfolio.moleni.se/')) errors.push('index.html
 if (!indexHtml.includes('application/ld+json')) errors.push('index.html: structured data missing');
 
 const notFoundHtml = await read('404.html');
-if (!notFoundHtml.includes('href="/portfolio/"')) errors.push('404.html: recovery link must target /portfolio/');
+if (!notFoundHtml.includes('href="https://portfolio.moleni.se/"')) errors.push('404.html: recovery link must target the canonical homepage');
 
 if (errors.length) {
   console.error(`Validation failed with ${errors.length} issue${errors.length === 1 ? '' : 's'}:`);
