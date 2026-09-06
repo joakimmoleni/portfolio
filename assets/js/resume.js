@@ -24,7 +24,7 @@ function updateQuery(key, value) {
   const next = new URL(location.href);
   if (value) next.searchParams.set(key, value);
   else next.searchParams.delete(key);
-  history.replaceState(null, '', `${next.pathname}${next.search}${next.hash}`);
+  history.pushState(null, '', `${next.pathname}${next.search}${next.hash}`);
 }
 
 function t(object, field) {
@@ -79,26 +79,6 @@ setResumeLang(window.__resumeLang, false);
 langEnBtn?.addEventListener('click', () => setResumeLang('en'));
 langSvBtn?.addEventListener('click', () => setResumeLang('sv'));
 exportButton?.addEventListener('click', () => window.print());
-
-/* Hide the controls while reading on small screens; reveal them on upward scroll. */
-
-(() => {
-  const topbar = document.querySelector('.resume-topbar');
-  if (!topbar) return;
-  let lastY = 0;
-  let scheduled = false;
-
-  window.addEventListener('scroll', () => {
-    if (scheduled) return;
-    scheduled = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      topbar.classList.toggle('topbar-hidden', window.innerWidth <= 900 && y > lastY && y > 80);
-      lastY = y;
-      scheduled = false;
-    });
-  }, { passive: true });
-})();
 
 async function fetchJson(path) {
   const response = await fetch(path, { cache: 'no-store' });
@@ -170,8 +150,10 @@ function mergeResumeData(baseData, overrideData) {
 }
 
 const variantCache = new Map();
+let variantRequest = 0;
 
-async function selectVariant(variantId) {
+async function selectVariant(variantId, updateUrl = true) {
+  const request = ++variantRequest;
   const variants = window.__resumeVariants || [];
   const variant = variants.find(entry => entry.id === variantId);
   if (!variant) return;
@@ -192,6 +174,7 @@ async function selectVariant(variantId) {
       variantCache.set(variant.id, data);
     }
 
+    if (request !== variantRequest) return;
     const merged = mergeResumeData(window.__baseResumeData || {}, data);
     window.__currentResumeData = merged;
     window.__currentVariantId = variant.id;
@@ -201,9 +184,10 @@ async function selectVariant(variantId) {
     renderResume(merged, variant.mode);
     setStatus(variantStatus(variant), 'ready');
     storageSet('resumeVariant', variant.id);
-    updateQuery('focus', variant.id);
+    if (updateUrl) updateQuery('focus', variant.id);
     document.title = `${variant.title} Resume — Joakim Moléni`;
   } catch (error) {
+    if (request !== variantRequest) return;
     console.error(`Could not load resume variant ${variant.id}.`, error);
     const fallback = window.__baseResumeData || {};
     window.__currentResumeData = fallback;
@@ -232,7 +216,7 @@ async function loadResume() {
     initVariants(variants);
     const requested = query.get('focus') || storageGet('resumeVariant');
     const selected = variants.some(variant => variant.id === requested) ? requested : variants[0].id;
-    await selectVariant(selected);
+    await selectVariant(selected, false);
   } catch (error) {
     console.error('Could not load resume data.', error);
     if (resumeContent) resumeContent.innerHTML = '<p class="resume-error">Resume data could not be loaded. Please return to the portfolio or use the email link above.</p>';
@@ -334,4 +318,12 @@ function renderListSection(label, values) {
   return `<section><h2 class="resume-section-title">${escapeHtml(label)}</h2><ul class="skill-list">${values.map(value => `<li class="skill-item">${escapeHtml(value)}</li>`).join('')}</ul></section>`;
 }
 
+window.addEventListener('popstate', () => {
+  const currentQuery = new URLSearchParams(location.search);
+  setResumeLang(currentQuery.get('lang') === 'sv' ? 'sv' : 'en', false);
+  const variants = window.__resumeVariants || [];
+  const requested = currentQuery.get('focus');
+  const selected = variants.find(variant => variant.id === requested) || variants[0];
+  if (selected) selectVariant(selected.id, false);
+});
 loadResume();

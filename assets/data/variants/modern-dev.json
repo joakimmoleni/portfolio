@@ -1,16 +1,16 @@
 {
   "personal": {
-    "name": "Joakim Mol\u00e9ni",
+    "name": "Joakim Moléni",
     "title": "Senior Software Engineer | Backend & Platform Engineering",
-    "title_sv": "Senior mjukvaruingenj\u00f6r | Backend & plattformsutveckling",
+    "title_sv": "Senior mjukvaruingenjör | Backend & plattformsutveckling",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Backend and platform engineer with production ownership across IBM z/OS and OpenShift. Builds transaction-critical HLASM and COBOL as well as integrated JavaScript applications end-to-end, including database-backed workflows, CI pipelines, deployment and operation. Also brings AWS and ML product delivery.",
-  "profile_sv": "Backend- och plattformsingenjör med produktionsansvar över IBM z/OS och OpenShift. Bygger transaktionskritisk HLASM och COBOL samt integrerade JavaScript-applikationer end-to-end, inklusive databasdrivna arbetsflöden, CI-pipelines, driftsättning och förvaltning. Har också erfarenhet av AWS- och ML-produktleverans.",
+  "profile": "Systems developer with experience in JavaScript, Node.js, SQL, OpenShift and AWS. My background also includes COBOL and HLASM on IBM z/OS, and integrating machine learning models into a web product.",
+  "profile_sv": "Systemutvecklare med erfarenhet av JavaScript, Node.js, SQL, OpenShift och AWS. Min bakgrund omfattar också COBOL och HLASM på IBM z/OS, samt integration av maskininlärningsmodeller i en webbprodukt.",
   "coreStack": [
     "Node.js, TypeScript, REST APIs",
     "OpenShift, Docker, CI/CD",
@@ -23,32 +23,24 @@
   "coreStack_sv": [
     "Node.js, TypeScript, REST-API:er",
     "OpenShift, Docker, CI/CD",
-    "SQL & databasdrivna arbetsfl\u00f6den",
+    "SQL & databasdrivna arbetsflöden",
     "AWS (Lambda, S3, CloudFormation)",
     "IBM z/OS-integration",
-    "Systems\u00e4kerhet & arkitektur",
+    "Systemsäkerhet & arkitektur",
     "Linux-serveradministration"
   ],
   "experience": [
     {
       "company": "SEB",
       "role": "Senior Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "role_sv": "Senior mjukvaruingenj\u00f6r (COBOL & HLASM / IBM z/OS)",
-      "years": "Aug 2024 \u2013 Present",
-      "years_sv": "Aug 2024 \u2013 nu",
+      "role_sv": "Senior mjukvaruingenjör (COBOL & HLASM / IBM z/OS)",
+      "years": "Aug 2024 – Present",
+      "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Write and maintain HLASM and COBOL in a production core-banking platform, with on-call responsibility.",
-        "Serve as a leading technical contributor to a live migration from assembler-driven processing to modern COBOL, stepping into technical coordination when needed.",
-        "Own end-to-end delivery of integrated internal applications on OpenShift \u2014 JavaScript, database-backed workflows, CI pipelines and production integrations used across engineering and leadership.",
-        "Built AI-assisted developer tooling adopted by 50+ engineers and an 850+ page knowledge platform with custom routing, search and build tooling.",
-        "Review code across teams, mentor engineers and drive production incidents through root cause and prevention."
+        "Systems development with COBOL, HLASM and IBM z/OS."
       ],
       "highlights_sv": [
-        "Skriver och underhåller HLASM och COBOL i en kärnbanksplattform i produktion, med jouransvar.",
-        "Är en ledande teknisk bidragsgivare i en pågående migrering från assembler-driven bearbetning till modern COBOL och går in i teknisk koordinering vid behov.",
-        "Äger end-to-end-leverans av integrerade interna applikationer på OpenShift — JavaScript, databasdrivna arbetsflöden, CI-pipelines och produktionsintegrationer som används av ingenjörer och chefer.",
-        "Byggde AI-assisterade utvecklarverktyg som används av 50+ ingenjörer och en kunskapsplattform med 850+ sidor, egen routing, sök och byggverktyg.",
-        "Granskar kod över teamgränser, mentorerar ingenjörer och driver produktionsincidenter till rotorsak och prevention."
+        "Systemutveckling med COBOL, HLASM och IBM z/OS."
       ]
     },
     {
@@ -58,71 +50,64 @@
       "years": "Aug 2023 – Aug 2024",
       "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "My first production change went live in the week after COBOL training.",
-        "Developed production COBOL for transaction-critical core banking workloads across mainframe, Linux and distributed environments.",
-        "Joined daytime on-call within three months and handled production incidents end-to-end across system boundaries."
+        "Systems development with COBOL and IBM z/OS, following COBOL training."
       ],
       "highlights_sv": [
-        "Min första produktionsändring driftsattes veckan efter COBOL-utbildningen.",
-        "Utvecklade produktions-COBOL för transaktionskritiska kärnbanksarbetslaster över stordator, Linux och distribuerade miljöer.",
-        "Gick in i dagjour inom tre månader och hanterade produktionsincidenter end-to-end över systemgränser."
+        "Systemutveckling med COBOL och IBM z/OS efter COBOL-utbildning."
       ]
     },
     {
       "company": "Fragsheet",
       "role": "Frontend App Developer Intern (LIA)",
       "role_sv": "Frontend App Developer-praktikant (LIA)",
-      "years": "Jan 2023 \u2013 Jul 2023",
+      "years": "Jan 2023 – Jul 2023",
       "highlights": [
-        "Integrated ML coaching models into the product through connectors and adapters, working closely with the ML engineer to operationalize live League of Legends insights for 100,000 registered users.",
-        "Rewrote the entire web platform in vanilla JavaScript and owned the infrastructure migration from DigitalOcean to AWS end-to-end."
+        "Integrated ML coaching models into the product together with the ML engineer.",
+        "Rewrote the web platform in vanilla JavaScript and migrated infrastructure from DigitalOcean to AWS."
       ],
       "highlights_sv": [
-        "Integrerade ML-coachingmodeller i produkten genom connectors och adaptrar, i n\u00e4ra samarbete med ML-ingenj\u00f6ren, f\u00f6r live-insikter till 100 000 registrerade League of Legends-anv\u00e4ndare.",
-        "Skrev om hela webbplattformen i vanilla JavaScript och \u00e4gde infrastrukturmigreringen fr\u00e5n DigitalOcean till AWS end-to-end."
+        "Integrerade ML-coachingmodeller i produkten tillsammans med ML-utvecklaren.",
+        "Skrev om webbplattformen i vanilla JavaScript och flyttade infrastrukturen från DigitalOcean till AWS."
       ]
     },
     {
       "company": "Evil Table Poker",
       "role": "Chief Technology Officer",
       "role_sv": "Teknikchef (CTO)",
-      "years": "2007 \u2013 2008",
+      "years": "2007 – 2008",
       "highlights": [
-        "Full technical ownership of an online gaming platform \u2014 system architecture, infrastructure, backend development and security from scratch.",
+        "Full technical ownership of an online gaming platform — system architecture, infrastructure, backend development and security from scratch.",
         "Responsible for all technology decisions, server infrastructure and cybersecurity posture."
       ],
       "highlights_sv": [
-        "Fullt tekniskt \u00e4garskap f\u00f6r en online-spelplattform \u2014 systemarkitektur, infrastruktur, backendutveckling och s\u00e4kerhet fr\u00e5n grunden.",
-        "Ansvarig f\u00f6r alla teknikbeslut, serverinfrastruktur och s\u00e4kerhetsarbete."
+        "Fullt tekniskt ägarskap för en online-spelplattform — systemarkitektur, infrastruktur, backendutveckling och säkerhet från grunden.",
+        "Ansvarig för alla teknikbeslut, serverinfrastruktur och säkerhetsarbete."
       ]
     },
     {
       "company": "Paf",
       "role": "Web Administrator",
-      "role_sv": "Webbadministrat\u00f6r",
-      "years": "2005 \u2013 2006",
+      "role_sv": "Webbadministratör",
+      "years": "2005 – 2006",
       "highlights": [
         "Linux server administration and web operations for a major Nordic gaming company."
       ],
       "highlights_sv": [
-        "Linux-serveradministration och webbdrift f\u00f6r ett stort nordiskt spelbolag."
+        "Linux-serveradministration och webbdrift för ett stort nordiskt spelbolag."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Integrated Operational Platforms",
-      "name_sv": "Integrerade verksamhetsplattformar",
-      "description": "Production applications on OpenShift connecting JavaScript services, database-backed workflows and CI pipelines across engineering and leadership processes. Owned end-to-end from architecture through operation.",
-      "description_sv": "Produktionsapplikationer p\u00e5 OpenShift som kopplar samman JavaScript-tj\u00e4nster, databasdrivna arbetsfl\u00f6den och CI-pipelines f\u00f6r ingenj\u00f6rs- och ledningsprocesser. \u00c4gda end-to-end fr\u00e5n arkitektur till f\u00f6rvaltning.",
-      "tech": ["OpenShift", "JavaScript", "Databases", "CI/CD"]
-    },
-    {
-      "name": "Internal Documentation Platform",
-      "name_sv": "Intern dokumentationsplattform",
-      "description": "Web application replacing legacy documents with a searchable, structured knowledge base. Built with modern web tech, used daily by mainframe teams at SEB.",
-      "description_sv": "Webbapplikation som ersatte utspridda dokument med en s\u00f6kbar, strukturerad kunskapsbas. Byggd med modern webbteknik, anv\u00e4nds dagligen av stordatorteam p\u00e5 SEB.",
-      "tech": ["HTML", "CSS", "JavaScript"]
+      "name": "Portfolio and resume",
+      "name_sv": "Portfolio och CV",
+      "description": "Static portfolio with three resume variants, Swedish and English content, and print-to-PDF. Built with HTML, CSS and vanilla JavaScript.",
+      "description_sv": "Statisk portfolio med tre CV-inriktningar, svenskt och engelskt innehåll samt utskrift till PDF. Byggd med HTML, CSS och vanilla JavaScript.",
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
     }
   ],
   "education": [
@@ -130,13 +115,44 @@
       "school": "Changemaker Educations",
       "degree": "Frontend App Developer Programme",
       "degree_sv": "Frontend App Developer",
-      "years": "2021 \u2013 2023"
+      "years": "2021 – 2023"
     }
   ],
   "skills": {
-    "languages": ["JavaScript", "TypeScript", "COBOL", "HLASM", "Python", "SQL", "HTML/CSS"],
-    "platforms": ["OpenShift", "Node.js", "AWS", "Docker", "IBM z/OS", "Linux", "Git", "REST APIs"],
-    "concepts": ["Service integration & API design", "CI/CD & automated deployment", "System security & architecture", "Full-stack delivery", "Mainframe-to-modern bridging", "Observability & monitoring"],
-    "concepts_sv": ["Tj\u00e4nsteintegration & API-design", "CI/CD & automatiserad drifts\u00e4ttning", "Systems\u00e4kerhet & arkitektur", "Full-stack-leverans", "Integration stordator\u2013modernt", "Observerbarhet & monitorering"]
+    "languages": [
+      "JavaScript",
+      "TypeScript",
+      "COBOL",
+      "HLASM",
+      "Python",
+      "SQL",
+      "HTML/CSS"
+    ],
+    "platforms": [
+      "OpenShift",
+      "Node.js",
+      "AWS",
+      "Docker",
+      "IBM z/OS",
+      "Linux",
+      "Git",
+      "REST APIs"
+    ],
+    "concepts": [
+      "Service integration & API design",
+      "CI/CD & automated deployment",
+      "System security & architecture",
+      "Full-stack delivery",
+      "Mainframe-to-modern bridging",
+      "Observability & monitoring"
+    ],
+    "concepts_sv": [
+      "Tjänsteintegration & API-design",
+      "CI/CD & automatiserad driftsättning",
+      "Systemsäkerhet & arkitektur",
+      "Full-stack-leverans",
+      "Integration stordator–modernt",
+      "Observerbarhet & monitorering"
+    ]
   }
 }
