@@ -4,10 +4,10 @@ Personal portfolio and interactive resume builder. Static site built with HTML, 
 
 ## Features
 
-- Responsive instruction-stream portfolio with persistent dark/light theme
+- Responsive editorial portfolio with persistent dark/light theme and original illustrations
 - Multi-variant resume system (Core Systems, Modern Backend, Platform & Leadership)
 - Print-optimized PDF export for resumes
-- Keyboard, touch and wheel navigation with reduced-motion and no-JavaScript fallbacks
+- Native scrolling and anchor navigation, reduced-motion support and readable content without JavaScript
 - Local validation for links, assets, resume data and unsafe unverified claims
 
 ## Structure
@@ -17,6 +17,7 @@ Personal portfolio and interactive resume builder. Static site built with HTML, 
 - `assets/data/` — Resume data (JSON) with per-variant overrides
 - `assets/css/` — Stylesheets (portfolio + resume)
 - `assets/js/` — Scripts (portfolio + resume)
+- `content/illustrations.md` — Generated illustration descriptions and provenance
 
 ## Run locally
 
