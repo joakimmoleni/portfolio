@@ -29,7 +29,7 @@ const requiredFiles = [
   'assets/css/resume.css',
   'assets/js/script.js',
   'assets/js/resume.js',
-  'assets/images/og-card.png',
+  'assets/images/og-card-20260907.png',
   'assets/data/resume-data.json'
 ];
 

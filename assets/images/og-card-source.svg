@@ -1,36 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Joakim Moléni — Systemutvecklare</title>
+  <desc id="desc">Portfolio i Windows 2000-stil. Stordatorer, webb och verktygen däremellan.</desc>
   <defs>
-    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="1" fill="#e9e5dd" opacity=".035"/>
-    </pattern>
-    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#d0ad70" stop-opacity=".09"/>
-      <stop offset=".7" stop-color="#d0ad70" stop-opacity="0"/>
-    </linearGradient>
+    <linearGradient id="titlebar"><stop stop-color="#0a246a"/><stop offset="1" stop-color="#a6caf0"/></linearGradient>
+    <symbol id="computer" viewBox="0 0 32 32"><path fill="#d4d0c8" stroke="#222" d="M3 2h25v21H3zM11 23h9v4h-9zM6 27h20v3H6z"/><path fill="#fff" d="M4 3h23v1H4v17H3V3z"/><path fill="#003b70" stroke="#808080" d="M6 5h19v14H6z"/><path fill="#66b4cb" d="M7 6h17v2H9v9H7z"/><path fill="#fff" d="M7 28h17v1H7z"/><path fill="#288846" d="M23 21h2v1h-2z"/></symbol>
+    <symbol id="folder" viewBox="0 0 32 32"><path fill="#d6ae55" stroke="#655323" d="M2 7h11l3 3h14v17H2z"/><path fill="#fff0b0" d="M3 8h9v2H3z"/><path fill="#f4d783" stroke="#655323" d="M2 13h28l-3 15H4z"/><path fill="#fff6c7" d="M3 14h26v1H3z"/></symbol>
+    <symbol id="document" viewBox="0 0 32 32"><path fill="#fff" stroke="#444" d="M7 2h14l6 6v22H7z"/><path fill="#d4d0c8" stroke="#444" d="M21 2v6h6"/><path fill="#406c9b" d="M11 11h12v2H11zM11 16h12v1H11zM11 20h12v1H11zM11 24h9v1h-9z"/></symbol>
   </defs>
-
-  <rect width="1200" height="630" fill="#07090c"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <ellipse cx="230" cy="300" rx="430" ry="360" fill="url(#warm)"/>
-  <path d="M76 58v514" stroke="#272d34"/>
-  <path d="M76 58h52" stroke="#d0ad70" stroke-width="3"/>
-
-  <text x="98" y="88" fill="#e9e5dd" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="1.5">JOAKIM MOLÉNI</text>
-  <text x="98" y="119" fill="#686d72" font-family="Courier New, monospace" font-size="16" letter-spacing="1">SYSTEMS ENGINEER / STOCKHOLM</text>
-
-  <text x="92" y="245" fill="#a8a8a4" font-family="Arial, sans-serif" font-size="72" font-weight="500" letter-spacing="-3">I write code where</text>
-  <text x="92" y="325" fill="#e9e5dd" font-family="Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-3.5">money actually moves.</text>
-
-  <text x="98" y="392" fill="#a8a8a4" font-family="Courier New, monospace" font-size="23">HLASM and COBOL in live core banking.</text>
-  <text x="98" y="428" fill="#a8a8a4" font-family="Courier New, monospace" font-size="23">Production on-call. Modernization while it runs.</text>
-
-  <path d="M98 500h1004" stroke="#272d34"/>
-  <text x="98" y="542" fill="#d0ad70" font-family="Courier New, monospace" font-size="17">0x00 / ENTRY</text>
-  <text x="330" y="542" fill="#686d72" font-family="Courier New, monospace" font-size="17">IBM z/OS</text>
-  <text x="510" y="542" fill="#686d72" font-family="Courier New, monospace" font-size="17">PRODUCTION</text>
-  <text x="700" y="542" fill="#686d72" font-family="Courier New, monospace" font-size="17">ON-CALL</text>
-  <text x="865" y="542" fill="#686d72" font-family="Courier New, monospace" font-size="17">WEB / CLOUD / ML</text>
-
-  <circle cx="1097" cy="82" r="5" fill="#65bda7"/>
-  <text x="1080" y="114" fill="#686d72" font-family="Courier New, monospace" font-size="14" text-anchor="end">RC 00</text>
+  <rect width="1200" height="630" fill="#3a6ea5"/>
+  <g font-family="Tahoma, Verdana, Arial, sans-serif">
+    <g fill="#fff" font-size="17" text-anchor="middle">
+      <use href="#computer" x="65" y="66" width="52" height="52"/>
+      <text x="91" y="145">Min arbetsplats</text>
+      <use href="#folder" x="65" y="199" width="52" height="52"/>
+      <text x="91" y="278">Mina arbeten</text>
+      <use href="#document" x="65" y="332" width="52" height="52"/>
+      <text x="91" y="411">Mitt CV</text>
+    </g>
+    <!-- Classic raised window, using the same palette and icons as the site. -->
+    <rect x="186" y="51" width="963" height="525" fill="#173654" opacity=".35"/>
+    <rect x="181" y="46" width="963" height="525" fill="#d4d0c8" stroke="#404040" stroke-width="2"/>
+    <path d="M182 570V47h961" fill="none" stroke="#fff" stroke-width="2"/>
+    <path d="M184 568h957V49" fill="none" stroke="#808080"/>
+    <rect x="187" y="52" width="951" height="38" fill="url(#titlebar)"/>
+    <use href="#computer" x="195" y="58" width="26" height="26"/>
+    <text x="232" y="78" fill="#fff" font-size="19" font-weight="700">Joakim Moléni — Min arbetsplats</text>
+    <rect x="1104" y="58" width="27" height="26" fill="#d4d0c8" stroke="#404040"/>
+    <path d="M1105 83V59h25" fill="none" stroke="#fff"/>
+    <text x="1118" y="78" text-anchor="middle" fill="#202020" font-size="20" font-weight="700">?</text>
+    <g fill="#202020" font-size="18"><text x="205" y="121">Översikt</text><text x="304" y="121">Arbeten</text><text x="401" y="121">Bakgrund</text><text x="518" y="121">Kontakt</text></g>
+    <path d="M188 135h949" stroke="#fff"/>
+    <text x="205" y="165" fill="#555" font-size="17">Plats</text>
+    <rect x="268" y="144" width="859" height="32" fill="#fff"/>
+    <path d="M268 176v-32h859" fill="none" stroke="#808080"/>
+    <use href="#folder" x="277" y="147" width="25" height="25"/>
+    <text x="313" y="166" fill="#202020" font-size="18">portfolio.moleni.se</text>
+    <rect x="191" y="187" width="943" height="343" fill="#fff"/>
+    <path d="M191 530V187h943" fill="none" stroke="#808080"/>
+    <text x="231" y="241" fill="#555" font-size="20">Systemutvecklare · Stockholm</text>
+    <text x="226" y="325" fill="#202020" font-size="72" font-weight="700" letter-spacing="-3">Joakim Moléni</text>
+    <text x="231" y="387" fill="#202020" font-size="30">Stordatorer, webb och</text>
+    <text x="231" y="430" fill="#202020" font-size="30">verktygen däremellan.</text>
+    <text x="232" y="492" fill="#003f80" font-size="19">COBOL · HLASM · z/OS · JavaScript · AI</text>
+    <use href="#computer" x="928" y="321" width="140" height="140"/>
+    <path d="M190 562v-24h631v24M829 562v-24h305v24" fill="none" stroke="#808080"/>
+    <path d="M190 562h631M829 562h305" stroke="#fff"/>
+    <text x="201" y="556" fill="#555" font-size="16">Klart.</text>
+    <text x="843" y="556" fill="#555" font-size="16">Portfolio &amp; CV</text>
+  </g>
 </svg>

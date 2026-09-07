@@ -32,3 +32,13 @@ The preview serves `http://127.0.0.1:4173`. No install is necessary. The existin
 ## Visual references
 
 Windows 2000 Professional screenshots from [GUIdebook](https://guidebookgallery.org/screenshots/win2000pro/): desktop and Display Properties. The CSS uses the classic Standard palette (#3a6ea5 desktop, #d4d0c8 system surface, #0a246a title bar), inset/raised borders and Tahoma with system fallbacks. Small functional SVG icons are drawn on a 32-pixel grid.
+
+## Link preview image
+
+The portfolio and resume share `assets/images/og-card-20260907.png` (1200 × 630).
+Its editable source is `assets/images/og-card-source.svg`. When updating the image,
+export the SVG to PNG at its original size, give the PNG a new filename, and update
+the image URLs in both HTML pages and the required file in the validator.
+Using a new image URL avoids reusing a cached image. Telegram can also cache the
+page preview; after publishing, request a refresh through @WebpageBot and share
+the link again. Existing messages may retain their original preview.
