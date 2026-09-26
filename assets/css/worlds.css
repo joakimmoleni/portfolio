@@ -1,0 +1,278 @@
+/* Each program keeps the shared Windows shell and owns only its inner surface. */
+.world-page .window-menu a[aria-current="page"] { font-weight: 700; box-shadow: var(--inset); }
+.world-page .desktop-shortcuts a[aria-current="page"] span { background: #0a246a; outline: 1px dotted #fff; }
+.world-window-actions { display: flex; flex-shrink: 0; gap: 4px; }
+.world-close { display: grid; place-items: center; text-decoration: none; }
+.world-document { border: 1px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); min-width: 0; }
+.world-document:focus { outline: none; }
+.world-document a, .world-document button { touch-action: manipulation; }
+.world-document :focus-visible { outline: 2px solid var(--world-focus); outline-offset: 3px; }
+.world-document button:focus-visible { outline-offset: 3px; outline-style: solid; }
+.world-document h1 { letter-spacing: -.035em; }
+.world-document p, .world-document dd { overflow-wrap: break-word; }
+
+/* A quiet journal: dark stone, worn brass, wood and readable parchment. */
+.wow-world { --world-focus: #ecce81; color: #e8dcc1; background: #22201e; padding: 24px; background-image: linear-gradient(125deg, #49443a44, transparent 45%), repeating-linear-gradient(0deg, #ffffff03 0 1px, transparent 1px 4px); }
+.wow-masthead { position: relative; display: flex; align-items: center; gap: 20px; padding: 0 6px 25px; }
+.wow-emblem { width: 96px; height: 96px; filter: drop-shadow(0 3px 2px #0008); }
+.wow-overline { color: #bdb092; text-transform: uppercase; font-size: .625rem; font-weight: 700; letter-spacing: .17em; margin-bottom: 9px; }
+.wow-masthead h1 { color: #e6c782; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(1.7rem, 3.5vw, 2.55rem); margin: 0 0 8px; text-shadow: 0 2px 1px #000; }
+.wow-subtitle { color: #d7c9ac; font-size: .875rem; }
+.wow-chapter { align-self: flex-start; margin-left: auto; padding: 4px 8px; border: 1px solid #796649; color: #b6a580; font-size: .625rem; letter-spacing: .1em; }
+.wow-journal { display: grid; grid-template-columns: minmax(185px, .75fr) minmax(0, 1.6fr); padding: 5px; border: 1px solid #9b8660; background: #39332a; box-shadow: 0 0 0 2px #111, 0 0 0 4px #665b46, inset 0 0 0 1px #181512, 0 8px 18px #0004; gap: 7px; }
+.wow-quest-list { min-width: 0; background: linear-gradient(90deg, #151411, #26211b); border: 1px solid #100e0b; display: flex; flex-direction: column; }
+.wow-quest-list h2 { padding: 18px 15px 16px; color: #e2c17f; font: 1.05rem Georgia, 'Times New Roman', serif; border-bottom: 1px solid #55472d; box-shadow: 0 1px 0 #0a0907; }
+.wow-quest-list > a { display: flex; align-items: flex-start; gap: 10px; padding: 16px 13px; border-bottom: 1px solid #3d3528; color: #e7d1a0; font-size: .875rem; text-decoration: none; line-height: 1.4; }
+.wow-quest-list > a small { display: block; margin-top: 5px; font: .6875rem/1.6 Tahoma, Verdana, sans-serif; color: #bbb09a; }
+.wow-quest-list > a:hover { background: #4c3b24; }
+.wow-quest-list > a[aria-current="true"] { color: #ffe09b; background: linear-gradient(90deg, #6b512c, #45331e); box-shadow: inset 3px 0 #cfa854, inset 0 1px #917445; }
+.wow-quest-list > a[aria-current="true"] small { color: #e2cfaa; }
+.quest-mark { color: #edc351; font: bold 1.55rem/1 Georgia, serif; text-shadow: 1px 1px #000; width: 12px; flex-shrink: 0; }
+.wow-inventory { padding: 30px 14px 12px; margin-top: auto; }
+.wow-inventory > p { font-size: .6875rem; color: #baa98a; margin-bottom: 10px; }
+.wow-inventory > div { display: flex; gap: 5px; flex-wrap: wrap; }
+.wow-inventory span { color: #c4bb9f; background: #252822; border: 1px solid #5b604a; box-shadow: inset 0 0 0 1px #10110e; padding: 4px 5px; font: .625rem/1.4 Tahoma, sans-serif; }
+.wow-journal-count { padding: 13px 14px; font-size: .625rem; color: #ab9e85; }
+.wow-pages { min-width: 0; background: #b89a62; }
+.wow-parchment { --world-focus: #63371c; min-height: 535px; color: #342712; padding: 30px 30px 32px; background-color: #e4cea0; background-image: radial-gradient(ellipse at 35% 35%, #fff5d159, transparent 65%), linear-gradient(90deg, #8e652b20, transparent 10%, transparent 94%, #79532124), repeating-linear-gradient(0deg, transparent 0 3px, #633a0910 3px 4px); box-shadow: inset 0 0 20px #80531c24, inset 0 0 0 1px #f5e0b4; }
+.wow-parchment + .wow-parchment { border-top: 3px solid #7b6138; }
+.wow-parchment h2 { font: 400 clamp(1.7rem, 3vw, 2rem)/1.2 Georgia, 'Times New Roman', serif; color: #3c2915; }
+.parchment-kicker { font: .6875rem/1.5 Tahoma, Verdana, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #675031; margin-bottom: 9px; }
+.parchment-rule { display: flex; align-items: center; gap: 10px; font-size: .6rem; color: #a78343; margin: 16px 0 23px; }
+.parchment-rule::before, .parchment-rule::after { content: ''; flex: 1; height: 1px; background: #9b773e80; }
+.wow-parchment > p:not(.parchment-kicker) { font: .9375rem/1.8 Georgia, 'Times New Roman', serif; margin-bottom: 17px; }
+.wow-parchment > p.parchment-lead { font-size: 1.15rem; line-height: 1.5; margin-bottom: 18px; }
+.wow-parchment h3 { font: 700 1.05rem/1.4 Georgia, 'Times New Roman', serif; margin: 23px 0 7px; }
+.wow-objective { border-top: 1px solid #a78a5559; border-bottom: 1px solid #a78a5559; margin: 23px 0; padding: 16px 0; }
+.wow-objective h3 { margin: 0 0 9px; }
+.wow-objective p { font: .9375rem/1.75 Georgia, 'Times New Roman', serif; }
+.wow-objective p + p { margin-top: 7px; }
+.wow-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-top: 25px; }
+.wow-button { display: inline-flex; align-items: center; justify-content: center; padding: 9px 20px; min-height: 42px; background: linear-gradient(#8e3021, #621f19); color: #ffe2a5; border: 1px solid #dfbe77; box-shadow: 0 0 0 1px #684c21, inset 0 0 0 2px #501c1580, 0 2px 3px #39200838; text-decoration: none; font: .9375rem Georgia, 'Times New Roman', serif; }
+.wow-button:hover { background: #9d3828; text-decoration: none; }
+.parchment-link { color: #4e3319; font: .8125rem/1.5 Tahoma, sans-serif; padding: 8px 0; }
+.wow-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 23px 2px 0; color: #b4a88e; font-size: .6875rem; }
+.wow-bottom a { color: #d9bd81; }
+
+/* Pre-Steam-inspired project browser: graphite, steel and amber. */
+.cs-world { --world-focus: #ffcb77; background: #25282c; color: #e3e4e5; padding: 30px; background-image: linear-gradient(115deg, #44484f70, transparent 65%), repeating-linear-gradient(0deg, #00000008 0 1px, transparent 1px 3px); }
+.cs-masthead { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 25px; }
+.cs-overline { text-transform: uppercase; letter-spacing: .17em; font-size: .625rem; color: #b2b7bc; margin-bottom: 9px; }
+.cs-masthead h1 { font-family: 'Arial Narrow', Impact, Arial, sans-serif; font-size: clamp(1.85rem, 3.5vw, 2.8rem); font-weight: 400; text-transform: uppercase; letter-spacing: .015em; color: #e5e7e9; margin-bottom: 9px; text-shadow: 1px 2px #111; }
+.cs-masthead h1 > span { color: #e3ae55; }
+.cs-masthead > div > p:last-child { font-size: .8125rem; color: #c3c6ca; }
+.cs-radar { width: 145px; height: 118px; opacity: .85; }
+.cs-browser { border: 1px solid #646970; box-shadow: 0 0 0 1px #0a0c10, 0 4px 12px #0004; background: #1c1f23; }
+.cs-list-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 11px 15px; background: linear-gradient(#575d64, #3e444a); border-bottom: 1px solid #080b0f; box-shadow: inset 0 1px #7c8288; }
+.cs-list-top h2 { font-size: .8125rem; color: #fff; }
+.cs-list-top > span { font-size: .625rem; color: #dde0e2; }
+.cs-list-columns, .cs-project-list > a { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 130px; gap: 15px; padding: 11px 16px; font-size: .8125rem; }
+.cs-list-columns { background: #2d3238; border-bottom: 1px solid #0e1217; color: #bfc5ca; font-size: .625rem; text-transform: uppercase; letter-spacing: .07em; padding-block: 8px; }
+.cs-project-list > a { color: #c8cbd0; text-decoration: none; border-bottom: 1px solid #3b3f43; min-height: 49px; align-items: center; }
+.cs-project-list > a strong { display: flex; align-items: center; gap: 10px; color: #edeff0; font-size: .875rem; }
+.cs-project-dot { display: inline-block; width: 7px; height: 7px; background: #9098a2; box-shadow: 0 0 0 1px #08090c; flex-shrink: 0; }
+.cs-project-list > a:hover { background: #343b44; }
+.cs-project-list > a[aria-current="true"] { background: #4c4434; box-shadow: inset 3px 0 #e4b666; color: #f0d8ae; }
+.cs-project-list > a[aria-current="true"] strong { color: #ffdd98; }
+.cs-project-list > a[aria-current="true"] .cs-project-dot { background: #f0c374; }
+.cs-details { border-top: 5px solid #32373d; }
+.cs-briefing { padding: 27px 28px 29px; min-height: 437px; background: linear-gradient(140deg, #24292e, #1d2126); }
+.cs-briefing + .cs-briefing { border-top: 1px solid #596069; }
+.cs-briefing-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+.cs-eyebrow { font: .625rem/1.5 'Courier New', monospace; text-transform: uppercase; letter-spacing: .09em; color: #c3a779; margin-bottom: 5px; }
+.cs-briefing h2 { color: #f0d5a4; font-size: 1.75rem; letter-spacing: -.025em; }
+.cs-file-stamp { color: #bcc3ca; font: .625rem/1.4 'Courier New', monospace; border: 1px solid #656d74; padding: 6px 8px; white-space: nowrap; margin-top: 4px; }
+.cs-lead { font-size: 1rem; line-height: 1.6; color: #edf0f2; max-width: 60ch; margin-bottom: 24px; }
+.cs-briefing-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; }
+.cs-briefing h3 { text-transform: uppercase; color: #b9c2cb; font-size: .6875rem; letter-spacing: .1em; margin-bottom: 9px; }
+.cs-briefing-grid p { font-size: .875rem; line-height: 1.8; color: #d5d9dd; }
+.cs-project-data { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1fr); gap: 17px; margin-top: 25px; padding: 16px 0 0; border-top: 1px solid #454c53; font-size: .75rem; }
+.cs-project-data dt { color: #aeb9c2; margin-bottom: 4px; }
+.cs-project-data dd { color: #e3e5e7; line-height: 1.65; }
+.cs-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 25px; }
+.cs-button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; padding: 10px 17px; min-height: 42px; background: linear-gradient(#555d66, #39414a); border: 1px solid; border-color: #9ba4ad #10151a #10151a #9ba4ad; box-shadow: inset 0 0 0 1px #303741, 0 1px #080b0e; color: #f1d5a2; font-size: .8125rem; font-weight: 700; text-decoration: none; }
+.cs-button:hover { color: #ffe3aa; background: #59636e; text-decoration: none; }
+.cs-text-link { color: #d5bc91; font-size: .8125rem; padding: 8px 0; }
+.cs-bottom { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 15px; padding-top: 22px; font-size: .6875rem; color: #b7bec6; }
+.cs-small-button { min-height: 36px; font-size: .6875rem; padding: 7px 12px; }
+
+/* A personal community profile, with the orange and turquoise of early Lunarstorm. */
+.lunar-world { --world-focus: #0b5960; background: #e8f0ed; color: #253c40; }
+.lunar-masthead { display: flex; align-items: center; gap: 14px; padding: 23px 30px 25px; background: #ec701f; background-image: linear-gradient(110deg, #f4822a, #de621c); border-bottom: 4px solid #934723; color: #fff; }
+.lunar-orbit svg { width: 70px; height: 60px; }
+.lunar-masthead p { font-size: .6875rem; font-weight: 700; color: #361900; margin-bottom: 4px; }
+.lunar-masthead h1 { font-size: clamp(2rem, 4.5vw, 3.15rem); line-height: 1; font-weight: 700; letter-spacing: -.045em; margin: 0; color: #173a40; text-shadow: 1px 1px #ffc988; }
+.lunar-masthead h1 span { display: inline-block; font-size: 1.4rem; color: #fff2b1; margin-left: 12px; vertical-align: top; line-height: 1.5; }
+.lunar-header-label { margin-left: auto; align-self: flex-end; font-size: .6875rem; color: #361900; font-weight: 700; }
+.lunar-navigation { display: flex; flex-wrap: wrap; gap: 2px; padding: 0 23px; border-bottom: 1px solid #316972; background: #276673; box-shadow: inset 0 1px #70a8aa; }
+.lunar-navigation a { min-height: 41px; padding: 10px 15px; font-size: .75rem; font-weight: 700; text-decoration: none; color: #fff; border-right: 1px solid #46808a; }
+.lunar-navigation a:first-child { border-left: 1px solid #46808a; }
+.lunar-navigation a:hover, .lunar-navigation a:focus-visible { background: #194d58; }
+.lunar-navigation :focus-visible { outline-color: #fff; outline-offset: -4px; }
+.lunar-layout { display: grid; grid-template-columns: 198px minmax(0, 1fr); align-items: start; gap: 24px; padding: 27px; }
+.lunar-profile { background: #fff; border: 1px solid #a9bfc0; padding: 10px; box-shadow: 2px 2px #c4d4d3; }
+.lunar-avatar { padding: 3px; border: 1px solid #92acac; background: #fff; margin-bottom: 12px; }
+.lunar-avatar svg { display: block; width: 100%; height: auto; }
+.lunar-profile-nick { color: #256575; font-weight: 700; font-size: 1.125rem; padding: 0 3px; }
+.lunar-real-name { color: #576d71; padding: 1px 3px 12px; font-size: .75rem; }
+.lunar-profile dl { border-top: 1px dotted #aac0c1; padding: 11px 3px; font-size: .6875rem; }
+.lunar-profile dl > div + div { margin-top: 10px; }
+.lunar-profile dt { color: #5b7177; }
+.lunar-profile dd { color: #2d464b; font-weight: 700; }
+.lunar-button { color: #124752; background: #d8e9e7; border: 1px solid; border-color: #f6fbfa #759f9e #759f9e #f6fbfa; outline: 1px solid #a2bdbb; box-shadow: inset -1px -1px #b3ceca; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px; font-size: .6875rem; font-weight: 700; text-decoration: none; margin: 7px 1px 1px; }
+.lunar-button svg { width: 22px; height: 22px; }
+.lunar-button:hover { background: #c6e0dd; text-decoration: none; }
+.lunar-content { min-width: 0; }
+.lunar-box { background: #fff; border: 1px solid #a9bfc0; margin-bottom: 20px; }
+.lunar-box > h2 { background: #d0e2e1; color: #254f59; font-size: .8125rem; padding: 8px 14px; border-bottom: 1px solid #a9bfc0; box-shadow: inset 0 1px #edf6f3; }
+.lunar-box-body { padding: 21px 23px; }
+.lunar-box-body > p { font-size: .875rem; line-height: 1.75; }
+.lunar-box-body > p + p { margin-top: 13px; }
+.lunar-box-body > .lunar-welcome { font: 700 1.6rem/1.25 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; color: #a84612; margin-bottom: 17px; }
+.lunar-contact-box > h2 { background: #f5d2b7; border-bottom-color: #d9b99d; color: #774019; box-shadow: inset 0 1px #fff0df; }
+.lunar-email { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 10px; color: #145b6a; font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 700; margin: 12px 0 20px; overflow-wrap: anywhere; max-width: 100%; }
+.lunar-email > span { font-size: 1rem; color: #c55a1d; }
+.lunar-contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px dotted #b1c4c6; padding-top: 18px; }
+.lunar-contact-links > a { display: flex; align-items: center; gap: 10px; color: #175968; text-decoration: none; font-size: .875rem; padding: 7px 0; }
+.lunar-contact-links > a:hover { text-decoration: underline; }
+.lunar-link-icon { display: grid; place-items: center; width: 32px; height: 32px; background: #e3efec; border: 1px solid #afc9c7; color: #39717b; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+.lunar-contact-links small { display: block; color: #5f7274; font-size: .625rem; margin-top: 2px; }
+.lunar-contact-links > a > span:last-child { margin-left: auto; color: #52818a; }
+.lunar-signature { display: flex; gap: 13px; align-items: center; padding: 3px 5px; font-size: .75rem; color: #556a6c; }
+.lunar-signature > span { color: #cc6e24; font-size: 1.8rem; }
+.lunar-signature a { color: #285f6b; font-size: .6875rem; }
+.lunar-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; background: #d3e3df; border-top: 1px solid #aac5c0; padding: 12px 27px; font-size: .625rem; color: #46686c; }
+.lunar-bottom a { color: #265d68; font-weight: 700; }
+
+@media (max-width: 1050px) {
+  .wow-world { padding: 20px; }
+  .wow-parchment { padding: 25px 23px; }
+  .wow-journal { grid-template-columns: minmax(175px, .7fr) minmax(0, 1.6fr); }
+  .wow-chapter { display: none; }
+  .cs-world { padding: 24px; }
+  .cs-radar { width: 112px; height: 100px; }
+  .cs-briefing { padding: 24px; }
+  .cs-list-columns, .cs-project-list > a { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 110px; }
+  .lunar-layout { grid-template-columns: 169px minmax(0, 1fr); gap: 18px; padding: 22px; }
+  .lunar-box-body { padding: 18px; }
+  .lunar-header-label { display: none; }
+}
+@media (max-width: 800px) {
+  .wow-journal { grid-template-columns: 1fr; }
+  .wow-quest-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wow-quest-list h2 { grid-column: 1 / -1; padding: 11px 13px; font-size: .875rem; }
+  .wow-quest-list > a { padding: 12px; font-size: .75rem; gap: 7px; border-right: 1px solid #3d3528; }
+  .wow-quest-list > a small, .wow-inventory, .wow-journal-count { display: none; }
+  .quest-mark { font-size: 1.2rem; width: 9px; }
+  .wow-parchment { min-height: 0; }
+  .cs-radar { display: none; }
+  .cs-briefing-grid { grid-template-columns: 1fr; gap: 22px; }
+  .cs-project-data { grid-template-columns: 1fr 1fr; }
+  .cs-list-columns, .cs-project-list > a { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .cs-list-columns > span:last-child, .cs-project-list > a > span:last-child { display: none; }
+  .cs-file-stamp { display: none; }
+  .lunar-contact-links { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 650px) {
+  .world-page .window-menu { justify-content: flex-start; }
+  .world-page .window-menu .menu-cv { display: inline-flex; margin-left: 0; }
+  .world-page .window-menu a { padding-inline: 8px; font-size: .8125rem; }
+  .world-window-actions { gap: 3px; }
+  .world-window-actions .title-button { width: 30px; height: 30px; }
+  .world-page .window-title { font-size: .75rem; }
+  .world-page .titlebar { gap: 6px; }
+  .wow-world { padding: 19px 13px; }
+  .wow-masthead { gap: 12px; padding: 0 0 20px; }
+  .wow-emblem { width: 65px; height: 65px; }
+  .wow-overline { font-size: .5625rem; letter-spacing: .09em; margin-bottom: 7px; }
+  .wow-masthead h1 { font-size: 1.65rem; margin-bottom: 6px; }
+  .wow-subtitle { font-size: .75rem; }
+  .wow-journal { gap: 5px; padding: 4px; }
+  .wow-quest-list > a { padding: 12px 9px; gap: 6px; font-size: .6875rem; align-items: center; }
+  .wow-quest-list > a[aria-current="true"] { box-shadow: inset 0 -2px #cfa854; }
+  .wow-parchment { padding: 25px 20px; }
+  .wow-parchment > p:not(.parchment-kicker), .wow-objective p { font-size: 1rem; }
+  .wow-button { min-height: 44px; }
+  .wow-bottom { line-height: 1.6; padding-top: 20px; gap: 8px; }
+  .cs-world { padding: 24px 15px 20px; }
+  .cs-masthead { padding: 0 2px 22px; }
+  .cs-overline { letter-spacing: .1em; }
+  .cs-masthead h1 { font-size: 2rem; }
+  .cs-masthead > div > p:last-child { font-size: .75rem; }
+  .cs-list-columns, .cs-project-list > a { padding-inline: 12px; gap: 10px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .cs-project-list > a { min-height: 55px; font-size: .6875rem; }
+  .cs-project-list > a strong { font-size: .8125rem; gap: 7px; }
+  .cs-project-dot { width: 5px; height: 5px; }
+  .cs-briefing { padding: 23px 18px; min-height: 0; }
+  .cs-briefing h2 { font-size: 1.55rem; }
+  .cs-briefing-grid p { font-size: .875rem; }
+  .cs-project-data { grid-template-columns: 1fr; gap: 13px; }
+  .cs-project-data > div { display: grid; grid-template-columns: 55px minmax(0, 1fr); gap: 15px; }
+  .cs-project-data dt { margin-bottom: 0; }
+  .cs-button { min-height: 44px; }
+  .cs-bottom { align-items: flex-start; }
+  .lunar-masthead { padding: 21px 19px 23px; gap: 10px; }
+  .lunar-orbit svg { width: 54px; height: 48px; }
+  .lunar-masthead h1 { font-size: 2.6rem; }
+  .lunar-masthead h1 span { font-size: 1rem; margin-left: 6px; }
+  .lunar-masthead p { font-size: .5625rem; }
+  .lunar-navigation { padding: 0 9px; gap: 0; }
+  .lunar-navigation a { padding: 12px 10px; font-size: .6875rem; min-height: 44px; }
+  .lunar-layout { grid-template-columns: 1fr; padding: 18px 15px; gap: 19px; }
+  .lunar-profile { display: grid; grid-template-columns: 91px minmax(0, 1fr); gap: 0 15px; padding: 13px; align-items: start; }
+  .lunar-avatar { grid-column: 1; grid-row: 1 / 4; margin: 0; }
+  .lunar-profile-nick { padding: 0; margin-top: 2px; }
+  .lunar-real-name { padding: 0 0 9px; }
+  .lunar-profile dl { grid-column: 2; padding: 8px 0 0; }
+  .lunar-profile dl > div { display: flex; flex-wrap: wrap; gap: 0 7px; }
+  .lunar-profile dl > div + div { margin-top: 4px; }
+  .lunar-profile dl > div:last-child { display: none; }
+  .lunar-button { grid-column: 1 / -1; margin-top: 15px; min-height: 44px; font-size: .75rem; }
+  .lunar-box-body { padding: 19px; }
+  .lunar-box-body > .lunar-welcome { font-size: 1.55rem; }
+  .lunar-email { font-size: 1rem; gap: 7px; }
+  .lunar-contact-links { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .lunar-contact-links > a { gap: 7px; font-size: .8125rem; min-height: 44px; }
+  .lunar-contact-links > a > span:last-child { display: none; }
+  .lunar-signature { font-size: .6875rem; }
+  .lunar-bottom { padding: 13px 19px; }
+}
+@media (max-width: 380px) {
+  .wow-masthead h1 { font-size: 1.4rem; }
+  .wow-emblem { width: 53px; height: 53px; }
+  .wow-parchment { padding-inline: 16px; }
+  .wow-quest-list > a { gap: 4px; padding-inline: 6px; }
+  .wow-quest-list .quest-mark { display: none; }
+  .cs-world { padding-inline: 11px; }
+  .cs-masthead h1 { font-size: 1.75rem; }
+  .cs-list-columns, .cs-project-list > a { grid-template-columns: 1fr; }
+  .cs-list-columns > span:nth-child(2), .cs-project-list > a > span:nth-child(2) { display: none; }
+  .cs-briefing { padding-inline: 16px; }
+  .lunar-masthead { padding-inline: 15px; }
+  .lunar-masthead h1 { font-size: 2.2rem; }
+  .lunar-navigation a { padding-inline: 8px; font-size: .625rem; }
+  .lunar-layout { padding-inline: 11px; }
+  .lunar-profile { grid-template-columns: 69px minmax(0, 1fr); gap: 0 12px; }
+  .lunar-box-body { padding-inline: 16px; }
+  .lunar-contact-links { grid-template-columns: 1fr; }
+}
+@media (forced-colors: active) {
+  .world-document a, .world-document button { forced-color-adjust: auto; }
+  .wow-journal, .wow-parchment, .cs-browser, .cs-project-list > a, .lunar-box, .lunar-profile { border: 1px solid CanvasText; }
+  .wow-quest-list > a[aria-current="true"], .cs-project-list > a[aria-current="true"] { border: 2px solid Highlight; }
+  .world-document :focus-visible { outline-color: Highlight; }
+}
+@media print {
+  .world-window-actions, .wow-quest-list, .wow-emblem, .wow-actions, .wow-bottom, .cs-project-list, .cs-list-top, .cs-radar, .cs-actions, .cs-bottom, .lunar-navigation, .lunar-avatar, .lunar-button, .lunar-bottom { display: none !important; }
+  .world-document, .wow-parchment, .cs-briefing, .lunar-box, .lunar-profile { background: #fff; color: #000; border: 0; box-shadow: none; }
+  .world-document { padding: 0; }
+  .world-document [data-world-panel][hidden] { display: block !important; }
+  .world-document * { text-shadow: none; color: #000 !important; }
+  .wow-journal, .lunar-layout { display: block; padding: 0; border: 0; background: #fff; box-shadow: none; }
+  .wow-masthead, .lunar-masthead { background: #fff; border: 0; padding: 0 0 20px; }
+  .wow-parchment, .cs-briefing { min-height: 0; padding: 15px 0; break-inside: avoid; }
+  .cs-browser, .cs-details { border: 0; box-shadow: none; }
+  .lunar-profile { display: block; }
+  .lunar-profile dl { display: none; }
+  .lunar-box-body { padding: 15px 0; }
+}

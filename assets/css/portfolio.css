@@ -30,6 +30,7 @@ body { margin: 0; background: var(--desktop); color: var(--text); font-size: 1re
 [hidden] { display: none !important; }
 a { color: var(--link); text-underline-offset: .2em; }
 a:hover { text-decoration-thickness: 2px; }
+a, summary { cursor: pointer; }
 button { font: inherit; cursor: pointer; color: inherit; }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
@@ -124,6 +125,19 @@ dt { color: var(--muted); }
 .start-links svg { width: 26px; height: 26px; }
 .start-links a:hover, .start-links button:hover { color: #fff; background: #0a246a; }
 .start-links hr { border: 0; border-top: 1px solid var(--shadow); border-bottom: 1px solid var(--highlight); margin: 3px; }
+.start-panel { max-height: calc(100dvh - 76px); overflow-y: auto; overscroll-behavior: contain; }
+.start-extras summary { padding: 10px 12px; min-height: 44px; font-size: .875rem; }
+.start-extras summary:hover { color: #fff; background: #0a246a; }
+.start-extras[open] { border-block: 1px solid var(--shadow); }
+.start-extras [data-extras-menu] { padding-left: 12px; }
+.titlebar a.title-button { display: inline-grid; place-items: center; text-decoration: none; }
+.window-menu a[aria-current="page"] { box-shadow: var(--inset); }
+.personal-note > a { display: inline-block; margin-top: 12px; }
+@media (pointer: fine) and (forced-colors: none) {
+  body { cursor: url('../images/cursor-arrow.svg') 1 1, default; }
+  input, textarea, p, dd, li, h1, h2, h3 { cursor: text; }
+  a, button, summary, [role="tab"] { cursor: pointer; }
+}
 .about-dialog { width: min(460px, calc(100% - 24px)); color: var(--text); max-height: calc(100dvh - 32px); margin: auto; }
 .about-dialog::backdrop { background: #0005; }
 .about-dialog .titlebar h2 { font-size: .875rem; }

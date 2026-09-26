@@ -30,85 +30,87 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260907-win2000">
-  <link rel="stylesheet" href="./assets/css/resume.css?v=20260907-win2000">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-worlds">
+  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-terminal">
+  <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-worlds">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
 <body class="page-resume">
-  <a class="skip-link" href="#resumeContent">Skip to resume</a>
-
-  <!-- Fixed top bar -->
-  <header class="resume-topbar window no-print">
-    <div class="titlebar"><span class="window-title">Joakim Moléni — CV</span></div>
-    <div class="resume-topbar-content">
-      <a href="./#panel-signal" class="resume-back-link" aria-label="Back to portfolio">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        <span>Portfolio</span>
-      </a>
-
-      <div class="resume-topbar-center">
-        <div class="version-tabs">
-          <span class="sr-only" id="variantLabel">Resume emphasis</span>
-          <div class="tabs-list" id="variantList" role="tablist" aria-labelledby="variantLabel">
-            <!-- Filled by JS -->
-          </div>
-        </div>
-      </div>
-
-      <div class="resume-topbar-right">
-        <div class="resume-lang-switch" role="group" aria-label="Language">
+  <a class="skip-link" href="#resumeContent" data-resume-en="Skip to resume" data-resume-sv="Hoppa till CV">Skip to resume</a>
+  <main class="resume-window window" aria-label="CV">
+    <header class="titlebar no-print">
+      <span class="window-title"><span class="terminal-icon" aria-hidden="true">&gt;_</span>Joakim Moléni — CV / Terminal</span>
+      <a class="title-button resume-close" href="./index.html" aria-label="Close terminal and return to desktop" data-resume-en-label="Close terminal and return to desktop" data-resume-sv-label="Stäng terminalen och återgå till skrivbordet">×</a>
+    </header>
+    <nav class="window-menu resume-menu no-print" aria-label="Programs">
+      <a href="./index.html" data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</a>
+      <a href="./about.html" data-resume-en="About me" data-resume-sv="Om mig">About me</a>
+      <a href="./projects.html" data-resume-en="Projects" data-resume-sv="Projekt">Projects</a>
+      <a href="./contact.html" data-resume-en="Contact" data-resume-sv="Kontakt">Contact</a>
+      <details class="resume-extras"><summary data-resume-en="Programs" data-resume-sv="Program">Programs</summary><div data-extras-menu></div></details>
+    </nav>
+    <div class="resume-toolbar no-print" data-requires-js hidden>
+      <span class="connection-label"><span aria-hidden="true">▪</span> JMOLENI / CV</span>
+      <div class="resume-tools">
+        <div class="resume-lang-switch" role="group" aria-label="Language / Språk">
           <button class="lang-btn active" id="langEnBtn" type="button" data-lang="en" aria-pressed="true">EN</button>
           <button class="lang-btn" id="langSvBtn" type="button" data-lang="sv" aria-pressed="false">SV</button>
         </div>
-
-        <button class="theme-switch" id="themeToggle" aria-label="Toggle dark/light mode">
-          <svg id="iconMoon" class="icon-moon hidden" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg id="iconSun" class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-
-        <button class="action-btn action-btn-primary" id="btnExportPdf" type="button" title="Print or save as PDF" aria-label="Print or save resume as PDF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Print / PDF</span>
-        </button>
+        <button class="theme-switch" id="themeToggle" type="button" aria-label="Change desktop appearance">◐</button>
+        <button class="action-btn" id="btnExportPdf" type="button" data-resume-en="Print / PDF" data-resume-sv="Skriv ut / PDF">Print / PDF</button>
       </div>
     </div>
-  </header>
-
-  <main aria-label="Resume">
-    <noscript>
-      <p class="resume-noscript">This resume needs JavaScript to switch between its three focused versions. You can still return to the <a href="./">portfolio</a> or email <a href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>.</p>
-    </noscript>
-    <div class="resume-wrapper">
-      <div class="resume-document">
-        <div class="resume-status no-print" id="resumeStatus" aria-live="polite" aria-atomic="true"></div>
-        <div class="resume">
-          <div class="resume-inner" id="resumeContent" tabindex="0">
-            <!-- Generated by JavaScript -->
-          </div>
+    <div class="terminal-screen">
+      <div class="terminal-heading no-print">
+        <span class="terminal-panel-id">JM00</span>
+        <p data-resume-en="PERSONAL INFORMATION · RESUME" data-resume-sv="PERSONUPPGIFTER · CV">PERSONAL INFORMATION · RESUME</p>
+        <span class="terminal-mode">BROWSE</span>
+      </div>
+      <div class="terminal-controls no-print" data-requires-js hidden>
+        <div class="terminal-focus">
+          <span id="variantLabel" data-resume-en="CV focus" data-resume-sv="CV-inriktning">CV focus</span>
+          <div class="tabs-list" id="variantList" role="tablist" aria-labelledby="variantLabel"></div>
+        </div>
+        <div class="resume-status" id="resumeStatus" aria-live="polite" aria-atomic="true"></div>
+        <form class="terminal-command" id="resumeCommandForm">
+          <label for="resumeCommand">Command <span aria-hidden="true">===&gt;</span></label>
+          <input id="resumeCommand" name="command" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="commandHint" placeholder="help">
+          <button type="submit" data-resume-en="Enter ↵" data-resume-sv="Kör ↵">Enter ↵</button>
+          <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false" data-resume-en="Help" data-resume-sv="Hjälp">Help</button>
+        </form>
+        <p class="command-hint" id="commandHint" data-resume-en="Click the sections below, or type a command. No terminal knowledge needed." data-resume-sv="Klicka på avsnitten nedan eller skriv ett kommando. Du behöver inte kunna terminaler.">Click the sections below, or type a command. No terminal knowledge needed.</p>
+        <p id="commandFeedback" class="command-feedback" role="status"></p>
+        <div class="terminal-help" id="resumeHelp" hidden>
+          <p data-resume-en="Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and home to return to the desktop." data-resume-sv="Kommandon: profile, work, skills, education, projects. Välj CV-inriktning med 1, 2 eller 3. Byt språk med en / sv, skriv print för PDF och home för att återgå till skrivbordet.">Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and home to return to the desktop.</p>
+          <p data-resume-en="F1 opens help. F3 returns to the desktop. These shortcuts are inactive while typing." data-resume-sv="F1 öppnar hjälp. F3 återgår till skrivbordet. Snabbtangenterna är inaktiva när du skriver.">F1 opens help. F3 returns to the desktop. These shortcuts are inactive while typing.</p>
         </div>
       </div>
+      <div class="resume-inner" id="resumeContent" tabindex="0">
+        <div class="resume-fallback" lang="en">
+          <h1>Joakim Moléni</h1>
+          <p>Senior Software Engineer | IBM z/OS, Assembler &amp; COBOL</p>
+          <p><a href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a> · <a href="https://github.com/joakimmoleni">GitHub</a> · <a href="https://linkedin.com/in/joakimmoleni">LinkedIn</a></p>
+          <noscript><p class="resume-noscript">Core Systems CV is shown below. Enable JavaScript for all three focus versions, Swedish translation and terminal navigation. You can also print this page with your browser.</p></noscript>
+          <section><h2>Profile</h2><p>Systems developer focused on COBOL, HLASM and IBM z/OS. Experience from SEB and Handelsbanken, with a background in web development and business operations.</p></section>
+          <section><h2>Core stack</h2><ul><li>IBM z/OS Assembler (HLASM)</li><li>COBOL</li><li>IMS &amp; DB2</li><li>JCL &amp; batch processing</li><li>TSO/ISPF, Endevor</li><li>OpenShift, JavaScript, CI/CD</li></ul></section>
+          <section><h2>Experience</h2><article class="job"><h3>SEB</h3><p class="job-position">Senior Software Engineer (HLASM &amp; COBOL / IBM z/OS)</p><p class="job-years">Aug 2024 – Present</p><ul class="job-highlights"><li>Systems development with COBOL, HLASM and IBM z/OS.</li></ul></article>
+<article class="job"><h3>Handelsbanken</h3><p class="job-position">Systems Engineer (COBOL / IBM z/OS)</p><p class="job-years">Aug 2023 – Aug 2024</p><ul class="job-highlights"><li>Systems development with COBOL and IBM z/OS, following COBOL training.</li></ul></article>
+<article class="job"><h3>PostNord TPL AB</h3><p class="job-position">Returns Manager</p><p class="job-years">Apr 2020 – Sep 2021</p><ul class="job-highlights"><li>First professional exposure to IBM mainframe systems — high-volume batch processing under strict SLAs.</li><li>Managed logistics operations at scale with process ownership and continuous improvement focus.</li></ul></article>
+<article class="job"><h3>Ericsson</h3><p class="job-position">Machine Technician</p><p class="job-years">Apr 2011 – Apr 2014</p><ul class="job-highlights"><li>Operated advanced manufacturing equipment at Ericsson — precision, reliability and systematic troubleshooting as daily requirements.</li><li>Technical training across hardware and Linux-based industrial systems.</li></ul></article></section>
+          <section><h2>Education</h2><p>Changemaker Educations — Frontend App Developer Programme</p><p>2021 – 2023</p></section>
+        </div>
+      </div>
+      <footer class="terminal-footer no-print" data-requires-js hidden>
+        <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false"><span>F1</span> <span data-resume-en="Help" data-resume-sv="Hjälp">Help</span></button>
+        <a href="./index.html"><span>F3</span> <span data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</span></a>
+        <button type="button" data-resume-command="print"><span>PDF</span> <span data-resume-en="Print all sections" data-resume-sv="Skriv ut alla avsnitt">Print all sections</span></button>
+        <span class="terminal-readonly" data-resume-en="READ ONLY" data-resume-sv="SKRIVSKYDDAD">READ ONLY</span>
+      </footer>
     </div>
+    <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span>UTF-8</span></div>
   </main>
-
-  <script src="./assets/js/resume-shell.js?v=20260907-win2000" defer></script>
-  <script src="./assets/js/resume.js?v=20260907-win2000" defer></script>
+  <script src="./assets/js/resume-shell.js?v=20260926-terminal" defer></script>
+  <script src="./assets/js/resume.js?v=20260926-terminal" defer></script>
+  <script src="./assets/js/extras.js?v=20260926-worlds" defer></script>
 </body>
 </html>

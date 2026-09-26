@@ -1,0 +1,295 @@
+'use strict';
+
+(() => {
+  if (document.getElementById('extras-player')) return;
+
+  const markup = document.createElement('div');
+  markup.innerHTML = `
+    <section id="extras-player" class="window extras-window extras-player" aria-labelledby="extras-player-title" tabindex="-1" hidden>
+      <header class="titlebar extras-titlebar">
+        <h2 id="extras-player-title">Winamp · nostalgiläge</h2>
+        <div class="extras-title-actions">
+          <button type="button" class="title-button extras-title-button" data-player-compact aria-label="Kompakt läge" aria-pressed="false" title="Kompakt läge">▱</button>
+          <button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">×</button>
+        </div>
+      </header>
+      <div class="extras-player-body">
+        <div class="extras-player-screen">
+          <div class="extras-player-readout"><span class="extras-player-time" data-player-time>00:00</span><span class="extras-player-state" data-player-state>STOPP</span></div>
+          <div class="extras-equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="extras-track" data-player-track>Demospår 01</p>
+        </div>
+        <label class="extras-progress-label" for="extras-player-progress">Position i spåret</label>
+        <input id="extras-player-progress" class="extras-player-progress" type="range" min="0" max="155" step="1" value="0" aria-valuetext="0 minuter, 0 sekunder">
+        <div class="extras-player-controls">
+          <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren">▶ Spela</button>
+          <button type="button" class="extras-control" data-player-stop>■ Stopp</button>
+          <button type="button" class="extras-control" data-player-next>Nästa ▷</button>
+        </div>
+        <ol class="extras-playlist" aria-label="Spellista med ljudlösa demospår">
+          <li><button type="button" data-player-select="0" aria-pressed="true"><span>01. Demospår 01</span><span>2:35</span></button></li>
+          <li><button type="button" data-player-select="1" aria-pressed="false"><span>02. Demospår 02</span><span>3:00</span></button></li>
+          <li><button type="button" data-player-select="2" aria-pressed="false"><span>03. Demospår 03</span><span>3:30</span></button></li>
+        </ol>
+        <p class="extras-player-note">Ljudlös nostalgispelare.</p>
+      </div>
+    </section>
+    <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
+      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">mIRC — #nostalgi</h2><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC">×</button></header>
+      <p id="extras-mirc-description" class="extras-dialog-note">Nostalgikanal — bara du och boten. Ingen livechatt.</p>
+      <div class="extras-chat-layout">
+        <div class="extras-chat-log" role="log" aria-label="Meddelanden i den lokala nostalgikanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
+        <aside class="extras-chat-users" aria-label="Namn i lekkanalen"><strong>#nostalgi</strong><span>@nostalgibot</span><span>besökare</span></aside>
+      </div>
+      <form class="extras-chat-form">
+        <label for="extras-chat-input">besökare &gt;</label>
+        <div class="extras-chat-entry"><input id="extras-chat-input" type="text" maxlength="300" autocomplete="off" spellcheck="false" placeholder="Skriv /help" autofocus><button class="system-button extras-send" type="submit">Skicka</button></div>
+      </form>
+      <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
+    </dialog>
+    <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
+      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
+      <p id="extras-notepad-description" class="extras-dialog-note">Din egen tillfälliga anteckning på det här skrivbordet.</p>
+      <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
+      <textarea id="extras-notepad-text" maxlength="12000" spellcheck="true" autofocus></textarea>
+      <p class="extras-notepad-status" role="status">Sparas i den här fliken. Skickas ingenstans.</p>
+    </dialog>`;
+  document.body.append(...markup.children);
+
+  const player = document.getElementById('extras-player');
+  const mirc = document.getElementById('extras-mirc');
+  const notepad = document.getElementById('extras-notepad');
+  const panels = { winamp: player, mirc, notepad };
+  const returnFocus = new Map();
+  const names = { winamp: ['♫', 'Winamp'], mirc: ['#', 'mIRC'], notepad: ['▤', 'Anteckningar'] };
+
+  for (const menu of document.querySelectorAll('[data-extras-menu]')) {
+    for (const [name, [icon, title]] of Object.entries(names)) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'system-button extras-launcher';
+      button.dataset.openExtra = name;
+      const symbol = document.createElement('span');
+      symbol.className = 'extras-launcher-icon';
+      symbol.setAttribute('aria-hidden', 'true');
+      symbol.textContent = icon;
+      button.append(symbol, title);
+      menu.append(button);
+    }
+  }
+  for (const button of document.querySelectorAll('[data-open-extra]')) {
+    const panel = panels[button.dataset.openExtra];
+    if (!panel) continue;
+    button.hidden = false;
+    button.setAttribute('aria-controls', panel.id);
+    button.setAttribute('aria-expanded', 'false');
+    if (panel instanceof HTMLDialogElement) button.setAttribute('aria-haspopup', 'dialog');
+  }
+
+  function isVisible(element) {
+    return element instanceof HTMLElement && element.isConnected && !element.closest('[hidden]') && !element.matches(':disabled') && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
+  }
+  function restoreFocus(name) {
+    const previous = returnFocus.get(name);
+    if (!previous) return;
+    const target = [previous, document.getElementById('startButton'), document.querySelector('[data-open-extra]'), document.querySelector('main')].find(isVisible);
+    target?.focus({ preventScroll: true });
+    returnFocus.delete(name);
+  }
+  function markOpen(name, open) {
+    for (const button of document.querySelectorAll(`[data-open-extra="${name}"]`)) button.setAttribute('aria-expanded', String(open));
+  }
+  function openExtra(name, trigger) {
+    const panel = panels[name];
+    if (!panel) return;
+    const start = document.getElementById('startPanel');
+    const startButton = document.getElementById('startButton');
+    returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
+    const previousDialog = trigger?.closest('dialog');
+    if (previousDialog?.open && previousDialog !== panel) previousDialog.close();
+    if (start) start.hidden = true;
+    startButton?.setAttribute('aria-expanded', 'false');
+    markOpen(name, true);
+    if (panel instanceof HTMLDialogElement) {
+      if (!panel.open) panel.showModal();
+      panel.querySelector('[autofocus]')?.focus();
+    } else {
+      panel.hidden = false;
+      panel.querySelector('[data-player-play]').focus({ preventScroll: true });
+    }
+  }
+  function closePlayer() {
+    stopPlayer();
+    player.hidden = true;
+    markOpen('winamp', false);
+    restoreFocus('winamp');
+  }
+  document.addEventListener('click', event => {
+    const opener = event.target.closest('[data-open-extra]');
+    if (opener && panels[opener.dataset.openExtra]) {
+      event.preventDefault();
+      openExtra(opener.dataset.openExtra, opener);
+      return;
+    }
+    const closer = event.target.closest('[data-extra-close]');
+    if (!closer) return;
+    const name = closer.dataset.extraClose;
+    if (name === 'winamp') closePlayer();
+    else panels[name]?.close();
+  });
+  player.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closePlayer();
+    }
+  });
+  for (const [name, dialog] of [['mirc', mirc], ['notepad', notepad]]) {
+    dialog.addEventListener('close', () => {
+      markOpen(name, false);
+      restoreFocus(name);
+    });
+  }
+
+  // A silent visual clock: no audio objects, media requests or autoplay.
+  const tracks = [155, 180, 210];
+  const time = player.querySelector('[data-player-time]');
+  const trackLabel = player.querySelector('[data-player-track]');
+  const playButton = player.querySelector('[data-player-play]');
+  const stateLabel = player.querySelector('[data-player-state]');
+  const progress = document.getElementById('extras-player-progress');
+  const playlistButtons = player.querySelectorAll('[data-player-select]');
+  let track = 0;
+  let position = 0;
+  let playing = false;
+  let startedAt = 0;
+  let timer;
+
+  function trackName() { return `Demospår ${String(track + 1).padStart(2, '0')}`; }
+  function drawPlayer() {
+    const seconds = Math.floor(position);
+    time.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+    progress.max = tracks[track];
+    progress.value = seconds;
+    progress.setAttribute('aria-valuetext', `${Math.floor(seconds / 60)} minuter, ${seconds % 60} sekunder`);
+    trackLabel.textContent = trackName();
+    playButton.textContent = playing ? 'Ⅱ Pausa' : '▶ Spela';
+    playButton.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
+    stateLabel.textContent = playing ? 'SPELAR · LJUDLÖST' : position >= tracks[track] ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
+    player.classList.toggle('is-playing', playing);
+    for (const button of playlistButtons) button.setAttribute('aria-pressed', String(Number(button.dataset.playerSelect) === track));
+  }
+  function stopTimer() {
+    clearInterval(timer);
+    timer = undefined;
+  }
+  function tick() {
+    position = Math.min(tracks[track], (performance.now() - startedAt) / 1000);
+    if (position >= tracks[track]) {
+      playing = false;
+      stopTimer();
+    }
+    drawPlayer();
+  }
+  function stopPlayer() {
+    playing = false;
+    position = 0;
+    stopTimer();
+    drawPlayer();
+  }
+  playButton.addEventListener('click', () => {
+    if (playing) {
+      tick();
+      playing = false;
+      stopTimer();
+    } else {
+      if (position >= tracks[track]) position = 0;
+      playing = true;
+      startedAt = performance.now() - position * 1000;
+      timer = setInterval(tick, 250);
+    }
+    drawPlayer();
+  });
+  player.querySelector('[data-player-stop]').addEventListener('click', stopPlayer);
+  function selectTrack(index) {
+    track = index;
+    position = 0;
+    startedAt = performance.now();
+    drawPlayer();
+  }
+  player.querySelector('[data-player-next]').addEventListener('click', () => selectTrack((track + 1) % tracks.length));
+  for (const button of playlistButtons) button.addEventListener('click', () => selectTrack(Number(button.dataset.playerSelect)));
+  progress.addEventListener('input', () => {
+    position = Number(progress.value);
+    startedAt = performance.now() - position * 1000;
+    drawPlayer();
+  });
+  player.querySelector('[data-player-compact]').addEventListener('click', event => {
+    const compact = player.classList.toggle('is-compact');
+    event.currentTarget.setAttribute('aria-pressed', String(compact));
+    event.currentTarget.setAttribute('aria-label', compact ? 'Visa hela spelaren' : 'Kompakt läge');
+    event.currentTarget.title = compact ? 'Visa hela spelaren' : 'Kompakt läge';
+  });
+  window.addEventListener('pagehide', stopPlayer);
+
+  const log = mirc.querySelector('.extras-chat-log');
+  const chatInput = document.getElementById('extras-chat-input');
+  function addLine(text, kind = 'system') {
+    const line = document.createElement('p');
+    line.className = `extras-chat-${kind}`;
+    line.textContent = text;
+    log.append(line);
+    while (log.children.length > 80) log.firstElementChild.remove();
+    log.scrollTop = log.scrollHeight;
+  }
+  function bot(text) { addLine(`<nostalgibot> ${text}`, 'bot'); }
+  addLine('*** Välkommen till #nostalgi. Du och nostalgibot är bara här i webbläsaren.');
+  addLine('*** Vänner, klaner, turneringar, scripts och bots — en liten blinkning till IRC-tiden. Skriv /help.');
+  mirc.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+    chatInput.value = '';
+    const command = message.split(/\s+/)[0].toLowerCase();
+    const argument = message.slice(command.length).trim();
+    if (command === '/clear') {
+      log.replaceChildren();
+      addLine('*** Rensat. Samma lokala kanal, lite mer plats.');
+    } else if (command === '/help') {
+      bot('/me [text] · /slap [namn] · /clear · /winamp · /np. Allt händer lokalt.');
+    } else if (command === '/me') {
+      addLine(`* besökare ${argument || 'ser sig omkring i #nostalgi.'}`, 'action');
+    } else if (command === '/slap') {
+      addLine(`* besökare daskar ${argument || 'nostalgibot'} försiktigt med en mycket pixlig öring.`, 'action');
+      bot('Öringen har lagts tillbaka. Ordningen är återställd.');
+    } else if (command === '/np') {
+      bot(`${trackName()} · ${playing ? 'spelar' : 'stoppad eller pausad'} · ljudlöst nostalgiläge.`);
+    } else if (command === '/winamp') {
+      const trigger = returnFocus.get('mirc');
+      returnFocus.delete('mirc');
+      mirc.close();
+      openExtra('winamp', trigger);
+      return;
+    } else if (command.startsWith('/')) {
+      bot(`Okänt kommando: ${command}. Skriv /help för kommandolistan.`);
+    } else {
+      addLine(`<besökare> ${message}`, 'visitor');
+      bot(/^(hej|hello|hallå|tjena)(\s|[!.?]|$)/i.test(message) ? 'Hej! Ingen kö till den här servern. Prova /me eller /slap.' : 'Mottaget i nostalgikanalen. Jag kan några små tricks — skriv /help.');
+    }
+    chatInput.focus();
+  });
+
+  const note = document.getElementById('extras-notepad-text');
+  const noteStatus = notepad.querySelector('.extras-notepad-status');
+  const noteKey = 'portfolio-extra-note-v1';
+  note.value = '[x] Starta datorn\n[ ] Bara en match till\n[ ] Komma ihåg varför jag öppnade Anteckningar\n';
+  try {
+    const saved = sessionStorage.getItem(noteKey);
+    if (saved !== null) note.value = saved.slice(0, 12000);
+  } catch {
+    noteStatus.textContent = 'Finns i minnet tills du lämnar sidan. Skickas ingenstans.';
+  }
+  note.addEventListener('input', () => {
+    try { sessionStorage.setItem(noteKey, note.value); }
+    catch { noteStatus.textContent = 'Finns i minnet tills du lämnar sidan. Skickas ingenstans.'; }
+  });
+})();
