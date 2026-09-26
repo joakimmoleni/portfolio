@@ -51,3 +51,28 @@ No dependencies, fonts or professional claims were added. The CV's colours and s
 - The no-JavaScript fallback remains readable. Print CSS at an A4-like content width shows all populated sections and full profile URLs while hiding command/navigation controls. This verifies layout styles, not native PDF pagination.
 
 No dependencies were added. Shared-world CSS changes are confined to Lunarstorm, preserving the other program designs.
+
+## Follow-up: whole-site shell and navigation audit
+
+All five main pages now use the same desktop shortcuts, Start menu, taskbar, clock, theme control and system dialog. The CV reuses portfolio.js for these behaviours; its separate theme listener and duplicate Programs launcher were removed. Its toolbar keeps language and print controls. Window controls and active desktop markers share the same CSS. Contact no longer loads the unused world-panel script.
+
+Repaired behaviours:
+
+- Active-page links return to the current content instead of reloading and resetting the selected project or quest. Start links identify the active program consistently.
+- Project/quest history preserves the selected pane through ordinary anchors such as the taskbar's #main, including Back/Forward and focus recovery.
+- F1/F3 do not interrupt the non-modal Winamp window. Shared desktop preferences refresh when a document is restored from browser cache.
+- Notes refresh from session storage both on restoration and when opened. A real browser check caught form restoration overwriting the first fix; rereading on open also passed the CV → Contact → Back reproduction, including preserving the latest edit.
+- Mobile title bars use the same readable labels and controls. Start's maximum height accounts for the device's safe bottom inset.
+- The 404 recovery stays on the current host. Without JavaScript, all personal/project sections remain readable and the first section is no longer incorrectly labelled current.
+
+Verification:
+
+- Static validation covers shared shell elements and navigation order/destinations in addition to links, IDs, assets and data. Deliberately broken shell, external menu and 404 links were rejected in a temporary validation copy.
+- The native test suite covers 29 CV/shared-theme cases, a world-pane history regression sequence, and four note persistence cases. No dependencies were added.
+- Browser layouts checked for all five main pages at 320, 651, 768, 960 and 1440 pixels, with no horizontal overflow, duplicate IDs or unnamed visible controls in the checked matrices. Start, theme and system-dialog focus were exercised on all five pages. A 320 × 390 viewport confirmed the Start menu scrolls within the screen and Notepad remains usable.
+- All five CV sections were clicked in each of the six language/variant combinations. English CV → Projects → linked role preserves English and selects the correct experience. All WoW panes, both project panes and history through the taskbar were exercised.
+- Winamp play/pause, stop, previous/next, playlist, seek, compact mode, Escape and focus return were exercised. F1/F3 stay within the CV page while Winamp has focus. mIRC commands, input history/draft restoration, plain-text rendering and /winamp transition passed. Notes were restored to their prior contents after the browser check.
+- All five pages remain readable at 320px with scripts removed. CV print styles at an A4-like content width hide the entire desktop shell and show populated sections with complete profile URLs. Native PDF pagination remains unverified in this environment.
+- The real local 404 recovered to localhost. GitHub profile and repository links returned HTTP 200. LinkedIn rejected automated retrieval (HTTP 999), so its external page availability is not claimed as verified. Email destination was inspected without sending mail.
+
+The preserved hierarchy is desktop → program → content. Desktop shortcuts, the window menu and Start are consistent alternatives; each program retains its own inner visual language.

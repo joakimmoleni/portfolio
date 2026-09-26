@@ -121,6 +121,7 @@
     if (previousDialog?.open && previousDialog !== panel) previousDialog.close();
     if (start) start.hidden = true;
     startButton?.setAttribute('aria-expanded', 'false');
+    if (name === 'notepad') loadNote();
     markOpen(name, true);
     if (panel instanceof HTMLDialogElement) {
       if (!panel.open) panel.showModal();
@@ -325,12 +326,18 @@
   const noteStatus = notepad.querySelector('.extras-notepad-status');
   const noteKey = 'portfolio-extra-note-v1';
   note.value = '[x] Starta datorn\n[ ] Bara en match till\n[ ] Komma ihåg varför jag öppnade Anteckningar\n';
-  try {
-    const saved = sessionStorage.getItem(noteKey);
-    if (saved !== null) note.value = saved.slice(0, 12000);
-  } catch {
-    noteStatus.textContent = 'Finns i minnet tills du lämnar sidan. Skickas ingenstans.';
+  function loadNote() {
+    try {
+      const saved = sessionStorage.getItem(noteKey);
+      if (saved !== null) note.value = saved.slice(0, 12000);
+    } catch {
+      noteStatus.textContent = 'Finns i minnet tills du lämnar sidan. Skickas ingenstans.';
+    }
   }
+  loadNote();
+  window.addEventListener('pageshow', event => {
+    if (event.persisted) loadNote();
+  });
   note.addEventListener('input', () => {
     try { sessionStorage.setItem(noteKey, note.value); }
     catch { noteStatus.textContent = 'Finns i minnet tills du lämnar sidan. Skickas ingenstans.'; }

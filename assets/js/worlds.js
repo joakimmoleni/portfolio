@@ -9,6 +9,11 @@
     if (!panels.length || !links.length) continue;
 
     const panelForHash = () => panels.find(panel => `#${panel.id}` === location.hash);
+    const panelForHistory = () => panels.find(panel => panel.id === history.state?.worldPanel);
+
+    function rememberPanel(panel) {
+      history.replaceState({ ...history.state, worldPanel: panel.id }, '');
+    }
 
     function showPanel(panel) {
       const moveFocus = panels.some(candidate => candidate !== panel && candidate.contains(document.activeElement));
@@ -24,7 +29,9 @@
       }
     }
 
-    showPanel(panelForHash() || panels[0]);
+    const initialPanel = panelForHash() || panelForHistory() || panels[0];
+    showPanel(initialPanel);
+    rememberPanel(initialPanel);
 
     navigation.addEventListener('click', event => {
       const link = event.target.closest('a[href^="#"]');
@@ -33,7 +40,7 @@
       if (!panel) return;
       event.preventDefault();
       showPanel(panel);
-      if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+      if (location.hash !== link.hash) history.pushState({ ...history.state, worldPanel: panel.id }, '', link.hash);
       const heading = panel.querySelector('h2');
       heading.setAttribute('tabindex', '-1');
       heading.focus({ preventScroll: true });
@@ -42,8 +49,10 @@
     });
 
     function syncToLocation() {
-      const panel = panelForHash();
-      if (panel || !location.hash) showPanel(panel || panels[0]);
+      // Native links such as the taskbar's #main also need to retain their pane.
+      const panel = panelForHash() || panelForHistory() || panels.find(candidate => !candidate.hidden) || panels[0];
+      showPanel(panel);
+      rememberPanel(panel);
     }
 
     window.addEventListener('hashchange', syncToLocation);

@@ -15,8 +15,8 @@
   <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card-20260907.png">
   <link rel="canonical" href="https://portfolio.moleni.se/projects.html">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-finish">
-  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260926-nostalgia">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-consistency">
+  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260926-consistency">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
@@ -30,20 +30,20 @@
     <symbol id="icon-profile" viewBox="0 0 32 32"><path d="M3 3h26v26H3Z" fill="#d3e8e4" stroke="#456f73"/><path d="M4 4h24v5H4Z" fill="#df7327"/><circle cx="16" cy="15" r="4" fill="#36717b"/><path d="M8 26v-3a8 8 0 0 1 16 0v3" fill="#36717b"/><path d="m25 11 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z" fill="#fff7b5"/></symbol>
   </svg>
   <div class="desktop">
-    <nav class="desktop-shortcuts" aria-label="Genvägar på skrivbordet"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Skrivbord</span></a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg><span>Om mig</span></a><a href="./projects.html" aria-current="page"><svg aria-hidden="true"><use href="#icon-projects"/></svg><span>Projekt</span></a><a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>CV</span></a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg><span>Kontakt</span></a></nav>
+    <nav class="desktop-shortcuts" aria-label="Genvägar på skrivbordet"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Skrivbord</span></a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg><span>Om mig</span></a><a href="#main" aria-current="page"><svg aria-hidden="true"><use href="#icon-projects"/></svg><span>Projekt</span></a><a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>CV</span></a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg><span>Kontakt</span></a></nav>
     <div class="window main-window">
       <header class="titlebar">
         <span class="window-title"><svg aria-hidden="true"><use href="#icon-projects"/></svg>Projekt — Joakim Moléni</span>
-        <div class="world-window-actions"><button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button><a class="title-button world-close" href="./index.html" aria-label="Stäng projekt och gå till skrivbordet">×</a></div>
+        <div class="window-actions"><button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button><a class="title-button world-close" href="./index.html" aria-label="Stäng projekt och gå till skrivbordet">×</a></div>
       </header>
-      <nav class="window-menu" aria-label="Huvudnavigation"><a href="./index.html">Skrivbord</a><a href="./about.html">Om mig</a><a href="./projects.html" aria-current="page">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a></nav>
+      <nav class="window-menu" aria-label="Huvudnavigation"><a href="./index.html">Skrivbord</a><a href="./about.html">Om mig</a><a href="#main" aria-current="page">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a></nav>
       <main id="main" class="world-document cs-world" tabindex="-1">
         <header class="cs-masthead">
           <div><p class="cs-overline">Counter-Strike 1.3</p><h1>Projektarkiv</h1></div>
         </header>
         <div class="cs-browser" data-world-switcher>
           <nav class="cs-project-list" aria-label="Projekt" data-world-nav>
-            <a href="#fragsheet" aria-current="true"><strong>Fragsheet</strong><span>Webbplattform, ML-integration och drift på AWS.</span></a>
+            <a href="#fragsheet"><strong>Fragsheet</strong><span>Webbplattform, ML-integration och drift på AWS.</span></a>
             <a href="#portfolio"><strong>Portfolio &amp; CV</strong><span>Personliga miljöer och ett anpassningsbart CV.</span></a>
           </nav>
           <div class="cs-details">
@@ -77,7 +77,7 @@
   </div>
   <nav class="start-panel window" id="startPanel" aria-label="Start" hidden>
     <p class="start-brand">Joakim <strong>Moléni</strong></p>
-    <div class="start-links"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Skrivbord</a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg>Om mig</a><a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg>Projekt</a><a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg>CV</a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg>Kontakt</a><hr><details class="start-extras"><summary>Program</summary><div data-extras-menu></div></details><hr><button type="button" data-about>Om den här datorn…</button><button id="themeToggle" type="button" aria-pressed="false">Mörkt färgschema</button></div>
+    <div class="start-links"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Skrivbord</a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg>Om mig</a><a href="#main" aria-current="page"><svg aria-hidden="true"><use href="#icon-projects"/></svg>Projekt</a><a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg>CV</a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg>Kontakt</a><hr><details class="start-extras"><summary>Program</summary><div data-extras-menu></div></details><hr><button type="button" data-about>Om den här datorn…</button><button id="themeToggle" type="button" aria-pressed="false">Mörkt färgschema</button></div>
   </nav>
   <dialog class="window about-dialog" id="aboutDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
     <div class="titlebar"><h2 id="dialogTitle">Om den här datorn</h2><button class="title-button" type="button" data-close aria-label="Stäng dialogrutan">×</button></div>
@@ -85,8 +85,8 @@
     <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
     <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
   </dialog>
-  <script src="./assets/js/portfolio.js?v=20260926-worlds" defer></script>
-  <script src="./assets/js/worlds.js?v=20260926-polish" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
+  <script src="./assets/js/portfolio.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/worlds.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/extras.js?v=20260926-consistency" defer></script>
 </body>
 </html>

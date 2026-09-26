@@ -11,7 +11,7 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 - `contact.html`: a Lunarstorm-inspired profile, using the personal nickname `exposure_`.
 - Start → Program: a completely silent Winamp toy, a local mIRC bot and a temporary editable Notepad. They do not connect to chat servers or load music.
 
-Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
+All five main programs share the same desktop shortcuts, Start menu, taskbar, theme control and system dialog. Theme and extras live in Start; the CV toolbar contains only its language and print controls. Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
 
 The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line stays visible below the panel title; using it is optional, and all sections also have ordinary clickable controls. F1 opens help beside the field, and the function-key row sits below the panel content.
 
@@ -25,7 +25,7 @@ npm run validate
 npm test
 ```
 
-Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history, focus restoration, terminal keyboard behaviour and printing during loading. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
+Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, shared desktop structure and navigation, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history, focus restoration, terminal keyboard behaviour printing during loading, project/quest history through taskbar anchors, and restoring the latest local note. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
 
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 

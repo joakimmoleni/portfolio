@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const desktopSource = readFileSync(path.join(root, 'assets/js/portfolio.js'), 'utf8');
 const shellSource = readFileSync(path.join(root, 'assets/js/resume-shell.js'), 'utf8');
 const resumeSource = readFileSync(path.join(root, 'assets/js/resume.js'), 'utf8');
 const base = JSON.parse(readFileSync(path.join(root, 'assets/data/resume-data.json'), 'utf8'));
@@ -116,6 +117,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     }
   });
   context.window = context;
+  vm.runInContext(desktopSource, context, { filename: 'portfolio.js' });
   vm.runInContext(shellSource, context, { filename: 'resume-shell.js' });
   vm.runInContext(resumeSource, context, { filename: 'resume.js' });
   await settle();
@@ -126,10 +128,10 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     selectedVariant: () => nodes.get('variantList').children.find(button => button.getAttribute('aria-selected') === 'true')?.dataset.variant ?? null,
     setLanguage: lang => nodes.get(lang === 'sv' ? 'langSvBtn' : 'langEnBtn').fire('click'),
     setDialogOpen: value => { dialogOpen = value; },
-    pressKey(key, { field = null, ...properties } = {}) {
+    pressKey(key, { field = null, extra = false, ...properties } = {}) {
       const event = {
         key, defaultPrevented: false, ...properties,
-        target: { closest: () => field === 'command' ? nodes.get('resumeCommand') : field },
+        target: { closest: selector => selector === '.extras-window' ? (extra ? element() : null) : field === 'command' ? nodes.get('resumeCommand') : field },
         preventDefault() { this.defaultPrevented = true; }
       };
       documentListeners.get('keydown')(event);
@@ -272,12 +274,30 @@ await test('failed history navigation keeps data and URL on the available varian
 });
 
 await test('theme name remains stable while its pressed state changes', async () => {
-  const { nodes } = await page();
+  const { nodes, storage, document } = await page();
   const button = nodes.get('themeToggle');
-  const name = button.getAttribute('aria-label');
+  button.textContent = 'Dark colour scheme';
+  const name = button.textContent;
   button.fire('click');
-  assert.equal(button.getAttribute('aria-label'), name);
+  assert.equal(button.textContent, name);
   assert.equal(button.getAttribute('aria-pressed'), 'true');
+  assert.equal(storage.get('theme'), 'dark');
+  assert.equal(document.documentElement.dataset.theme, 'dark');
+  button.fire('click');
+  assert.equal(button.getAttribute('aria-pressed'), 'false');
+  assert.equal(storage.get('theme'), 'light');
+});
+
+await test('returning to a cached page adopts the desktop theme chosen on another page', async () => {
+  const { nodes, storage, document, listeners } = await page();
+  storage.set('theme', 'dark');
+  listeners.get('pageshow')({ persisted: true });
+  assert.equal(document.documentElement.dataset.theme, 'dark');
+  assert.equal(nodes.get('themeToggle').getAttribute('aria-pressed'), 'true');
+  storage.set('theme', 'light');
+  listeners.get('pageshow')({ persisted: true });
+  assert.equal(document.documentElement.dataset.theme, 'light');
+  assert.equal(nodes.get('themeToggle').getAttribute('aria-pressed'), 'false');
 });
 
 await test('the panel line follows section and language changes', async () => {
@@ -500,6 +520,17 @@ await test('F1 and F3 still work outside input fields', async () => {
   assert.equal(nodes.get('resumeHelp').hidden, false);
   assert.equal(pressKey('F3'), true);
   assert.equal(location.href, 'https://portfolio.example/index.html');
+});
+
+await test('terminal shortcuts do not interrupt the non-modal Winamp player', async () => {
+  const { nodes, pressKey, location, document } = await page();
+  const initialUrl = location.href;
+  const playButton = element();
+  document.activeElement = playButton;
+  for (const key of ['F1', 'F3']) assert.equal(pressKey(key, { extra: true }), false);
+  assert.equal(nodes.get('resumeHelp').hidden, true);
+  assert.equal(location.href, initialUrl);
+  assert.equal(document.activeElement, playButton);
 });
 
 for (const result of results) if (result.passed) console.log(`PASS ${result.name}`);

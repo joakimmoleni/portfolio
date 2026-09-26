@@ -47,6 +47,7 @@ const requiredFiles = [
 await Promise.all(requiredFiles.map(file => exists(file, 'required files')));
 
 const htmlFiles = ['index.html', 'resume.html', 'about.html', 'projects.html', 'contact.html', '404.html'];
+const mainNavigation = ['/index.html', '/about.html', '/projects.html', '/resume.html', '/contact.html'];
 for (const htmlFile of htmlFiles) {
   const html = await read(htmlFile);
   const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
@@ -76,6 +77,22 @@ for (const htmlFile of htmlFiles) {
   if (htmlFile !== '404.html') {
     const canonical = htmlFile === 'index.html' ? 'https://portfolio.moleni.se/' : `https://portfolio.moleni.se/${htmlFile}`;
     if (!html.includes(`rel="canonical" href="${canonical}"`)) errors.push(`${htmlFile}: canonical URL missing`);
+    const classes = [...html.matchAll(/\sclass=["']([^"']+)["']/g)].flatMap(match => match[1].split(/\s+/));
+    for (const className of ['desktop', 'desktop-shortcuts', 'taskbar', 'start-panel', 'about-dialog']) {
+      if (!classes.includes(className)) errors.push(`${htmlFile}: missing shared shell .${className}`);
+    }
+    for (const id of ['startButton', 'startPanel', 'aboutDialog', 'themeToggle']) {
+      if (!ids.includes(id)) errors.push(`${htmlFile}: missing shared shell #${id}`);
+    }
+    const menu = html.match(/<nav\b[^>]*\bclass=["'][^"']*\bwindow-menu\b[^"']*["'][^>]*>([\s\S]*?)<\/nav>/)?.[1] || '';
+    const destinations = [...menu.matchAll(/\shref=["']([^"']+)["']/g)].map(match => {
+      const destination = new URL(match[1].replaceAll('&amp;', '&'), `https://portfolio.moleni.se/${htmlFile}`);
+      if (destination.origin !== 'https://portfolio.moleni.se') return destination.href;
+      return destination.pathname === '/' ? '/index.html' : destination.pathname;
+    });
+    if (destinations.join('|') !== mainNavigation.join('|')) {
+      errors.push(`${htmlFile}: main navigation must link to Desktop, About, Projects, CV and Contact in that order`);
+    }
   }
 }
 
@@ -139,7 +156,9 @@ if (!indexHtml.includes('https://portfolio.moleni.se/')) errors.push('index.html
 if (!indexHtml.includes('application/ld+json')) errors.push('index.html: structured data missing');
 
 const notFoundHtml = await read('404.html');
-if (!notFoundHtml.includes('href="https://portfolio.moleni.se/"')) errors.push('404.html: recovery link must target the canonical homepage');
+if (!/<a\b(?=[^>]*\bid=["']recoveryLink["'])(?=[^>]*\bhref=["']\/["'])[^>]*>/.test(notFoundHtml)) {
+  errors.push('404.html: recoveryLink must target / so recovery stays on the current host');
+}
 
 if (errors.length) {
   console.error(`Validation failed with ${errors.length} issue${errors.length === 1 ? '' : 's'}:`);

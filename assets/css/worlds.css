@@ -1,7 +1,4 @@
 /* Each program keeps the shared Windows shell and owns only its inner surface. */
-.world-page .desktop-shortcuts a[aria-current="page"] span { background: #0a246a; outline: 1px dotted #fff; }
-.world-window-actions { display: flex; flex-shrink: 0; gap: 4px; }
-.world-close { display: grid; place-items: center; text-decoration: none; }
 .world-document { border: 1px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); min-width: 0; }
 .world-document:focus { outline: none; }
 .world-document a, .world-document button { touch-action: manipulation; }
@@ -138,10 +135,6 @@
   .cs-briefing-grid { grid-template-columns: 1fr; gap: 18px; }
 }
 @media (max-width: 650px) {
-  .world-window-actions { gap: 3px; }
-  .world-window-actions .title-button { width: 30px; height: 30px; }
-  .world-page .window-title { font-size: .75rem; }
-  .world-page .titlebar { gap: 6px; }
   .wow-world { padding: 16px 11px; }
   .wow-masthead { gap: 11px; padding: 10px 12px; }
   .wow-emblem { width: 48px; height: 48px; }

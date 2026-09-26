@@ -57,6 +57,10 @@
     if (meta) meta.content = dark ? '#182b41' : '#3a6ea5';
   }
   applyTheme(document.documentElement.dataset.theme);
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    try { applyTheme(localStorage.getItem('theme')); } catch (error) { /* Keep the current theme when storage is unavailable. */ }
+  });
   themeToggle?.addEventListener('click', () => {
     const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     applyTheme(theme);

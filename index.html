@@ -31,7 +31,7 @@
   <link rel="sitemap" type="application/xml" href="https://portfolio.moleni.se/sitemap.xml">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-finish">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-consistency">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}
@@ -147,12 +147,12 @@
   <nav class="start-panel window" id="startPanel" aria-label="Start" hidden>
     <p class="start-brand">Joakim <strong>Moléni</strong></p>
     <div class="start-links">
-      <a href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Skrivbord</a>
+      <a href="#panel-boot" aria-current="page"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Skrivbord</a>
       <a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg>Om mig</a>
       <a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg>Projekt</a>
       <a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg>CV</a>
       <a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg>Kontakt</a>
-      <details class="start-extras"><summary>Program</summary><div data-extras-menu></div></details>
+      <hr><details class="start-extras"><summary>Program</summary><div data-extras-menu></div></details>
       <hr><button type="button" data-about>Om den här datorn…</button><button id="themeToggle" type="button" aria-pressed="false">Mörkt färgschema</button>
     </div>
   </nav>
@@ -162,7 +162,7 @@
     <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
     <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
   </dialog>
-  <script src="./assets/js/portfolio.js?v=20260926-worlds" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
+  <script src="./assets/js/portfolio.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/extras.js?v=20260926-consistency" defer></script>
 </body>
 </html>

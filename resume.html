@@ -9,7 +9,7 @@
   <meta name="title" content="Resume — Joakim Moléni, Core Systems Engineer">
   <meta name="description" content="Three focused resumes for Joakim Moléni: core systems, modern backend, and platform leadership.">
 
-  <!-- Theme color for mobile UI (updated by resume-shell.js on toggle) -->
+  <!-- Shared desktop theme colour. -->
   <meta name="theme-color" content="#3a6ea5">
 
   <!-- Open Graph -->
@@ -30,17 +30,26 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-finish">
-  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-nostalgia">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-consistency">
+  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-consistency">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
 <body class="page-resume">
   <a class="skip-link" href="#resumeContent" data-resume-en="Skip to resume" data-resume-sv="Hoppa till CV">Skip to resume</a>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-computer" viewBox="0 0 32 32"><path fill="#d4d0c8" stroke="#222" d="M3 2h25v21H3zM11 23h9v4h-9zM6 27h20v3H6z"/><path fill="#fff" d="M4 3h23v1H4v17H3V3z"/><path fill="#003b70" stroke="#808080" d="M6 5h19v14H6z"/><path fill="#66b4cb" d="M7 6h17v2H9v9H7z"/><path fill="#fff" d="M7 28h17v1H7z"/><path fill="#288846" d="M23 21h2v1h-2z"/></symbol>
+    <symbol id="icon-document" viewBox="0 0 32 32"><path fill="#fff" stroke="#444" d="M7 2h14l6 6v22H7z"/><path fill="#d4d0c8" stroke="#444" d="M21 2v6h6"/><path fill="#406c9b" d="M11 11h12v2H11zM11 16h12v1H11zM11 20h12v1H11zM11 24h9v1h-9z"/></symbol>
+    <symbol id="icon-about" viewBox="0 0 32 32"><path d="M8 5h18v19h3v5H10l-3-3V10H4V7Z" fill="#1b160e" opacity=".35"/><path d="M7 4h18v22H10l-3-2Z" fill="#ead49b" stroke="#513b22"/><path d="M8 5h15v2H8Z" fill="#fff1c5"/><path d="M23 7h2v17h-2Z" fill="#b99759"/><path d="M5 3h18l2 2v3H7V6H5v3H3V6l1-2Z" fill="#cfad69" stroke="#513b22"/><path d="M5 4h18v1H5Z" fill="#fff1c5"/><path d="M7 24h18v-2h3v4l-2 2H10l-3-2Z" fill="#c9a664" stroke="#513b22"/><path d="M9 24h14v1H9Z" fill="#fff1c5"/><path d="M10 12h8v1h-8Zm0 4h10v1H10Zm0 4h7v1h-7Z" fill="#8a6334"/><path d="M23 2h5v8l-1 2h-3l-1-2Zm1 12h3v3h-3Z" fill="#f4c542" stroke="#493019" stroke-linejoin="round"/><path d="M24 3h1v6h-1Z" fill="#fff2a1"/></symbol>
+    <symbol id="icon-projects" viewBox="0 0 32 32"><path d="M4 6h26v22H4Z" fill="#131820" opacity=".4"/><path d="M2 4h27v22H2Z" fill="#788390" stroke="#28313d"/><path d="M3 5h25v1H3Zm0 1h1v19H3Z" fill="#c5cbd1"/><path d="M4 6h23v5H4Z" fill="#394656"/><path d="M6 8h10v1H6Zm17-1h3v3h-3Z" fill="#d1b86d"/><path d="M4 12h23v12H4Z" fill="#252f3b"/><path d="M6 14h2v2H6Zm0 4h2v2H6Z" fill="#b8b874"/><path d="M10 14h12v1H10Zm0 4h9v1h-9Z" fill="#d0d3cd"/><path d="M10 16h9v1h-9Zm0 4h6v1h-6Z" fill="#788997"/><path d="M21 19h7v2h2v7h-2v2h-7v-2h-2v-7h2Z" fill="#27313c" stroke="#b9aa70"/><path d="M24 20v3m0 3v3m-4-5h3m3 0h3" fill="none" stroke="#e2c77e"/><path d="M24 24h1v1h-1Z" fill="#f3e5b3"/></symbol>
+    <symbol id="icon-profile" viewBox="0 0 32 32"><path d="M3 3h26v26H3Z" fill="#d3e8e4" stroke="#456f73"/><path d="M4 4h24v5H4Z" fill="#df7327"/><circle cx="16" cy="15" r="4" fill="#36717b"/><path d="M8 26v-3a8 8 0 0 1 16 0v3" fill="#36717b"/><path d="m25 11 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z" fill="#fff7b5"/></symbol>
+  </svg>
+  <div class="desktop">
+    <nav class="desktop-shortcuts" aria-label="Desktop shortcuts" data-resume-en-label="Desktop shortcuts" data-resume-sv-label="Genvägar på skrivbordet"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</span></a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg><span data-resume-en="About me" data-resume-sv="Om mig">About me</span></a><a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg><span data-resume-en="Projects" data-resume-sv="Projekt">Projects</span></a><a href="#resumeContent" aria-current="page"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>CV</span></a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg><span data-resume-en="Contact" data-resume-sv="Kontakt">Contact</span></a></nav>
   <main class="resume-window window" aria-label="CV">
     <header class="titlebar no-print">
-      <span class="window-title"><span class="terminal-icon" aria-hidden="true">&gt;_</span>Joakim Moléni — CV</span>
-      <a class="title-button resume-close" href="./index.html" aria-label="Close terminal and return to desktop" data-resume-en-label="Close terminal and return to desktop" data-resume-sv-label="Stäng terminalen och återgå till skrivbordet">×</a>
+      <span class="window-title"><svg aria-hidden="true"><use href="#icon-document"/></svg>Joakim Moléni — CV</span>
+      <div class="window-actions"><button class="title-button" type="button" data-about aria-label="About this computer" data-resume-en-label="About this computer" data-resume-sv-label="Om den här datorn" hidden>?</button><a class="title-button resume-close" href="./index.html" aria-label="Close terminal and return to desktop" data-resume-en-label="Close terminal and return to desktop" data-resume-sv-label="Stäng terminalen och återgå till skrivbordet">×</a></div>
     </header>
     <div class="resume-menubar no-print">
       <nav class="window-menu resume-menu" aria-label="Programs">
@@ -51,13 +60,11 @@
         <a href="./contact.html" data-resume-en="Contact" data-resume-sv="Kontakt">Contact</a>
       </nav>
       <div class="resume-toolbar" data-requires-js hidden>
-        <details class="resume-extras"><summary data-resume-en="Programs" data-resume-sv="Program">Programs</summary><div data-extras-menu></div></details>
         <div class="resume-tools">
           <div class="resume-lang-switch" role="group" aria-label="Language / Språk">
             <button class="lang-btn active" id="langEnBtn" type="button" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-btn" id="langSvBtn" type="button" data-lang="sv" aria-pressed="false">SV</button>
           </div>
-          <button class="theme-switch" id="themeToggle" type="button" aria-label="Change desktop appearance">◐</button>
           <button class="action-btn" id="btnExportPdf" type="button" data-resume-en="Print / PDF" data-resume-sv="Skriv ut / PDF">Print / PDF</button>
         </div>
       </div>
@@ -111,8 +118,27 @@
     </div>
     <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span data-resume-en="Read only" data-resume-sv="Läsläge">Read only</span></div>
   </main>
-  <script src="./assets/js/resume-shell.js?v=20260926-quality" defer></script>
-  <script src="./assets/js/resume.js?v=20260926-nostalgia" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
+    <p class="desktop-caption no-print">© <span id="copyrightYear">2026</span> Joakim Moléni</p>
+  </div>
+  <div class="taskbar" hidden>
+    <button class="system-button start-button" id="startButton" type="button" aria-expanded="false" aria-controls="startPanel"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Start</button>
+    <a class="task-button" href="#resumeContent"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>CV</span></a>
+    <span class="taskbar-note" data-resume-en="One thing at a time." data-resume-sv="En sak i taget.">One thing at a time.</span>
+    <span class="tray">Stockholm <time id="clock" aria-label="Time in Stockholm" data-resume-en-label="Time in Stockholm" data-resume-sv-label="Tid i Stockholm"></time></span>
+  </div>
+  <nav class="start-panel window" id="startPanel" aria-label="Start" hidden>
+    <p class="start-brand">Joakim <strong>Moléni</strong></p>
+    <div class="start-links"><a href="./index.html"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</span></a><a href="./about.html"><svg aria-hidden="true"><use href="#icon-about"/></svg><span data-resume-en="About me" data-resume-sv="Om mig">About me</span></a><a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg><span data-resume-en="Projects" data-resume-sv="Projekt">Projects</span></a><a href="#resumeContent" aria-current="page"><svg aria-hidden="true"><use href="#icon-document"/></svg>CV</a><a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg><span data-resume-en="Contact" data-resume-sv="Kontakt">Contact</span></a><hr><details class="start-extras"><summary data-resume-en="Programs" data-resume-sv="Program">Programs</summary><div data-extras-menu></div></details><hr><button type="button" data-about data-resume-en="About this computer…" data-resume-sv="Om den här datorn…">About this computer…</button><button id="themeToggle" type="button" aria-pressed="false" data-resume-en="Dark colour scheme" data-resume-sv="Mörkt färgschema">Dark colour scheme</button></div>
+  </nav>
+  <dialog lang="sv" class="window about-dialog" id="aboutDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
+    <div class="titlebar"><h2 id="dialogTitle">Om den här datorn</h2><button class="title-button" type="button" data-close aria-label="Stäng dialogrutan">×</button></div>
+    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Nyfiken sedan före bredbandet.</p></div></div>
+    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
+    <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
+  </dialog>
+  <script src="./assets/js/portfolio.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/resume-shell.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/resume.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/extras.js?v=20260926-consistency" defer></script>
 </body>
 </html>

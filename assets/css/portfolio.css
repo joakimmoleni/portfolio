@@ -49,9 +49,11 @@ svg { width: 2rem; height: 2rem; flex-shrink: 0; }
 .desktop-shortcuts a { display: grid; justify-items: center; gap: 6px; color: #fff; font-size: .875rem; line-height: 1.4; text-align: center; text-decoration: none; padding: 4px; }
 .desktop-shortcuts a span { padding: 1px 4px; }
 .desktop-shortcuts a:hover span, .desktop-shortcuts a:focus-visible span, .desktop-shortcuts a[aria-current="page"] span { background: #0a246a; }
+.desktop-shortcuts a[aria-current="page"] span { outline: 1px dotted #fff; }
 .window { background: var(--surface); padding: 3px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); box-shadow: inset -1px -1px var(--shadow), inset 1px 1px var(--surface), 2px 2px 0 #0003; }
 .main-window { min-width: 0; }
 .titlebar { min-height: 32px; padding: 3px 4px; background: linear-gradient(90deg, var(--title), var(--title-end)); color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.window-actions { display: flex; flex-shrink: 0; gap: 4px; }
 .window-title { display: flex; align-items: center; gap: 7px; font-size: .875rem; font-weight: 700; line-height: 1.4; }
 .window-title svg { width: 20px; height: 20px; }
 .title-button { flex-shrink: 0; width: 26px; height: 25px; border: 1px solid var(--edge); border-top-color: var(--highlight); border-left-color: var(--highlight); box-shadow: var(--raised); background: var(--surface); color: var(--text); font: bold 1rem Tahoma, sans-serif; padding: 0; line-height: 1; }
@@ -97,7 +99,7 @@ dt { color: var(--muted); }
 .taskbar-note { color: var(--muted); font-size: .75rem; padding-left: 8px; }
 .tray { box-shadow: var(--inset); padding: 6px 11px; margin-left: auto; display: flex; gap: 12px; font-size: .75rem; }
 .tray time { font-variant-numeric: tabular-nums; }
-.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 13; width: 286px; max-width: calc(100% - 10px); max-height: calc(100dvh - 76px); overflow-y: auto; overscroll-behavior: contain; display: flex; }
+.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 13; width: 286px; max-width: calc(100% - 10px); max-height: calc(100dvh - 76px - env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; display: flex; }
 .start-brand { writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 4px; background: linear-gradient(#0a246a, #567aa5); color: #fff; font-size: 1.1rem; }
 .start-links { flex: 1; padding: 3px; }
 .start-links a, .start-links button { width: 100%; display: flex; align-items: center; gap: 13px; color: var(--text); text-decoration: none; text-align: left; font-size: .875rem; background: transparent; border: 0; padding: 10px 12px; min-height: 44px; }
@@ -134,7 +136,8 @@ dt { color: var(--muted); }
 @media (max-width: 650px) {
   .desktop { display: block; padding: 10px 8px 90px; }
   .desktop-shortcuts { display: none; }
-  .titlebar { min-height: 43px; background: linear-gradient(90deg, var(--title) 0%, var(--title) 55%, var(--title-end)); }
+  .titlebar { min-height: 43px; gap: 6px; background: linear-gradient(90deg, var(--title) 0%, var(--title) 55%, var(--title-end)); }
+  .window-actions { gap: 3px; }
   .title-button { width: 38px; height: 36px; }
   .window-title { font-size: .875rem; }
   .window-title svg { display: none; }

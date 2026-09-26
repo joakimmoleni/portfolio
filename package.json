@@ -5,6 +5,6 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "validate": "node scripts/validate-site.mjs",
-    "test": "node scripts/test-resume.mjs"
+    "test": "node scripts/test-resume.mjs && node scripts/test-worlds.mjs && node --test scripts/test-extras.mjs"
   }
 }
