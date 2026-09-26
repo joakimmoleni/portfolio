@@ -118,7 +118,7 @@ dt { color: var(--muted); }
 .taskbar-note { color: var(--muted); font-size: .75rem; padding-left: 8px; }
 .tray { box-shadow: var(--inset); padding: 6px 11px; margin-left: auto; display: flex; gap: 12px; font-size: .75rem; }
 .tray time { font-variant-numeric: tabular-nums; }
-.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 11; width: 286px; max-width: calc(100% - 10px); display: flex; }
+.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 13; width: 286px; max-width: calc(100% - 10px); display: flex; }
 .start-brand { writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 4px; background: linear-gradient(#0a246a, #567aa5); color: #fff; font-size: 1.1rem; }
 .start-links { flex: 1; padding: 3px; }
 .start-links a, .start-links button { width: 100%; display: flex; align-items: center; gap: 13px; color: var(--text); text-decoration: none; text-align: left; font-size: .875rem; background: transparent; border: 0; padding: 10px 12px; min-height: 44px; }

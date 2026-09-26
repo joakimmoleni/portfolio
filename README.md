@@ -20,9 +20,10 @@ The resume continues to use `assets/data/resume-data.json` and its three variant
 ```sh
 npm run dev
 npm run validate
+npm test
 ```
 
-Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets, canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The server and validator use Node's standard library only.
+Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes and history. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
 
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 

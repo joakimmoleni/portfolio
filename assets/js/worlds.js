@@ -31,7 +31,8 @@
       const heading = panel.querySelector('h2');
       heading.setAttribute('tabindex', '-1');
       heading.focus({ preventScroll: true });
-      if (panel.getBoundingClientRect().top > innerHeight - 100) panel.scrollIntoView({ block: 'start' });
+      const headingBounds = heading.getBoundingClientRect();
+      if (headingBounds.top < 0 || headingBounds.bottom > innerHeight - 100) panel.scrollIntoView({ block: 'start' });
     });
 
     function syncToLocation() {

@@ -50,6 +50,7 @@
 .terminal-help p + p { margin-top: 8px; color: var(--terminal-muted); }
 .resume-inner { padding: 22px 0 0; min-width: 0; }
 .resume-inner:focus { outline: none; }
+.resume-inner:focus-visible { outline: 2px solid var(--terminal-cyan); outline-offset: -2px; }
 .resume-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; padding-bottom: 21px; }
 .resume-chip { font-size: .75rem; color: var(--terminal-muted); margin-bottom: 5px; }
 .resume-name { font: bold clamp(1.4rem, 2.8vw, 1.75rem)/1.25 'Courier New', Courier, monospace; color: var(--terminal-bright); letter-spacing: 0; margin: 0 0 7px; }

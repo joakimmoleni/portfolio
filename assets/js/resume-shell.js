@@ -12,9 +12,7 @@ function applyTheme(theme) {
   document.documentElement.dataset.theme = dark ? 'dark' : 'light';
   const button = document.getElementById('themeToggle');
   button?.setAttribute('aria-pressed', String(dark));
-  button?.setAttribute('aria-label', swedish
-    ? (dark ? 'Ljus skrivbordsram' : 'Mörk skrivbordsram')
-    : (dark ? 'Light desktop frame' : 'Dark desktop frame'));
+  button?.setAttribute('aria-label', swedish ? 'Mörk skrivbordsram' : 'Dark desktop frame');
   const themeColor = document.querySelector('meta[name="theme-color"]');
   if (themeColor) themeColor.content = dark ? '#182b41' : '#3a6ea5';
 }

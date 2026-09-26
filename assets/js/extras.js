@@ -5,7 +5,7 @@
 
   const markup = document.createElement('div');
   markup.innerHTML = `
-    <section id="extras-player" class="window extras-window extras-player" aria-labelledby="extras-player-title" tabindex="-1" hidden>
+    <section id="extras-player" class="window extras-window extras-player" lang="sv" aria-labelledby="extras-player-title" tabindex="-1" hidden>
       <header class="titlebar extras-titlebar">
         <h2 id="extras-player-title">Winamp · nostalgiläge</h2>
         <div class="extras-title-actions">
@@ -34,7 +34,7 @@
         <p class="extras-player-note">Ljudlös nostalgispelare.</p>
       </div>
     </section>
-    <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
+    <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" lang="sv" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
       <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">mIRC — #nostalgi</h2><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC">×</button></header>
       <p id="extras-mirc-description" class="extras-dialog-note">Nostalgikanal — bara du och boten. Ingen livechatt.</p>
       <div class="extras-chat-layout">
@@ -47,7 +47,7 @@
       </form>
       <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
     </dialog>
-    <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
+    <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" lang="sv" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
       <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
       <p id="extras-notepad-description" class="extras-dialog-note">Din egen tillfälliga anteckning på det här skrivbordet.</p>
       <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
@@ -64,6 +64,7 @@
   const names = { winamp: ['♫', 'Winamp'], mirc: ['#', 'mIRC'], notepad: ['▤', 'Anteckningar'] };
 
   for (const menu of document.querySelectorAll('[data-extras-menu]')) {
+    menu.lang = 'sv';
     for (const [name, [icon, title]] of Object.entries(names)) {
       const button = document.createElement('button');
       button.type = 'button';
@@ -87,12 +88,17 @@
   }
 
   function isVisible(element) {
-    return element instanceof HTMLElement && element.isConnected && !element.closest('[hidden]') && !element.matches(':disabled') && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
+    if (!(element instanceof HTMLElement)) return false;
+    const closedDetails = element.closest('details:not([open])');
+    if (closedDetails && !closedDetails.querySelector('summary')?.contains(element)) return false;
+    return element.isConnected && !element.closest('[hidden]') && !element.matches(':disabled') && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
   }
   function restoreFocus(name) {
     const previous = returnFocus.get(name);
     if (!previous) return;
-    const target = [previous, document.getElementById('startButton'), document.querySelector('[data-open-extra]'), document.querySelector('main')].find(isVisible);
+    const disclosure = previous.closest('details')?.querySelector('summary');
+    const target = [previous, disclosure, document.getElementById('startButton'), document.querySelector('[data-open-extra]'), document.querySelector('main')].find(isVisible);
+    if (target?.matches('main') && !target.hasAttribute('tabindex')) target.tabIndex = -1;
     target?.focus({ preventScroll: true });
     returnFocus.delete(name);
   }

@@ -12,8 +12,10 @@ async function exists(relativePath, source) {
   try {
     await access(absolutePath);
     checked.add(path.relative(root, absolutePath));
+    return true;
   } catch {
     errors.push(`${source}: missing ${relativePath}`);
+    return false;
   }
 }
 
@@ -53,15 +55,23 @@ for (const htmlFile of htmlFiles) {
 
   const references = [...html.matchAll(/\s(?:href|src)=["']([^"']+)["']/g)].map(match => match[1]);
   for (const reference of references) {
-    if (/^(?:https?:|mailto:|tel:|\/)/.test(reference)) continue;
+    if (/^(?:https?:|mailto:|tel:|\/\/)/.test(reference)) continue;
     if (reference.startsWith('#')) {
       if (reference.length > 1 && !ids.includes(reference.slice(1))) errors.push(`${htmlFile}: missing anchor ${reference}`);
       continue;
     }
     const clean = reference.split(/[?#]/)[0];
     if (!clean) continue;
-    const resolved = path.relative(root, path.resolve(root, path.dirname(htmlFile), clean));
-    await exists(resolved, htmlFile);
+    const resolved = clean.startsWith('/')
+      ? clean.slice(1)
+      : path.relative(root, path.resolve(root, path.dirname(htmlFile), clean));
+    const found = await exists(resolved, htmlFile);
+    const fragment = reference.includes('#') ? reference.slice(reference.indexOf('#') + 1) : '';
+    if (found && fragment && path.extname(resolved) === '.html') {
+      const destination = await read(resolved);
+      const destinationIds = [...destination.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
+      if (!destinationIds.includes(fragment)) errors.push(`${htmlFile}: missing anchor ${reference}`);
+    }
   }
   if (htmlFile !== '404.html') {
     const canonical = htmlFile === 'index.html' ? 'https://portfolio.moleni.se/' : `https://portfolio.moleni.se/${htmlFile}`;
