@@ -4,7 +4,7 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 
 ## Programs
 
-- `index.html`: the original Windows 2000 overview.
+- `index.html`: a compact Windows 2000 desktop with a short introduction and four clear routes into the portfolio.
 - `resume.html`: a mainframe-inspired CV with three professional emphases, Swedish/English, clickable terminal panels and ordinary print/PDF output.
 - `about.html`: a vanilla-WoW-inspired personal quest log.
 - `projects.html`: two selected projects in a Counter-Strike 1.3-inspired project browser.
@@ -12,6 +12,8 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 - Start → Program: a completely silent Winamp toy, a local mIRC bot and a temporary editable Notepad. They do not connect to chat servers or load music.
 
 Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
+
+The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line is optional, below the CV; all sections also have ordinary clickable controls.
 
 The resume continues to use `assets/data/resume-data.json` and its three variant overrides. Public copy does not include internal bank assignments or unverified project/adoption figures. Specific gaming achievements, character details and music selections are left out until supplied.
 
@@ -23,7 +25,7 @@ npm run validate
 npm test
 ```
 
-Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history and terminal keyboard behaviour. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
+Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history, focus restoration, terminal keyboard behaviour and printing during loading. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
 
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 
@@ -36,7 +38,7 @@ The interface artwork is drawn in HTML, CSS and SVG. These references establish 
 - [World of Warcraft's original quest log, 2004 screenshot](https://www.mobygames.com/game/15620/world-of-warcraft/screenshots/windows/91220/)
 - [Lunarstorm, Internetmuseum](https://internetmuseum.se/utstallningar/sociala-medier/lunarstorm/)
 
-The [feel review](content/portfolio-feel-review.md) records the later reference comparison, refinements and browser checks, including Winamp, mIRC and ISPF.
+The [feel review](content/portfolio-feel-review.md) records the later reference comparison, refinements and browser checks, including Winamp, mIRC and ISPF. The [polish review](content/portfolio-polish-review.md) records the subsequent content, navigation and responsive-layout pass.
 
 ## Link preview image
 

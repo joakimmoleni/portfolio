@@ -11,10 +11,16 @@
     const panelForHash = () => panels.find(panel => `#${panel.id}` === location.hash);
 
     function showPanel(panel) {
+      const moveFocus = panels.some(candidate => candidate !== panel && candidate.contains(document.activeElement));
       for (const candidate of panels) candidate.hidden = candidate !== panel;
       for (const link of links) {
         if (link.hash === `#${panel.id}`) link.setAttribute('aria-current', 'true');
         else link.removeAttribute('aria-current');
+      }
+      if (moveFocus) {
+        const heading = panel.querySelector('h2');
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
       }
     }
 

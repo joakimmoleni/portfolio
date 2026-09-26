@@ -31,7 +31,7 @@
   <link rel="sitemap" type="application/xml" href="https://portfolio.moleni.se/sitemap.xml">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-quality">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-polish">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}
@@ -74,83 +74,65 @@
   <a class="skip-link" href="#main">Hoppa till innehåll</a>
   <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <symbol id="icon-computer" viewBox="0 0 32 32"><path fill="#d4d0c8" stroke="#222" d="M3 2h25v21H3zM11 23h9v4h-9zM6 27h20v3H6z"/><path fill="#fff" d="M4 3h23v1H4v17H3V3z"/><path fill="#003b70" stroke="#808080" d="M6 5h19v14H6z"/><path fill="#66b4cb" d="M7 6h17v2H9v9H7z"/><path fill="#fff" d="M7 28h17v1H7z"/><path fill="#288846" d="M23 21h2v1h-2z"/></symbol>
-    <symbol id="icon-folder" viewBox="0 0 32 32"><path fill="#d6ae55" stroke="#655323" d="M2 7h11l3 3h14v17H2z"/><path fill="#fff0b0" d="M3 8h9v2H3z"/><path fill="#f4d783" stroke="#655323" d="M2 13h28l-3 15H4z"/><path fill="#fff6c7" d="M3 14h26v1H3z"/></symbol>
     <symbol id="icon-document" viewBox="0 0 32 32"><path fill="#fff" stroke="#444" d="M7 2h14l6 6v22H7z"/><path fill="#d4d0c8" stroke="#444" d="M21 2v6h6"/><path fill="#406c9b" d="M11 11h12v2H11zM11 16h12v1H11zM11 20h12v1H11zM11 24h9v1h-9z"/></symbol>
-    <symbol id="icon-person" viewBox="0 0 32 32"><path fill="#b49250" stroke="#433622" d="M16 2 29 7v10c0 7-7 11-13 14C10 28 3 24 3 17V7z"/><path fill="#233d4e" d="m16 5 10 4v8c0 5-5 9-10 11-5-2-10-6-10-11V9z"/><circle cx="16" cy="12" r="4" fill="#eadab2"/><path fill="#eadab2" d="M9 23v-3c0-5 14-5 14 0v3z"/></symbol>
-    <symbol id="icon-mail" viewBox="0 0 32 32"><path fill="#fff4d1" stroke="#625c48" d="M2 7h28v20H2z"/><path fill="none" stroke="#8a8065" d="m2 8 14 11L30 8M2 26l10-10m8 0 10 10"/><path fill="#fff" d="M3 8h25v1H3z"/></symbol>
+    <symbol id="icon-compass" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#635137" stroke="#312617" stroke-width="2"/><circle cx="16" cy="16" r="10" fill="#213a43" stroke="#d3ae63"/><path d="m16 5 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#e2c17f" stroke="#48371d"/><circle cx="16" cy="16" r="3" fill="#b5532d"/></symbol>
+    <symbol id="icon-projects" viewBox="0 0 32 32"><path d="M3 4h26v24H3Z" fill="#545e6c" stroke="#171f28" stroke-width="2"/><path d="M5 6h22v20H5Z" fill="none" stroke="#98a1b0"/><path d="M8 10h10v4H8Zm7 8h9v5h-9Z" fill="#b4bac5"/><path d="M11 14v6h4m3-8h4v6" fill="none" stroke="#d5b564" stroke-width="2"/></symbol>
+    <symbol id="icon-profile" viewBox="0 0 32 32"><path d="M3 3h26v26H3Z" fill="#d3e8e4" stroke="#456f73"/><path d="M4 4h24v5H4Z" fill="#df7327"/><circle cx="16" cy="15" r="4" fill="#36717b"/><path d="M8 26v-3a8 8 0 0 1 16 0v3" fill="#36717b"/><path d="m25 11 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z" fill="#fff7b5"/></symbol>
   </svg>
   <div class="desktop">
     <nav class="desktop-shortcuts" aria-label="Genvägar på skrivbordet">
-      <a href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Min arbetsplats</span></a>
-      <a href="./projects.html"><svg aria-hidden="true"><use href="#icon-folder"/></svg><span>Projekt</span></a>
-      <a href="./resume.html?lang=sv"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>Mitt CV</span></a>
-      <a href="./about.html"><svg aria-hidden="true"><use href="#icon-person"/></svg><span>Om mig</span></a>
-      <a href="./contact.html"><svg aria-hidden="true"><use href="#icon-mail"/></svg><span>Kontakt</span></a>
+      <a href="#panel-boot" aria-current="page"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Skrivbord</span></a>
+      <a href="./about.html"><svg aria-hidden="true"><use href="#icon-compass"/></svg><span>Om mig</span></a>
+      <a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg><span>Projekt</span></a>
+      <a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg><span>CV</span></a>
+      <a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg><span>Kontakt</span></a>
     </nav>
     <div class="window main-window">
       <header class="titlebar">
-        <span class="window-title"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Joakim Moléni — Min arbetsplats</span>
+        <span class="window-title"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Joakim Moléni — Skrivbord</span>
         <button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button>
       </header>
       <nav class="window-menu" aria-label="Huvudnavigation">
-        <a href="#panel-boot" aria-current="page">Översikt</a><a href="./projects.html">Projekt</a><a href="./about.html">Om mig</a><a href="./contact.html">Kontakt</a>
-        <a href="./resume.html?lang=sv" class="menu-cv">CV</a>
+        <a href="#panel-boot" aria-current="page">Skrivbord</a><a href="./about.html">Om mig</a><a href="./projects.html">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a>
       </nav>
-      <div class="location-bar"><span>Plats</span><div class="location-value"><svg aria-hidden="true"><use href="#icon-folder"/></svg><span>Joakim Moléni / Portfolio</span></div></div>
       <main id="main" class="document" tabindex="-1">
         <section class="intro" id="panel-boot" aria-labelledby="entryTitle">
-          <div class="intro-copy">
-            <p class="eyebrow">Systemutvecklare · Stockholm</p>
-            <h1 id="entryTitle">Joakim Moléni</h1>
-            <p class="intro-lead">Stordatorer, webb och verktygen däremellan.</p>
-            <p>Jag arbetar med COBOL, HLASM och z/OS på SEB. Jag bygger också webbapplikationer och AI-arbetsflöden, med fokus på enkel arkitektur, underhållbarhet och mindre friktion.</p>
-            <div class="intro-actions"><a class="system-button primary-button" href="./projects.html">Se utvalda arbeten</a><a class="system-button" href="./resume.html?lang=sv">Öppna CV</a></div>
+          <p class="eyebrow">Systemutvecklare · Stockholm</p>
+          <h1 id="entryTitle">Joakim Moléni</h1>
+          <p class="intro-lead">Stordatorer, webb och verktygen däremellan.</p>
+          <p>Jag arbetar med COBOL, HLASM och z/OS på SEB. Här finns min erfarenhet, det jag bygger och några av världarna som format mig.</p>
+        </section>
+        <nav class="program-list" aria-label="Utforska portfolion">
+          <div id="panel-identity">
+            <a class="program-link" id="panel-dual" href="./resume.html">
+              <svg aria-hidden="true"><use href="#icon-document"/></svg>
+              <span class="program-copy"><strong>CV</strong><span>Erfarenhet, kompetenser och utbildning.</span><small>Mainframe · Svenska / English · PDF</small></span>
+              <span class="program-arrow" aria-hidden="true">→</span>
+            </a>
           </div>
-          <aside class="profile-summary" aria-label="Kort om mig">
-            <h2>I korthet</h2>
-            <dl><div><dt>Nu</dt><dd>Systemutveckling på SEB</dd></div><div><dt>Bakgrund</dt><dd>Teknik, webb och verksamhet</dd></div><div><dt>Arbetssätt</dt><dd>Enkel kod som går att förvalta</dd></div></dl>
-            <a href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>
-          </aside>
-        </section>
-        <section class="content-section" id="panel-work" aria-labelledby="workTitle">
-          <div class="section-heading" id="panel-projects"><svg aria-hidden="true"><use href="#icon-folder"/></svg><div><p class="eyebrow">Ett urval</p><h2 id="workTitle">Arbeten att titta närmare på</h2></div></div>
-          <div class="project-list">
-            <article class="project-entry">
-              <div class="project-label"><p class="file-meta">01 · Webb &amp; produkt · 2023</p><h3>Fragsheet</h3><p>JavaScript · ML-integration · AWS</p></div>
-              <div class="project-copy"><p>En spelplattform där coachingmodeller skulle bli en del av produkten.</p><p>Under min praktik integrerade jag modellerna tillsammans med ML-utvecklaren, skrev om webbplattformen i vanilla JavaScript och flyttade infrastrukturen från DigitalOcean till AWS.</p><p class="result"><strong>Resultat:</strong> modellernas insikter blev tillgängliga i produkten, med en omskriven webbplattform och drift på AWS.</p><a href="./resume.html?focus=modern-dev&amp;lang=sv&amp;panel=work">Min roll i CV:t</a></div>
-            </article>
-            <article class="project-entry">
-              <div class="project-label"><p class="file-meta">02 · Eget projekt</p><h3>Portfolio &amp; CV</h3><p>HTML · CSS · JavaScript</p></div>
-              <div class="project-copy"><p>Min erfarenhet spänner över flera områden. Ett enda CV behöver inte ge alla lika mycket plats.</p><p>Här samlar jag min portfolio och tre CV-inriktningar, på svenska och engelska, med gemensamma grunduppgifter.</p><p class="result"><strong>Resultat:</strong> välj relevant inriktning och skriv ut eller spara ett CV som PDF direkt i webbläsaren.</p><a href="https://github.com/joakimmoleni/portfolio" target="_blank" rel="noopener noreferrer">Läs koden på GitHub <span aria-hidden="true">↗</span></a></div>
-            </article>
+          <div id="panel-work">
+            <a class="program-link" id="panel-projects" href="./projects.html">
+              <svg aria-hidden="true"><use href="#icon-projects"/></svg>
+              <span class="program-copy"><strong>Projekt</strong><span>Utvalda arbeten, min roll och resultatet.</span><small>Counter-Strike · Projektarkiv</small></span>
+              <span class="program-arrow" aria-hidden="true">→</span>
+            </a>
           </div>
-        </section>
-        <section class="content-section" id="panel-identity" aria-labelledby="experienceTitle">
-          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-document"/></svg><div><p class="eyebrow">Bakgrund</p><h2 id="experienceTitle">Vägen hit</h2></div></div>
-          <p class="section-intro">Jag har arbetat med teknik och verksamhet, studerat frontendutveckling och gått vidare till bankernas stordatorsystem. Den bakgrunden hjälper mig att se både koden och arbetet den ska stödja.</p>
-          <ol class="career-list">
-            <li><span class="career-date">2024–nu</span><div><h3>SEB</h3><p>Systemutveckling · COBOL, HLASM och IBM z/OS</p></div></li>
-            <li><span class="career-date">2023–2024</span><div><h3>Handelsbanken</h3><p>Systemutveckling · COBOL och IBM z/OS</p></div></li>
-            <li><span class="career-date">2023</span><div><h3>Fragsheet</h3><p>Praktik · webbutveckling, ML-integration och AWS</p></div></li>
-            <li><span class="career-date">2021–2023</span><div><h3>Changemaker Educations</h3><p>Frontend App Developer</p></div></li>
-          </ol>
-          <a class="system-button" href="./resume.html?lang=sv&amp;panel=work">Mer erfarenhet i mitt CV</a>
-        </section>
-        <section class="content-section" id="panel-dual" aria-labelledby="skillsTitle">
-          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="eyebrow">Kompetens</p><h2 id="skillsTitle">Det jag arbetar med</h2></div></div>
-          <div class="skills-grid">
-            <div><h3>Stordator</h3><p>Utveckling på IBM z/OS, plattformen bakom många långlivade verksamhetssystem.</p><p class="skill-tools">COBOL · HLASM (assembler) · IMS · JCL</p></div>
-            <div><h3>Webb &amp; plattformar</h3><p>Från gränssnitt och tjänster till driftsättning och förvaltning.</p><p class="skill-tools">JavaScript · Node.js · SQL · OpenShift</p></div>
-            <div><h3>Utvecklarens vardag</h3><p>Begriplig dokumentation, kodgranskning och AI-stöd som minskar handarbete.</p><p class="skill-tools">Git · Copilot · AI-arbetsflöden</p></div>
+          <div>
+            <a class="program-link" href="./about.html">
+              <svg aria-hidden="true"><use href="#icon-compass"/></svg>
+              <span class="program-copy"><strong>Om mig</strong><span>Vägen hit, spelhistorien och nyfikenheten.</span><small>World of Warcraft · Quest Log</small></span>
+              <span class="program-arrow" aria-hidden="true">→</span>
+            </a>
           </div>
-        </section>
-        <section class="personal-note" aria-labelledby="personalTitle"><h2 id="personalTitle">Utanför koden</h2><p>Min väg till systemutveckling har gått via bland annat tillverkning, logistik och solenergi. Jag gillar att förstå hur saker fungerar. Energi och rymd är två områden jag gärna fortsätter att lära mig mer om.</p><a href="./about.html">Mer om mig och världarna jag vuxit upp med</a></section>
-        <section class="content-section contact-section" id="panel-signal" aria-labelledby="contactTitle">
-          <div class="section-heading"><svg aria-hidden="true"><use href="#icon-mail"/></svg><div><p class="eyebrow">Kontakt</p><h2 id="contactTitle">Vi hörs.</h2></div></div>
-          <p>Om systemutveckling, ett projekt eller något du vill prata vidare om.</p>
-          <a class="contact-email" href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a>
-          <div class="contact-links"><a href="./contact.html">Mitt krypin</a><a href="https://www.linkedin.com/in/joakimmoleni" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/joakimmoleni" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="./resume.html?lang=sv">CV på svenska</a><a href="./resume.html?lang=en" lang="en">CV in English</a></div>
-        </section>
+          <div id="panel-signal">
+            <a class="program-link" href="./contact.html">
+              <svg aria-hidden="true"><use href="#icon-profile"/></svg>
+              <span class="program-copy"><strong>Kontakt</strong><span>Mejl, LinkedIn och GitHub.</span><small>Lunarstorm · exposure_</small></span>
+              <span class="program-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </nav>
+        <div class="home-contact"><a href="mailto:jcrooge@gmail.com">jcrooge@gmail.com</a><a href="./resume.html?lang=en" lang="en">CV in English <span aria-hidden="true">→</span></a></div>
       </main>
       <footer class="statusbar"><span>Klart.</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
     </div>
@@ -158,17 +140,18 @@
   </div>
   <div class="taskbar" hidden>
     <button class="system-button start-button" id="startButton" type="button" aria-expanded="false" aria-controls="startPanel"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Start</button>
-    <a class="task-button" href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Min arbetsplats</span></a>
+    <a class="task-button" href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg><span>Skrivbord</span></a>
     <span class="taskbar-note">En sak i taget.</span>
     <span class="tray">Stockholm <time id="clock" aria-label="Tid i Stockholm"></time></span>
   </div>
   <nav class="start-panel window" id="startPanel" aria-label="Start" hidden>
     <p class="start-brand">Joakim <strong>Moléni</strong></p>
     <div class="start-links">
-      <a href="./resume.html?lang=sv"><svg aria-hidden="true"><use href="#icon-document"/></svg>Mitt CV</a>
-      <a href="./about.html"><svg aria-hidden="true"><use href="#icon-person"/></svg>Om mig</a>
-      <a href="./projects.html"><svg aria-hidden="true"><use href="#icon-folder"/></svg>Projekt</a>
-      <a href="./contact.html"><svg aria-hidden="true"><use href="#icon-mail"/></svg>Kontakt</a>
+      <a href="#panel-boot"><svg aria-hidden="true"><use href="#icon-computer"/></svg>Skrivbord</a>
+      <a href="./about.html"><svg aria-hidden="true"><use href="#icon-compass"/></svg>Om mig</a>
+      <a href="./projects.html"><svg aria-hidden="true"><use href="#icon-projects"/></svg>Projekt</a>
+      <a href="./resume.html"><svg aria-hidden="true"><use href="#icon-document"/></svg>CV</a>
+      <a href="./contact.html"><svg aria-hidden="true"><use href="#icon-profile"/></svg>Kontakt</a>
       <details class="start-extras"><summary>Program</summary><div data-extras-menu></div></details>
       <hr><button type="button" data-about>Om den här datorn…</button><button id="themeToggle" type="button" aria-pressed="false">Mörkt färgschema</button>
     </div>

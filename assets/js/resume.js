@@ -18,7 +18,7 @@
   let resumeLoadState = 'loading';
   let requestedVariant = null;
   let currentPanel = panelNames.includes(query.get('panel')) ? query.get('panel') : 'profile';
-  let resumeLang = ['en', 'sv'].includes(query.get('lang')) ? query.get('lang') : (storedLang === 'sv' ? 'sv' : 'en');
+  let resumeLang = ['en', 'sv'].includes(query.get('lang')) ? query.get('lang') : (storedLang === 'en' ? 'en' : 'sv');
 
   function escapeHtml(value) {
     return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
@@ -32,8 +32,8 @@
   }
   function labels() {
     return resumeLang === 'sv'
-      ? { profile: 'Profil', work: 'Erfarenhet', skills: 'Kompetenser', education: 'Utbildning', projects: 'Utvalda projekt', coreStack: 'Kärnkompetens', languages: 'Språk', platforms: 'Plattformar', focus: 'Fokus', contact: 'Kontakt', sections: 'CV-avsnitt', empty: 'Inga utvalda projekt i denna CV-inriktning.' }
-      : { profile: 'Profile', work: 'Experience', skills: 'Skills', education: 'Education', projects: 'Selected projects', coreStack: 'Core stack', languages: 'Languages', platforms: 'Platforms', focus: 'Focus', contact: 'Contact', sections: 'Resume sections', empty: 'No selected projects in this CV focus.' };
+      ? { profile: 'Profil', work: 'Erfarenhet', skills: 'Kompetenser', education: 'Utbildning', projects: 'Utvalda projekt', coreStack: 'Kärnkompetens', languages: 'Språk', platforms: 'Plattformar', focus: 'Fokus', contact: 'Kontakt', sections: 'CV-avsnitt', empty: 'Projekten finns i portfolions projektarkiv.' }
+      : { profile: 'Profile', work: 'Experience', skills: 'Skills', education: 'Education', projects: 'Selected projects', coreStack: 'Core stack', languages: 'Languages', platforms: 'Platforms', focus: 'Focus', contact: 'Contact', sections: 'Resume sections', empty: 'Project cases are collected in the portfolio.' };
   }
   function syncResumeUrl(replace = false) {
     const next = new URL(location.href);
@@ -53,25 +53,26 @@
   }
   function updateResumeStatus() {
     const swedish = resumeLang === 'sv';
+    document.getElementById('btnExportPdf').disabled = resumeLoadState === 'loading';
     if (resumeLoadState === 'loading') {
-      const target = requestedVariant?.title || (swedish ? 'CV' : 'resume');
+      const target = t(requestedVariant, 'title') || (swedish ? 'CV' : 'resume');
       setStatus(swedish ? `Laddar ${target}…` : `Loading ${target}…`, 'loading');
     } else if (resumeLoadState === 'error') {
       if (!currentResumeData) {
         setStatus(swedish ? 'CV-data kunde inte laddas. Den sparade engelska kärnsystemsversionen visas.' : 'Resume data could not be loaded. Showing the saved English Core Systems CV.', 'error');
       } else {
-        const shown = currentVariantMeta?.title;
+        const shown = t(currentVariantMeta, 'title');
         const fallback = shown
           ? (swedish ? `Visar fortfarande ${shown}.` : `Still showing ${shown}.`)
           : (swedish ? 'Grund-CV visas.' : 'Showing the base resume.');
-        setStatus(`${requestedVariant?.title || 'CV'} ${swedish ? 'kunde inte laddas.' : 'could not be loaded.'} ${fallback}`, 'error');
+        setStatus(`${t(requestedVariant, 'title') || 'CV'} ${swedish ? 'kunde inte laddas.' : 'could not be loaded.'} ${fallback}`, 'error');
       }
     } else {
       setStatus(variantStatus(currentVariantMeta) || (swedish ? 'Grund-CV visas.' : 'Showing the base resume.'), 'ready');
     }
   }
   function updateDocumentTitle() {
-    const title = currentVariantMeta?.title;
+    const title = t(currentVariantMeta, 'title');
     document.title = `${title ? `${title} · ` : ''}${resumeLang === 'sv' ? 'CV' : 'Resume'} — Joakim Moléni`;
   }
   function setResumeLang(lang, updateUrl = true) {
@@ -87,7 +88,10 @@
     translateResumeShell(resumeLang);
     document.querySelectorAll('#variantList .tab-btn').forEach(button => {
       const variant = resumeVariants.find(item => item.id === button.dataset.variant);
-      if (variant) button.title = t(variant, 'description');
+      if (variant) {
+        button.title = t(variant, 'description');
+        button.textContent = t(variant, 'title');
+      }
     });
     document.getElementById('commandFeedback').textContent = '';
     if (currentResumeData) {
@@ -107,6 +111,7 @@
     return variants.map((variant, index) => ({
       id: variant.id || `variant-${index + 1}`,
       title: variant.title || variant.id,
+      title_sv: variant.title_sv || variant.title || variant.id,
       description: variant.description || '',
       description_sv: variant.description_sv || variant.description || '',
       path: variant.path || `./assets/data/variants/${variant.id}.json`,
@@ -128,7 +133,7 @@
       button.setAttribute('aria-selected', 'false');
       button.setAttribute('tabindex', index === 0 ? '0' : '-1');
       button.title = t(variant, 'description');
-      button.textContent = variant.title;
+      button.textContent = t(variant, 'title');
       button.addEventListener('click', () => selectVariant(variant.id));
       button.addEventListener('keydown', event => {
         const target = tabTarget(event, index, variants.length);
@@ -194,7 +199,7 @@
       updateResumeStatus();
       updateDocumentTitle();
       syncResumeUrl(true);
-      return;
+      return false;
     }
     if (request !== variantRequest) return;
     currentResumeData = merged;
@@ -216,6 +221,7 @@
     storageSet('resumeVariant', variant.id);
     updateDocumentTitle();
     if (updateUrl) syncResumeUrl();
+    return true;
   }
 
   function renderListSection(label, values) {
@@ -223,6 +229,7 @@
     return `<section><h3 class="resume-section-title">${escapeHtml(label)}</h3><ul class="skill-list">${values.map(value => `<li class="skill-item"><span class="skill-bullet" aria-hidden="true">›</span>${escapeHtml(value)}</li>`).join('')}</ul></section>`;
   }
   function renderResume(data, variantId = 'default') {
+    const focused = resumeContent.contains(document.activeElement) ? document.activeElement : null;
     const { personal = {}, experience = [], skills = {}, education = [], projects = [] } = data || {};
     const l = labels();
     const swedish = resumeLang === 'sv';
@@ -249,7 +256,7 @@
       { id: 'work', content: experienceHtml },
       { id: 'skills', content: `<div class="resume-skills-grid">${renderListSection(l.languages, tArr(skills, 'languages'))}${renderListSection(l.platforms, tArr(skills, 'platforms'))}${renderListSection(l.focus, tArr(skills, 'concepts'))}</div>` },
       { id: 'education', content: educationHtml },
-      { id: 'projects', content: projectsHtml || `<p>${l.empty}</p>`, empty: !projects.length }
+      { id: 'projects', content: projectsHtml || `<p>${l.empty}</p><p class="resume-project-link"><a href="./projects.html">${swedish ? 'Se projekt i portfolion' : 'View projects in the portfolio'} →</a></p>`, empty: !projects.length }
     ];
     resumeContent.innerHTML = `
       <header class="resume-head">
@@ -269,12 +276,30 @@
       });
     });
     selectPanel(currentPanel, false);
+    if (focused && focused !== resumeContent) {
+      let target = focused.matches('.section-tab')
+        ? document.getElementById(`section-tab-${currentPanel}`)
+        : focused.id ? document.getElementById(focused.id)
+          : [...resumeContent.querySelectorAll('a')].find(link => link.getAttribute('href') === focused.getAttribute('href'));
+      if (!target || target.closest('[hidden]')) target = document.getElementById(`resume-${currentPanel}`);
+      target.focus({ preventScroll: true });
+    }
   }
 
   function showHelp() {
+    const terminal = document.getElementById('resumeTerminal');
     const help = document.getElementById('resumeHelp');
-    help.hidden = !help.hidden;
+    const showing = !terminal.open || help.hidden;
+    terminal.open = true;
+    help.hidden = !showing;
     document.querySelectorAll('[data-resume-command="help"]').forEach(button => button.setAttribute('aria-expanded', String(!help.hidden)));
+    (showing ? help : document.getElementById('resumeCommand')).focus();
+  }
+  function revealCurrentPanel() {
+    const panel = document.getElementById(`resume-${currentPanel}`);
+    panel.focus({ preventScroll: true });
+    const bounds = panel.getBoundingClientRect();
+    if (bounds.top < 0 || bounds.bottom > window.innerHeight) panel.scrollIntoView({ block: 'start' });
   }
   async function runCommand(raw) {
     const command = raw.trim().toLowerCase();
@@ -282,15 +307,34 @@
     feedback.textContent = '';
     if (!command) return;
     if (command === 'help' || command === '?') { showHelp(); return; }
-    if (command === 'print' || command === 'pdf') { window.print(); return; }
+    if (command === 'print' || command === 'pdf') {
+      if (resumeLoadState === 'loading') feedback.textContent = resumeLang === 'sv'
+        ? 'CV:t laddas. Vänta tills det är klart och skriv print igen.'
+        : 'The resume is loading. Wait for it to finish, then type print again.';
+      else window.print();
+      return;
+    }
     if (command === 'home' || command === 'exit' || command === 'end') { location.href = './index.html'; return; }
     if (command === 'en' || command === 'sv') { setResumeLang(command); return; }
+    const aliases = { profil: 'profile', experience: 'work', erfarenhet: 'work', kompetenser: 'skills', utbildning: 'education', projekt: 'projects' };
+    const panel = aliases[command] || command;
+    if (!currentResumeData && (panelNames.includes(panel) || /^[123]$/.test(command))) {
+      feedback.textContent = resumeStatus.textContent;
+      return;
+    }
     if (/^[123]$/.test(command)) {
       const variant = resumeVariants[Number(command) - 1];
-      if (variant) { await selectVariant(variant.id); return; }
+      if (variant) {
+        const origin = document.activeElement;
+        const selected = await selectVariant(variant.id);
+        if (document.activeElement === origin) {
+          if (selected) revealCurrentPanel();
+          else if (selected === false) feedback.textContent = resumeStatus.textContent;
+        }
+        return;
+      }
     }
-    const aliases = { profil: 'profile', experience: 'work', erfarenhet: 'work', kompetenser: 'skills', utbildning: 'education', projekt: 'projects' };
-    if (selectPanel(aliases[command] || command)) return;
+    if (selectPanel(panel)) { revealCurrentPanel(); return; }
     feedback.textContent = resumeLang === 'sv' ? `Okänt kommando: ${raw}. Skriv help för att se valen.` : `Unknown command: ${raw}. Type help to see the options.`;
   }
 
@@ -326,8 +370,13 @@
   document.querySelectorAll('[data-requires-js]').forEach(element => { element.hidden = false; });
   langEnBtn.addEventListener('click', () => setResumeLang('en'));
   langSvBtn.addEventListener('click', () => setResumeLang('sv'));
-  document.getElementById('btnExportPdf').addEventListener('click', () => window.print());
+  document.getElementById('btnExportPdf').addEventListener('click', () => runCommand('print'));
   document.querySelectorAll('[data-resume-command]').forEach(button => button.addEventListener('click', () => runCommand(button.dataset.resumeCommand)));
+  document.getElementById('resumeTerminal').addEventListener('toggle', event => {
+    if (event.target.open) return;
+    document.getElementById('resumeHelp').hidden = true;
+    document.querySelectorAll('[data-resume-command="help"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+  });
   document.getElementById('resumeCommandForm').addEventListener('submit', event => {
     event.preventDefault();
     const input = document.getElementById('resumeCommand');
@@ -344,7 +393,7 @@
   window.addEventListener('popstate', () => {
     const currentQuery = new URLSearchParams(location.search);
     currentPanel = panelNames.includes(currentQuery.get('panel')) ? currentQuery.get('panel') : 'profile';
-    setResumeLang(currentQuery.get('lang') === 'sv' ? 'sv' : 'en', false);
+    setResumeLang(['en', 'sv'].includes(currentQuery.get('lang')) ? currentQuery.get('lang') : resumeLang, false);
     const selected = resumeVariants.find(variant => variant.id === currentQuery.get('focus')) || resumeVariants[0];
     if (selected) selectVariant(selected.id, false);
   });

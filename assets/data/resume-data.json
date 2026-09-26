@@ -13,6 +13,7 @@
     {
       "id": "mainframe-dev",
       "title": "Core Systems",
+      "title_sv": "Stordator",
       "template": "mainframe-dev",
       "path": "./assets/data/variants/mainframe-dev.json",
       "description": "HLASM, COBOL and production ownership in transaction-critical banking.",
@@ -21,6 +22,7 @@
     {
       "id": "modern-dev",
       "title": "Modern Backend",
+      "title_sv": "Webb & backend",
       "template": "modern-dev",
       "path": "./assets/data/variants/modern-dev.json",
       "description": "Backend, cloud and product delivery grounded in systems engineering.",
@@ -29,6 +31,7 @@
     {
       "id": "platform-dev",
       "title": "Platform & Leadership",
+      "title_sv": "Plattform & ledarskap",
       "template": "platform-dev",
       "path": "./assets/data/variants/platform-dev.json",
       "description": "Developer platforms, technical leadership and operational ownership.",
