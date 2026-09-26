@@ -31,8 +31,8 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
   <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-quality">
-  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-quality">
-  <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-worlds">
+  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-feel">
+  <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
 <body class="page-resume">
@@ -62,8 +62,8 @@
     </div>
     <div class="terminal-screen">
       <div class="terminal-heading no-print">
-        <span class="terminal-panel-id">JM00</span>
-        <p data-resume-en="PERSONAL INFORMATION · RESUME" data-resume-sv="PERSONUPPGIFTER · CV">PERSONAL INFORMATION · RESUME</p>
+        <span class="terminal-panel-id" id="resumePanelId">JM00</span>
+        <p id="resumePanelTitle" data-resume-en="RESUME / OVERVIEW" data-resume-sv="CV / ÖVERSIKT">RESUME / OVERVIEW</p>
         <span class="terminal-mode">BROWSE</span>
       </div>
       <div class="terminal-controls no-print" data-requires-js hidden>
@@ -81,8 +81,8 @@
         <p class="command-hint" id="commandHint" data-resume-en="Click the sections below, or type a command. No terminal knowledge needed." data-resume-sv="Klicka på avsnitten nedan eller skriv ett kommando. Du behöver inte kunna terminaler.">Click the sections below, or type a command. No terminal knowledge needed.</p>
         <p id="commandFeedback" class="command-feedback" role="status"></p>
         <div class="terminal-help" id="resumeHelp" hidden>
-          <p data-resume-en="Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and home to return to the desktop." data-resume-sv="Kommandon: profile, work, skills, education, projects. Välj CV-inriktning med 1, 2 eller 3. Byt språk med en / sv, skriv print för PDF och home för att återgå till skrivbordet.">Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and home to return to the desktop.</p>
-          <p data-resume-en="F1 opens help. F3 returns to the desktop. These shortcuts are inactive while typing." data-resume-sv="F1 öppnar hjälp. F3 återgår till skrivbordet. Snabbtangenterna är inaktiva när du skriver.">F1 opens help. F3 returns to the desktop. These shortcuts are inactive while typing.</p>
+          <p data-resume-en="Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop." data-resume-sv="Kommandon: profile, work, skills, education, projects. Välj CV-inriktning med 1, 2 eller 3. Byt språk med en / sv, skriv print för PDF och end (eller home / exit) för att återgå till skrivbordet.">Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop.</p>
+          <p data-resume-en="F1 shows or hides help, including in the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command." data-resume-sv="F1 visar eller döljer hjälp, även i kommandofältet. F3 återgår till skrivbordet; i kommandofältet fungerar det bara när fältet är tomt. Båda snabbtangenterna är inaktiva i andra inmatningsfält, i dialogrutor och tillsammans med Skift, Ctrl, Alt eller Command.">F1 shows or hides help, including in the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command.</p>
         </div>
       </div>
       <div class="resume-inner" id="resumeContent" tabindex="0">
@@ -101,16 +101,16 @@
         </div>
       </div>
       <footer class="terminal-footer no-print" data-requires-js hidden>
-        <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false"><span>F1</span> <span data-resume-en="Help" data-resume-sv="Hjälp">Help</span></button>
-        <a href="./index.html"><span>F3</span> <span data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</span></a>
+        <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false"><span>F1=</span><span data-resume-en="Help" data-resume-sv="Hjälp">Help</span></button>
+        <a href="./index.html"><span>F3=</span><span data-resume-en="Exit" data-resume-sv="Avsluta">Exit</span></a>
         <button type="button" data-resume-command="print"><span>PDF</span> <span data-resume-en="Print all sections" data-resume-sv="Skriv ut alla avsnitt">Print all sections</span></button>
         <span class="terminal-readonly" data-resume-en="READ ONLY" data-resume-sv="SKRIVSKYDDAD">READ ONLY</span>
       </footer>
     </div>
-    <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span>UTF-8</span></div>
+    <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span data-resume-en="Read only" data-resume-sv="Läsläge">Read only</span></div>
   </main>
   <script src="./assets/js/resume-shell.js?v=20260926-quality" defer></script>
-  <script src="./assets/js/resume.js?v=20260926-quality" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-quality" defer></script>
+  <script src="./assets/js/resume.js?v=20260926-feel" defer></script>
+  <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
 </body>
 </html>

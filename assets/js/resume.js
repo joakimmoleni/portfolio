@@ -8,6 +8,7 @@
   const query = new URLSearchParams(location.search);
   const storedLang = storageGet('resumeLang');
   const variantCache = new Map();
+  const panelNames = ['profile', 'work', 'skills', 'education', 'projects'];
   let variantRequest = 0;
   let currentResumeData = null;
   let currentVariantId = null;
@@ -16,7 +17,7 @@
   let resumeVariants = [];
   let resumeLoadState = 'loading';
   let requestedVariant = null;
-  let currentPanel = ['profile', 'work', 'skills', 'education', 'projects'].includes(query.get('panel')) ? query.get('panel') : 'profile';
+  let currentPanel = panelNames.includes(query.get('panel')) ? query.get('panel') : 'profile';
   let resumeLang = ['en', 'sv'].includes(query.get('lang')) ? query.get('lang') : (storedLang === 'sv' ? 'sv' : 'en');
 
   function escapeHtml(value) {
@@ -149,8 +150,10 @@
     return { ...baseData, ...overrideData, personal: { ...baseData.personal, ...overrideData.personal }, skills: { ...baseData.skills, ...overrideData.skills }, variants: baseData.variants || [] };
   }
   function selectPanel(panel, updateUrl = true) {
-    if (!document.getElementById(`resume-${panel}`)) return false;
+    if (!panelNames.includes(panel) || !document.getElementById(`resume-${panel}`)) return false;
     currentPanel = panel;
+    document.getElementById('resumePanelId').textContent = `JM0${panelNames.indexOf(panel) + 1}`;
+    document.getElementById('resumePanelTitle').textContent = `${resumeLang === 'sv' ? 'CV' : 'RESUME'} / ${labels()[panel].toUpperCase()}`;
     document.querySelectorAll('.resume-panel').forEach(section => { section.hidden = section.dataset.panel !== panel; });
     document.querySelectorAll('.section-tab').forEach(button => {
       const selected = button.dataset.panel === panel;
@@ -254,7 +257,7 @@
         <div class="resume-head__contact" aria-label="${l.contact}">${contacts.join('')}</div>
       </header>
       <div class="resume-section-tabs no-print" role="tablist" aria-label="${l.sections}">${panels.map(panel => `<button class="section-tab" id="section-tab-${panel.id}" type="button" role="tab" data-panel="${panel.id}" aria-selected="false" aria-controls="resume-${panel.id}" tabindex="-1">${l[panel.id]}</button>`).join('')}</div>
-      ${panels.map((panel, index) => `<section class="resume-panel" id="resume-${panel.id}" data-panel="${panel.id}" data-empty="${Boolean(panel.empty)}" role="tabpanel" aria-labelledby="section-tab-${panel.id}" tabindex="0" hidden><div class="panel-heading"><h2 class="resume-section-title">${l[panel.id]}</h2><span class="panel-code no-print" aria-hidden="true">JM0${index + 1}</span></div>${panel.content}</section>`).join('')}`;
+      ${panels.map(panel => `<section class="resume-panel" id="resume-${panel.id}" data-panel="${panel.id}" data-empty="${Boolean(panel.empty)}" role="tabpanel" aria-labelledby="section-tab-${panel.id}" tabindex="0" hidden><div class="panel-heading"><h2 class="resume-section-title">${l[panel.id]}</h2></div>${panel.content}</section>`).join('')}`;
     const buttons = [...resumeContent.querySelectorAll('.section-tab')];
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => selectPanel(button.dataset.panel));
@@ -280,7 +283,7 @@
     if (!command) return;
     if (command === 'help' || command === '?') { showHelp(); return; }
     if (command === 'print' || command === 'pdf') { window.print(); return; }
-    if (command === 'home' || command === 'exit') { location.href = './index.html'; return; }
+    if (command === 'home' || command === 'exit' || command === 'end') { location.href = './index.html'; return; }
     if (command === 'en' || command === 'sv') { setResumeLang(command); return; }
     if (/^[123]$/.test(command)) {
       const variant = resumeVariants[Number(command) - 1];
@@ -332,14 +335,15 @@
     input.value = '';
   });
   document.addEventListener('keydown', event => {
-    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || document.querySelector('dialog[open]')) return;
-    if (event.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return;
+    if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || document.querySelector('dialog[open]')) return;
+    const field = event.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
+    if (field && field !== document.getElementById('resumeCommand')) return;
     if (event.key === 'F1') { event.preventDefault(); showHelp(); }
-    if (event.key === 'F3') { event.preventDefault(); location.href = './index.html'; }
+    if (event.key === 'F3' && (!field || !field.value.trim())) { event.preventDefault(); location.href = './index.html'; }
   });
   window.addEventListener('popstate', () => {
     const currentQuery = new URLSearchParams(location.search);
-    currentPanel = ['profile', 'work', 'skills', 'education', 'projects'].includes(currentQuery.get('panel')) ? currentQuery.get('panel') : 'profile';
+    currentPanel = panelNames.includes(currentQuery.get('panel')) ? currentQuery.get('panel') : 'profile';
     setResumeLang(currentQuery.get('lang') === 'sv' ? 'sv' : 'en', false);
     const selected = resumeVariants.find(variant => variant.id === currentQuery.get('focus')) || resumeVariants[0];
     if (selected) selectVariant(selected.id, false);

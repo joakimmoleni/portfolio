@@ -19,7 +19,7 @@ const settle = () => new Promise(resolve => setImmediate(resolve));
 function element() {
   const handlers = new Map();
   return {
-    dataset: {}, attributes: {}, children: [], textContent: '', innerHTML: '',
+    dataset: {}, attributes: {}, children: [], textContent: '', innerHTML: '', value: '',
     classList: { toggle() {} },
     setAttribute(name, value) { this.attributes[name] = String(value); },
     getAttribute(name) { return this.attributes[name]; },
@@ -33,7 +33,8 @@ function element() {
 }
 async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map()) {
   const nodes = new Map();
-  for (const id of ['resumeContent', 'resumeStatus', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
+  for (const id of ['resumeContent', 'resumeStatus', 'resumePanelId', 'resumePanelTitle', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
+  nodes.get('resumeHelp').hidden = true;
   const panels = ['profile', 'work', 'skills', 'education', 'projects'].map(panel => {
     const section = element();
     section.dataset.panel = panel;
@@ -41,19 +42,28 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     return section;
   });
   const listeners = new Map();
+  const documentListeners = new Map();
   const storage = new Map();
-  const location = new URL(`https://portfolio.example/resume.html${search}`);
+  let currentUrl = new URL(`https://portfolio.example/resume.html${search}`);
+  let dialogOpen = false;
+  const location = {
+    get href() { return currentUrl.href; },
+    set href(value) { currentUrl = new URL(value, currentUrl); },
+    get search() { return currentUrl.search; },
+    get searchParams() { return currentUrl.searchParams; },
+    toString() { return currentUrl.href; }
+  };
   const document = {
     body: element(), documentElement: { lang: 'en', dataset: {} }, title: '',
     getElementById: id => nodes.get(id) || null,
     createElement: element,
-    querySelector: () => null,
+    querySelector: selector => selector === 'dialog[open]' && dialogOpen ? element() : null,
     querySelectorAll(selector) {
       if (selector === '#variantList .tab-btn') return nodes.get('variantList').children;
       if (selector === '.resume-panel') return panels;
       return [];
     },
-    addEventListener() {}
+    addEventListener: (name, listener) => documentListeners.set(name, listener)
   };
   const context = vm.createContext({
     document, location, URL, URLSearchParams, console: { error() {} },
@@ -78,6 +88,16 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     clickVariant: id => nodes.get('variantList').children.find(button => button.dataset.variant === id).fire('click'),
     selectedVariant: () => nodes.get('variantList').children.find(button => button.getAttribute('aria-selected') === 'true')?.dataset.variant ?? null,
     setLanguage: lang => nodes.get(lang === 'sv' ? 'langSvBtn' : 'langEnBtn').fire('click'),
+    setDialogOpen: value => { dialogOpen = value; },
+    pressKey(key, { field = null, ...properties } = {}) {
+      const event = {
+        key, defaultPrevented: false, ...properties,
+        target: { closest: () => field === 'command' ? nodes.get('resumeCommand') : field },
+        preventDefault() { this.defaultPrevented = true; }
+      };
+      documentListeners.get('keydown')(event);
+      return event.defaultPrevented;
+    },
     command(value) {
       nodes.get('resumeCommand').value = value;
       nodes.get('resumeCommandForm').fire('submit');
@@ -187,6 +207,8 @@ await test('history restores language, focus and section', async () => {
   await clickVariant(modern.id);
   setLanguage('sv');
   command('work');
+  assert.equal(nodes.get('resumePanelId').textContent, 'JM02');
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'CV / ERFARENHET');
   location.href = 'https://portfolio.example/resume.html?lang=en&focus=mainframe-dev&panel=skills';
   listeners.get('popstate')();
   await settle();
@@ -194,6 +216,8 @@ await test('history restores language, focus and section', async () => {
   assert.equal(selectedVariant(), core.id);
   assert.equal(nodes.get('resume-skills').hidden, false);
   assert.equal(nodes.get('resume-work').hidden, true);
+  assert.equal(nodes.get('resumePanelId').textContent, 'JM03');
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'RESUME / SKILLS');
 });
 
 await test('failed history navigation keeps data and URL on the available variant', async () => {
@@ -215,6 +239,74 @@ await test('theme name remains stable while its pressed state changes', async ()
   button.fire('click');
   assert.equal(button.getAttribute('aria-label'), name);
   assert.equal(button.getAttribute('aria-pressed'), 'true');
+});
+
+await test('the panel line follows section and language changes', async () => {
+  const { nodes, command, setLanguage } = await page('?lang=en&focus=mainframe-dev&panel=projects');
+  assert.equal(nodes.get('resumePanelId').textContent, 'JM05');
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'RESUME / SELECTED PROJECTS');
+  setLanguage('sv');
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'CV / UTVALDA PROJEKT');
+  command('profile');
+  assert.equal(nodes.get('resumePanelId').textContent, 'JM01');
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'CV / PROFIL');
+});
+
+await test('END exits to the desktop, like home and exit', async () => {
+  for (const value of [' end ', 'HOME', 'exit']) {
+    const { command, location } = await page();
+    command(value);
+    assert.equal(location.href, 'https://portfolio.example/index.html');
+  }
+});
+
+await test('F1 toggles help in the command field without changing its text', async () => {
+  const { nodes, pressKey } = await page();
+  nodes.get('resumeCommand').value = 'skills';
+  assert.equal(pressKey('F1', { field: 'command' }), true);
+  assert.equal(nodes.get('resumeHelp').hidden, false);
+  assert.equal(nodes.get('resumeCommand').value, 'skills');
+  pressKey('F1', { field: 'command' });
+  assert.equal(nodes.get('resumeHelp').hidden, true);
+});
+
+await test('F3 protects an unfinished command and exits from an empty command field', async () => {
+  const { nodes, pressKey, location } = await page();
+  const initialUrl = location.href;
+  nodes.get('resumeCommand').value = 'skills';
+  assert.equal(pressKey('F3', { field: 'command' }), false);
+  assert.equal(location.href, initialUrl);
+  assert.equal(nodes.get('resumeCommand').value, 'skills');
+  nodes.get('resumeCommand').value = '  ';
+  assert.equal(pressKey('F3', { field: 'command' }), true);
+  assert.equal(location.href, 'https://portfolio.example/index.html');
+});
+
+await test('terminal shortcuts remain inactive in other fields, dialogs, composition and modified events', async () => {
+  const { nodes, pressKey, setDialogOpen, location } = await page();
+  const initialUrl = location.href;
+  for (const key of ['F1', 'F3']) {
+    for (const field of ['input', 'textarea', 'select', 'contenteditable']) {
+      assert.equal(pressKey(key, { field: { nodeName: field, value: '' } }), false);
+    }
+    for (const flag of ['shiftKey', 'ctrlKey', 'altKey', 'metaKey', 'isComposing']) {
+      assert.equal(pressKey(key, { field: 'command', [flag]: true }), false);
+    }
+    pressKey(key, { defaultPrevented: true });
+    setDialogOpen(true);
+    assert.equal(pressKey(key, { field: 'command' }), false);
+    setDialogOpen(false);
+  }
+  assert.equal(nodes.get('resumeHelp').hidden, true);
+  assert.equal(location.href, initialUrl);
+});
+
+await test('F1 and F3 still work outside input fields', async () => {
+  const { nodes, pressKey, location } = await page();
+  assert.equal(pressKey('F1'), true);
+  assert.equal(nodes.get('resumeHelp').hidden, false);
+  assert.equal(pressKey('F3'), true);
+  assert.equal(location.href, 'https://portfolio.example/index.html');
 });
 
 for (const result of results) if (result.passed) console.log(`PASS ${result.name}`);

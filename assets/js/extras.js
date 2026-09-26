@@ -7,8 +7,10 @@
   markup.innerHTML = `
     <section id="extras-player" class="window extras-window extras-player" lang="sv" aria-labelledby="extras-player-title" tabindex="-1" hidden>
       <header class="titlebar extras-titlebar">
-        <h2 id="extras-player-title">Winamp · nostalgiläge</h2>
+        <h2 id="extras-player-title">WINAMP</h2>
+        <span class="extras-shade-time" data-player-shade-time>00:00</span>
         <div class="extras-title-actions">
+          <button type="button" class="extras-shade-play" data-player-shade-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
           <button type="button" class="title-button extras-title-button" data-player-compact aria-label="Kompakt läge" aria-pressed="false" title="Kompakt läge">▱</button>
           <button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">×</button>
         </div>
@@ -22,10 +24,12 @@
         <label class="extras-progress-label" for="extras-player-progress">Position i spåret</label>
         <input id="extras-player-progress" class="extras-player-progress" type="range" min="0" max="155" step="1" value="0" aria-valuetext="0 minuter, 0 sekunder">
         <div class="extras-player-controls">
-          <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren">▶ Spela</button>
-          <button type="button" class="extras-control" data-player-stop>■ Stopp</button>
-          <button type="button" class="extras-control" data-player-next>Nästa ▷</button>
+          <button type="button" class="extras-control" data-player-previous aria-label="Föregående demospår" title="Föregående spår">|◀</button>
+          <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
+          <button type="button" class="extras-control" data-player-stop aria-label="Stoppa den ljudlösa spelaren" title="Stopp">■</button>
+          <button type="button" class="extras-control" data-player-next aria-label="Nästa demospår" title="Nästa spår">▶|</button>
         </div>
+        <div class="extras-playlist-heading" aria-hidden="true"><span>WINAMP PLAYLIST</span><span>3 spår</span></div>
         <ol class="extras-playlist" aria-label="Spellista med ljudlösa demospår">
           <li><button type="button" data-player-select="0" aria-pressed="true"><span>01. Demospår 01</span><span>2:35</span></button></li>
           <li><button type="button" data-player-select="1" aria-pressed="false"><span>02. Demospår 02</span><span>3:00</span></button></li>
@@ -39,10 +43,10 @@
       <p id="extras-mirc-description" class="extras-dialog-note">Nostalgikanal — bara du och boten. Ingen livechatt.</p>
       <div class="extras-chat-layout">
         <div class="extras-chat-log" role="log" aria-label="Meddelanden i den lokala nostalgikanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
-        <aside class="extras-chat-users" aria-label="Namn i lekkanalen"><strong>#nostalgi</strong><span>@nostalgibot</span><span>besökare</span></aside>
+        <aside class="extras-chat-users" aria-label="Namn i lekkanalen"><strong>#nostalgi</strong><span>@nostalgibot</span><span>besokare</span></aside>
       </div>
       <form class="extras-chat-form">
-        <label for="extras-chat-input">besökare &gt;</label>
+        <label for="extras-chat-input">besokare &gt;</label>
         <div class="extras-chat-entry"><input id="extras-chat-input" type="text" maxlength="300" autocomplete="off" spellcheck="false" placeholder="Skriv /help" autofocus><button class="system-button extras-send" type="submit">Skicka</button></div>
       </form>
       <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
@@ -51,7 +55,7 @@
       <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
       <p id="extras-notepad-description" class="extras-dialog-note">Din egen tillfälliga anteckning på det här skrivbordet.</p>
       <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
-      <textarea id="extras-notepad-text" maxlength="12000" spellcheck="true" autofocus></textarea>
+      <textarea id="extras-notepad-text" maxlength="12000" spellcheck="false" autofocus></textarea>
       <p class="extras-notepad-status" role="status">Sparas i den här fliken. Skickas ingenstans.</p>
     </dialog>`;
   document.body.append(...markup.children);
@@ -111,6 +115,8 @@
     const start = document.getElementById('startPanel');
     const startButton = document.getElementById('startButton');
     returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
+    const disclosure = trigger?.closest('details');
+    if (disclosure) disclosure.open = false;
     const previousDialog = trigger?.closest('dialog');
     if (previousDialog?.open && previousDialog !== panel) previousDialog.close();
     if (start) start.hidden = true;
@@ -121,7 +127,8 @@
       panel.querySelector('[autofocus]')?.focus();
     } else {
       panel.hidden = false;
-      panel.querySelector('[data-player-play]').focus({ preventScroll: true });
+      const playControl = panel.classList.contains('is-compact') ? '[data-player-shade-play]' : '[data-player-play]';
+      panel.querySelector(playControl).focus({ preventScroll: true });
     }
   }
   function closePlayer() {
@@ -159,8 +166,10 @@
   // A silent visual clock: no audio objects, media requests or autoplay.
   const tracks = [155, 180, 210];
   const time = player.querySelector('[data-player-time]');
+  const shadeTime = player.querySelector('[data-player-shade-time]');
   const trackLabel = player.querySelector('[data-player-track]');
   const playButton = player.querySelector('[data-player-play]');
+  const shadePlayButton = player.querySelector('[data-player-shade-play]');
   const stateLabel = player.querySelector('[data-player-state]');
   const progress = document.getElementById('extras-player-progress');
   const playlistButtons = player.querySelectorAll('[data-player-select]');
@@ -174,12 +183,16 @@
   function drawPlayer() {
     const seconds = Math.floor(position);
     time.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+    shadeTime.textContent = time.textContent;
     progress.max = tracks[track];
     progress.value = seconds;
     progress.setAttribute('aria-valuetext', `${Math.floor(seconds / 60)} minuter, ${seconds % 60} sekunder`);
     trackLabel.textContent = trackName();
-    playButton.textContent = playing ? 'Ⅱ Pausa' : '▶ Spela';
-    playButton.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
+    for (const button of [playButton, shadePlayButton]) {
+      button.textContent = playing ? 'Ⅱ' : '▶';
+      button.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
+      button.title = playing ? 'Pausa' : 'Spela';
+    }
     stateLabel.textContent = playing ? 'SPELAR · LJUDLÖST' : position >= tracks[track] ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
     player.classList.toggle('is-playing', playing);
     for (const button of playlistButtons) button.setAttribute('aria-pressed', String(Number(button.dataset.playerSelect) === track));
@@ -202,7 +215,7 @@
     stopTimer();
     drawPlayer();
   }
-  playButton.addEventListener('click', () => {
+  function togglePlayback() {
     if (playing) {
       tick();
       playing = false;
@@ -214,7 +227,9 @@
       timer = setInterval(tick, 250);
     }
     drawPlayer();
-  });
+  }
+  playButton.addEventListener('click', togglePlayback);
+  shadePlayButton.addEventListener('click', togglePlayback);
   player.querySelector('[data-player-stop]').addEventListener('click', stopPlayer);
   function selectTrack(index) {
     track = index;
@@ -223,6 +238,7 @@
     drawPlayer();
   }
   player.querySelector('[data-player-next]').addEventListener('click', () => selectTrack((track + 1) % tracks.length));
+  player.querySelector('[data-player-previous]').addEventListener('click', () => selectTrack((track + tracks.length - 1) % tracks.length));
   for (const button of playlistButtons) button.addEventListener('click', () => selectTrack(Number(button.dataset.playerSelect)));
   progress.addEventListener('input', () => {
     position = Number(progress.value);
@@ -239,6 +255,23 @@
 
   const log = mirc.querySelector('.extras-chat-log');
   const chatInput = document.getElementById('extras-chat-input');
+  const chatHistory = [];
+  let historyIndex = 0;
+  let chatDraft = '';
+  chatInput.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || !chatHistory.length) return;
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+    if (event.key === 'ArrowUp') {
+      if (historyIndex === chatHistory.length) chatDraft = chatInput.value;
+      historyIndex = Math.max(0, historyIndex - 1);
+    } else {
+      if (historyIndex === chatHistory.length) return;
+      historyIndex += 1;
+    }
+    event.preventDefault();
+    chatInput.value = historyIndex === chatHistory.length ? chatDraft : chatHistory[historyIndex];
+    chatInput.setSelectionRange(chatInput.value.length, chatInput.value.length);
+  });
   function addLine(text, kind = 'system') {
     const line = document.createElement('p');
     line.className = `extras-chat-${kind}`;
@@ -254,6 +287,10 @@
     event.preventDefault();
     const message = chatInput.value.trim();
     if (!message) return;
+    if (chatHistory[chatHistory.length - 1] !== message) chatHistory.push(message);
+    if (chatHistory.length > 20) chatHistory.shift();
+    historyIndex = chatHistory.length;
+    chatDraft = '';
     chatInput.value = '';
     const command = message.split(/\s+/)[0].toLowerCase();
     const argument = message.slice(command.length).trim();
@@ -263,9 +300,9 @@
     } else if (command === '/help') {
       bot('/me [text] · /slap [namn] · /clear · /winamp · /np. Allt händer lokalt.');
     } else if (command === '/me') {
-      addLine(`* besökare ${argument || 'ser sig omkring i #nostalgi.'}`, 'action');
+      addLine(`* besokare ${argument || 'ser sig omkring i #nostalgi.'}`, 'action');
     } else if (command === '/slap') {
-      addLine(`* besökare daskar ${argument || 'nostalgibot'} försiktigt med en mycket pixlig öring.`, 'action');
+      addLine(`* besokare daskar ${argument || 'nostalgibot'} försiktigt med en mycket pixlig öring.`, 'action');
       bot('Öringen har lagts tillbaka. Ordningen är återställd.');
     } else if (command === '/np') {
       bot(`${trackName()} · ${playing ? 'spelar' : 'stoppad eller pausad'} · ljudlöst nostalgiläge.`);
@@ -278,8 +315,8 @@
     } else if (command.startsWith('/')) {
       bot(`Okänt kommando: ${command}. Skriv /help för kommandolistan.`);
     } else {
-      addLine(`<besökare> ${message}`, 'visitor');
-      bot(/^(hej|hello|hallå|tjena)(\s|[!.?]|$)/i.test(message) ? 'Hej! Ingen kö till den här servern. Prova /me eller /slap.' : 'Mottaget i nostalgikanalen. Jag kan några små tricks — skriv /help.');
+      addLine(`<besokare> ${message}`, 'visitor');
+      if (/^(hej|hello|hallå|tjena)(\s|[!.?]|$)/i.test(message)) bot('Hej! Ingen kö till den här servern. Prova /me eller /slap.');
     }
     chatInput.focus();
   });

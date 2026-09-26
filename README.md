@@ -23,7 +23,7 @@ npm run validate
 npm test
 ```
 
-Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes and history. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
+Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history and terminal keyboard behaviour. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
 
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 
@@ -35,6 +35,8 @@ The interface artwork is drawn in HTML, CSS and SVG. These references establish 
 - [Original Counter-Strike WON menus by version](https://steamcommunity.com/sharedfiles/filedetails/?id=3359467114)
 - [World of Warcraft's original quest log, 2004 screenshot](https://www.mobygames.com/game/15620/world-of-warcraft/screenshots/windows/91220/)
 - [Lunarstorm, Internetmuseum](https://internetmuseum.se/utstallningar/sociala-medier/lunarstorm/)
+
+The [feel review](content/portfolio-feel-review.md) records the later reference comparison, refinements and browser checks, including Winamp, mIRC and ISPF.
 
 ## Link preview image
 
