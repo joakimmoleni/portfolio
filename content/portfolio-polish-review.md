@@ -40,3 +40,14 @@ Native print-preview pagination could not be inspected because computer use cann
 - Browser checks cover all three CV variants in Swedish and English at 320px, the 960px desktop layout, section/history focus, F1 and command results, Programs → mIRC → focus restoration, light/dark frames and the no-JavaScript fallback. No horizontal overflow, duplicate IDs or broken ARIA references were found in the checked mobile layouts. No browser console warnings or errors on the final normal preview.
 
 No dependencies, fonts or professional claims were added. The CV's colours and structure are an accessible interpretation of a terminal, not a fixed-size emulator.
+
+## Follow-up: Lunarstorm krypin and ISPF command placement
+
+- Rebuilt contact around the compact orange headers, blue navigation and personally decorated presentation seen in [Lunarstorm's own 2006 demo (page 12)](https://arkiv.internetdagarna.se/2006/65-e-mobbning/bjarneotterdahl.pdf#page=12). The profile uses exposure_, a small illustrated retrocomputer, real contact links and a local mIRC shortcut. No fabricated visitors, friends, messages or activity were added.
+- Email and professional links remain above the longer presentation, including at 320px. Navigation anchors, visible link names and mIRC open/close with focus restoration were checked. Small orange-header text was adjusted for readable contrast.
+- Moved the always-visible Command ===> field directly below the panel title. Compact labeled identity fields and flat section choices replace the larger heading and tab treatment; F1/F3 remain at the bottom. [IBM's current ISPF options](https://www.ibm.com/docs/en/zos/3.1.0?topic=fields-select-options) allow command placement at either the top or bottom; this portfolio deliberately uses the top configuration.
+- F1, both help buttons and the help command share one inline help panel. There is no automatic input focus. The obsolete terminal disclosure and its event handler were removed.
+- Site validation and all 27 native regression tests pass. Fresh browser checks covered all six language/variant combinations at 320px, desktop layouts, command results, history focus, F1 toggling and slow-loading feedback. No overflow, duplicate IDs or broken ARIA references appeared in the checked mobile layouts.
+- The no-JavaScript fallback remains readable. Print CSS at an A4-like content width shows all populated sections and full profile URLs while hiding command/navigation controls. This verifies layout styles, not native PDF pagination.
+
+No dependencies were added. Shared-world CSS changes are confined to Lunarstorm, preserving the other program designs.

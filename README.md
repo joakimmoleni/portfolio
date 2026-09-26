@@ -13,7 +13,7 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 
 Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
 
-The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line is optional, below the CV; all sections also have ordinary clickable controls.
+The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line stays visible below the panel title; using it is optional, and all sections also have ordinary clickable controls. F1 opens help beside the field, and the function-key row sits below the panel content.
 
 The resume continues to use `assets/data/resume-data.json` and its three variant overrides. Public copy does not include internal bank assignments or unverified project/adoption figures. Specific gaming achievements, character details and music selections are left out until supplied.
 

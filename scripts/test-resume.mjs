@@ -38,9 +38,13 @@ function element() {
 }
 async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map(), storage = new Map()) {
   const nodes = new Map();
-  for (const id of ['resumeContent', 'resumeStatus', 'resumePanelId', 'resumePanelTitle', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeTerminal', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
+  for (const id of ['resumeContent', 'resumeStatus', 'resumePanelId', 'resumePanelTitle', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
   nodes.get('resumeHelp').hidden = true;
-  nodes.get('resumeTerminal').open = false;
+  const helpButtons = [element(), element()];
+  helpButtons.forEach(button => {
+    button.dataset.resumeCommand = 'help';
+    button.setAttribute('aria-expanded', 'false');
+  });
   const sectionTabs = [];
   const panels = ['profile', 'work', 'skills', 'education', 'projects'].map(panel => {
     const section = element();
@@ -74,6 +78,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
       if (selector === '#variantList .tab-btn') return nodes.get('variantList').children;
       if (selector === '.resume-panel') return panels;
       if (selector === '.section-tab') return sectionTabs;
+      if (selector === '[data-resume-command]' || selector === '[data-resume-command="help"]') return helpButtons;
       return [];
     },
     addEventListener: (name, listener) => documentListeners.set(name, listener)
@@ -115,7 +120,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
   vm.runInContext(resumeSource, context, { filename: 'resume.js' });
   await settle();
   return {
-    nodes, responses, location, listeners, document, storage,
+    nodes, responses, location, listeners, document, storage, helpButtons,
     printed: () => printCount,
     clickVariant: id => nodes.get('variantList').children.find(button => button.dataset.variant === id).fire('click'),
     selectedVariant: () => nodes.get('variantList').children.find(button => button.getAttribute('aria-selected') === 'true')?.dataset.variant ?? null,
@@ -430,27 +435,30 @@ await test('END exits to the desktop, like home and exit', async () => {
 });
 
 await test('F1 toggles help in the command field without changing its text', async () => {
-  const { nodes, pressKey, document } = await page();
+  const { nodes, pressKey, document, helpButtons } = await page();
   nodes.get('resumeCommand').value = 'skills';
   assert.equal(pressKey('F1', { field: 'command' }), true);
   assert.equal(nodes.get('resumeHelp').hidden, false);
-  assert.equal(nodes.get('resumeTerminal').open, true);
+  assert.ok(helpButtons.every(button => button.getAttribute('aria-expanded') === 'true'));
   assert.equal(document.activeElement.id, 'resumeHelp');
   assert.equal(nodes.get('resumeCommand').value, 'skills');
   pressKey('F1', { field: 'command' });
   assert.equal(nodes.get('resumeHelp').hidden, true);
+  assert.ok(helpButtons.every(button => button.getAttribute('aria-expanded') === 'false'));
   assert.equal(document.activeElement.id, 'resumeCommand');
 });
 
-await test('closing terminal commands clears help state and F1 reopens visible help', async () => {
-  const { nodes, pressKey, document } = await page();
-  pressKey('F1');
-  const terminal = nodes.get('resumeTerminal');
-  terminal.open = false;
-  terminal.fire('toggle');
+await test('help buttons and the help command share one inline help panel', async () => {
+  const { nodes, command, helpButtons, document } = await page();
+  helpButtons[0].fire('click');
+  assert.equal(nodes.get('resumeHelp').hidden, false);
+  assert.equal(document.activeElement.id, 'resumeHelp');
+  assert.ok(helpButtons.every(button => button.getAttribute('aria-expanded') === 'true'));
+  helpButtons[1].fire('click');
   assert.equal(nodes.get('resumeHelp').hidden, true);
-  pressKey('F1');
-  assert.equal(terminal.open, true);
+  assert.equal(document.activeElement.id, 'resumeCommand');
+  assert.ok(helpButtons.every(button => button.getAttribute('aria-expanded') === 'false'));
+  command('help');
   assert.equal(nodes.get('resumeHelp').hidden, false);
   assert.equal(document.activeElement.id, 'resumeHelp');
 });

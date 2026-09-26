@@ -31,7 +31,7 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
   <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-finish">
-  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-finish">
+  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-nostalgia">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
@@ -68,6 +68,20 @@
         <p id="resumePanelTitle" data-resume-en="RESUME / OVERVIEW" data-resume-sv="CV / ÖVERSIKT">RESUME / OVERVIEW</p>
         <span class="terminal-mode">BROWSE</span>
       </div>
+      <div class="terminal-command-area no-print" data-requires-js hidden>
+        <form class="terminal-command" id="resumeCommandForm">
+          <label for="resumeCommand">Command <span aria-hidden="true">===&gt;</span></label>
+          <input id="resumeCommand" name="command" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="commandHint" placeholder="help">
+          <button type="submit" data-resume-en="Enter ↵" data-resume-sv="Kör ↵">Enter ↵</button>
+          <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false" data-resume-en="Help" data-resume-sv="Hjälp">Help</button>
+        </form>
+        <p class="command-hint" id="commandHint" data-resume-en="Select an option below, or type help for commands." data-resume-sv="Klicka på valen nedan eller skriv help för kommandon.">Select an option below, or type help for commands.</p>
+        <p id="commandFeedback" class="command-feedback" role="status"></p>
+        <div class="terminal-help" id="resumeHelp" tabindex="-1" hidden>
+          <p data-resume-en="Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop." data-resume-sv="Kommandon: profile, work, skills, education, projects. Välj CV-inriktning med 1, 2 eller 3. Byt språk med en / sv, skriv print för PDF och end (eller home / exit) för att återgå till skrivbordet.">Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop.</p>
+          <p data-resume-en="F1 shows or hides help beside the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command." data-resume-sv="F1 visar eller döljer hjälpen vid kommandofältet. F3 återgår till skrivbordet; i kommandofältet fungerar det bara när fältet är tomt. Båda snabbtangenterna är inaktiva i andra inmatningsfält, i dialogrutor och tillsammans med Skift, Ctrl, Alt eller Command.">F1 shows or hides help beside the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command.</p>
+        </div>
+      </div>
       <div class="terminal-controls no-print" data-requires-js hidden>
         <div class="terminal-focus">
           <span id="variantLabel" data-resume-en="CV focus" data-resume-sv="CV-inriktning">CV focus</span>
@@ -90,23 +104,6 @@
           <section><h2>Education</h2><p>Changemaker Educations — Frontend App Developer Programme</p><p>2021 – 2023</p></section>
         </div>
       </div>
-      <details class="terminal-disclosure no-print" id="resumeTerminal" data-requires-js hidden>
-        <summary data-resume-en="Terminal commands" data-resume-sv="Terminalkommandon">Terminal commands</summary>
-        <div class="terminal-command-body">
-          <form class="terminal-command" id="resumeCommandForm">
-            <label for="resumeCommand">Command <span aria-hidden="true">===&gt;</span></label>
-            <input id="resumeCommand" name="command" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="commandHint" placeholder="help">
-            <button type="submit" data-resume-en="Enter ↵" data-resume-sv="Kör ↵">Enter ↵</button>
-            <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false" data-resume-en="Help" data-resume-sv="Hjälp">Help</button>
-          </form>
-          <p class="command-hint" id="commandHint" data-resume-en="Click the sections above, or type a command. No terminal knowledge needed." data-resume-sv="Klicka på avsnitten ovan eller skriv ett kommando. Du behöver inte kunna terminaler.">Click the sections above, or type a command. No terminal knowledge needed.</p>
-          <p id="commandFeedback" class="command-feedback" role="status"></p>
-          <div class="terminal-help" id="resumeHelp" tabindex="-1" hidden>
-            <p data-resume-en="Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop." data-resume-sv="Kommandon: profile, work, skills, education, projects. Välj CV-inriktning med 1, 2 eller 3. Byt språk med en / sv, skriv print för PDF och end (eller home / exit) för att återgå till skrivbordet.">Commands: profile, work, skills, education, projects. Choose a CV focus with 1, 2 or 3. Use en / sv to change language, print for PDF, and end (or home / exit) to return to the desktop.</p>
-            <p data-resume-en="F1 opens terminal commands and shows or hides help, including from the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command." data-resume-sv="F1 öppnar terminalkommandona och visar eller döljer hjälp, även från kommandofältet. F3 återgår till skrivbordet; i kommandofältet fungerar det bara när fältet är tomt. Båda snabbtangenterna är inaktiva i andra inmatningsfält, i dialogrutor och tillsammans med Skift, Ctrl, Alt eller Command.">F1 opens terminal commands and shows or hides help, including from the command field. F3 returns to the desktop; in the command field it works only when the field is empty. Both shortcuts are inactive in other input fields, in dialogs and when combined with Shift, Ctrl, Alt or Command.</p>
-          </div>
-        </div>
-      </details>
       <footer class="terminal-footer no-print" data-requires-js hidden>
         <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false"><span>F1=</span><span data-resume-en="Help" data-resume-sv="Hjälp">Help</span></button>
         <a href="./index.html"><span>F3=</span><span data-resume-en="Exit" data-resume-sv="Avsluta">Exit</span></a>
@@ -115,7 +112,7 @@
     <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span data-resume-en="Read only" data-resume-sv="Läsläge">Read only</span></div>
   </main>
   <script src="./assets/js/resume-shell.js?v=20260926-quality" defer></script>
-  <script src="./assets/js/resume.js?v=20260926-finish" defer></script>
+  <script src="./assets/js/resume.js?v=20260926-nostalgia" defer></script>
   <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
 </body>
 </html>

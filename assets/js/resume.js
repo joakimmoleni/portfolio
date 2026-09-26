@@ -264,10 +264,10 @@
     ];
     resumeContent.innerHTML = `
       <header class="resume-head">
-        <div><h1 class="resume-name">${escapeHtml(personal.name)}</h1><p class="resume-title">${escapeHtml(t(personal, 'title'))}</p></div>
+        <div class="resume-identity"><span class="resume-field-label no-print" aria-hidden="true">${swedish ? 'Namn' : 'Name'}</span><h1 class="resume-name">${escapeHtml(personal.name)}</h1><span class="resume-field-label no-print" aria-hidden="true">${swedish ? 'Yrkesroll' : 'Role'}</span><p class="resume-title">${escapeHtml(t(personal, 'title'))}</p></div>
         <dl class="resume-head__contact" aria-label="${l.contact}">${contacts.join('')}</dl>
       </header>
-      <div class="resume-section-tabs no-print" role="tablist" aria-label="${l.sections}">${panels.map(panel => `<button class="section-tab" id="section-tab-${panel.id}" type="button" role="tab" data-panel="${panel.id}" aria-selected="false" aria-controls="resume-${panel.id}" tabindex="-1">${l[panel.id]}</button>`).join('')}</div>
+      <div class="resume-section-menu no-print"><span class="resume-field-label" id="resumeSectionsLabel">${swedish ? 'Avsnitt' : 'Sections'}</span><div class="resume-section-tabs" role="tablist" aria-labelledby="resumeSectionsLabel">${panels.map(panel => `<button class="section-tab" id="section-tab-${panel.id}" type="button" role="tab" data-panel="${panel.id}" aria-selected="false" aria-controls="resume-${panel.id}" tabindex="-1">${l[panel.id]}</button>`).join('')}</div></div>
       ${panels.map(panel => `<section class="resume-panel" id="resume-${panel.id}" data-panel="${panel.id}" data-empty="${Boolean(panel.empty)}" role="tabpanel" aria-labelledby="section-tab-${panel.id}" tabindex="0" hidden><div class="panel-heading"><h2 class="resume-section-title">${l[panel.id]}</h2></div>${panel.content}</section>`).join('')}`;
     const buttons = [...resumeContent.querySelectorAll('.section-tab')];
     buttons.forEach((button, index) => {
@@ -291,10 +291,8 @@
   }
 
   function showHelp() {
-    const terminal = document.getElementById('resumeTerminal');
     const help = document.getElementById('resumeHelp');
-    const showing = !terminal.open || help.hidden;
-    terminal.open = true;
+    const showing = help.hidden;
     help.hidden = !showing;
     document.querySelectorAll('[data-resume-command="help"]').forEach(button => button.setAttribute('aria-expanded', String(!help.hidden)));
     (showing ? help : document.getElementById('resumeCommand')).focus();
@@ -381,11 +379,6 @@
   langSvBtn.addEventListener('click', () => setResumeLang('sv'));
   document.getElementById('btnExportPdf').addEventListener('click', () => runCommand('print'));
   document.querySelectorAll('[data-resume-command]').forEach(button => button.addEventListener('click', () => runCommand(button.dataset.resumeCommand)));
-  document.getElementById('resumeTerminal').addEventListener('toggle', event => {
-    if (event.target.open) return;
-    document.getElementById('resumeHelp').hidden = true;
-    document.querySelectorAll('[data-resume-command="help"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
-  });
   document.getElementById('resumeCommandForm').addEventListener('submit', event => {
     event.preventDefault();
     const input = document.getElementById('resumeCommand');

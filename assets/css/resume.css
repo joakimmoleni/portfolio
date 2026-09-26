@@ -16,18 +16,18 @@
 .lang-btn.active { background: var(--paper); box-shadow: var(--inset); border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); font-weight: bold; }
 .theme-switch { min-width: 36px; font-size: 1rem; }
 .action-btn:disabled { color: var(--muted); box-shadow: none; cursor: wait; }
-.terminal-screen { background: var(--terminal-bg); color: var(--terminal-bright); font: 15px/1.65 var(--terminal-font); padding: 15px 26px 0; border: 2px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); overflow-wrap: anywhere; }
+.terminal-screen { background: var(--terminal-bg); color: var(--terminal-bright); font: 15px/1.5 var(--terminal-font); padding: 15px 26px 0; border: 2px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); overflow-wrap: anywhere; }
 .terminal-screen a { color: var(--terminal-cyan); }
 .terminal-screen :focus-visible { outline: 2px solid var(--terminal-cyan); outline-offset: 3px; }
 .terminal-screen button:focus-visible { outline-offset: -3px; }
-.terminal-heading { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; color: var(--terminal-blue); font-size: .75rem; line-height: 1.5; }
+.terminal-heading { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; color: var(--terminal-blue); font-size: .875rem; line-height: 1.5; }
 .terminal-heading p { display: flex; align-items: center; justify-content: center; gap: 16px; color: var(--terminal-cyan); text-align: center; font-weight: 700; }
 .terminal-heading p::before, .terminal-heading p::after { content: ''; flex: 1; min-width: 1ch; border-top: 1px solid var(--terminal-line); }
-.terminal-controls { padding: 6px 0 10px; border-bottom: 1px solid var(--terminal-line); }
+.terminal-controls { padding: 8px 0; border-bottom: 1px solid var(--terminal-line); }
 .terminal-focus { display: flex; flex-wrap: wrap; gap: 0 18px; align-items: center; }
-#variantLabel { color: var(--terminal-muted); font-size: .75rem; }
+#variantLabel { color: var(--terminal-muted); font-size: .875rem; }
 .tabs-list { display: flex; flex-wrap: wrap; gap: 0 16px; }
-.tab-btn { background: transparent; border: 0; min-height: 40px; padding: 5px 0; color: var(--terminal-blue); font: inherit; font-size: .8125rem; text-align: left; }
+.tab-btn { background: transparent; border: 0; min-height: 36px; padding: 5px 0; color: var(--terminal-blue); font: inherit; font-size: .875rem; text-align: left; }
 .tab-btn::before { content: attr(data-number) ' '; display: inline-block; width: 2ch; color: var(--terminal-text); }
 .tab-btn.active { color: var(--terminal-bright); text-decoration: underline; text-decoration-color: var(--terminal-text); text-underline-offset: 5px; }
 .tab-btn.active::before { content: attr(data-number) '>'; }
@@ -35,47 +35,47 @@
 .resume-status { margin: 3px 0 0; color: var(--terminal-muted); font-size: .8125rem; }
 .resume-status[data-state='ready'] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .resume-status[data-state='error'] { color: #ffb697; }
-.terminal-disclosure { border-top: 1px solid var(--terminal-line); }
-.terminal-disclosure > summary { padding: 10px 0; min-height: 44px; color: var(--terminal-blue); font-size: .8125rem; cursor: pointer; }
-.terminal-command-body { padding: 2px 0 16px; }
+.terminal-command-area { padding: 8px 0 10px; border-bottom: 1px solid var(--terminal-line); }
 .terminal-command { display: flex; align-items: center; gap: 10px; }
 .terminal-command label { color: var(--terminal-cyan); flex-shrink: 0; }
-.terminal-command input { width: 100%; min-width: 0; max-width: 35ch; border: 0; border-bottom: 1px solid var(--terminal-text); border-radius: 0; background: #0e1822; color: var(--terminal-text); caret-color: var(--terminal-bright); font: inherit; padding: 5px 8px; min-height: 44px; }
+.terminal-command input { flex: 1; width: 100%; min-width: 0; border: 0; border-bottom: 1px solid var(--terminal-text); border-radius: 0; background: transparent; color: var(--terminal-text); caret-color: var(--terminal-bright); font: inherit; padding: 5px 4px; min-height: 36px; }
 .terminal-command input::placeholder { color: var(--terminal-muted); opacity: 1; }
 .terminal-command button { flex-shrink: 0; }
-.terminal-command button, .terminal-footer button { padding: 5px 8px; min-height: 44px; background: none; border: 1px solid var(--terminal-line); color: var(--terminal-cyan); font: inherit; font-size: .8125rem; }
-.command-hint { margin-top: 8px; color: var(--terminal-muted); font-size: .75rem; }
+.terminal-command button, .terminal-footer button { padding: 5px 8px; min-height: 36px; background: none; border: 0; color: var(--terminal-cyan); font: inherit; font-size: .875rem; text-decoration: underline; text-underline-offset: 3px; }
+.command-hint { margin-top: 4px; color: var(--terminal-muted); font-size: .8125rem; }
 .command-feedback { color: #ffe69b; font-size: .8125rem; }
 .command-feedback:empty { display: none; }
 .command-feedback:not(:empty) { margin-top: 8px; }
-.terminal-help { padding: 14px; margin-top: 14px; border: 1px dashed var(--terminal-line); color: var(--terminal-bright); font-size: .8125rem; }
+.terminal-help { padding: 12px; margin-top: 10px; border: 1px dashed var(--terminal-line); color: var(--terminal-bright); font-size: .875rem; }
 .terminal-help p + p { margin-top: 8px; color: var(--terminal-muted); }
-.resume-inner { padding: 20px 0 0; min-width: 0; }
+.resume-inner { padding: 16px 0 0; min-width: 0; }
 .resume-inner:focus { outline: none; }
 .resume-inner:focus-visible { outline: 2px solid var(--terminal-cyan); outline-offset: -2px; }
-.resume-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 24px; padding-bottom: 22px; align-items: start; }
-.resume-name { font: 700 clamp(1.55rem, 2.8vw, 2rem)/1.2 var(--terminal-font); color: var(--terminal-bright); letter-spacing: -.04em; margin: 0 0 9px; }
-.resume-title { max-width: 56ch; color: var(--terminal-text); font-size: .9375rem; line-height: 1.65; }
-.resume-head__contact { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; font-size: .75rem; line-height: 1.65; padding-top: 2px; }
-.resume-head__contact dt { color: var(--terminal-muted); }
-.resume-head__contact dt::after { content: ' .'; }
+.resume-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 24px; padding-bottom: 16px; align-items: start; }
+.resume-identity, .resume-head__contact { display: grid; grid-template-columns: 11ch minmax(0, 1fr); gap: 3px 12px; font-size: .875rem; line-height: 1.5; align-items: baseline; }
+.resume-name { font: 700 1.25rem/1.3 var(--terminal-font); color: var(--terminal-bright); letter-spacing: 0; margin: 0; }
+.resume-title { max-width: 56ch; color: var(--terminal-text); font-size: .875rem; line-height: 1.5; }
+.resume-field-label, .resume-head__contact dt { color: var(--terminal-muted); font-size: .875rem; white-space: nowrap; }
+.resume-field-label::after, .resume-head__contact dt::after { content: ' .'; }
 .resume-head__contact dd { color: var(--terminal-bright); }
 .resume-head__contact a { display: inline-flex; align-items: center; min-height: 24px; }
 .contact-profiles { display: flex; flex-wrap: wrap; gap: 0 14px; }
 .contact-print-value { display: none; }
-.resume-section-tabs { display: flex; flex-wrap: wrap; gap: 0 18px; border-top: 1px solid var(--terminal-line); border-bottom: 1px solid var(--terminal-line); }
-.section-tab { position: relative; min-height: 44px; padding: 8px 0; background: transparent; border: 0; color: var(--terminal-blue); font: inherit; font-size: .8125rem; }
+.resume-section-menu { display: grid; grid-template-columns: 11ch minmax(0, 1fr); align-items: baseline; gap: 0 12px; padding: 5px 0; border-top: 1px solid var(--terminal-line); border-bottom: 1px solid var(--terminal-line); font-size: .875rem; }
+.resume-section-tabs { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.section-tab { min-height: 36px; padding: 5px 0; background: transparent; border: 0; color: var(--terminal-blue); font: inherit; font-size: .875rem; text-decoration: underline; text-underline-offset: 3px; }
+.section-tab::before { content: ''; display: inline-block; width: 2ch; color: var(--terminal-text); }
 .section-tab:hover, .terminal-command button:hover, .terminal-footer button:hover, .terminal-footer a:hover { background: #10232b; }
-.section-tab[aria-selected='true'] { color: var(--terminal-bright); }
-.section-tab[aria-selected='true']::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; border-bottom: 2px solid var(--terminal-text); }
-.resume-panel { padding: 22px 0 24px; }
+.section-tab[aria-selected='true'] { color: var(--terminal-bright); font-weight: 700; }
+.section-tab[aria-selected='true']::before { content: '>'; }
+.resume-panel { padding: 18px 0 20px; }
 .resume-panel:focus { outline: none; }
 .resume-panel:focus-visible { outline: 2px solid var(--terminal-cyan); outline-offset: -2px; }
 .panel-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; }
 .panel-heading::after { content: ''; flex: 1; border-bottom: 1px dashed var(--terminal-line); }
 .resume-section-title { font: 700 .9375rem/1.5 var(--terminal-font); color: var(--terminal-cyan); margin: 0; }
-.profile-text { max-width: 82ch; line-height: 1.8; }
-.resume-summary { margin-top: 22px; max-width: 90ch; }
+.profile-text { max-width: 82ch; line-height: 1.65; }
+.resume-summary { margin-top: 18px; max-width: 90ch; }
 .resume-summary .resume-section-title { font-size: .8125rem; margin-bottom: 10px; color: var(--terminal-text); }
 .resume-summary .skill-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 25px; }
 .skill-list { list-style: none; padding: 0; margin: 0; }
@@ -87,7 +87,7 @@
 .job:last-child { margin-bottom: 0; border-bottom: 0; padding-bottom: 0; }
 .job-number { position: absolute; left: 0; top: 0; color: var(--terminal-blue); font-size: .8125rem; }
 .job-header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-.job-company { font: 700 1rem/1.5 var(--terminal-font); color: var(--terminal-bright); }
+.job-company { font: 700 .9375rem/1.5 var(--terminal-font); color: var(--terminal-bright); }
 .job-years { color: var(--terminal-cyan); font-size: .8125rem; flex-shrink: 0; }
 .job-position { margin-top: 3px; font-size: .875rem; color: var(--terminal-text); }
 .job-highlights { padding-left: 20px; margin: 10px 0 0; color: var(--terminal-bright); font-size: .875rem; max-width: 88ch; }
@@ -102,7 +102,7 @@
 .terminal-footer a > span:first-child, .terminal-footer button > span:first-child { color: var(--terminal-blue); }
 .resume-window-status { grid-template-columns: 1fr auto; }
 .resume-fallback { padding-bottom: 25px; }
-.resume-fallback h1 { font: 700 2rem/1.2 var(--terminal-font); color: var(--terminal-bright); letter-spacing: -.04em; }
+.resume-fallback h1 { font: 700 1.25rem/1.3 var(--terminal-font); color: var(--terminal-bright); letter-spacing: 0; }
 .resume-fallback h2 { font: 700 1rem var(--terminal-font); color: var(--terminal-cyan); margin-bottom: 14px; }
 .resume-fallback section { margin-top: 24px; }
 .resume-fallback .job { padding-left: 0; }
@@ -111,14 +111,14 @@
 @media (max-width: 760px) {
   .terminal-screen { padding: 13px 17px 0; }
   .terminal-command input { font-size: 16px; }
+  .terminal-command input, .terminal-command button, .section-tab { min-height: 44px; }
   .resume-window { margin: 12px 8px 25px; }
   .resume-menubar { display: block; }
   .resume-toolbar { padding: 0 7px 4px; border-top: 1px solid var(--highlight); }
   .terminal-focus { gap: 0 12px; }
   .tabs-list { gap: 0 15px; }
   .tab-btn { min-height: 44px; }
-  .resume-head { grid-template-columns: 1fr; gap: 14px; padding-bottom: 18px; }
-  .resume-head__contact { grid-template-columns: auto minmax(0, 1fr); justify-self: start; }
+  .resume-head { grid-template-columns: 1fr; gap: 14px; }
   .resume-skills-grid { grid-template-columns: 1fr 1fr; }
   .resume-skills-grid section:last-child { grid-column: 1 / -1; }
   .job-header { display: block; }
@@ -133,19 +133,17 @@
   .resume-menu a { font-size: .8125rem; padding: 7px; }
   .resume-extras summary { padding-inline: 6px; min-height: 44px; }
   .terminal-screen { padding: 12px 12px 0; }
-  .terminal-heading { grid-template-columns: auto minmax(0, 1fr); gap: 12px; font-size: .6875rem; }
+  .terminal-heading { grid-template-columns: auto minmax(0, 1fr); gap: 12px; font-size: .8125rem; }
   .terminal-heading p { justify-content: flex-end; gap: 10px; }
   .terminal-heading p::after, .terminal-mode { display: none; }
   .terminal-controls { padding-bottom: 7px; }
   .terminal-focus { display: block; padding-top: 5px; }
   .tabs-list { column-gap: 13px; }
   .resume-inner { padding-top: 17px; }
-  .resume-name { font-size: 1.6rem; }
-  .resume-title { font-size: .875rem; }
+  .resume-section-menu { display: block; }
   .resume-section-tabs { column-gap: 16px; }
   .terminal-command { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 7px; }
   .terminal-command label { grid-column: 1 / -1; }
-  .terminal-command input { max-width: none; }
   .resume-summary .skill-list, .resume-skills-grid { grid-template-columns: 1fr; }
   .resume-skills-grid section:last-child { grid-column: auto; }
   .resume-panel { padding-top: 20px; }
@@ -160,8 +158,9 @@
   .terminal-screen { background: #fff; color: #000; font: inherit; }
   .terminal-screen * { color: #000 !important; }
   .resume-head { display: flex; justify-content: space-between; gap: 8mm; padding: 0 0 5mm; border-bottom: 1px solid #aaa; }
+  .resume-identity { display: block; font-size: inherit; }
   .resume-name, .resume-section-title, .job-company { font-family: Arial, sans-serif; }
-  .resume-name { font-size: 22pt; line-height: 1.25; letter-spacing: 0; }
+  .resume-name { font-size: 22pt; line-height: 1.25; letter-spacing: 0; margin: 0 0 9px; }
   .resume-title { font-size: 10pt; line-height: 1.4; }
   .resume-head__contact { display: block; font-size: 8pt; line-height: 1.6; padding: 0; }
   .resume-head__contact dt, .contact-screen-value { display: none; }
@@ -193,7 +192,7 @@
   .education-school, .resume-project-name { font-size: 10pt; }
   .education-years, .resume-project-description, .resume-project-tech { font-size: 9pt; }
   .resume-fallback h1, .resume-fallback h2 { font-family: Arial, sans-serif; }
-  .resume-fallback h1 { letter-spacing: 0; }
+  .resume-fallback h1 { font-size: 22pt; line-height: 1.25; letter-spacing: 0; }
   h2, h3 { break-after: avoid; }
   a { color: #000 !important; text-decoration: none; }
 }
