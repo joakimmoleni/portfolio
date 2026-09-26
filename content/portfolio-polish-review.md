@@ -30,3 +30,13 @@ This pass addresses visitors with different goals: recruiters and managers looki
 - Opened, played and closed the silent Winamp on mobile; focus returned to Start. Checked the revised desktop in light and dark themes. The final local page reported no browser console warnings or errors.
 
 Native print-preview pagination could not be inspected because computer use cannot access the host app's print dialog. The button and command invocation are covered, but this pass does not claim a fresh visual verification of the exported PDF.
+
+## Follow-up: icons and mainframe
+
+- Replaced the abstract About and Projects desktop icons with a parchment quest scroll and a CS-inspired server browser. Checked them on the desktop, launcher and window chrome; removed unused old symbols.
+- Reworked the CV around a clearer name/role hierarchy and a readable system monospace font. Consolidated desktop controls, shortened contact labels, removed the duplicate profile label and arbitrary panel height, and made the terminal colours serve distinct roles. The [IBM ISPF Primary Option Menu](https://www.ibm.com/docs/en/zos/3.1.0?topic=ispf-primary-option-menu-panel) informed the panel title, text choices and function row.
+- Kept complete contact URLs in print. Inspected the print styles on a local preview at an A4-content-like width; all populated sections were visible, screen controls hidden and addresses complete. This checks CSS layout, not native PDF pagination.
+- Fixed terminal loading feedback that could remain stale after data arrived. A focused regression verifies completion, failure and preserving a newer command's message. All 27 tests and site validation pass.
+- Browser checks cover all three CV variants in Swedish and English at 320px, the 960px desktop layout, section/history focus, F1 and command results, Programs → mIRC → focus restoration, light/dark frames and the no-JavaScript fallback. No horizontal overflow, duplicate IDs or broken ARIA references were found in the checked mobile layouts. No browser console warnings or errors on the final normal preview.
+
+No dependencies, fonts or professional claims were added. The CV's colours and structure are an accessible interpretation of a terminal, not a fixed-size emulator.

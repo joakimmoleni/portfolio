@@ -163,7 +163,7 @@ await test('failed variant keeps the last successful CV and its error after a la
   setLanguage('sv');
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
   assert.match(nodes.get('resumeStatus').textContent, /Webb & backend/);
-  assert.match(nodes.get('resumeContent').innerHTML, /Kärnsystemsprofil/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(files.get(core.path).profile_sv));
 });
 
 await test('initial variant failure labels base data honestly and can be retried', async () => {
@@ -171,16 +171,18 @@ await test('initial variant failure labels base data honestly and can be retried
   assert.equal(selectedVariant(), null);
   assert.notEqual(nodes.get('resumeContent').getAttribute('role'), 'tabpanel');
   assert.equal(location.searchParams.has('focus'), false);
-  assert.match(nodes.get('resumeContent').innerHTML, /Grund-CV/);
+  assert.match(nodes.get('resumeStatus').textContent, /Grund-CV/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(base.profile_sv));
   setLanguage('en');
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
-  assert.match(nodes.get('resumeContent').innerHTML, /Base resume/);
+  assert.match(nodes.get('resumeStatus').textContent, /base resume/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(base.profile));
   responses.delete(modern.path);
   await clickVariant(modern.id);
   assert.equal(selectedVariant(), modern.id);
   assert.equal(nodes.get('resumeContent').getAttribute('aria-labelledby'), `tab-${modern.id}`);
   assert.equal(nodes.get('resumeStatus').dataset.state, 'ready');
-  assert.match(nodes.get('resumeContent').innerHTML, /Backend profile/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(files.get(modern.path).profile));
 });
 
 await test('changing language during a pending variant keeps the loading state', async () => {
@@ -195,7 +197,7 @@ await test('changing language during a pending variant keeps the loading state',
   await request;
   assert.equal(selectedVariant(), modern.id);
   assert.equal(nodes.get('resumeStatus').dataset.state, 'ready');
-  assert.match(nodes.get('resumeContent').innerHTML, /Backendprofil/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(files.get(modern.path).profile_sv));
 });
 
 await test('changing language before the base file arrives preserves a linked variant', async () => {
@@ -354,6 +356,24 @@ await test('known commands report initial loading or failure while unknown comma
     if (state === 'loading') {
       pending.fail();
       await settle();
+    }
+  }
+});
+
+await test('temporary command loading feedback resolves without overwriting a later command', async () => {
+  for (const value of ['work', 'print']) {
+    for (const outcome of ['ready', 'error', 'later-command']) {
+      const pending = delayedResponse();
+      const { command, nodes } = await page('?lang=sv', new Map([['./assets/data/resume-data.json', pending.get]]));
+      command(value);
+      assert.match(nodes.get('commandFeedback').textContent, /[Ll]adda/);
+      if (outcome === 'later-command') command('unknown');
+      if (outcome === 'error') pending.fail();
+      else pending.finish(base);
+      await settle();
+      if (outcome === 'later-command') assert.match(nodes.get('commandFeedback').textContent, /Okänt kommando: unknown/);
+      else if (outcome === 'error') assert.equal(nodes.get('commandFeedback').textContent, nodes.get('resumeStatus').textContent);
+      else assert.equal(nodes.get('commandFeedback').textContent, 'CV:t är klart. Skriv kommandot igen.');
     }
   }
 });

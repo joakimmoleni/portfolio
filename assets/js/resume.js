@@ -17,6 +17,7 @@
   let resumeVariants = [];
   let resumeLoadState = 'loading';
   let requestedVariant = null;
+  let commandAwaitingData = false;
   let currentPanel = panelNames.includes(query.get('panel')) ? query.get('panel') : 'profile';
   let resumeLang = ['en', 'sv'].includes(query.get('lang')) ? query.get('lang') : (storedLang === 'en' ? 'en' : 'sv');
 
@@ -70,6 +71,12 @@
     } else {
       setStatus(variantStatus(currentVariantMeta) || (swedish ? 'Grund-CV visas.' : 'Showing the base resume.'), 'ready');
     }
+    if (commandAwaitingData) {
+      document.getElementById('commandFeedback').textContent = resumeLoadState === 'ready'
+        ? (swedish ? 'CV:t är klart. Skriv kommandot igen.' : 'The resume is ready. Enter the command again.')
+        : resumeStatus.textContent;
+      if (resumeLoadState !== 'loading') commandAwaitingData = false;
+    }
   }
   function updateDocumentTitle() {
     const title = t(currentVariantMeta, 'title');
@@ -95,7 +102,7 @@
     });
     document.getElementById('commandFeedback').textContent = '';
     if (currentResumeData) {
-      renderResume(currentResumeData, currentVariantMeta?.mode);
+      renderResume(currentResumeData);
     }
     updateResumeStatus();
     updateDocumentTitle();
@@ -114,8 +121,7 @@
       title_sv: variant.title_sv || variant.title || variant.id,
       description: variant.description || '',
       description_sv: variant.description_sv || variant.description || '',
-      path: variant.path || `./assets/data/variants/${variant.id}.json`,
-      mode: variant.template || variant.id
+      path: variant.path || `./assets/data/variants/${variant.id}.json`
     }));
   }
   function initVariants(variants) {
@@ -214,7 +220,7 @@
     });
     resumeContent.setAttribute('role', 'tabpanel');
     resumeContent.setAttribute('aria-labelledby', `tab-${variant.id}`);
-    renderResume(merged, variant.mode);
+    renderResume(merged);
     resumeLoadState = 'ready';
     resumeContent.setAttribute('aria-busy', 'false');
     updateResumeStatus();
@@ -228,20 +234,18 @@
     if (!values.length) return '';
     return `<section><h3 class="resume-section-title">${escapeHtml(label)}</h3><ul class="skill-list">${values.map(value => `<li class="skill-item"><span class="skill-bullet" aria-hidden="true">›</span>${escapeHtml(value)}</li>`).join('')}</ul></section>`;
   }
-  function renderResume(data, variantId = 'default') {
+  function renderResume(data) {
     const focused = resumeContent.contains(document.activeElement) ? document.activeElement : null;
     const { personal = {}, experience = [], skills = {}, education = [], projects = [] } = data || {};
     const l = labels();
     const swedish = resumeLang === 'sv';
-    const chipLabel = variantId === 'default' ? (swedish ? 'Grund-CV' : 'Base resume')
-      : /modern/i.test(variantId) ? (swedish ? 'Backendprofil' : 'Backend profile')
-      : /platform/i.test(variantId) ? (swedish ? 'Plattform & ledarskap' : 'Platform & leadership')
-        : (swedish ? 'Kärnsystemsprofil' : 'Core systems profile');
     const contacts = [];
-    if (t(personal, 'location')) contacts.push(`<div class="contact-item contact-location">${escapeHtml(t(personal, 'location'))}</div>`);
-    if (personal.email) contacts.push(`<div class="contact-item"><a href="mailto:${escapeHtml(personal.email)}">${escapeHtml(personal.email)}</a></div>`);
-    if (personal.github) contacts.push(`<div class="contact-item"><a href="https://${escapeHtml(personal.github)}" target="_blank" rel="noopener noreferrer">${escapeHtml(personal.github)}</a></div>`);
-    if (personal.linkedin) contacts.push(`<div class="contact-item"><a href="https://${escapeHtml(personal.linkedin)}" target="_blank" rel="noopener noreferrer">${escapeHtml(personal.linkedin)}</a></div>`);
+    if (t(personal, 'location')) contacts.push(`<dt>${swedish ? 'Ort' : 'Location'}</dt><dd>${escapeHtml(t(personal, 'location'))}</dd>`);
+    if (personal.email) contacts.push(`<dt>${swedish ? 'E-post' : 'Email'}</dt><dd><a href="mailto:${escapeHtml(personal.email)}">${escapeHtml(personal.email)}</a></dd>`);
+    const profiles = [];
+    if (personal.github) profiles.push(`<a href="https://${escapeHtml(personal.github)}" target="_blank" rel="noopener noreferrer"><span class="contact-screen-value">GitHub</span><span class="contact-print-value">${escapeHtml(personal.github)}</span></a>`);
+    if (personal.linkedin) profiles.push(`<a href="https://${escapeHtml(personal.linkedin)}" target="_blank" rel="noopener noreferrer"><span class="contact-screen-value">LinkedIn</span><span class="contact-print-value">${escapeHtml(personal.linkedin)}</span></a>`);
+    if (profiles.length) contacts.push(`<dt>${swedish ? 'Länkar' : 'Links'}</dt><dd class="contact-profiles">${profiles.join('')}</dd>`);
     const experienceHtml = experience.map((job, index) => `
       <article class="job">
         <span class="job-number no-print" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
@@ -260,8 +264,8 @@
     ];
     resumeContent.innerHTML = `
       <header class="resume-head">
-        <div><p class="resume-chip">${escapeHtml(chipLabel)}</p><h1 class="resume-name">${escapeHtml(personal.name)}</h1><p class="resume-title">${escapeHtml(t(personal, 'title'))}</p></div>
-        <div class="resume-head__contact" aria-label="${l.contact}">${contacts.join('')}</div>
+        <div><h1 class="resume-name">${escapeHtml(personal.name)}</h1><p class="resume-title">${escapeHtml(t(personal, 'title'))}</p></div>
+        <dl class="resume-head__contact" aria-label="${l.contact}">${contacts.join('')}</dl>
       </header>
       <div class="resume-section-tabs no-print" role="tablist" aria-label="${l.sections}">${panels.map(panel => `<button class="section-tab" id="section-tab-${panel.id}" type="button" role="tab" data-panel="${panel.id}" aria-selected="false" aria-controls="resume-${panel.id}" tabindex="-1">${l[panel.id]}</button>`).join('')}</div>
       ${panels.map(panel => `<section class="resume-panel" id="resume-${panel.id}" data-panel="${panel.id}" data-empty="${Boolean(panel.empty)}" role="tabpanel" aria-labelledby="section-tab-${panel.id}" tabindex="0" hidden><div class="panel-heading"><h2 class="resume-section-title">${l[panel.id]}</h2></div>${panel.content}</section>`).join('')}`;
@@ -305,12 +309,16 @@
     const command = raw.trim().toLowerCase();
     const feedback = document.getElementById('commandFeedback');
     feedback.textContent = '';
+    commandAwaitingData = false;
     if (!command) return;
     if (command === 'help' || command === '?') { showHelp(); return; }
     if (command === 'print' || command === 'pdf') {
-      if (resumeLoadState === 'loading') feedback.textContent = resumeLang === 'sv'
-        ? 'CV:t laddas. Vänta tills det är klart och skriv print igen.'
-        : 'The resume is loading. Wait for it to finish, then type print again.';
+      if (resumeLoadState === 'loading') {
+        commandAwaitingData = true;
+        feedback.textContent = resumeLang === 'sv'
+          ? 'CV:t laddas. Vänta tills det är klart och skriv print igen.'
+          : 'The resume is loading. Wait for it to finish, then type print again.';
+      }
       else window.print();
       return;
     }
@@ -319,6 +327,7 @@
     const aliases = { profil: 'profile', experience: 'work', erfarenhet: 'work', kompetenser: 'skills', utbildning: 'education', projekt: 'projects' };
     const panel = aliases[command] || command;
     if (!currentResumeData && (panelNames.includes(panel) || /^[123]$/.test(command))) {
+      commandAwaitingData = resumeLoadState === 'loading';
       feedback.textContent = resumeStatus.textContent;
       return;
     }

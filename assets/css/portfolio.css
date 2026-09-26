@@ -55,6 +55,7 @@ svg { width: 2rem; height: 2rem; flex-shrink: 0; }
 .window-title { display: flex; align-items: center; gap: 7px; font-size: .875rem; font-weight: 700; line-height: 1.4; }
 .window-title svg { width: 20px; height: 20px; }
 .title-button { flex-shrink: 0; width: 26px; height: 25px; border: 1px solid var(--edge); border-top-color: var(--highlight); border-left-color: var(--highlight); box-shadow: var(--raised); background: var(--surface); color: var(--text); font: bold 1rem Tahoma, sans-serif; padding: 0; line-height: 1; }
+.title-button:active { box-shadow: var(--inset); border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); }
 .window-menu { display: flex; align-items: center; gap: 2px; min-height: 43px; padding: 2px 5px; }
 .window-menu a { color: var(--text); padding: 7px 12px; font-size: .875rem; text-decoration: none; }
 .window-menu a:hover { box-shadow: var(--raised); }

@@ -30,8 +30,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-polish">
-  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-polish">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-finish">
+  <link rel="stylesheet" href="./assets/css/resume.css?v=20260926-finish">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
@@ -39,25 +39,27 @@
   <a class="skip-link" href="#resumeContent" data-resume-en="Skip to resume" data-resume-sv="Hoppa till CV">Skip to resume</a>
   <main class="resume-window window" aria-label="CV">
     <header class="titlebar no-print">
-      <span class="window-title"><span class="terminal-icon" aria-hidden="true">&gt;_</span>Joakim Moléni — CV / Terminal</span>
+      <span class="window-title"><span class="terminal-icon" aria-hidden="true">&gt;_</span>Joakim Moléni — CV</span>
       <a class="title-button resume-close" href="./index.html" aria-label="Close terminal and return to desktop" data-resume-en-label="Close terminal and return to desktop" data-resume-sv-label="Stäng terminalen och återgå till skrivbordet">×</a>
     </header>
-    <nav class="window-menu resume-menu no-print" aria-label="Programs">
-      <a href="./index.html" data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</a>
-      <a href="./about.html" data-resume-en="About me" data-resume-sv="Om mig">About me</a>
-      <a href="./projects.html" data-resume-en="Projects" data-resume-sv="Projekt">Projects</a>
-      <a href="#resumeContent" aria-current="page">CV</a>
-      <a href="./contact.html" data-resume-en="Contact" data-resume-sv="Kontakt">Contact</a>
-    </nav>
-    <div class="resume-toolbar no-print" data-requires-js hidden>
-      <details class="resume-extras"><summary data-resume-en="Programs" data-resume-sv="Program">Programs</summary><div data-extras-menu></div></details>
-      <div class="resume-tools">
-        <div class="resume-lang-switch" role="group" aria-label="Language / Språk">
-          <button class="lang-btn active" id="langEnBtn" type="button" data-lang="en" aria-pressed="true">EN</button>
-          <button class="lang-btn" id="langSvBtn" type="button" data-lang="sv" aria-pressed="false">SV</button>
+    <div class="resume-menubar no-print">
+      <nav class="window-menu resume-menu" aria-label="Programs">
+        <a href="./index.html" data-resume-en="Desktop" data-resume-sv="Skrivbord">Desktop</a>
+        <a href="./about.html" data-resume-en="About me" data-resume-sv="Om mig">About me</a>
+        <a href="./projects.html" data-resume-en="Projects" data-resume-sv="Projekt">Projects</a>
+        <a href="#resumeContent" aria-current="page">CV</a>
+        <a href="./contact.html" data-resume-en="Contact" data-resume-sv="Kontakt">Contact</a>
+      </nav>
+      <div class="resume-toolbar" data-requires-js hidden>
+        <details class="resume-extras"><summary data-resume-en="Programs" data-resume-sv="Program">Programs</summary><div data-extras-menu></div></details>
+        <div class="resume-tools">
+          <div class="resume-lang-switch" role="group" aria-label="Language / Språk">
+            <button class="lang-btn active" id="langEnBtn" type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button class="lang-btn" id="langSvBtn" type="button" data-lang="sv" aria-pressed="false">SV</button>
+          </div>
+          <button class="theme-switch" id="themeToggle" type="button" aria-label="Change desktop appearance">◐</button>
+          <button class="action-btn" id="btnExportPdf" type="button" data-resume-en="Print / PDF" data-resume-sv="Skriv ut / PDF">Print / PDF</button>
         </div>
-        <button class="theme-switch" id="themeToggle" type="button" aria-label="Change desktop appearance">◐</button>
-        <button class="action-btn" id="btnExportPdf" type="button" data-resume-en="Print / PDF" data-resume-sv="Skriv ut / PDF">Print / PDF</button>
       </div>
     </div>
     <div class="terminal-screen">
@@ -108,13 +110,12 @@
       <footer class="terminal-footer no-print" data-requires-js hidden>
         <button type="button" data-resume-command="help" aria-controls="resumeHelp" aria-expanded="false"><span>F1=</span><span data-resume-en="Help" data-resume-sv="Hjälp">Help</span></button>
         <a href="./index.html"><span>F3=</span><span data-resume-en="Exit" data-resume-sv="Avsluta">Exit</span></a>
-        <span class="terminal-readonly" data-resume-en="READ ONLY" data-resume-sv="SKRIVSKYDDAD">READ ONLY</span>
       </footer>
     </div>
     <div class="statusbar resume-window-status no-print"><span data-resume-en="Mainframe · Resume" data-resume-sv="Stordator · CV">Mainframe · Resume</span><span data-resume-en="Read only" data-resume-sv="Läsläge">Read only</span></div>
   </main>
   <script src="./assets/js/resume-shell.js?v=20260926-quality" defer></script>
-  <script src="./assets/js/resume.js?v=20260926-polish" defer></script>
+  <script src="./assets/js/resume.js?v=20260926-finish" defer></script>
   <script src="./assets/js/extras.js?v=20260926-feel" defer></script>
 </body>
 </html>
