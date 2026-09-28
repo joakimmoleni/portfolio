@@ -393,14 +393,15 @@ await test('an empty project section links to the portfolio cases', async () => 
   assert.match(nodes.get('resumeContent').innerHTML, /href="\.\/projects\.html">View projects in the portfolio/);
 });
 
-await test('a section command focuses its result and scrolls when it is above the viewport', async () => {
+await test('a section command keeps the command field focused and visible', async () => {
   const { nodes, command, document } = await page();
-  const panel = nodes.get('resume-work');
-  panel.bounds = { top: -300, bottom: -20 };
-  nodes.get('resumeCommand').focus();
+  const input = nodes.get('resumeCommand');
+  input.bounds = { top: -300, bottom: -20 };
+  input.focus();
   command('work');
-  assert.equal(document.activeElement, panel);
-  assert.equal(panel.scrolled, true);
+  assert.equal(document.activeElement, input);
+  assert.equal(input.scrolled, true);
+  assert.equal(nodes.get('resume-work').hidden, false);
 });
 
 await test('known commands report initial loading or failure while unknown commands remain unknown', async () => {
@@ -451,7 +452,7 @@ await test('a successful variant command reveals the result without stealing lat
     if (moveFocus) nodes.get('langSvBtn').focus();
     pending.finish(files.get(modern.path));
     await settle();
-    assert.equal(document.activeElement.id, moveFocus ? 'langSvBtn' : 'resume-menu');
+    assert.equal(document.activeElement.id, moveFocus ? 'langSvBtn' : 'resumeCommand');
   }
 });
 
@@ -571,13 +572,14 @@ await test('terminal shortcuts do not interrupt the non-modal Winamp player', as
   assert.equal(document.activeElement, playButton);
 });
 
-await test('the primary menu is the default and number commands open sections without changing CV focus', async () => {
-  const { nodes, command, selectedVariant, location, document } = await page('');
+await test('autofocus supports repeated number commands and F3 without changing CV focus', async () => {
+  const { nodes, command, pressKey, selectedVariant, location, document } = await page('');
   assert.equal(nodes.get('resume-menu').hidden, false);
   assert.equal(nodes.get('resumePanelId').textContent, 'JM00');
   assert.equal(nodes.get('resumePanelMode').textContent, 'MENU');
   assert.equal(nodes.get('resumeCommandLabel').textContent, 'Option');
   assert.equal(location.searchParams.has('panel'), false);
+  assert.equal(document.activeElement.id, 'resumeCommand');
   const variant = selectedVariant();
   for (const [index, panel] of ['profile', 'work', 'skills', 'education', 'projects'].entries()) {
     command(String(index + 1));
@@ -586,23 +588,27 @@ await test('the primary menu is the default and number commands open sections wi
     assert.equal(selectedVariant(), variant);
     assert.equal(location.searchParams.get('panel'), panel);
     assert.equal(nodes.get('resumeCommandLabel').textContent, 'Command');
-    assert.equal(document.activeElement.id, `resume-${panel}`);
-    command('menu');
+    assert.equal(document.activeElement.id, 'resumeCommand');
+    assert.equal(nodes.get('resumeCommand').value, '');
+    assert.equal(pressKey('F3', { field: 'command' }), true);
     assert.equal(nodes.get('resume-menu').hidden, false);
     assert.equal(nodes.get(`resume-${panel}`).hidden, true);
     assert.equal(location.searchParams.has('panel'), false);
+    assert.equal(document.activeElement.id, 'resumeCommand');
   }
 });
 
 await test('menu buttons open their panel and F3 or END returns to the menu before exiting', async () => {
-  const { nodes, clickMenu, pressKey, command, location } = await page('');
+  const { nodes, clickMenu, pressKey, command, location, document } = await page('');
   for (const back of ['F3', 'end']) {
     clickMenu('work');
     assert.equal(nodes.get('resume-work').hidden, false);
+    assert.equal(document.activeElement.id, 'resume-work');
     assert.equal(nodes.get('resumeBackLabel').textContent, 'Meny');
     if (back === 'F3') pressKey('F3');
     else command('end');
     assert.equal(nodes.get('resume-menu').hidden, false);
+    assert.equal(document.activeElement.id, 'resumeCommand');
     assert.equal(nodes.get('resumeBackLabel').textContent, 'Avsluta');
     assert.equal(new URL(location.href).pathname, '/resume.html');
   }

@@ -318,15 +318,16 @@
     document.querySelectorAll('[data-resume-command="help"]').forEach(button => button.setAttribute('aria-expanded', String(!help.hidden)));
     (showing ? help : document.getElementById('resumeCommand')).focus();
   }
-  function revealCurrentPanel() {
+  function revealCurrentPanel(focusCommand = false) {
     const panel = document.getElementById(`resume-${currentPanel}`);
-    panel.focus({ preventScroll: true });
-    const bounds = panel.getBoundingClientRect();
-    if (bounds.top < 0 || bounds.bottom > window.innerHeight) panel.scrollIntoView({ block: 'start' });
+    const target = focusCommand ? document.getElementById('resumeCommand') : panel;
+    target.focus({ preventScroll: true });
+    const bounds = target.getBoundingClientRect();
+    if (bounds.top < 0 || bounds.bottom > window.innerHeight) target.scrollIntoView({ block: 'start' });
   }
   function returnToMenu() {
     if (currentPanel === 'menu') location.href = './index.html';
-    else if (selectPanel('menu')) revealCurrentPanel();
+    else if (selectPanel('menu')) revealCurrentPanel(true);
   }
   function toggleOptions() {
     const options = document.getElementById('resumeOptions');
@@ -369,13 +370,13 @@
         const origin = document.activeElement;
         const selected = await selectVariant(variant.id);
         if (document.activeElement === origin) {
-          if (selected) revealCurrentPanel();
+          if (selected) revealCurrentPanel(true);
           else if (selected === false) feedback.textContent = resumeStatus.textContent;
         }
         return;
       }
     }
-    if (selectPanel(panel)) { revealCurrentPanel(); return; }
+    if (selectPanel(panel)) { revealCurrentPanel(true); return; }
     feedback.textContent = resumeLang === 'sv' ? `Okänt kommando: ${raw}. Skriv help för att se valen.` : `Unknown command: ${raw}. Type help to see the options.`;
   }
 
@@ -409,6 +410,9 @@
 
   setResumeLang(resumeLang, false);
   document.querySelectorAll('[data-requires-js]').forEach(element => { element.hidden = false; });
+  if (document.activeElement === document.body && !location.hash) {
+    document.getElementById('resumeCommand').focus({ preventScroll: true });
+  }
   langEnBtn.addEventListener('click', () => setResumeLang('en'));
   langSvBtn.addEventListener('click', () => setResumeLang('sv'));
   document.getElementById('btnExportPdf').addEventListener('click', () => runCommand('print'));
