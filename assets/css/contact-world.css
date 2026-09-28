@@ -1,0 +1,117 @@
+/* Approved design: page surface inside the shared Windows shell. */
+.contact-stage { --world-focus: #246966; }
+.contact-masthead h1 { margin: 0; }
+.contact-tabs a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.contact-content { min-width: 0; }
+.contact-panel:not([hidden]) ~ .contact-panel:not([hidden]) { margin-top: 18px; }
+.contact-panel-body > p { margin: 0 0 1.1em; }
+.contact-secondary-link { font-size: 11px; text-underline-offset: 3px; color: var(--contact-ink); }
+.contact-link-row { color: var(--contact-ink); }
+.mirc-launch { min-height: 36px; }
+.contact-stage { background:#eaf2ef;--contact-paper:#fffdf5;--contact-ink:#345257;--contact-muted:#758585;--contact-line:#b5ceca;color:var(--contact-ink);min-height:547px;border:1px solid #8ba7a5 }
+.contact-masthead { display:flex;align-items:center;gap:15px;background:#e28236;color:#fff9da;border-bottom:4px solid #b65a29;padding:19px 28px 17px;position:relative }
+.contact-flower { font:48px/1 Georgia,serif;color:#fff2c4;transform:rotate(10deg) }
+.contact-masthead h1 { font:700 28px/1 Tahoma,sans-serif;letter-spacing:-.075em }
+.contact-masthead small { margin-left:auto;font-size:10px;color:#733e20 }
+.contact-topbar { display:flex;align-items:flex-end;gap:20px;padding:14px 25px 0;border-bottom:1px solid var(--contact-line);background:#dbe9e4 }
+.contact-tabs { display:flex;gap:4px }
+.contact-tabs a { padding:12px 18px;background:#cbded8;border:1px solid var(--contact-line);border-bottom:0;font-size:11px;color:#517572;position:relative;top:1px;border-radius:4px 4px 0 0 }
+.contact-tabs a[aria-current="true"] { background:var(--contact-paper);color:#345257;padding-top:15px;font-weight:700;box-shadow:inset 0 3px #e28236 }
+.contact-tabs a:hover { color:#233b3f }
+.mirc-launch { margin:0 0 8px auto;display:flex;gap:8px;align-items:center;background:transparent;border:1px solid #9ab6b0;padding:6px 11px;font-size:11px;border-radius:3px;color:#446864;box-shadow:0 1px 0 #fff9 }
+.mirc-launch:hover { background:#edf6f0 }
+.mirc-launch img { width:22px;height:22px }
+.mirc-launch span:last-child { color:#75928d;padding-left:7px }
+.contact-grid { display:grid;grid-template-columns:230px 1fr;gap:25px;padding:26px }
+.profile { background:#d8e8e2;border:1px solid var(--contact-line);align-self:start }
+.profile-header { font:bold 15px Tahoma,sans-serif;padding:11px 14px;border-bottom:1px solid var(--contact-line);background:#cbded8;letter-spacing:-.02em }
+.profile-picture { margin:15px 16px 12px;background:#f1e9cd;border:1px solid #adc2b9;display:flex;align-items:center;justify-content:center;height:118px;position:relative;overflow:hidden;background-image:linear-gradient(0deg,#cec7aa 1px,transparent 1px);background-size:100% 12px }
+.profile-picture svg { width:118px;height:106px;image-rendering:pixelated;position:relative;z-index:1 }
+.profile-picture:after { content:"";position:absolute;inset:60% 0 0;background:#cabca0;border-top:2px solid #a59780 }
+.profile-name { font-size:11px;font-weight:700;margin:0 15px 8px }
+.profile-facts { font:10px/1.7 Tahoma,sans-serif;margin:0 15px 15px;color:#69827b }
+.profile-email { display:block;padding:11px 14px;border-top:1px solid var(--contact-line);color:#37645f;font-size:10px;text-underline-offset:3px;background:#e2efe8 }
+.contact-panel { background:var(--contact-paper);border:1px solid var(--contact-line);min-height:325px;display:flex;flex-direction:column;animation:world-pane-in .18s ease-out }
+.contact-panel-title { background:#f2f2e6;border-bottom:1px solid #d9e0ce;padding:12px 20px;font:700 11px Tahoma,sans-serif;color:#6b817b;display:flex;align-items:center;gap:9px }
+.contact-panel-title:before { content:"»";font-size:16px;color:#d58542;line-height:10px }
+.contact-panel-body { padding:27px 31px }
+.contact-panel-body .contact-greeting { font:700 32px/1.2 Tahoma,sans-serif;letter-spacing:-.045em;margin-bottom:18px;color:var(--contact-ink) }
+.contact-panel-body p { font-size:13px;line-height:1.85;max-width:43ch }
+.interests { border-top:1px dotted #b9c8bb;margin-top:25px;padding-top:17px;font-size:10px;display:grid;grid-template-columns:70px 1fr;gap:10px;color:var(--contact-muted) }
+.interests dt,.interests dd { margin:0 }
+.interests dd { color:var(--contact-ink) }
+.contact-email { font-size:19px;color:#ac592c;font-weight:700;text-decoration:none;border-bottom:1px solid #cfac87;display:inline-block;margin:6px 0 18px }
+.contact-email:hover { color:#70401d }
+.contact-link-row { display:flex;align-items:center;gap:14px;text-decoration:none;border-bottom:1px dotted #c6d4c7;padding:15px 0 }
+.contact-link-row:first-child { padding-top:0 }
+.link-badge { width:38px;height:35px;display:grid;place-items:center;border:1px solid #b9cdc3;background:#e6eee2;font-size:15px;font-weight:700 }
+.contact-link-row strong { display:block;font-size:13px }
+.contact-link-row small { display:block;font-size:10px;color:var(--contact-muted);margin-top:5px }
+.contact-link-row .out { margin-left:auto;color:#ae8760 }
+.contact-link-row:hover strong { text-decoration:underline }
+.contact-signoff { font-size:9px;letter-spacing:.03em;margin-top:auto;padding:0 31px 17px;color:#9bada5 }
+[data-theme=dark] .contact-stage { background:#273e3f;--contact-paper:#344a49;--contact-ink:#e0e9d9;--contact-muted:#adc3b7;--contact-line:#59786f;--world-focus:#c3dfd2 }
+[data-theme=dark] .contact-masthead { background:#a46136;border-bottom-color:#794426 }
+[data-theme=dark] .contact-masthead small { color:#f4d7b5 }
+[data-theme=dark] .contact-topbar { background:#304b48 }
+[data-theme=dark] .contact-tabs a { background:#3e5d55;color:#b2cabc }
+[data-theme=dark] .contact-tabs a[aria-current="true"] { background:var(--contact-paper);color:#e4ebd6 }
+[data-theme=dark] .mirc-launch { color:#d1dfd0;border-color:#718d7f }
+[data-theme=dark] .mirc-launch:hover { background:#426257 }
+[data-theme=dark] .profile { background:#3c584e }
+[data-theme=dark] .profile-header { background:#4b6758 }
+[data-theme=dark] .profile-facts { color:#b4c8b9 }
+[data-theme=dark] .profile-email { background:#466252;color:#d2e4c9 }
+[data-theme=dark] .contact-panel-title { background:#40554d;border-color:#597366;color:#c0d1ba }
+[data-theme=dark] .contact-email { color:#e9b889 }
+[data-theme=dark] .link-badge { background:#486054;border-color:#7b9280 }
+@media(max-width:860px) {
+.contact-grid { grid-template-columns:180px 1fr;gap:18px;padding:23px }
+.contact-panel-body { padding:25px 23px }
+.contact-panel-body p { font-size:12px }
+}
+@media(max-width:620px) {
+.contact-masthead { padding:16px 18px 14px;gap:10px }
+.contact-masthead h1 { font-size:25px }
+.contact-masthead small { font-size:8px }
+.contact-flower { font-size:38px }
+.contact-topbar { padding:13px 10px 0;gap:8px }
+.contact-tabs { gap:3px }
+.contact-tabs a { font-size:10px;padding:10px 10px }
+.contact-tabs a[aria-current="true"] { padding-top:13px }
+.mirc-launch { padding:5px;gap:4px;font-size:9px;margin-bottom:6px }
+.mirc-launch img { width:18px;height:18px }
+.mirc-launch span:last-child { display:none }
+.contact-grid { grid-template-columns:1fr;padding:17px 14px;gap:14px }
+.profile { display:grid;grid-template-columns:75px 1fr;column-gap:12px;padding:12px }
+.profile-header { grid-column:2;background:transparent!important;border:0;padding:0;margin:0 0 5px;font-size:14px }
+.profile-picture { grid-column:1;grid-row:1/5;width:75px;height:82px;margin:0 }
+.profile-picture svg { width:76px }
+.profile-name { grid-column:2;margin:0 0 3px;font-size:10px }
+.profile-facts { grid-column:2;margin:0;font-size:9px }
+.profile-email { grid-column:2;background:transparent!important;border:0;padding:5px 0 0;font-size:9px }
+.contact-panel { min-height:310px }
+.contact-panel-title { padding:11px 18px }
+.contact-panel-body { padding:23px }
+.contact-panel-body p { font-size:13px }
+.contact-email { font-size:17px }
+.contact-panel-body .contact-greeting { font-size:29px }
+}
+@media (max-width: 360px) {
+  .contact-topbar { padding-inline: 6px; gap: 5px; }
+  .contact-tabs a { padding-inline: 7px; font-size: 9px; }
+  .mirc-launch { padding-inline: 4px; }
+  .contact-panel-body { padding-inline: 18px; }
+}
+@media (forced-colors: active) {
+  .contact-stage, .contact-panel, .profile, .contact-topbar, .contact-tabs a, .contact-panel-title { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; }
+  .contact-stage a { color: LinkText; }
+}
+@media print {
+  .contact-stage, .contact-grid, .profile, .contact-panel { display: block; background: white; min-height: 0; padding: 0; border: 0; }
+  .contact-masthead, .contact-panel-title, .profile-header, .profile-email { background: white; padding: 0 0 10px; border: 0; }
+  .contact-topbar, .profile-picture, .contact-flower, .contact-signoff { display: none; }
+  .contact-panel { padding: 15px 0; break-inside: avoid; }
+  .contact-panel-body { padding: 10px 0; }
+  .profile-name, .profile-facts { margin-inline: 0; }
+}

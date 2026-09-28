@@ -1,113 +1,212 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Senior Software Engineer | Backend & Platform Engineering",
-    "title_sv": "Senior mjukvaruingenjör | Backend & plattformsutveckling",
+    "title": "Software Developer | Web & Backend",
+    "title_sv": "Systemutvecklare | Webb & backend",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Systems developer with experience in JavaScript, Node.js, SQL, OpenShift and AWS. My background also includes COBOL and HLASM on IBM z/OS, and integrating machine learning models into a web product.",
-  "profile_sv": "Systemutvecklare med erfarenhet av JavaScript, Node.js, SQL, OpenShift och AWS. Min bakgrund omfattar också COBOL och HLASM på IBM z/OS, samt integration av maskininlärningsmodeller i en webbprodukt.",
+  "profile": "I design and build web applications, from data flows and integrations to interfaces and operations.\n\nI work with JavaScript, Python/Django and SQL and have integrated ML models for personalised game coaching. In my current role, I build internal tools and also work with mainframe systems.",
+  "profile_sv": "Jag utformar och bygger webbapplikationer, från dataflöden och integrationer till gränssnitt och drift.\n\nJag arbetar med JavaScript, Python/Django och SQL och har integrerat ML-modeller för personlig spelcoaching. På mitt nuvarande jobb bygger jag interna verktyg och arbetar även med stordatorsystem.",
   "coreStack": [
-    "Node.js, TypeScript, REST APIs",
-    "OpenShift, Docker, CI/CD",
-    "SQL & database-backed workflows",
-    "AWS (Lambda, S3, CloudFormation)",
-    "IBM z/OS integration",
-    "System security & architecture",
-    "Linux server administration"
+    "JavaScript, TypeScript and Node.js",
+    "Python and Django",
+    "SQL and API integration",
+    "OpenShift, AWS and Git",
+    "ML integration and data flows",
+    "COBOL, HLASM and IBM z/OS"
   ],
   "coreStack_sv": [
-    "Node.js, TypeScript, REST-API:er",
-    "OpenShift, Docker, CI/CD",
-    "SQL & databasdrivna arbetsflöden",
-    "AWS (Lambda, S3, CloudFormation)",
-    "IBM z/OS-integration",
-    "Systemsäkerhet & arkitektur",
-    "Linux-serveradministration"
+    "JavaScript, TypeScript och Node.js",
+    "Python och Django",
+    "SQL och API-integration",
+    "OpenShift, AWS och Git",
+    "ML-integration och dataflöden",
+    "COBOL, HLASM och IBM z/OS"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Senior Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "role_sv": "Senior mjukvaruingenjör (COBOL & HLASM / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Systems development with COBOL, HLASM and IBM z/OS."
+        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
+        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks.",
+        "Troubleshoot production systems and address root causes with the team."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL, HLASM och IBM z/OS."
+        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
+        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag.",
+        "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet."
       ]
     },
     {
       "company": "Handelsbanken",
-      "role": "Systems Engineer (COBOL / IBM z/OS)",
-      "role_sv": "Systemingenjör (COBOL / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2023 – Aug 2024",
       "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "Systems development with COBOL and IBM z/OS, following COBOL training."
+        "Developed in COBOL on IBM z/OS."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL och IBM z/OS efter COBOL-utbildning."
+        "Utvecklade i COBOL på IBM z/OS."
       ]
     },
     {
       "company": "Fragsheet",
-      "role": "Frontend App Developer Intern (LIA)",
-      "role_sv": "Frontend App Developer-praktikant (LIA)",
+      "role": "Web Developer Intern (LIA)",
+      "role_sv": "Webbutvecklare (LIA)",
       "years": "Jan 2023 – Jul 2023",
+      "years_sv": "Jan 2023 – jul 2023",
       "highlights": [
-        "Integrated ML coaching models into the product together with the ML engineer.",
-        "Rewrote the web platform in vanilla JavaScript and migrated infrastructure from DigitalOcean to AWS."
+        "Coordinated the technology and data flows for personalised game coaching.",
+        "Built the web application in Python/Django and JavaScript and integrated models with the ML developer.",
+        "Designed the solution and carried out the migration to AWS."
       ],
       "highlights_sv": [
-        "Integrerade ML-coachingmodeller i produkten tillsammans med ML-utvecklaren.",
-        "Skrev om webbplattformen i vanilla JavaScript och flyttade infrastrukturen från DigitalOcean till AWS."
+        "Höll ihop tekniken och dataflödena för personlig spelcoaching.",
+        "Byggde webbapplikationen i Python/Django och JavaScript och integrerade modeller tillsammans med ML-utvecklaren.",
+        "Utformade lösningen vid plattformsbytet och genomförde flytten till AWS."
       ]
     },
     {
-      "company": "Evil Table Poker",
-      "role": "Chief Technology Officer",
-      "role_sv": "Teknikchef (CTO)",
-      "years": "2007 – 2008",
+      "company": "PostNord TPL AB",
+      "role": "Returns Manager",
+      "role_sv": "Returansvarig",
+      "years": "Apr 2020 – Sep 2021",
+      "years_sv": "Apr 2020 – sep 2021",
       "highlights": [
-        "Full technical ownership of an online gaming platform — system architecture, infrastructure, backend development and security from scratch.",
-        "Responsible for all technology decisions, server infrastructure and cybersecurity posture."
+        "Managed returns and improved logistics workflows. This was my first experience of IBM mainframe systems at work."
       ],
       "highlights_sv": [
-        "Fullt tekniskt ägarskap för en online-spelplattform — systemarkitektur, infrastruktur, backendutveckling och säkerhet från grunden.",
-        "Ansvarig för alla teknikbeslut, serverinfrastruktur och säkerhetsarbete."
+        "Ansvarade för returer och förbättrade logistikflöden. Här kom jag först i kontakt med IBM:s stordatorsystem i arbetet."
+      ]
+    },
+    {
+      "company": "Svea Solar",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
+      "years": "",
+      "years_sv": "",
+      "highlights": [
+        "I started working with Svea Solar while at Cell Solar and later joined the company."
+      ],
+      "highlights_sv": [
+        "Samarbetet började under min tid på Cell Solar och ledde senare till en anställning."
+      ]
+    },
+    {
+      "company": "Cell Solar Nordic AB",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
+      "years": "Feb 2017 – Mar 2019",
+      "years_sv": "Feb 2017 – mar 2019",
+      "highlights": [
+        "As the first employee, built up sales, delivery processes and the technology supporting the business.",
+        "Selected products and suppliers and organised international deliveries directly to installation sites.",
+        "Trained salespeople and coordinated subcontractors."
+      ],
+      "highlights_sv": [
+        "Byggde som första anställd upp försäljning, leveransflöden och teknikstöd.",
+        "Valde produkter och leverantörer och organiserade internationella leveranser direkt till installationsplatserna.",
+        "Utbildade säljare och samordnade underleverantörer."
+      ]
+    },
+    {
+      "company": "Pinevision / ePage",
+      "role": "Sales, Business Development and Web Design",
+      "role_sv": "Försäljning, affärsutveckling och webb",
+      "years": "",
+      "years_sv": "",
+      "highlights": [
+        "Built up sales and developed the business with the founders.",
+        "Designed and built customer websites and worked on hosting, storage and domains."
+      ],
+      "highlights_sv": [
+        "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna.",
+        "Formgav och byggde kundernas hemsidor och arbetade med drift, lagring och domäner."
+      ]
+    },
+    {
+      "company": "Ericsson",
+      "role": "Machine Technician",
+      "role_sv": "Maskintekniker",
+      "years": "Apr 2011 – Apr 2014",
+      "years_sv": "Apr 2011 – apr 2014",
+      "highlights": [
+        "Worked with manufacturing equipment, technical operations and systematic troubleshooting."
+      ],
+      "highlights_sv": [
+        "Arbetade med tillverkningsutrustning, teknisk drift och systematisk felsökning."
+      ]
+    },
+    {
+      "company": "Genom Historien AB",
+      "role": "Production and Operations",
+      "role_sv": "Produktion och verksamhet",
+      "years": "2007 – 2011",
+      "years_sv": "2007 – 2011",
+      "highlights": [
+        "Produced shows and coordinated stage work, technical operations and transport on site.",
+        "Built stages and worked with sound and lighting. Also took part in performances and music recordings."
+      ],
+      "highlights_sv": [
+        "Producerade shower och samordnade scen, teknik och transporter på plats.",
+        "Byggde scen och arbetade med ljud och ljus. Medverkade också i föreställningar och musikinspelningar."
       ]
     },
     {
       "company": "Paf",
-      "role": "Web Administrator",
-      "role_sv": "Webbadministratör",
+      "role": "Administration",
+      "role_sv": "Administration",
       "years": "2005 – 2006",
+      "years_sv": "2005 – 2006",
       "highlights": [
-        "Linux server administration and web operations for a major Nordic gaming company."
+        "Worked remotely in administration and made the work more efficient by anticipating changes in user numbers."
       ],
       "highlights_sv": [
-        "Linux-serveradministration och webbdrift för ett stort nordiskt spelbolag."
+        "Arbetade på distans med administration och effektiviserade arbetet genom att förutse variationer i användarantalet."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Portfolio and resume",
-      "name_sv": "Portfolio och CV",
-      "description": "Static portfolio with three resume variants, Swedish and English content, and print-to-PDF. Built with HTML, CSS and vanilla JavaScript.",
-      "description_sv": "Statisk portfolio med tre CV-inriktningar, svenskt och engelskt innehåll samt utskrift till PDF. Byggd med HTML, CSS och vanilla JavaScript.",
+      "name": "Fragsheet",
+      "name_sv": "Fragsheet",
+      "description": "Game coaching that got to know the player over time. I coordinated the technology, from data collection to the web application and ML integration.",
+      "description_sv": "Spelcoaching som lärde känna spelaren över tid. Jag höll ihop tekniken, från datainsamling till webbapplikation och ML-integration.",
+      "tech": [
+        "JavaScript",
+        "Python",
+        "Django",
+        "AWS"
+      ],
+      "url": "./projects.html#fragsheet"
+    },
+    {
+      "name": "Pinevision / ePage",
+      "name_sv": "Pinevision / ePage",
+      "description": "Built up sales and developed the business with the founders. Also designed and built customer websites.",
+      "description_sv": "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna. Formgav och byggde också kundernas hemsidor.",
+      "url": "./projects.html#pinevision"
+    },
+    {
+      "name": "This portfolio",
+      "name_sv": "Den här portfolion",
+      "description": "A personal desktop on the web, with a few things to discover. Built with HTML, CSS and JavaScript, with content that is readable without scripts.",
+      "description_sv": "Ett eget skrivbord på webben, med lite att upptäcka. Byggt i HTML, CSS och JavaScript, med innehåll som går att läsa även utan skript.",
       "tech": [
         "HTML",
         "CSS",
         "JavaScript"
-      ]
+      ],
+      "url": "./projects.html#portfolio"
     }
   ],
   "education": [
@@ -122,37 +221,37 @@
     "languages": [
       "JavaScript",
       "TypeScript",
-      "COBOL",
-      "HLASM",
       "Python",
       "SQL",
-      "HTML/CSS"
+      "HTML/CSS",
+      "COBOL",
+      "HLASM"
     ],
     "platforms": [
-      "OpenShift",
       "Node.js",
+      "Django",
+      "OpenShift",
       "AWS",
       "Docker",
-      "IBM z/OS",
       "Linux",
-      "Git",
-      "REST APIs"
+      "IBM z/OS",
+      "Git"
     ],
     "concepts": [
-      "Service integration & API design",
-      "CI/CD & automated deployment",
-      "System security & architecture",
-      "Full-stack delivery",
-      "Mainframe-to-modern bridging",
-      "Observability & monitoring"
+      "Data flows and API integration",
+      "ML integration",
+      "Technology choices and system dependencies",
+      "Troubleshooting",
+      "AI in software development and business operations",
+      "Business and delivery processes"
     ],
     "concepts_sv": [
-      "Tjänsteintegration & API-design",
-      "CI/CD & automatiserad driftsättning",
-      "Systemsäkerhet & arkitektur",
-      "Full-stack-leverans",
-      "Integration stordator–modernt",
-      "Observerbarhet & monitorering"
+      "Dataflöden och API-integration",
+      "ML-integration",
+      "Teknikval och systemberoenden",
+      "Felsökning",
+      "AI i utveckling och verksamhet",
+      "Verksamhets- och leveransflöden"
     ]
   }
 }

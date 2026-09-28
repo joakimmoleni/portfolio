@@ -3,11 +3,12 @@
 (() => {
   if (document.getElementById('extras-player')) return;
 
+  const programIcon = name => `<img class="extras-program-icon" src="./assets/images/${name}-icon.svg" width="24" height="24" alt="">`;
   const markup = document.createElement('div');
   markup.innerHTML = `
     <section id="extras-player" class="window extras-window extras-player" lang="sv" aria-labelledby="extras-player-title" tabindex="-1" hidden>
       <header class="titlebar extras-titlebar">
-        <h2 id="extras-player-title">WINAMP</h2>
+        <h2 id="extras-player-title">${programIcon('winamp')}WINAMP</h2>
         <span class="extras-shade-time" data-player-shade-time>00:00</span>
         <div class="extras-title-actions">
           <button type="button" class="extras-shade-play" data-player-shade-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
@@ -35,15 +36,15 @@
           <li><button type="button" data-player-select="1" aria-pressed="false"><span>02. Demospår 02</span><span>3:00</span></button></li>
           <li><button type="button" data-player-select="2" aria-pressed="false"><span>03. Demospår 03</span><span>3:30</span></button></li>
         </ol>
-        <p class="extras-player-note">Ljudlös nostalgispelare.</p>
+        <p class="extras-player-note">Demo · utan ljud</p>
       </div>
     </section>
     <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" lang="sv" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">mIRC — #nostalgi</h2><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC">×</button></header>
-      <p id="extras-mirc-description" class="extras-dialog-note">Nostalgikanal — bara du och boten. Ingen livechatt.</p>
+      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">${programIcon('mirc')}mIRC — #lobby</h2><div class="extras-title-actions"><button type="button" class="title-button extras-title-button" data-mirc-minimize aria-label="Minimera mIRC" title="Minimera">_</button><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC" title="Stäng">×</button></div></header>
+      <p id="extras-mirc-description" class="extras-dialog-note">Lokal demokanal · ingen livechatt</p>
       <div class="extras-chat-layout">
-        <div class="extras-chat-log" role="log" aria-label="Meddelanden i den lokala nostalgikanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
-        <aside class="extras-chat-users" aria-label="Namn i lekkanalen"><strong>#nostalgi</strong><span>@nostalgibot</span><span>besokare</span></aside>
+        <div class="extras-chat-log" role="log" aria-label="Meddelanden i demokanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
+        <aside class="extras-chat-users" aria-label="Namn i kanalen"><strong>#lobby</strong><span>@bot</span><span>besokare</span></aside>
       </div>
       <form class="extras-chat-form">
         <label for="extras-chat-input">besokare &gt;</label>
@@ -52,8 +53,8 @@
       <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
     </dialog>
     <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" lang="sv" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
-      <p id="extras-notepad-description" class="extras-dialog-note">Din egen tillfälliga anteckning på det här skrivbordet.</p>
+      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">${programIcon('notepad')}todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
+      <p id="extras-notepad-description" class="extras-dialog-note">Tillfälliga anteckningar</p>
       <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
       <textarea id="extras-notepad-text" maxlength="12000" spellcheck="false" autofocus></textarea>
       <p class="extras-notepad-status" role="status">Sparas i den här fliken. Skickas ingenstans.</p>
@@ -65,11 +66,21 @@
   const notepad = document.getElementById('extras-notepad');
   const panels = { winamp: player, mirc, notepad };
   const returnFocus = new Map();
-  const names = { winamp: ['♫', 'Winamp'], mirc: ['#', 'mIRC'], notepad: ['▤', 'Anteckningar'] };
+  const names = { winamp: 'Winamp', mirc: 'mIRC', notepad: 'Anteckningar' };
+  const mircTask = document.createElement('button');
+  mircTask.type = 'button';
+  mircTask.className = 'task-button extras-task-button';
+  mircTask.dataset.mircTask = '';
+  mircTask.hidden = true;
+  mircTask.setAttribute('aria-controls', mirc.id);
+  mircTask.setAttribute('aria-pressed', 'false');
+  mircTask.setAttribute('aria-label', 'Visa eller minimera mIRC');
+  mircTask.innerHTML = `${programIcon('mirc')}<span>mIRC</span>`;
+  document.querySelector('.taskbar > .task-button')?.after(mircTask);
 
   for (const menu of document.querySelectorAll('[data-extras-menu]')) {
     menu.lang = 'sv';
-    for (const [name, [icon, title]] of Object.entries(names)) {
+    for (const [name, title] of Object.entries(names)) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'system-button extras-launcher';
@@ -77,7 +88,7 @@
       const symbol = document.createElement('span');
       symbol.className = 'extras-launcher-icon';
       symbol.setAttribute('aria-hidden', 'true');
-      symbol.textContent = icon;
+      symbol.innerHTML = programIcon(name);
       button.append(symbol, title);
       menu.append(button);
     }
@@ -97,14 +108,14 @@
     if (closedDetails && !closedDetails.querySelector('summary')?.contains(element)) return false;
     return element.isConnected && !element.closest('[hidden]') && !element.matches(':disabled') && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
   }
-  function restoreFocus(name) {
+  function restoreFocus(name, forget = true) {
     const previous = returnFocus.get(name);
     if (!previous) return;
     const disclosure = previous.closest('details')?.querySelector('summary');
     const target = [previous, disclosure, document.getElementById('startButton'), document.querySelector('[data-open-extra]'), document.querySelector('main')].find(isVisible);
     if (target?.matches('main') && !target.hasAttribute('tabindex')) target.tabIndex = -1;
     target?.focus({ preventScroll: true });
-    returnFocus.delete(name);
+    if (forget) returnFocus.delete(name);
   }
   function markOpen(name, open) {
     for (const button of document.querySelectorAll(`[data-open-extra="${name}"]`)) button.setAttribute('aria-expanded', String(open));
@@ -114,7 +125,7 @@
     if (!panel) return;
     const start = document.getElementById('startPanel');
     const startButton = document.getElementById('startButton');
-    returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
+    if (trigger !== mircTask) returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
     const disclosure = trigger?.closest('details');
     if (disclosure) disclosure.open = false;
     const previousDialog = trigger?.closest('dialog');
@@ -123,9 +134,14 @@
     startButton?.setAttribute('aria-expanded', 'false');
     if (name === 'notepad') loadNote();
     markOpen(name, true);
+    panel.hidden = false;
+    if (name === 'mirc') {
+      mircTask.hidden = false;
+      mircTask.setAttribute('aria-pressed', 'true');
+    }
     if (panel instanceof HTMLDialogElement) {
-      if (!panel.open) panel.showModal();
-      panel.querySelector('[autofocus]')?.focus();
+      if (!panel.open) panel.show();
+      panel.querySelector('[autofocus]')?.focus({ preventScroll: true });
     } else {
       panel.hidden = false;
       const playControl = panel.classList.contains('is-compact') ? '[data-player-shade-play]' : '[data-player-play]';
@@ -138,6 +154,18 @@
     markOpen('winamp', false);
     restoreFocus('winamp');
   }
+  function minimizeMirc() {
+    mirc.hidden = true;
+    mirc.dataset.inactive = 'true';
+    markOpen('mirc', false);
+    mircTask.setAttribute('aria-pressed', 'false');
+    restoreFocus('mirc', false);
+  }
+  mirc.querySelector('[data-mirc-minimize]').addEventListener('click', minimizeMirc);
+  mircTask.addEventListener('click', () => {
+    if (!mirc.hidden && mirc.dataset.inactive !== 'true') minimizeMirc();
+    else openExtra('mirc', mircTask);
+  });
   document.addEventListener('click', event => {
     const opener = event.target.closest('[data-open-extra]');
     if (opener && panels[opener.dataset.openExtra]) {
@@ -158,8 +186,18 @@
     }
   });
   for (const [name, dialog] of [['mirc', mirc], ['notepad', notepad]]) {
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !event.isComposing) {
+        event.preventDefault();
+        dialog.close();
+      }
+    });
     dialog.addEventListener('close', () => {
       markOpen(name, false);
+      if (name === 'mirc') {
+        mircTask.hidden = true;
+        mircTask.setAttribute('aria-pressed', 'false');
+      }
       restoreFocus(name);
     });
   }
@@ -194,7 +232,7 @@
       button.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
       button.title = playing ? 'Pausa' : 'Spela';
     }
-    stateLabel.textContent = playing ? 'SPELAR · LJUDLÖST' : position >= tracks[track] ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
+    stateLabel.textContent = playing ? 'SPELAR' : position >= tracks[track] ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
     player.classList.toggle('is-playing', playing);
     for (const button of playlistButtons) button.setAttribute('aria-pressed', String(Number(button.dataset.playerSelect) === track));
   }
@@ -281,9 +319,9 @@
     while (log.children.length > 80) log.firstElementChild.remove();
     log.scrollTop = log.scrollHeight;
   }
-  function bot(text) { addLine(`<nostalgibot> ${text}`, 'bot'); }
-  addLine('*** Välkommen till #nostalgi. Du och nostalgibot är bara här i webbläsaren.');
-  addLine('*** Vänner, klaner, turneringar, scripts och bots — en liten blinkning till IRC-tiden. Skriv /help.');
+  function bot(text) { addLine(`<bot> ${text}`, 'bot'); }
+  addLine('*** Du har anslutit till #lobby.');
+  addLine('*** Skriv /help för kommandon.');
   mirc.querySelector('form').addEventListener('submit', event => {
     event.preventDefault();
     const message = chatInput.value.trim();
@@ -297,16 +335,15 @@
     const argument = message.slice(command.length).trim();
     if (command === '/clear') {
       log.replaceChildren();
-      addLine('*** Rensat. Samma lokala kanal, lite mer plats.');
+      addLine('*** Rensat.');
     } else if (command === '/help') {
-      bot('/me [text] · /slap [namn] · /clear · /winamp · /np. Allt händer lokalt.');
+      bot('/me [text] · /slap [namn] · /clear · /winamp · /np');
     } else if (command === '/me') {
-      addLine(`* besokare ${argument || 'ser sig omkring i #nostalgi.'}`, 'action');
+      addLine(`* besokare ${argument || 'ser sig omkring.'}`, 'action');
     } else if (command === '/slap') {
-      addLine(`* besokare daskar ${argument || 'nostalgibot'} försiktigt med en mycket pixlig öring.`, 'action');
-      bot('Öringen har lagts tillbaka. Ordningen är återställd.');
+      addLine(`* besokare daskar ${argument || 'bot'} med en öring.`, 'action');
     } else if (command === '/np') {
-      bot(`${trackName()} · ${playing ? 'spelar' : 'stoppad eller pausad'} · ljudlöst nostalgiläge.`);
+      bot(`${trackName()} · ${playing ? 'spelar' : 'stoppad eller pausad'} · demo utan ljud.`);
     } else if (command === '/winamp') {
       const trigger = returnFocus.get('mirc');
       returnFocus.delete('mirc');
@@ -325,7 +362,7 @@
   const note = document.getElementById('extras-notepad-text');
   const noteStatus = notepad.querySelector('.extras-notepad-status');
   const noteKey = 'portfolio-extra-note-v1';
-  note.value = '[x] Starta datorn\n[ ] Bara en match till\n[ ] Komma ihåg varför jag öppnade Anteckningar\n';
+  note.value = '';
   function loadNote() {
     try {
       const saved = sessionStorage.getItem(noteKey);

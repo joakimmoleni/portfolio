@@ -6,18 +6,22 @@
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#3a6ea5">
   <title>Om mig — Joakim Moléni</title>
-  <meta name="description" content="Lär känna Joakim Moléni. Systemutvecklare i Stockholm, från stordatorer och webb till spel, energi och rymd.">
+  <meta name="description" content="Lite om vägen hit, hur jag tänker och vad jag gärna fastnar i.">
   <meta property="og:title" content="Om mig — Joakim Moléni">
-  <meta property="og:description" content="Lär känna Joakim Moléni. Systemutvecklare i Stockholm, från stordatorer och webb till spel, energi och rymd.">
+  <meta property="og:description" content="Lite om vägen hit, hur jag tänker och vad jag gärna fastnar i.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio.moleni.se/about.html">
   <meta property="og:locale" content="sv_SE">
-  <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card-20260907.png">
+  <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card-20260926-perspective.png">
+  <meta property="og:image:alt" content="Joakim Moléni — Jag vill förstå hela grejen. Portfolio i Windows 2000-stil.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <link rel="canonical" href="https://portfolio.moleni.se/about.html">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-consistency">
-  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260926-consistency">
-  <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/about-world.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/extras.css?v=20260928-approved">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
 <body class="world-page">
@@ -37,46 +41,56 @@
         <div class="window-actions"><button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button><a class="title-button world-close" href="./index.html" aria-label="Stäng om mig och gå till skrivbordet">×</a></div>
       </header>
       <nav class="window-menu" aria-label="Huvudnavigation"><a href="./index.html">Skrivbord</a><a href="#main" aria-current="page">Om mig</a><a href="./projects.html">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a></nav>
-      <main id="main" class="world-document wow-world" tabindex="-1">
-        <header class="wow-masthead">
-          <svg class="wow-emblem" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="36" fill="#191c1d" stroke="#929083" stroke-width="5"/><circle cx="40" cy="40" r="30" fill="#343025" stroke="#51472f" stroke-width="2"/><path d="M16 24q12-5 24 2 12-7 24-2v33q-13-4-24 3-11-7-24-3Z" fill="#d8bd7e" stroke="#2a2014" stroke-width="3"/><path d="M40 27v31M22 31l12 2m-12 5 12 2m-12 5 12 2m12-14 12-2m-12 9 12-2m-12 9 12-2" fill="none" stroke="#826239" stroke-width="2"/></svg>
-          <div><p class="wow-overline">Quest Log</p><h1>Joakim Moléni</h1><p class="wow-subtitle">Systemutvecklare · Stockholm</p></div>
-        </header>
-        <div class="wow-journal" data-world-switcher>
-          <nav class="wow-quest-list" aria-label="Anteckningar om mig" data-world-nav>
-            <h2>Min berättelse</h2>
-            <a href="#vagen-hit"><span>Vägen hit<small>Stordatorer, webb &amp; nyfikenhet</small></span></a>
-            <a href="#varldarna"><span>Världarna däremellan<small>Spel, människor &amp; kod</small></span></a>
-            <a href="#nyfikenheten"><span>Utanför koden<small>Energi, rymd &amp; nästa fråga</small></span></a>
-          </nav>
-          <div class="wow-pages">
-            <article class="wow-parchment" id="vagen-hit" data-world-panel aria-labelledby="pathTitle">
-              <h2 id="pathTitle">Vägen hit</h2>
-              <div class="parchment-rule" aria-hidden="true">◆</div>
-              <p>Min väg till systemutveckling har gått via tillverkning, logistik och solenergi. Efter frontendutbildningen gick jag vidare till bankernas stordatorsystem.</p>
-              <p>I dag arbetar jag på SEB och bygger också för webben. Den bakgrunden hjälper mig att se både koden och arbetet den ska stödja.</p>
-              <div class="wow-objective"><h3>Går det att göra enklare?</h3><p>Jag gillar begriplig kod, tydliga beslut och lösningar som går att förvalta.</p></div>
-              <div class="wow-actions"><a class="wow-button" href="./resume.html">Läs mitt CV</a></div>
+      <main id="main" class="world-document journal-stage" tabindex="-1">
+        <div class="book" data-world-switcher>
+          <aside class="book-left">
+            <svg class="book-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true"><path d="m22 1 5 16 16 5-16 5-5 16-5-16L1 22l16-5Z" stroke="currentColor"/><path d="m22 9 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z" stroke="currentColor" opacity=".4"/><circle cx="22" cy="22" r="3" fill="currentColor"/></svg>
+            <p class="book-author">Joakim Moléni</p>
+            <h1 class="book-heading">Om mig</h1>
+            <nav class="book-tabs" aria-label="Kapitel om mig" data-world-nav>
+              <a href="#vagen-hit"><span class="chapter-number" aria-hidden="true">I</span>Just nu</a>
+              <a href="#verksamheten"><span class="chapter-number" aria-hidden="true">II</span>Vägen hit</a>
+              <a href="#tekniken"><span class="chapter-number" aria-hidden="true">III</span>Hur jag tänker</a>
+              <a href="#nyfikenheten"><span class="chapter-number" aria-hidden="true">IV</span>Lite vid sidan av</a>
+            </nav>
+            <span class="book-signature" aria-hidden="true">Joakim Moléni</span>
+          </aside>
+          <div class="book-page">
+            <div class="page-running" aria-hidden="true">Om mig</div>
+            <article class="chapter" id="vagen-hit" data-world-panel aria-labelledby="pathTitle">
+              <h2 id="pathTitle">Just nu</h2>
+              <p>På mitt nuvarande jobb arbetar jag med stordatorsystem och bygger verktyg runt dem. En stor del av arbetet ligger i vägvalen: hur en förändring ska genomföras, vilka delar som påverkas och vad som behöver stämma mellan dem.</p>
+              <p>Jag tar fram underlag, diskuterar lösningar med kollegor och följer med ner i koden. Det ska gå att förstå varför vi valde som vi gjorde, även längre fram.</p>
+              <p>AI är också en del av vardagen. Jag bygger, provar och hjälper andra att använda verktygen i sitt arbete, genom enskild handledning och samtal med större grupper.</p>
+              <div class="journal-actions"><a class="journal-link" href="./resume.html">Mitt CV</a></div>
+            <div class="page-footer" aria-hidden="true"><span>01</span></div>
             </article>
-            <article class="wow-parchment" id="varldarna" data-world-panel aria-labelledby="worldsTitle">
-              <h2 id="worldsTitle">Världarna däremellan</h2>
-              <div class="parchment-rule" aria-hidden="true">◆</div>
-              <h3>World of Warcraft</h3><p>Vanilla är den period jag starkast förknippar med WoW. Raiding var en stor del av det, och jag fortsatte spela på hög nivå genom The Burning Crusade och Wrath of the Lich King.</p>
-              <h3>Counter-Strike &amp; mIRC</h3><p>CS 1.3 är favoriten, men 1.6 är versionen jag har spelat längst. Kring spelen fanns mIRC: vänner, klaner och tävlingar. Jag använde det också för att skripta och bygga egna saker.</p>
-              <p>Det är de här miljöerna som har fått flytta in på skrivbordet igen. Tillsammans med Windows 2000, Winamp och några anteckningar.</p>
-              <div class="wow-actions"><a class="wow-button" href="./projects.html">Öppna projekten</a></div>
+            <article class="chapter" id="verksamheten" data-world-panel aria-labelledby="businessTitle">
+              <h2 id="businessTitle">Vägen hit</h2>
+              <p>Försäljningen kom först. Jag lärde mig att förstå vad någon behövde, hitta en väg framåt och se till att det vi lovade gick att leverera.</p>
+              <p>Därifrån växte ansvaret till produktval, teknik, leveranser och hur verksamheten skulle fungera. Jag byggde upp arbetssätt och utbildade medarbetare och chefer. Det mönstret har återkommit i flera olika verksamheter.</p>
+              <p>Företagsbyggen, internationell logistik och showproduktion har satt sina spår. Jag tänker fortfarande på hur det vi bygger ska säljas, användas och hållas igång.</p>
+              <div class="journal-actions"><a class="journal-link" href="./projects.html">Några av arbetena</a></div>
+            <div class="page-footer" aria-hidden="true"><span>02</span></div>
             </article>
-            <article class="wow-parchment" id="nyfikenheten" data-world-panel aria-labelledby="curiosityTitle">
-              <h2 id="curiosityTitle">Utanför koden</h2>
-              <div class="parchment-rule" aria-hidden="true">◆</div>
-              <p>Energi och rymd är två områden jag gärna fortsätter att lära mig mer om. Min bakgrund inom bland annat solenergi är en del av den nyfikenheten.</p>
-              <p>Här finns också plats för sådant som har följt mig genom åren: spel, musik och människorna kring dem.</p>
-              <div class="wow-actions"><a class="wow-button" href="./contact.html">Skriv en rad</a></div>
+            <article class="chapter" id="tekniken" data-world-panel aria-labelledby="technologyTitle">
+              <h2 id="technologyTitle">Hur jag tänker</h2>
+              <p>Jag brukar följa en lösning ett par led bort. Vad behöver den av andra delar? Vem ska arbeta med den? Vad händer när förutsättningarna ändras?</p>
+              <p>Jag vill kunna plocka isär den, förstå den och ändra den. Drift, kostnader och beroenden hör till de tidiga frågorna. Det som är enkelt att börja med ska helst också gå att leva med.</p>
+              <p>Jag provar gärna nytt. När det ska användas på riktigt vill jag veta vad vi vinner på det och vad vi tar på oss.</p>
+              <div class="journal-actions"><a class="journal-link" href="./projects.html#fragsheet">Ett exempel</a></div>
+            <div class="page-footer" aria-hidden="true"><span>03</span></div>
+            </article>
+            <article class="chapter" id="nyfikenheten" data-world-panel aria-labelledby="curiosityTitle">
+              <h2 id="curiosityTitle">Lite vid sidan av</h2>
+              <p>Rymden, matematik och frågor som inte riktigt släpper. Där kan jag bli kvar ett tag. Ibland leder det till något jag bygger. Ibland räcker det att fundera.</p>
+              <div class="journal-actions"><a class="journal-link" href="./contact.html">Skriv en rad</a></div>
+            <div class="page-footer" aria-hidden="true"><span>04</span></div>
             </article>
           </div>
         </div>
       </main>
-      <footer class="statusbar"><span>Om mig · 3 anteckningar</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
+      <footer class="statusbar"><span>Om mig · 4 anteckningar</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
     </div>
     <p class="desktop-caption">© <span id="copyrightYear">2026</span> Joakim Moléni</p>
   </div>
@@ -92,12 +106,12 @@
   </nav>
   <dialog class="window about-dialog" id="aboutDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
     <div class="titlebar"><h2 id="dialogTitle">Om den här datorn</h2><button class="title-button" type="button" data-close aria-label="Stäng dialogrutan">×</button></div>
-    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Nyfiken sedan före bredbandet.</p></div></div>
-    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
+    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Brukar ha något på gång.</p></div></div>
+    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Kod, system och sidospår</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div></dl></fieldset>
     <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
   </dialog>
-  <script src="./assets/js/portfolio.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/portfolio.js?v=20260928-approved" defer></script>
   <script src="./assets/js/worlds.js?v=20260926-consistency" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/extras.js?v=20260928-approved" defer></script>
 </body>
 </html>

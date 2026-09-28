@@ -1,0 +1,106 @@
+/* Approved design: page surface inside the shared Windows shell. */
+.projects-stage { --world-focus: #855729; }
+.project-bar h1 { margin: 0; }
+.project-list a { text-decoration: none; }
+.project-panels { min-width: 0; }
+.project-preview .flow { list-style: none; padding: 0; margin: 0; align-items: stretch; }
+.flow-node { position: relative; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+.flow-node + .flow-node::before { content: '\2192'; position: absolute; left: -24px; top: calc(50% - 12px); font: 19px Georgia, serif; color: var(--panel-muted); }
+.flow-node strong { font: inherit; line-height: 1.45; }
+.project-outcome { margin-top: 22px; padding-top: 18px; border-top: 1px solid #89989f50; }
+.project-outcome h3 { font: 700 10px Tahoma, sans-serif; text-transform: uppercase; letter-spacing: .09em; margin: 0 0 10px; }
+.project-outcome p { font-size: 12px; line-height: 1.8; color: var(--panel-muted); }
+.project-actions { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 14px; }
+.project-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 12px; color: var(--panel-ink); }
+.project-data { display: grid; grid-template-columns: auto 1fr; gap: 12px; border-top: 1px solid #89989f50; margin-top: 23px; padding-top: 14px; font: 10px/1.8 'Courier New', monospace; color: var(--panel-muted); }
+.project-details:not([hidden]) ~ .project-details:not([hidden]) { border-top: 1px solid #89989f50; }
+.projects-stage { --panel:#e4e7e6;--panel-ink:#28353b;--panel-muted:#627076;--diagram:#d1d9d9;--grid:#52686f16;background:var(--panel);color:var(--panel-ink);border:1px solid #536069 }
+.project-bar { display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 24px;background:#ccd3d4;border-bottom:1px solid #a0aeb2;box-shadow:inset 0 1px #fff9 }
+.project-bar h1 { font-size:13px;letter-spacing:.1em;text-transform:uppercase }
+.project-bar span { font:10px 'Courier New',monospace;color:var(--panel-muted) }
+.projects-grid { display:grid;grid-template-columns:250px 1fr;min-height:501px }
+.project-list { background:linear-gradient(100deg,#29363f,#202d35);padding:22px 0;color:#cad5d7;display:flex;flex-direction:column;border-right:3px solid #869598 }
+.project-list-label { font:9px 'Courier New',monospace;letter-spacing:.18em;padding:0 23px 18px;color:#849aa5;text-transform:uppercase }
+.project-list a { display:grid;grid-template-columns:24px 1fr;gap:12px;text-align:left;border:0;border-top:1px solid #ffffff09;border-bottom:1px solid #0002;background:transparent;padding:17px 23px;color:#c0cbd0;position:relative }
+.project-list a:hover { background:#ffffff08 }
+.project-list a[aria-current="true"] { color:#ffdea2;background:linear-gradient(90deg,#bf984b24,#bf984b08);box-shadow:inset 3px 0 #d2ac68 }
+.project-list a[aria-current="true"]:after { content:"";position:absolute;right:12px;top:50%;width:5px;height:5px;transform:rotate(45deg);background:#d2ac68 }
+.project-id { font:10px 'Courier New',monospace;padding-top:2px;opacity:.6 }
+.project-name { font-size:13px;display:block;font-weight:700 }
+.project-list small { display:block;margin-top:6px;font-size:10px;color:#869da8;font-weight:400 }
+.project-list a[aria-current="true"] small { color:#b9aa8d }
+.project-list-bottom { font:10px/1.65 'Courier New',monospace;color:#81939c;margin-top:auto;padding:30px 23px 0 }
+.project-details { padding:28px 31px 25px;animation:world-pane-in .2s ease-out }
+.project-heading { display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:9px }
+.project-heading h2 { font:700 30px/1.1 Tahoma,sans-serif;letter-spacing:-.055em }
+.project-category { font:9px 'Courier New',monospace;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;margin-top:8px;color:var(--panel-muted) }
+.project-lead { font-size:12px;color:var(--panel-muted);max-width:60ch;margin-bottom:21px }
+.project-preview { border:1px solid #9fadb1;background-color:var(--diagram);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:19px 19px;padding:16px 20px 19px;position:relative;box-shadow:inset 0 0 0 4px #ffffff30;margin-bottom:24px }
+.preview-caption { font:8px 'Courier New',monospace;text-transform:uppercase;letter-spacing:.16em;color:var(--panel-muted);margin-bottom:18px;display:flex;justify-content:space-between }
+.flow { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:center }
+.flow-node { padding:13px 10px;text-align:center;border:1px solid #87989d;background:#eaf0ee;box-shadow:2px 2px 0 #76888d23;font:700 11px Tahoma,sans-serif;color:#384c54 }
+.flow-node small { display:block;font:9px/1.5 'Courier New',monospace;margin-top:6px;color:#6f8085 }
+.flow-node.primary { border-color:#ab8b52;background:#eee5d2;color:#705b38 }
+.project-copy { display:grid;grid-template-columns:1fr 1fr;gap:28px }
+.project-copy > :only-child { grid-column:1 / -1 }
+.project-copy h3 { font:700 10px Tahoma,sans-serif;text-transform:uppercase;letter-spacing:.09em;margin:0 0 10px }
+.project-copy p { font-size:12px;line-height:1.8;margin:0;color:var(--panel-muted) }
+[data-theme=dark] .projects-stage { --panel:#26363f;--panel-ink:#e0e7e8;--panel-muted:#a3b4ba;--diagram:#1e2f38;--grid:#a9c4cf09;--world-focus:#e7c48a }
+[data-theme=dark] .project-bar { background:#374751;border-color:#5c707a;box-shadow:inset 0 1px #81939a4d }
+[data-theme=dark] .project-preview { border-color:#526973;box-shadow:inset 0 0 0 4px #ffffff05 }
+[data-theme=dark] .flow-node { background:#344851;color:#d7e4e5;border-color:#697f87 }
+[data-theme=dark] .flow-node small { color:#a2b5bc }
+[data-theme=dark] .flow-node.primary { background:#514c3e;border-color:#a28c59;color:#e7d6ae }
+@media(max-width:860px) {
+.projects-grid { grid-template-columns:205px 1fr }
+.project-list a { padding:18px 16px;gap:5px }
+.project-list-label { padding-left:16px }
+.project-details { padding:25px 23px }
+.project-category { display:none }
+.project-copy { gap:20px }
+.flow-node { font-size:10px;padding:12px 7px }
+.flow-node small { font-size:8px }
+.flow { grid-template-columns:repeat(3,minmax(0,1fr));gap:21px }
+.project-preview { padding:14px 12px }
+.flow-node + .flow-node::before { left: -20px; }
+}
+@media(max-width:620px) {
+.projects-grid { grid-template-columns:1fr;min-height:0 }
+.project-bar { padding:15px }
+.project-bar h1 { font-size:11px }
+.project-bar span { font-size:9px }
+.project-list { padding:0;display:grid;grid-template-columns:1fr 1fr;border-right:0;border-bottom:3px solid #869598 }
+.project-list-label,.project-list-bottom { display:none }
+.project-list a { padding:13px 12px;gap:7px;grid-template-columns:15px 1fr;min-height:55px }
+.project-list a:last-of-type { grid-column:1/-1 }
+.project-name { font-size:11px }
+.project-list small { font-size:9px }
+.project-list a[aria-current="true"]:after { right:9px }
+.project-id { font-size:8px }
+.project-details { padding:23px 18px }
+.project-heading h2 { font-size:28px }
+.project-lead { font-size:12px }
+.project-copy { grid-template-columns:1fr;gap:20px }
+.project-preview { padding:13px 9px }
+.preview-caption { font-size:7px;letter-spacing:.07em }
+.flow-node { padding:12px 4px;font-size:9px }
+.flow-node small { font-size:8px }
+.flow { grid-template-columns:repeat(3,minmax(0,1fr));gap:17px }
+.flow-node + .flow-node::before { left: -16px; font-size: 17px; }
+.project-list a { min-width: 0; }
+.project-data { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (forced-colors: active) {
+  .projects-stage, .project-bar, .project-list, .project-preview, .flow-node { background: Canvas; color: CanvasText; box-shadow: none; border-color: CanvasText; }
+  .project-list a[aria-current="true"] { box-shadow: none; }
+  .project-list a::after { display: none; }
+}
+@media print {
+  .projects-grid { display: block; min-height: 0; }
+  .project-bar, .project-details, .project-preview, .flow-node { padding: 0; background: white; border: 0; box-shadow: none; }
+  .project-bar { padding-bottom: 15px; }
+  .project-list, .project-bar > span, .project-actions { display: none; }
+  .project-details { padding: 15px 0; break-inside: avoid; }
+  .project-copy p, .project-outcome p { font-size: 11pt; }
+  .flow-node { border: 1px solid #aaa; padding: 10px; }
+}

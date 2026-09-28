@@ -92,25 +92,47 @@ dt { color: var(--muted); }
 .statusbar { display: grid; grid-template-columns: 1fr auto auto; gap: 3px; padding-top: 4px; font-size: .75rem; }
 .statusbar span { box-shadow: var(--inset); padding: 3px 10px; }
 .desktop-caption { grid-column: 2; color: #fff; opacity: .9; font-size: .75rem; padding: 14px 3px 0; }
-.taskbar { position: fixed; z-index: 10; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 8px; background: var(--surface); box-shadow: inset 0 1px var(--highlight); border-top: 1px solid var(--surface); padding: 5px 6px max(5px, env(safe-area-inset-bottom)); font-size: .875rem; }
+.taskbar { position: fixed; z-index: 20; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 8px; background: var(--surface); box-shadow: inset 0 1px var(--highlight); border-top: 1px solid var(--surface); padding: 5px 6px max(5px, env(safe-area-inset-bottom)); font-size: .875rem; }
 .start-button { font-weight: bold; padding: 5px 10px; min-height: 34px; }
 .start-button svg, .task-button svg { width: 22px; height: 22px; }
 .task-button { box-shadow: var(--inset); font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 12px; width: 225px; }
 .taskbar-note { color: var(--muted); font-size: .75rem; padding-left: 8px; }
+.taskbar > a.task-button[data-inactive="true"] { box-shadow: var(--raised); font-weight: 400; }
 .tray { box-shadow: var(--inset); padding: 6px 11px; margin-left: auto; display: flex; gap: 12px; font-size: .75rem; }
 .tray time { font-variant-numeric: tabular-nums; }
-.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 13; width: 286px; max-width: calc(100% - 10px); max-height: calc(100dvh - 76px - env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; display: flex; }
+.start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 21; width: 286px; max-width: calc(100% - 10px); max-height: calc(100dvh - 76px - env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; display: flex; }
 .start-brand { writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 4px; background: linear-gradient(#0a246a, #567aa5); color: #fff; font-size: 1.1rem; }
 .start-links { flex: 1; padding: 3px; }
 .start-links a, .start-links button { width: 100%; display: flex; align-items: center; gap: 13px; color: var(--text); text-decoration: none; text-align: left; font-size: .875rem; background: transparent; border: 0; padding: 10px 12px; min-height: 44px; }
 .start-links svg { width: 26px; height: 26px; }
 .start-links a:hover, .start-links button:hover { color: #fff; background: #0a246a; }
+.start-links a:focus-visible, .start-links button:focus-visible, .start-extras summary:focus-visible { color: #fff; background: #0a246a; outline: 1px dotted #fff; outline-offset: -4px; }
+#themeToggle { position: relative; padding-left: 38px; }
+#themeToggle::before { content: ''; position: absolute; left: 13px; width: 14px; height: 14px; border: 1px solid currentColor; }
+#themeToggle[aria-pressed="true"]::after { content: ''; position: absolute; left: 16px; width: 8px; height: 5px; margin-top: -3px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
 .start-links hr { border: 0; border-top: 1px solid var(--shadow); border-bottom: 1px solid var(--highlight); margin: 3px; }
 .start-extras summary { padding: 10px 12px; min-height: 44px; font-size: .875rem; }
 .start-extras summary:hover { color: #fff; background: #0a246a; }
 .start-extras[open] { border-block: 1px solid var(--shadow); }
 .start-extras [data-extras-menu] { padding-left: 12px; }
 .titlebar a.title-button { display: inline-grid; place-items: center; text-decoration: none; }
+.window[data-inactive="true"] > .titlebar { background: linear-gradient(90deg, #606060, #878787); }
+:root[data-theme="dark"] .window[data-inactive="true"] > .titlebar { background: linear-gradient(90deg, #3e4650, #5c6570); }
+.titlebar, .titlebar h2 { cursor: default; }
+.start-panel:not([hidden]) { animation: desktop-menu-rise 160ms ease-out; }
+@keyframes desktop-menu-rise { from { clip-path: inset(100% 0 0); transform: translateY(14px); } to { clip-path: inset(0); transform: translateY(0); } }
+.start-extras summary { display: flex; align-items: center; justify-content: space-between; list-style: none; }
+.start-extras summary::-webkit-details-marker { display: none; }
+.start-extras summary::after { content: ''; width: 0; height: 0; border-block: 4px solid transparent; border-left: 5px solid currentColor; }
+.start-extras[open] > summary { color: #fff; background: #0a246a; }
+.start-extras[open] > summary::after { transform: rotate(90deg); }
+@media (min-width: 651px) and (min-height: 580px) {
+  .start-panel { overflow: visible; }
+  .start-extras { position: relative; }
+  .start-extras[open] { border: 0; }
+  .start-extras[open] > summary::after { transform: none; }
+  .start-extras [data-extras-menu] { position: absolute; left: calc(100% - 2px); bottom: -3px; width: 220px; padding: 3px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); background: var(--surface); box-shadow: var(--raised), 2px 2px 0 #0003; }
+}
 @media (pointer: fine) and (forced-colors: none) {
   body { cursor: url('../images/cursor-arrow.svg') 1 1, default; }
   input, textarea, p, dd, li, h1, h2, h3 { cursor: text; }
@@ -168,7 +190,7 @@ dt { color: var(--muted); }
   .properties-icon { width: 48px; height: 48px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
-@media (forced-colors: active) { .titlebar { background: Canvas; color: CanvasText; } .system-button, .window, .task-button, .program-list { border: 1px solid ButtonText; } }
+@media (forced-colors: active) { .titlebar, .window[data-inactive="true"] > .titlebar { background: Canvas; color: CanvasText; } .system-button, .window, .task-button, .program-list { border: 1px solid ButtonText; } }
 @media print {
   :root, :root[data-theme="dark"] { --paper: #fff; --text: #000; --muted: #333; --line: #bbb; --link: #000; --surface: #eee; }
   body { background: #fff; font-size: 11pt; }
@@ -178,3 +200,6 @@ dt { color: var(--muted); }
   .desktop-caption { color: #000; }
   .program-list > div { break-inside: avoid; }
 }
+
+/* Give the professional introduction and career context separate breathing room. */
+.intro > p + p { margin-top: 12px; }

@@ -34,13 +34,19 @@ const requiredFiles = [
   'assets/css/portfolio.css',
   'assets/css/resume.css',
   'assets/css/worlds.css',
+  'assets/css/about-world.css',
+  'assets/css/projects-world.css',
+  'assets/css/contact-world.css',
   'assets/css/extras.css',
   'assets/js/portfolio.js',
   'assets/js/resume.js',
   'assets/js/resume-shell.js',
   'assets/js/worlds.js',
   'assets/js/extras.js',
-  'assets/images/og-card-20260907.png',
+  'assets/images/og-card-20260926-perspective.png',
+  'assets/images/mirc-icon.svg',
+  'assets/images/winamp-icon.svg',
+  'assets/images/notepad-icon.svg',
   'assets/data/resume-data.json'
 ];
 
@@ -97,7 +103,7 @@ for (const htmlFile of htmlFiles) {
 }
 
 for (const file of await readdir(path.join(root, 'assets/css'))) {
-  if (!['portfolio.css', 'resume.css', 'worlds.css', 'extras.css'].includes(file)) continue;
+  if (!file.endsWith('.css')) continue;
   const css = await read(`assets/css/${file}`);
   for (const match of css.matchAll(/url\(["']?([^\s)'"\n]+)["']?\)/g)) {
     if (/^(?:data:|https?:|#)/.test(match[1])) continue;

@@ -13,7 +13,8 @@ const files = new Map([
   ['./assets/data/resume-data.json', base],
   ...base.variants.map(variant => [variant.path, JSON.parse(readFileSync(path.join(root, variant.path), 'utf8'))])
 ]);
-const [core, modern, platform] = base.variants;
+const [core, modern, platform] = ['mainframe-dev', 'modern-dev', 'platform-dev'].map(id => base.variants.find(variant => variant.id === id));
+const modernCommand = `v${base.variants.findIndex(variant => variant.id === modern.id) + 1}`;
 const settle = () => new Promise(resolve => setImmediate(resolve));
 
 // A small DOM stand-in for state tests. Browser checks cover layout and real focus.
@@ -39,15 +40,20 @@ function element() {
 }
 async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map(), storage = new Map()) {
   const nodes = new Map();
-  for (const id of ['resumeContent', 'resumeStatus', 'resumePanelId', 'resumePanelTitle', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
+  for (const id of ['resumeContent', 'resumeStatus', 'resumePanelId', 'resumePanelTitle', 'resumePanelMode', 'resumeCommandLabel', 'resumeBackLabel', 'resumeSessionInfo', 'resumeOptions', 'resume-menu', 'langEnBtn', 'langSvBtn', 'variantList', 'commandFeedback', 'btnExportPdf', 'resumeCommandForm', 'resumeCommand', 'resumeHelp', 'themeToggle']) nodes.set(id, element());
   nodes.get('resumeHelp').hidden = true;
+  nodes.get('resumeOptions').hidden = true;
   const helpButtons = [element(), element()];
   helpButtons.forEach(button => {
     button.dataset.resumeCommand = 'help';
     button.setAttribute('aria-expanded', 'false');
   });
   const sectionTabs = [];
+  const menuButtons = [];
   const panels = ['profile', 'work', 'skills', 'education', 'projects'].map(panel => {
+    const menuButton = element();
+    menuButton.dataset.openPanel = panel;
+    menuButtons.push(menuButton);
     const section = element();
     section.dataset.panel = panel;
     nodes.set(`resume-${panel}`, section);
@@ -90,8 +96,8 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     node.onFocus = () => { document.activeElement = node; };
   }
   const content = nodes.get('resumeContent');
-  content.contains = node => node === content || panels.includes(node) || sectionTabs.includes(node);
-  content.querySelectorAll = selector => selector === '.section-tab' ? sectionTabs : [];
+  content.contains = node => node === content || node === nodes.get('resume-menu') || panels.includes(node) || sectionTabs.includes(node) || menuButtons.includes(node);
+  content.querySelectorAll = selector => selector === '.section-tab' ? sectionTabs : selector === '[data-open-panel]' ? menuButtons : [];
   let contentMarkup = '';
   Object.defineProperty(content, 'innerHTML', {
     get: () => contentMarkup,
@@ -122,9 +128,10 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
   vm.runInContext(resumeSource, context, { filename: 'resume.js' });
   await settle();
   return {
-    nodes, responses, location, listeners, document, storage, helpButtons,
+    nodes, responses, location, listeners, document, storage, helpButtons, storageArea: context.localStorage,
     printed: () => printCount,
     clickVariant: id => nodes.get('variantList').children.find(button => button.dataset.variant === id).fire('click'),
+    clickMenu: id => menuButtons.find(button => button.dataset.openPanel === id).fire('click'),
     selectedVariant: () => nodes.get('variantList').children.find(button => button.getAttribute('aria-selected') === 'true')?.dataset.variant ?? null,
     setLanguage: lang => nodes.get(lang === 'sv' ? 'langSvBtn' : 'langEnBtn').fire('click'),
     setDialogOpen: value => { dialogOpen = value; },
@@ -236,10 +243,10 @@ for (const result of ['success', 'failure']) {
 await test('base-file failure remains an error after a language change', async () => {
   const { nodes, setLanguage } = await page('?lang=sv', new Map([['./assets/data/resume-data.json', fail]]));
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
-  assert.match(nodes.get('resumeStatus').textContent, /engelska kärnsystemsversionen/);
+  assert.match(nodes.get('resumeStatus').textContent, /sparade svenska CV:t/);
   setLanguage('en');
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
-  assert.match(nodes.get('resumeStatus').textContent, /saved English Core Systems CV/);
+  assert.match(nodes.get('resumeStatus').textContent, /saved Swedish CV/);
   assert.equal(nodes.get('resumeContent').getAttribute('aria-busy'), 'false');
 });
 
@@ -300,6 +307,35 @@ await test('returning to a cached page adopts the desktop theme chosen on anothe
   assert.equal(nodes.get('themeToggle').getAttribute('aria-pressed'), 'false');
 });
 
+await test('theme changes in another open tab preserve the CV language, section and unfinished command', async () => {
+  const { nodes, document, listeners, storageArea, location } = await page('?lang=en&panel=work');
+  nodes.get('resumeCommand').value = 'unfinished command';
+  nodes.get('themeToggle').textContent = 'Dark colour scheme';
+  for (const theme of ['dark', 'light']) {
+    listeners.get('storage')({ storageArea, key: 'theme', newValue: theme });
+    assert.equal(document.documentElement.dataset.theme, theme);
+    assert.equal(nodes.get('themeToggle').getAttribute('aria-pressed'), String(theme === 'dark'));
+    assert.equal(nodes.get('themeToggle').textContent, 'Dark colour scheme');
+    assert.equal(document.documentElement.lang, 'en');
+    assert.equal(location.searchParams.get('panel'), 'work');
+    assert.equal(nodes.get('resumeCommand').value, 'unfinished command');
+  }
+});
+
+await test('theme sync ignores unrelated storage and resets when the preference is removed or cleared', async () => {
+  const { nodes, document, listeners, storageArea } = await page();
+  nodes.get('themeToggle').fire('click');
+  listeners.get('storage')({ storageArea, key: 'portfolio-resume-lang', newValue: 'sv' });
+  listeners.get('storage')({ storageArea: {}, key: 'theme', newValue: 'light' });
+  assert.equal(document.documentElement.dataset.theme, 'dark');
+  listeners.get('storage')({ storageArea, key: 'theme', newValue: null });
+  assert.equal(document.documentElement.dataset.theme, 'light');
+  nodes.get('themeToggle').fire('click');
+  listeners.get('storage')({ storageArea, key: null, newValue: null });
+  assert.equal(document.documentElement.dataset.theme, 'light');
+  assert.equal(nodes.get('themeToggle').getAttribute('aria-pressed'), 'false');
+});
+
 await test('the panel line follows section and language changes', async () => {
   const { nodes, command, setLanguage } = await page('?lang=en&focus=mainframe-dev&panel=projects');
   assert.equal(nodes.get('resumePanelId').textContent, 'JM05');
@@ -320,7 +356,8 @@ await test('generic CV entry defaults to Swedish and preserves a chosen language
   assert.equal(returning.document.documentElement.lang, 'en');
   const explicit = await page('?lang=sv', new Map(), first.storage);
   assert.equal(explicit.document.documentElement.lang, 'sv');
-  assert.equal(explicit.nodes.get('variantList').children[0].textContent, 'Stordator');
+  assert.equal(first.selectedVariant(), platform.id);
+  assert.equal(explicit.nodes.get('variantList').children[0].textContent, 'Helhetsprofil');
 });
 
 await test('history keeps focus on the active CV section after replacing content', async () => {
@@ -334,7 +371,7 @@ await test('history keeps focus on the active CV section after replacing content
   location.href = '?lang=en&focus=mainframe-dev';
   listeners.get('popstate')();
   await settle();
-  assert.equal(document.activeElement.id, 'resume-profile');
+  assert.equal(document.activeElement.id, 'resume-menu');
 });
 
 await test('a variant finishing loading does not steal focus from the command field', async () => {
@@ -349,7 +386,8 @@ await test('a variant finishing loading does not steal focus from the command fi
 });
 
 await test('an empty project section links to the portfolio cases', async () => {
-  const { nodes, setLanguage } = await page('?lang=sv&focus=mainframe-dev&panel=projects');
+  const emptyProjects = { ...files.get(core.path), projects: [] };
+  const { nodes, setLanguage } = await page('?lang=sv&focus=mainframe-dev&panel=projects', new Map([[core.path, () => ({ ok: true, json: async () => emptyProjects })]]));
   assert.match(nodes.get('resumeContent').innerHTML, /href="\.\/projects\.html">Se projekt i portfolion/);
   setLanguage('en');
   assert.match(nodes.get('resumeContent').innerHTML, /href="\.\/projects\.html">View projects in the portfolio/);
@@ -371,7 +409,7 @@ await test('known commands report initial loading or failure while unknown comma
   nodes.get('resumeCommand').focus();
   for (const state of ['loading', 'error']) {
     assert.equal(nodes.get('resumeStatus').dataset.state, state);
-    for (const value of ['work', 'skills', 'erfarenhet', '1', '2', '3']) {
+    for (const value of ['work', 'skills', 'erfarenhet', 'menu', '1', '2', '3', '4', '5', 'v1', 'v2', 'v3']) {
       command(value);
       assert.equal(nodes.get('commandFeedback').textContent, nodes.get('resumeStatus').textContent);
       assert.equal(document.activeElement.id, 'resumeCommand');
@@ -409,11 +447,11 @@ await test('a successful variant command reveals the result without stealing lat
     const pending = delayedResponse();
     responses.set(modern.path, pending.get);
     nodes.get('resumeCommand').focus();
-    command('2');
+    command(modernCommand);
     if (moveFocus) nodes.get('langSvBtn').focus();
     pending.finish(files.get(modern.path));
     await settle();
-    assert.equal(document.activeElement.id, moveFocus ? 'langSvBtn' : 'resume-profile');
+    assert.equal(document.activeElement.id, moveFocus ? 'langSvBtn' : 'resume-menu');
   }
 });
 
@@ -421,7 +459,7 @@ await test('a failed variant command reports the error beside the command field'
   const { nodes, command, responses, document } = await page();
   responses.set(modern.path, fail);
   nodes.get('resumeCommand').focus();
-  command('2');
+  command(modernCommand);
   await settle();
   assert.equal(document.activeElement.id, 'resumeCommand');
   assert.match(nodes.get('commandFeedback').textContent, /could not be loaded/);
@@ -531,6 +569,61 @@ await test('terminal shortcuts do not interrupt the non-modal Winamp player', as
   assert.equal(nodes.get('resumeHelp').hidden, true);
   assert.equal(location.href, initialUrl);
   assert.equal(document.activeElement, playButton);
+});
+
+await test('the primary menu is the default and number commands open sections without changing CV focus', async () => {
+  const { nodes, command, selectedVariant, location, document } = await page('');
+  assert.equal(nodes.get('resume-menu').hidden, false);
+  assert.equal(nodes.get('resumePanelId').textContent, 'JM00');
+  assert.equal(nodes.get('resumePanelMode').textContent, 'MENU');
+  assert.equal(nodes.get('resumeCommandLabel').textContent, 'Option');
+  assert.equal(location.searchParams.has('panel'), false);
+  const variant = selectedVariant();
+  for (const [index, panel] of ['profile', 'work', 'skills', 'education', 'projects'].entries()) {
+    command(String(index + 1));
+    assert.equal(nodes.get('resume-menu').hidden, true);
+    assert.equal(nodes.get(`resume-${panel}`).hidden, false);
+    assert.equal(selectedVariant(), variant);
+    assert.equal(location.searchParams.get('panel'), panel);
+    assert.equal(nodes.get('resumeCommandLabel').textContent, 'Command');
+    assert.equal(document.activeElement.id, `resume-${panel}`);
+    command('menu');
+    assert.equal(nodes.get('resume-menu').hidden, false);
+    assert.equal(nodes.get(`resume-${panel}`).hidden, true);
+    assert.equal(location.searchParams.has('panel'), false);
+  }
+});
+
+await test('menu buttons open their panel and F3 or END returns to the menu before exiting', async () => {
+  const { nodes, clickMenu, pressKey, command, location } = await page('');
+  for (const back of ['F3', 'end']) {
+    clickMenu('work');
+    assert.equal(nodes.get('resume-work').hidden, false);
+    assert.equal(nodes.get('resumeBackLabel').textContent, 'Meny');
+    if (back === 'F3') pressKey('F3');
+    else command('end');
+    assert.equal(nodes.get('resume-menu').hidden, false);
+    assert.equal(nodes.get('resumeBackLabel').textContent, 'Avsluta');
+    assert.equal(new URL(location.href).pathname, '/resume.html');
+  }
+  pressKey('F3');
+  assert.equal(new URL(location.href).pathname, '/index.html');
+});
+
+await test('CV focus and language changes preserve the main menu and the printable CV', async () => {
+  const { nodes, clickVariant, setLanguage, printed, command } = await page('');
+  await clickVariant(modern.id);
+  setLanguage('en');
+  assert.equal(nodes.get('resume-menu').hidden, false);
+  assert.equal(nodes.get('resumePanelTitle').textContent, 'RESUME — PRIMARY OPTION MENU');
+  assert.match(nodes.get('resumeSessionInfo').textContent, /EN \/ WEB & BACKEND/);
+  assert.ok(nodes.get('resumeContent').innerHTML.includes(files.get(modern.path).profile));
+  command('print');
+  assert.equal(printed(), 1);
+  command('options');
+  assert.equal(nodes.get('resumeOptions').hidden, false);
+  command('options');
+  assert.equal(nodes.get('resumeOptions').hidden, true);
 });
 
 for (const result of results) if (result.passed) console.log(`PASS ${result.name}`);

@@ -6,18 +6,22 @@
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#3a6ea5">
   <title>Projekt — Joakim Moléni</title>
-  <meta name="description" content="Utvalda projekt av Joakim Moléni: Fragsheet samt Portfolio & CV. Bakgrunden, arbetet och resultatet.">
+  <meta name="description" content="Några arbeten inom teknik, affärsutveckling och produktion.">
   <meta property="og:title" content="Projekt — Joakim Moléni">
-  <meta property="og:description" content="Utvalda projekt av Joakim Moléni: Fragsheet samt Portfolio & CV. Bakgrunden, arbetet och resultatet.">
+  <meta property="og:description" content="Några arbeten inom teknik, affärsutveckling och produktion.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio.moleni.se/projects.html">
   <meta property="og:locale" content="sv_SE">
-  <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card-20260907.png">
+  <meta property="og:image" content="https://portfolio.moleni.se/assets/images/og-card-20260926-perspective.png">
+  <meta property="og:image:alt" content="Joakim Moléni — Jag vill förstå hela grejen.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <link rel="canonical" href="https://portfolio.moleni.se/projects.html">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260926-consistency">
-  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260926-consistency">
-  <link rel="stylesheet" href="./assets/css/extras.css?v=20260926-feel">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/worlds.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/projects-world.css?v=20260928-approved">
+  <link rel="stylesheet" href="./assets/css/extras.css?v=20260928-approved">
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}</script>
 </head>
 <body class="world-page">
@@ -37,35 +41,73 @@
         <div class="window-actions"><button class="title-button" type="button" data-about aria-label="Om den här datorn" hidden>?</button><a class="title-button world-close" href="./index.html" aria-label="Stäng projekt och gå till skrivbordet">×</a></div>
       </header>
       <nav class="window-menu" aria-label="Huvudnavigation"><a href="./index.html">Skrivbord</a><a href="./about.html">Om mig</a><a href="#main" aria-current="page">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a></nav>
-      <main id="main" class="world-document cs-world" tabindex="-1">
-        <header class="cs-masthead">
-          <div><p class="cs-overline">Counter-Strike 1.3</p><h1>Projektarkiv</h1></div>
-        </header>
-        <div class="cs-browser" data-world-switcher>
-          <nav class="cs-project-list" aria-label="Projekt" data-world-nav>
-            <a href="#fragsheet"><strong>Fragsheet</strong><span>Webbplattform, ML-integration och drift på AWS.</span></a>
-            <a href="#portfolio"><strong>Portfolio &amp; CV</strong><span>Personliga miljöer och ett anpassningsbart CV.</span></a>
+      <main id="main" class="world-document projects-stage" tabindex="-1">
+        <header class="project-bar"><h1>Utvalda arbeten</h1><span aria-hidden="true">PROJEKT / 01—05</span></header>
+        <div class="projects-grid" data-world-switcher>
+          <nav class="project-list" aria-label="Välj ett arbete" data-world-nav>
+            <p class="project-list-label">Välj projekt</p>
+            <a href="#fragsheet"><span class="project-id" aria-hidden="true">01</span><span><strong class="project-name">Fragsheet</strong><small>Coaching utifrån speldata.</small></span></a>
+            <a href="#cell-solar"><span class="project-id" aria-hidden="true">02</span><span><strong class="project-name">Cell Solar</strong><small>Bygga upp försäljning och leverans.</small></span></a>
+            <a href="#pinevision"><span class="project-id" aria-hidden="true">03</span><span><strong class="project-name">Pinevision / ePage</strong><small>Affären och kundernas hemsidor.</small></span></a>
+            <a href="#genom-historien"><span class="project-id" aria-hidden="true">04</span><span><strong class="project-name">Genom Historien</strong><small>Shower, scen och teknik.</small></span></a>
+            <a href="#portfolio"><span class="project-id" aria-hidden="true">05</span><span><strong class="project-name">Den här portfolion</strong><small>HTML, CSS och JavaScript.</small></span></a>
+            <p class="project-list-bottom" aria-hidden="true">JOAKIM MOLÉNI<br>UTVALDA ARBETEN</p>
           </nav>
-          <div class="cs-details">
-            <article class="cs-briefing" id="fragsheet" data-world-panel aria-labelledby="fragsheetTitle">
-              <header class="cs-briefing-heading"><h2 id="fragsheetTitle">Fragsheet</h2><p class="cs-project-meta">Praktik · webbutveckling · 2023</p></header>
-              <p class="cs-lead">En spelplattform där coachingmodeller skulle bli en del av produkten.</p>
-              <div class="cs-briefing-grid"><section><h3>Uppdraget</h3><p>Under min praktik integrerade jag modellerna tillsammans med ML-utvecklaren, skrev om webbplattformen i vanilla JavaScript och flyttade infrastrukturen från DigitalOcean till AWS.</p></section><section><h3>Resultatet</h3><p>Modellernas insikter blev tillgängliga i produkten, med en omskriven webbplattform och drift på AWS.</p></section></div>
-              <dl class="cs-project-data"><dt>Teknik</dt><dd>JavaScript · ML-integration · AWS</dd></dl>
-              <div class="cs-actions"><a class="cs-button" href="./resume.html?focus=modern-dev&amp;panel=work">Min roll i CV:t <span aria-hidden="true">→</span></a></div>
+          <div class="project-panels">
+            <article class="project-details" id="fragsheet" data-world-panel aria-labelledby="fragsheetTitle">
+              <header class="project-heading"><h2 id="fragsheetTitle">Fragsheet</h2><p class="project-category">Webb och ML · 2023</p></header>
+              <p class="project-lead">Fragsheet var en spelcoach som lärde känna spelaren över tid. Matcherna gav underlaget. Utmaningen var att göra något användbart av det.</p>
+              <div class="project-preview"><div class="preview-caption"><span>Från speldata till coaching</span><span aria-hidden="true">01</span></div><ol class="flow" aria-label="Förenklat flöde"><li class="flow-node"><strong>Speldata</strong><small>API:er · inspelningar</small></li><li class="flow-node"><strong>Personliga modeller</strong><small>Spelarens data</small></li><li class="flow-node primary"><strong>Coaching</strong><small>Inför · efter match</small></li></ol></div>
+              <div class="project-copy">
+                <section><h3>Tekniken</h3><p>Jag höll ihop tekniken, från insamlad speldata till det spelaren mötte. Hur delarna skulle hänga ihop, vad vi behövde bygga och vilka val vi skulle leva med. Sedan ner i detaljerna och få det att fungera.</p></section>
+              </div>
+              <div class="project-outcome"><h3>I produkten</h3><p>Coaching före och efter match blev verklighet. Nästa steg var att finnas med under spelets gång.</p></div>
+              <dl class="project-data"><dt>Teknik</dt><dd>Python · Django · JavaScript</dd></dl>
+              <div class="project-actions"><a class="project-link" href="./resume.html?focus=modern-dev&amp;panel=work">Mer i CV:t <span aria-hidden="true">→</span></a></div>
             </article>
-            <article class="cs-briefing" id="portfolio" data-world-panel aria-labelledby="portfolioTitle">
-              <header class="cs-briefing-heading"><h2 id="portfolioTitle">Portfolio &amp; CV</h2><p class="cs-project-meta">Eget projekt</p></header>
-              <p class="cs-lead">En personlig portfolio där miljöer som har följt mig genom åren möter det jag arbetar med i dag.</p>
-              <div class="cs-briefing-grid"><section><h3>Genomförandet</h3><p>Statisk HTML och CSS med vanilla JavaScript för fönster, småprogram och paneler. Ett Windows 2000-skrivbord binder ihop miljöer för WoW, Counter-Strike, Lunarstorm och stordator.</p></section><section><h3>CV:t</h3><p>Tre CV-inriktningar på svenska och engelska utgår från gemensamma grunduppgifter. Välj relevant inriktning och skriv ut eller spara som PDF direkt i webbläsaren.</p></section></div>
-              <dl class="cs-project-data"><dt>Teknik</dt><dd>HTML · CSS · JavaScript</dd></dl>
-              <div class="cs-actions"><a class="cs-button" href="https://github.com/joakimmoleni/portfolio" target="_blank" rel="noopener noreferrer">Läs koden på GitHub <span aria-hidden="true">↗</span></a><a class="cs-text-link" href="./resume.html">Öppna CV</a></div>
+            <article class="project-details" id="cell-solar" data-world-panel aria-labelledby="cellSolarTitle">
+              <header class="project-heading"><h2 id="cellSolarTitle">Cell Solar</h2><p class="project-category">Solenergi · verksamhetsutveckling</p></header>
+              <p class="project-lead">Jag kom in som första anställd, när det mesta fortfarande behövde byggas upp.</p>
+              <div class="project-preview"><div class="preview-caption"><span>Från leverantör till installationsplats</span><span aria-hidden="true">02</span></div><ol class="flow" aria-label="Förenklat flöde"><li class="flow-node"><strong>Produkt</strong><small>Krav · kvalitet</small></li><li class="flow-node"><strong>Leverans</strong><small>Inköp · logistik</small></li><li class="flow-node primary"><strong>Anläggning</strong><small>Kund · installation</small></li></ol></div>
+              <div class="project-copy">
+                <section><h3>Bygga upp verksamheten</h3><p>Försäljningen blev min ingång, men arbetet sträckte sig hela vägen till leverans. Produktval, internationella leverantörer, teknikstöd och arbetssätten runt alltihop. Jag byggde upp flödena och utbildade säljare.</p></section>
+              </div>
+              <div class="project-outcome"><h3>Leveranser</h3><p>Material skulle från andra sidan världen direkt till installationsplatserna. När förutsättningarna ändrades behövde det finnas en annan väg. Det gällde både leveranserna och vilka produkter och samarbetspartner vi kunde lita på.</p></div>
+              <div class="project-actions"><a class="project-link" href="./resume.html?focus=platform-dev&amp;panel=work">Mer i CV:t <span aria-hidden="true">→</span></a></div>
+            </article>
+            <article class="project-details" id="pinevision" data-world-panel aria-labelledby="pinevisionTitle">
+              <header class="project-heading"><h2 id="pinevisionTitle">Pinevision / ePage</h2><p class="project-category">Hemsidor för företag</p></header>
+              <p class="project-lead">Pinevision gjorde hemsidor åt företag. Jag kom in tidigt och byggde upp försäljningen, samtidigt som jag arbetade med grundarna kring hur verksamheten skulle fungera.</p>
+              <div class="project-preview"><div class="preview-caption"><span>Från behov till publicerad webb</span><span aria-hidden="true">03</span></div><ol class="flow" aria-label="Förenklat flöde"><li class="flow-node"><strong>Kund</strong><small>Behov · affär</small></li><li class="flow-node"><strong>Webb</strong><small>Design · innehåll</small></li><li class="flow-node primary"><strong>Leverans</strong><small>Domän · drift</small></li></ol></div>
+              <div class="project-copy">
+                <section><h3>Från affär till webbplats</h3><p>Det var nära mellan affären och det vi byggde. Jag sålde, formgav och byggde kundernas hemsidor, och arbetade med frågorna runt drift, lagring och domäner.</p></section>
+              </div>
+              <div class="project-actions"><a class="project-link" href="./resume.html?focus=modern-dev&amp;panel=work">Mer i CV:t <span aria-hidden="true">→</span></a></div>
+            </article>
+            <article class="project-details" id="genom-historien" data-world-panel aria-labelledby="productionTitle">
+              <header class="project-heading"><h2 id="productionTitle">Genom Historien</h2><p class="project-category">Showproduktion</p></header>
+              <p class="project-lead">Jag producerade shower och höll ihop arbetet på plats. Scen, ljud, ljus, transporter och människorna runt alltihop.</p>
+              <div class="project-preview"><div class="preview-caption"><span>Delar som möts på plats</span><span aria-hidden="true">04</span></div><ol class="flow" aria-label="Förenklat flöde"><li class="flow-node"><strong>Människor</strong><small>Artister · team</small></li><li class="flow-node"><strong>Produktion</strong><small>Scen · ljud · ljus</small></li><li class="flow-node primary"><strong>Show</strong><small>På plats</small></li></ol></div>
+              <div class="project-copy">
+                <section><h3>Bakom scenen</h3><p>Det kunde handla om att styra upp en leverans, få tekniken att fungera eller lösa något bakom scenen. Jag växlade mellan att leda arbetet och att göra det själv.</p></section>
+              </div>
+              <div class="project-outcome"><h3>Även på scen</h3><p>Ibland stod jag också på scen. Det blev både föreställningar och musikinspelningar.</p></div>
+              <div class="project-actions"><a class="project-link" href="./resume.html?focus=platform-dev&amp;panel=work">Mer i CV:t <span aria-hidden="true">→</span></a></div>
+            </article>
+            <article class="project-details" id="portfolio" data-world-panel aria-labelledby="portfolioTitle">
+              <header class="project-heading"><h2 id="portfolioTitle">Den här portfolion</h2><p class="project-category">Eget projekt</p></header>
+              <p class="project-lead">Ett eget skrivbord på webben, med lite att upptäcka.</p>
+              <div class="project-preview"><div class="preview-caption"><span>Liten grund, flera uttryck</span><span aria-hidden="true">05</span></div><ol class="flow" aria-label="Förenklat flöde"><li class="flow-node"><strong>Innehåll</strong><small>HTML</small></li><li class="flow-node"><strong>Uttryck</strong><small>CSS</small></li><li class="flow-node primary"><strong>Beteende</strong><small>JavaScript</small></li></ol></div>
+              <div class="project-copy">
+                <section><h3>I webbläsaren</h3><p>Grunden är enkel: HTML, CSS och JavaScript. Innehållet går att läsa även utan skripten. Sedan har jag lagt till sådant jag själv tycker är kul.</p></section>
+              </div>
+              <dl class="project-data"><dt>Teknik</dt><dd>HTML · CSS · vanilla JavaScript · tester med Node.js</dd></dl>
+              <div class="project-actions"><a class="project-link" href="https://github.com/joakimmoleni/portfolio" target="_blank" rel="noopener noreferrer">Läs koden på GitHub <span aria-hidden="true">↗</span></a><a class="project-link" href="./resume.html">Öppna CV</a></div>
             </article>
           </div>
         </div>
-        <button class="cs-button cs-mirc-launch" type="button" data-open-extra="mirc" hidden>Öppna mIRC</button>
       </main>
-      <footer class="statusbar"><span>Projektarkiv · 2 projekt</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
+      <footer class="statusbar"><span>Projektarkiv · 5 arbeten</span><span>Joakim Moléni</span><span>Stockholm, Sverige</span></footer>
     </div>
     <p class="desktop-caption">© <span id="copyrightYear">2026</span> Joakim Moléni</p>
   </div>
@@ -81,12 +123,12 @@
   </nav>
   <dialog class="window about-dialog" id="aboutDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
     <div class="titlebar"><h2 id="dialogTitle">Om den här datorn</h2><button class="title-button" type="button" data-close aria-label="Stäng dialogrutan">×</button></div>
-    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Nyfiken sedan före bredbandet.</p></div></div>
-    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Stordator, webb och AI-arbetsflöden</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div><div><dt>Omstart</dt><dd>En promenad brukar räcka.</dd></div></dl></fieldset>
+    <div class="properties-body"><svg class="properties-icon" aria-hidden="true"><use href="#icon-computer"/></svg><div><p class="properties-name">Joakim Moléni</p><p id="dialogDescription">Brukar ha något på gång.</p></div></div>
+    <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Kod, system och sidospår</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div></dl></fieldset>
     <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
   </dialog>
-  <script src="./assets/js/portfolio.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/portfolio.js?v=20260928-approved" defer></script>
   <script src="./assets/js/worlds.js?v=20260926-consistency" defer></script>
-  <script src="./assets/js/extras.js?v=20260926-consistency" defer></script>
+  <script src="./assets/js/extras.js?v=20260928-approved" defer></script>
 </body>
 </html>

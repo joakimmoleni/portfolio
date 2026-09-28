@@ -1,56 +1,78 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Senior Software Engineer | Platforms & Technical Leadership",
-    "title_sv": "Senior mjukvaruingenjör | Plattformar & teknisk ledning",
+    "title": "Software Developer",
+    "title_sv": "Systemutvecklare",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Systems developer with a background in technology and business operations. I work with developer tools and AI-assisted workflows and value clear documentation, code review and maintainable systems.",
-  "profile_sv": "Systemutvecklare med bakgrund inom teknik och verksamhet. Jag arbetar med utvecklarverktyg och AI-arbetsflöden och värderar tydlig dokumentation, kodgranskning och system som går att förvalta.",
+  "profile": "I develop systems and work through the decisions around them. How the parts should fit together, which dependencies we take on and what the solution needs to handle in practice.\n\nToday, I work with mainframe systems, internal tools and AI. My work takes me from early decisions through implementation to how the solution works day to day.\n\nI have also built up sales, organised deliveries and coordinated live productions. That influences both what I choose to build and which questions I ask first.",
+  "profile_sv": "Jag utvecklar system och arbetar med vägvalen runt dem. Hur delarna ska hänga ihop, vilka beroenden vi tar på oss och vad lösningen behöver klara i praktiken.\n\nI dag arbetar jag med stordatorsystem, interna verktyg och AI. Jag följer frågorna från de tidiga besluten ner i koden och vidare till hur det fungerar i vardagen.\n\nJag har också byggt upp försäljning, organiserat leveranser och samordnat produktioner. Det påverkar både vad jag väljer att bygga och vilka frågor jag ställer först.",
   "coreStack": [
-    "System ownership & architecture",
-    "Cross-platform delivery (z/OS + OpenShift)",
-    "Technical leadership & mentoring",
-    "CI/CD, Git, Agile practices",
-    "Internal tooling & developer experience",
-    "Incident response & risk analysis"
+    "Technology choices, dependencies and data flows",
+    "Business development, delivery processes and training",
+    "COBOL, HLASM and IBM z/OS",
+    "JavaScript, Python/Django and SQL",
+    "Troubleshooting and root-cause analysis",
+    "Internal tools and AI in business operations"
   ],
   "coreStack_sv": [
-    "Systemägande & arkitektur",
-    "Plattformsoberoende leverans (z/OS + OpenShift)",
-    "Teknisk ledning & mentorskap",
-    "CI/CD, Git, agila metoder",
-    "Intern verktygsbygge & utvecklarupplevelse",
-    "Incidenthantering & riskanalys"
+    "Teknikval, beroenden och dataflöden",
+    "Affärsutveckling, leveransflöden och utbildning",
+    "COBOL, HLASM och IBM z/OS",
+    "JavaScript, Python/Django och SQL",
+    "Felsökning och rotorsaksanalys",
+    "Interna verktyg och AI i verksamheten"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Senior Software Engineer (COBOL & HLASM / IBM z/OS)",
-      "role_sv": "Senior mjukvaruingenjör (COBOL & HLASM / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Systems development with COBOL, HLASM and IBM z/OS."
+        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
+        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks.",
+        "Troubleshoot production systems and address root causes with the team."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL, HLASM och IBM z/OS."
+        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
+        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag.",
+        "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet."
       ]
     },
     {
       "company": "Handelsbanken",
-      "role": "Systems Engineer (COBOL / IBM z/OS)",
-      "role_sv": "Systemingenjör (COBOL / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2023 – Aug 2024",
+      "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "Systems development with COBOL and IBM z/OS, following COBOL training."
+        "Developed in COBOL on IBM z/OS."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL och IBM z/OS efter COBOL-utbildning."
+        "Utvecklade i COBOL på IBM z/OS."
+      ]
+    },
+    {
+      "company": "Fragsheet",
+      "role": "Web Developer Intern (LIA)",
+      "role_sv": "Webbutvecklare (LIA)",
+      "years": "Jan 2023 – Jul 2023",
+      "years_sv": "Jan 2023 – jul 2023",
+      "highlights": [
+        "Coordinated the technology and data flows for personalised game coaching.",
+        "Built the web application in Python/Django and JavaScript and integrated models with the ML developer.",
+        "Designed the solution and carried out the migration to AWS."
+      ],
+      "highlights_sv": [
+        "Höll ihop tekniken och dataflödena för personlig spelcoaching.",
+        "Byggde webbapplikationen i Python/Django och JavaScript och integrerade modeller tillsammans med ML-utvecklaren.",
+        "Utformade lösningen vid plattformsbytet och genomförde flytten till AWS."
       ]
     },
     {
@@ -58,50 +80,57 @@
       "role": "Returns Manager",
       "role_sv": "Returansvarig",
       "years": "Apr 2020 – Sep 2021",
+      "years_sv": "Apr 2020 – sep 2021",
       "highlights": [
-        "Managed logistics operations at scale — process ownership, SLA compliance and continuous improvement in a high-volume environment.",
-        "First exposure to IBM mainframe and Linux systems in an operational context."
+        "Managed returns and improved logistics workflows. This was my first experience of IBM mainframe systems at work."
       ],
       "highlights_sv": [
-        "Ansvarade för logistikverksamhet i stor skala — processägarskap, SLA-efterlevnad och ständiga förbättringar under hög volym.",
-        "Första kontakten med IBM stordator- och Linux-system i operativ kontext."
+        "Ansvarade för returer och förbättrade logistikflöden. Här kom jag först i kontakt med IBM:s stordatorsystem i arbetet."
+      ]
+    },
+    {
+      "company": "Svea Solar",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
+      "years": "",
+      "years_sv": "",
+      "highlights": [
+        "I started working with Svea Solar while at Cell Solar and later joined the company."
+      ],
+      "highlights_sv": [
+        "Samarbetet började under min tid på Cell Solar och ledde senare till en anställning."
       ]
     },
     {
       "company": "Cell Solar Nordic AB",
-      "role": "Senior Business Specialist",
-      "role_sv": "Senior affärsspecialist",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
       "years": "Feb 2017 – Mar 2019",
+      "years_sv": "Feb 2017 – mar 2019",
       "highlights": [
-        "Joined as the company's first employee and helped build the operation from the ground up across technology, sourcing, supply chain, sales and delivery.",
-        "Established international supplier relationships, selected products and technical solutions, and built the partner and logistics network required to bring them to market.",
-        "Built sales pipelines and operating processes while training colleagues in products, technical design and customer delivery.",
-        "Served as the technical expert across the full project lifecycle, from solution design and commercial proposal through execution and client handover."
+        "As the first employee, built up sales, delivery processes and the technology supporting the business.",
+        "Selected products and suppliers and organised international deliveries directly to installation sites.",
+        "Trained salespeople and coordinated subcontractors."
       ],
       "highlights_sv": [
-        "Började som företagets första anställd och var med och byggde verksamheten från grunden inom teknik, inköp, leveranskedja, försäljning och leverans.",
-        "Etablerade internationella leverantörsrelationer, valde produkter och tekniska lösningar samt byggde partner- och logistiknätverket som krävdes för att få dem till marknaden.",
-        "Byggde säljpipelines och operativa processer samt utbildade kollegor inom produkter, teknisk design och kundleverans.",
-        "Var teknisk expert genom hela projektlivscykeln, från lösningsdesign och kommersiellt förslag till genomförande och kundöverlämning."
+        "Byggde som första anställd upp försäljning, leveransflöden och teknikstöd.",
+        "Valde produkter och leverantörer och organiserade internationella leveranser direkt till installationsplatserna.",
+        "Utbildade säljare och samordnade underleverantörer."
       ]
     },
     {
-      "company": "Executive & Leadership Roles",
-      "company_sv": "Ledande befattningar",
-      "role": "COO / Executive Producer / Project Manager / Operations Manager",
-      "role_sv": "COO / Executive Producer / Projektledare / Verksamhetsansvarig",
-      "years": "2007 – 2011",
+      "company": "Pinevision / ePage",
+      "role": "Sales, Business Development and Web Design",
+      "role_sv": "Försäljning, affärsutveckling och webb",
+      "years": "",
+      "years_sv": "",
       "highlights": [
-        "COO at Genom Historien AB — full P&L responsibility and operational leadership of a cultural heritage business.",
-        "Executive Producer for artist Stefan Andersson — production, logistics and team coordination for national concert tours.",
-        "Project Manager at Carlstens Fästning — led multi-year cultural projects with external stakeholders and public funding.",
-        "Operations Manager at Kronhuset — venue operations, team leadership, budget ownership."
+        "Built up sales and developed the business with the founders.",
+        "Designed and built customer websites and worked on hosting, storage and domains."
       ],
       "highlights_sv": [
-        "COO på Genom Historien AB — fullt resultatansvar och operativ ledning av en kulturarvsverksamhet.",
-        "Executive Producer för Stefan Andersson — produktion, logistik och teamkoordination för nationella konsertturnéer.",
-        "Projektledare på Carlstens Fästning — ledde flerårsprojekt med externa intressenter och offentlig finansiering.",
-        "Verksamhetsansvarig på Kronhuset — drift, teamledning, budgetansvar."
+        "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna.",
+        "Formgav och byggde kundernas hemsidor och arbetade med drift, lagring och domäner."
       ]
     },
     {
@@ -109,27 +138,75 @@
       "role": "Machine Technician",
       "role_sv": "Maskintekniker",
       "years": "Apr 2011 – Apr 2014",
+      "years_sv": "Apr 2011 – apr 2014",
       "highlights": [
-        "Operated advanced manufacturing equipment at Ericsson — precision, reliability and systematic troubleshooting.",
-        "Technical training across hardware and Linux-based industrial systems."
+        "Worked with manufacturing equipment, technical operations and systematic troubleshooting."
       ],
       "highlights_sv": [
-        "Opererade avancerad tillverkningsutrustning på Ericsson — precision, tillförlitlighet och systematisk felsökning.",
-        "Teknisk utbildning inom hårdvara och Linux-baserade industriella system."
+        "Arbetade med tillverkningsutrustning, teknisk drift och systematisk felsökning."
+      ]
+    },
+    {
+      "company": "Genom Historien AB",
+      "role": "Production and Operations",
+      "role_sv": "Produktion och verksamhet",
+      "years": "2007 – 2011",
+      "years_sv": "2007 – 2011",
+      "highlights": [
+        "Produced shows and coordinated stage work, technical operations and transport on site.",
+        "Built stages and worked with sound and lighting. Also took part in performances and music recordings."
+      ],
+      "highlights_sv": [
+        "Producerade shower och samordnade scen, teknik och transporter på plats.",
+        "Byggde scen och arbetade med ljud och ljus. Medverkade också i föreställningar och musikinspelningar."
+      ]
+    },
+    {
+      "company": "Paf",
+      "role": "Administration",
+      "role_sv": "Administration",
+      "years": "2005 – 2006",
+      "years_sv": "2005 – 2006",
+      "highlights": [
+        "Worked remotely in administration and made the work more efficient by anticipating changes in user numbers."
+      ],
+      "highlights_sv": [
+        "Arbetade på distans med administration och effektiviserade arbetet genom att förutse variationer i användarantalet."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Portfolio and resume",
-      "name_sv": "Portfolio och CV",
-      "description": "Static portfolio with three resume variants, Swedish and English content, and print-to-PDF. Built with HTML, CSS and vanilla JavaScript.",
-      "description_sv": "Statisk portfolio med tre CV-inriktningar, svenskt och engelskt innehåll samt utskrift till PDF. Byggd med HTML, CSS och vanilla JavaScript.",
+      "name": "Fragsheet",
+      "name_sv": "Fragsheet",
+      "description": "Game coaching that got to know the player over time. I coordinated the technology, from data collection to the web application and ML integration.",
+      "description_sv": "Spelcoaching som lärde känna spelaren över tid. Jag höll ihop tekniken, från datainsamling till webbapplikation och ML-integration.",
+      "tech": [
+        "JavaScript",
+        "Python",
+        "Django",
+        "AWS"
+      ],
+      "url": "./projects.html#fragsheet"
+    },
+    {
+      "name": "Cell Solar",
+      "name_sv": "Cell Solar",
+      "description": "As the first employee, built up sales, supporting technology and delivery processes. Organised international deliveries directly to installation sites.",
+      "description_sv": "Byggde som första anställd upp försäljning, teknikstöd och leveransflöden. Organiserade internationella leveranser direkt till installationsplatserna.",
+      "url": "./projects.html#cell-solar"
+    },
+    {
+      "name": "This portfolio",
+      "name_sv": "Den här portfolion",
+      "description": "A personal desktop on the web, with a few things to discover. Built with HTML, CSS and JavaScript, with content that is readable without scripts.",
+      "description_sv": "Ett eget skrivbord på webben, med lite att upptäcka. Byggt i HTML, CSS och JavaScript, med innehåll som går att läsa även utan skript.",
       "tech": [
         "HTML",
         "CSS",
         "JavaScript"
-      ]
+      ],
+      "url": "./projects.html#portfolio"
     }
   ],
   "education": [
@@ -147,32 +224,33 @@
       "JavaScript",
       "TypeScript",
       "Python",
-      "SQL"
+      "SQL",
+      "HTML/CSS"
     ],
     "platforms": [
       "IBM z/OS",
+      "IMS",
       "OpenShift",
-      "Linux",
       "Node.js",
+      "Django",
+      "Linux",
       "AWS",
       "Docker",
       "Git"
     ],
     "concepts": [
-      "System ownership & architecture",
-      "Technical leadership & mentoring",
-      "CI/CD & Agile delivery",
-      "Incident response & risk analysis",
-      "Cross-platform integration",
-      "Internal tooling & developer experience"
+      "Technology choices and system dependencies",
+      "Root-cause analysis and incident response",
+      "Data flows and API integration",
+      "AI in software development and business operations",
+      "Business development and delivery processes"
     ],
     "concepts_sv": [
-      "Systemägande & arkitektur",
-      "Teknisk ledning & mentorskap",
-      "CI/CD & agil leverans",
-      "Incidenthantering & riskanalys",
-      "Plattformsoberoende integration",
-      "Intern verktygsbygge & utvecklarupplevelse"
+      "Teknikval och systemberoenden",
+      "Rotorsaksanalys och incidenthantering",
+      "Dataflöden och API-integration",
+      "AI i utveckling och verksamhet",
+      "Affärsutveckling och leveransflöden"
     ]
   }
 }

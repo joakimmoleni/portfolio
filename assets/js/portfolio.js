@@ -5,11 +5,27 @@
   const startPanel = document.getElementById('startPanel');
   const aboutDialog = document.getElementById('aboutDialog');
   const themeToggle = document.getElementById('themeToggle');
+  const programs = startPanel?.querySelector('.start-extras');
+  const programsSummary = programs?.querySelector('summary');
   let aboutTrigger;
+
+  function activateWindow(element) {
+    const active = element?.closest('.main-window, .extras-window, .about-dialog');
+    if (!active) return;
+    for (const panel of document.querySelectorAll('.main-window, .extras-window, .about-dialog')) {
+      panel.dataset.inactive = String(panel !== active);
+    }
+    const mainTask = document.querySelector('.taskbar > a.task-button');
+    if (mainTask) mainTask.dataset.inactive = String(!active.classList.contains('main-window'));
+    document.querySelector('[data-mirc-task]')?.setAttribute('aria-pressed', String(active.id === 'extras-mirc'));
+  }
+  document.addEventListener('pointerdown', event => activateWindow(event.target));
+  activateWindow(document.querySelector('.main-window'));
 
   function closeStart(restoreFocus = false) {
     if (!startPanel || !startButton) return;
     startPanel.hidden = true;
+    if (programs) programs.open = false;
     startButton.setAttribute('aria-expanded', 'false');
     if (restoreFocus) startButton.focus();
   }
@@ -18,6 +34,7 @@
     startPanel.hidden = !opening;
     startButton.setAttribute('aria-expanded', String(opening));
     if (opening) startPanel.querySelector('a')?.focus();
+    else if (programs) programs.open = false;
   });
   startPanel?.addEventListener('click', event => {
     if (event.target.closest('a')) closeStart();
@@ -26,12 +43,24 @@
     if (!startPanel?.contains(event.target) && !startButton?.contains(event.target)) closeStart();
   });
   document.addEventListener('focusin', event => {
+    activateWindow(event.target);
     if (startPanel && !startPanel.hidden && !startPanel.contains(event.target) && event.target !== startButton) closeStart();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && startPanel && !startPanel.hidden) {
+    if (!event.defaultPrevented && event.key === 'Escape' && startPanel && !startPanel.hidden) {
       event.preventDefault();
       closeStart(true);
+    }
+  });
+  programs?.addEventListener('keydown', event => {
+    if (event.key === 'ArrowRight' && event.target === programsSummary) {
+      event.preventDefault();
+      programs.open = true;
+      programs.querySelector('button')?.focus();
+    } else if (programs.open && (event.key === 'ArrowLeft' || event.key === 'Escape')) {
+      event.preventDefault();
+      programs.open = false;
+      programsSummary.focus();
     }
   });
   if (aboutDialog) {
@@ -60,6 +89,10 @@
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
     try { applyTheme(localStorage.getItem('theme')); } catch (error) { /* Keep the current theme when storage is unavailable. */ }
+  });
+  window.addEventListener('storage', event => {
+    if (event.storageArea !== localStorage || (event.key !== 'theme' && event.key !== null)) return;
+    applyTheme(event.newValue);
   });
   themeToggle?.addEventListener('click', () => {
     const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';

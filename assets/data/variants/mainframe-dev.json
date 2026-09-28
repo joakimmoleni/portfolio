@@ -1,56 +1,78 @@
 {
   "personal": {
     "name": "Joakim Moléni",
-    "title": "Senior Software Engineer | IBM z/OS, Assembler & COBOL",
-    "title_sv": "Senior mjukvaruingenjör | IBM z/OS, Assembler & COBOL",
+    "title": "Software Developer | COBOL, HLASM & IBM z/OS",
+    "title_sv": "Systemutvecklare | COBOL, HLASM & IBM z/OS",
     "location": "Stockholm, Sweden",
     "location_sv": "Stockholm, Sverige",
     "email": "jcrooge@gmail.com",
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "Systems developer focused on COBOL, HLASM and IBM z/OS. Experience from SEB and Handelsbanken, with a background in web development and business operations.",
-  "profile_sv": "Systemutvecklare med fokus på COBOL, HLASM och IBM z/OS. Erfarenhet från SEB och Handelsbanken, med bakgrund inom webbutveckling och verksamhet.",
+  "profile": "I develop in COBOL and HLASM on IBM z/OS. Much of my work is about how a change should be implemented: which systems are affected, how the parts fit together and what needs to work between them.\n\nI work through dependencies, design solutions and troubleshoot when something is not behaving as it should. I also build internal tools and shape how we use AI in our work.",
+  "profile_sv": "Jag utvecklar i COBOL och HLASM på IBM z/OS. En stor del av arbetet handlar om hur en förändring ska genomföras: vilka system som berörs, hur delarna hänger ihop och vad som behöver fungera mellan dem.\n\nJag reder ut beroenden, utformar lösningar och felsöker när något inte beter sig som det ska. Jag bygger också interna verktyg och utvecklar hur vi använder AI i arbetet.",
   "coreStack": [
-    "IBM z/OS Assembler (HLASM)",
-    "COBOL",
-    "IMS & DB2",
-    "JCL & batch processing",
-    "TSO/ISPF, Endevor",
-    "OpenShift, JavaScript, CI/CD"
+    "COBOL and IBM z/OS Assembler (HLASM)",
+    "IMS, DB2 and JCL",
+    "TSO/ISPF and Endevor",
+    "Troubleshooting and root-cause analysis",
+    "Technology choices and system dependencies",
+    "Internal tools and AI in business operations"
   ],
   "coreStack_sv": [
-    "IBM z/OS Assembler (HLASM)",
-    "COBOL",
-    "IMS & DB2",
-    "JCL & batchbearbetning",
-    "TSO/ISPF, Endevor",
-    "OpenShift, JavaScript, CI/CD"
+    "COBOL och IBM z/OS Assembler (HLASM)",
+    "IMS, DB2 och JCL",
+    "TSO/ISPF och Endevor",
+    "Felsökning och rotorsaksanalys",
+    "Teknikval och systemberoenden",
+    "Interna verktyg och AI i verksamheten"
   ],
   "experience": [
     {
       "company": "SEB",
-      "role": "Senior Software Engineer (HLASM & COBOL / IBM z/OS)",
-      "role_sv": "Senior mjukvaruingenjör (HLASM & COBOL / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Systems development with COBOL, HLASM and IBM z/OS."
+        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
+        "Troubleshoot production systems and address root causes with the team.",
+        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL, HLASM och IBM z/OS."
+        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
+        "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet.",
+        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag."
       ]
     },
     {
       "company": "Handelsbanken",
-      "role": "Systems Engineer (COBOL / IBM z/OS)",
-      "role_sv": "Systemingenjör (COBOL / IBM z/OS)",
+      "role": "Software Developer",
+      "role_sv": "Systemutvecklare",
       "years": "Aug 2023 – Aug 2024",
+      "years_sv": "Aug 2023 – aug 2024",
       "highlights": [
-        "Systems development with COBOL and IBM z/OS, following COBOL training."
+        "Developed in COBOL on IBM z/OS."
       ],
       "highlights_sv": [
-        "Systemutveckling med COBOL och IBM z/OS efter COBOL-utbildning."
+        "Utvecklade i COBOL på IBM z/OS."
+      ]
+    },
+    {
+      "company": "Fragsheet",
+      "role": "Web Developer Intern (LIA)",
+      "role_sv": "Webbutvecklare (LIA)",
+      "years": "Jan 2023 – Jul 2023",
+      "years_sv": "Jan 2023 – jul 2023",
+      "highlights": [
+        "Coordinated the technology and data flows for personalised game coaching.",
+        "Built the web application in Python/Django and JavaScript and integrated models with the ML developer.",
+        "Designed the solution and carried out the migration to AWS."
+      ],
+      "highlights_sv": [
+        "Höll ihop tekniken och dataflödena för personlig spelcoaching.",
+        "Byggde webbapplikationen i Python/Django och JavaScript och integrerade modeller tillsammans med ML-utvecklaren.",
+        "Utformade lösningen vid plattformsbytet och genomförde flytten till AWS."
       ]
     },
     {
@@ -58,13 +80,57 @@
       "role": "Returns Manager",
       "role_sv": "Returansvarig",
       "years": "Apr 2020 – Sep 2021",
+      "years_sv": "Apr 2020 – sep 2021",
       "highlights": [
-        "First professional exposure to IBM mainframe systems — high-volume batch processing under strict SLAs.",
-        "Managed logistics operations at scale with process ownership and continuous improvement focus."
+        "Managed returns and improved logistics workflows. This was my first experience of IBM mainframe systems at work."
       ],
       "highlights_sv": [
-        "Första professionella kontakten med IBM stordatorsystem — batchbearbetning i hög volym under strikta SLA:er.",
-        "Ansvarade för logistikverksamhet i stor skala med processägarskap och fokus på ständiga förbättringar."
+        "Ansvarade för returer och förbättrade logistikflöden. Här kom jag först i kontakt med IBM:s stordatorsystem i arbetet."
+      ]
+    },
+    {
+      "company": "Svea Solar",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
+      "years": "",
+      "years_sv": "",
+      "highlights": [
+        "I started working with Svea Solar while at Cell Solar and later joined the company."
+      ],
+      "highlights_sv": [
+        "Samarbetet började under min tid på Cell Solar och ledde senare till en anställning."
+      ]
+    },
+    {
+      "company": "Cell Solar Nordic AB",
+      "role": "Sales and Business Development",
+      "role_sv": "Försäljning och affärsutveckling",
+      "years": "Feb 2017 – Mar 2019",
+      "years_sv": "Feb 2017 – mar 2019",
+      "highlights": [
+        "As the first employee, built up sales, delivery processes and the technology supporting the business.",
+        "Selected products and suppliers and organised international deliveries directly to installation sites.",
+        "Trained salespeople and coordinated subcontractors."
+      ],
+      "highlights_sv": [
+        "Byggde som första anställd upp försäljning, leveransflöden och teknikstöd.",
+        "Valde produkter och leverantörer och organiserade internationella leveranser direkt till installationsplatserna.",
+        "Utbildade säljare och samordnade underleverantörer."
+      ]
+    },
+    {
+      "company": "Pinevision / ePage",
+      "role": "Sales, Business Development and Web Design",
+      "role_sv": "Försäljning, affärsutveckling och webb",
+      "years": "",
+      "years_sv": "",
+      "highlights": [
+        "Built up sales and developed the business with the founders.",
+        "Designed and built customer websites and worked on hosting, storage and domains."
+      ],
+      "highlights_sv": [
+        "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna.",
+        "Formgav och byggde kundernas hemsidor och arbetade med drift, lagring och domäner."
       ]
     },
     {
@@ -72,13 +138,40 @@
       "role": "Machine Technician",
       "role_sv": "Maskintekniker",
       "years": "Apr 2011 – Apr 2014",
+      "years_sv": "Apr 2011 – apr 2014",
       "highlights": [
-        "Operated advanced manufacturing equipment at Ericsson — precision, reliability and systematic troubleshooting as daily requirements.",
-        "Technical training across hardware and Linux-based industrial systems."
+        "Worked with manufacturing equipment, technical operations and systematic troubleshooting."
       ],
       "highlights_sv": [
-        "Opererade avancerad tillverkningsutrustning på Ericsson — precision, tillförlitlighet och systematisk felsökning som dagliga krav.",
-        "Teknisk utbildning inom hårdvara och Linux-baserade industriella system."
+        "Arbetade med tillverkningsutrustning, teknisk drift och systematisk felsökning."
+      ]
+    },
+    {
+      "company": "Genom Historien AB",
+      "role": "Production and Operations",
+      "role_sv": "Produktion och verksamhet",
+      "years": "2007 – 2011",
+      "years_sv": "2007 – 2011",
+      "highlights": [
+        "Produced shows and coordinated stage work, technical operations and transport on site.",
+        "Built stages and worked with sound and lighting. Also took part in performances and music recordings."
+      ],
+      "highlights_sv": [
+        "Producerade shower och samordnade scen, teknik och transporter på plats.",
+        "Byggde scen och arbetade med ljud och ljus. Medverkade också i föreställningar och musikinspelningar."
+      ]
+    },
+    {
+      "company": "Paf",
+      "role": "Administration",
+      "role_sv": "Administration",
+      "years": "2005 – 2006",
+      "years_sv": "2005 – 2006",
+      "highlights": [
+        "Worked remotely in administration and made the work more efficient by anticipating changes in user numbers."
+      ],
+      "highlights_sv": [
+        "Arbetade på distans med administration och effektiviserade arbetet genom att förutse variationer i användarantalet."
       ]
     }
   ],
@@ -93,10 +186,10 @@
   ],
   "skills": {
     "languages": [
-      "HLASM",
       "COBOL",
-      "SQL",
+      "HLASM",
       "JCL",
+      "SQL",
       "JavaScript"
     ],
     "platforms": [
@@ -110,20 +203,20 @@
       "Git"
     ],
     "concepts": [
-      "Transaction-critical systems",
-      "Core banking operations",
+      "Technology choices and system dependencies",
       "Root-cause analysis",
-      "System ownership",
-      "Code review & quality assurance",
-      "Batch & online processing"
+      "On-call work and incident response",
+      "Batch and online processing",
+      "Code review",
+      "Technical guidance"
     ],
     "concepts_sv": [
-      "Transaktionskritiska system",
-      "Kärnbanksverksamhet",
+      "Teknikval och systemberoenden",
       "Rotorsaksanalys",
-      "Systemägande",
-      "Kodgranskning & kvalitetssäkring",
-      "Batch- & onlinebearbetning"
+      "Jour och incidenthantering",
+      "Batch- och onlinebearbetning",
+      "Kodgranskning",
+      "Teknisk handledning"
     ]
   }
 }
