@@ -10,7 +10,7 @@
     { name: 'ATB — 9 PM (Till I Come)', duration: 193 },
     { name: 'Led Zeppelin — Black Dog', duration: 295 },
     { name: 'Darude — Sandstorm', duration: 225 },
-    { name: 'Alice Deejay — Better Off Alone', duration: 214 },
+    { name: 'Alice Deejay — Better Off Alone', file: 'Track07.mp3', duration: 214 },
     { name: 'The Prodigy — Breathe', duration: 335 },
     { name: 'Slipknot — Spit It Out', duration: 159 },
     { name: 'Eiffel 65 — Blue (Da Ba Dee)', duration: 219 },
@@ -51,8 +51,18 @@
         </div>
         <div class="extras-playlist-heading" aria-hidden="true"><span>WINAMP PLAYLIST</span><span>${tracks.length} spår</span></div>
         <ol class="extras-playlist" aria-label="Spellista · demo utan ljud">
-          ${tracks.map((song, index) => `<li><button type="button" data-player-select="${index}" aria-pressed="${index === 0}"><span>${String(index + 1).padStart(2, '0')}. ${song.name}</span><span>${formatTime(song.duration)}</span></button></li>`).join('')}
+          ${tracks.map((song, index) => `<li><button type="button" data-player-select="${index}" aria-pressed="${index === 0}"><span>${String(index + 1).padStart(2, '0')}. ${song.file || song.name}</span><span>${formatTime(song.duration)}</span></button></li>`).join('')}
         </ol>
+        <details class="extras-track-info" hidden>
+          <summary>Spårinformation</summary>
+          <dl>
+            <dt>Fil</dt><dd>Track07.mp3</dd>
+            <dt>Artist</dt><dd>Unknown</dd>
+            <dt>Album</dt><dd>Unknown</dd>
+            <dt>Genre</dt><dd>Other</dd>
+            <dt>Kommentar</dt><dd>/join #exposure_</dd>
+          </dl>
+        </details>
         <p class="extras-player-note">Demo · utan ljud</p>
       </div>
     </section>
@@ -230,13 +240,14 @@
   const stateLabel = player.querySelector('[data-player-state]');
   const progress = document.getElementById('extras-player-progress');
   const playlistButtons = player.querySelectorAll('[data-player-select]');
+  const trackInfo = player.querySelector('.extras-track-info');
   let track = 0;
   let position = 0;
   let playing = false;
   let startedAt = 0;
   let timer;
 
-  function trackName() { return tracks[track].name; }
+  function trackName() { return tracks[track].file || tracks[track].name; }
   function drawPlayer() {
     const seconds = Math.floor(position);
     time.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
@@ -290,6 +301,8 @@
   player.querySelector('[data-player-stop]').addEventListener('click', stopPlayer);
   function selectTrack(index) {
     track = index;
+    trackInfo.hidden = !tracks[track].file;
+    trackInfo.open = false;
     position = 0;
     startedAt = performance.now();
     drawPlayer();

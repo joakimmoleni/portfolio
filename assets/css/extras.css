@@ -58,6 +58,11 @@
 .extras-playlist button[aria-pressed="true"] { background: #2d4330; color: #d4ffaa; }
 .extras-playlist button:hover { background: #243a27; }
 .extras-playlist button:focus-visible { outline-color: #d4ffaa; outline-offset: -2px; }
+.extras-track-info { margin-top: 6px; border: 1px solid #73798a; background: #101812; color: #b3dd98; font: 11px/1.5 "Courier New", monospace; }
+.extras-track-info summary { min-height: 36px; padding: 9px 6px; cursor: pointer; }
+.extras-track-info dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; margin: 0; padding: 0 8px 8px; }
+.extras-track-info dt { color: inherit; }
+.extras-track-info dd { margin: 0; overflow-wrap: anywhere; }
 .extras-player-note { margin: 8px 0 0; color: #e2e3e8; font-size: 10px; line-height: 1.4; }
 .extras-player.is-compact .extras-player-body { display: none; }
 .extras-player.is-compact .extras-shade-time { display: inline; }
@@ -121,7 +126,7 @@
   .extras-player.is-playing .extras-equalizer i:nth-child(3n) { height: 14px; }
 }
 @media (forced-colors: active) {
-  .extras-window, .extras-player-body, .extras-player-screen, .extras-chat-log, .extras-chat-users { background: Canvas; color: CanvasText; }
+  .extras-window, .extras-player-body, .extras-player-screen, .extras-track-info, .extras-chat-log, .extras-chat-users { background: Canvas; color: CanvasText; }
   .extras-player-time, .extras-player-state, .extras-player-note, .extras-chat-log p, .extras-chat-users strong { color: CanvasText; }
   .extras-window button, .extras-window input, .extras-window textarea { border: 1px solid ButtonText; }
   .extras-equalizer i { background: CanvasText; }
