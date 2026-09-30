@@ -17,7 +17,7 @@ function page(storage, access = { blocked: false }) {
       this.nodes = new Map();
       this.attributes = new Map();
       this.isConnected = true;
-      this.classList = { toggle() {} };
+      this.classList = { toggle() {}, contains() { return false; } };
     }
     addEventListener(name, handler) { this.handlers.set(name, handler); }
     fire(name, properties = {}) { this.handlers.get(name)?.({ target: this, ...properties }); }
@@ -31,6 +31,7 @@ function page(storage, access = { blocked: false }) {
     focus() {}
     setAttribute(name, value) { this.attributes.set(name, value); }
     append(...children) { this.children.push(...children); }
+    replaceChildren(...children) { this.children = children; }
     after(node) { this.next = node; }
     querySelector(selector) {
       if (!this.nodes.has(selector)) this.nodes.set(selector, new Element());
@@ -55,7 +56,12 @@ function page(storage, access = { blocked: false }) {
   const listeners = new Map();
   const documentListeners = new Map();
   const mainTask = new Element();
+  const timeouts = new Map();
+  let nextTimeout = 0;
   const context = vm.createContext({
+    performance: { now: () => 0 },
+    setTimeout(handler) { timeouts.set(++nextTimeout, handler); return nextTimeout; },
+    clearTimeout(id) { timeouts.delete(id); },
     HTMLElement: Element,
     HTMLDialogElement: Dialog,
     getComputedStyle: () => ({ visibility: 'visible' }),
@@ -95,6 +101,17 @@ function page(storage, access = { blocked: false }) {
     mirc: nodes.get('extras-mirc'),
     notepad: nodes.get('extras-notepad'),
     chatInput: nodes.get('extras-chat-input'),
+    player: nodes.get('extras-player'),
+    send(message) {
+      nodes.get('extras-chat-input').value = message;
+      nodes.get('extras-mirc').querySelector('form').fire('submit', { preventDefault() {} });
+    },
+    lines() { return nodes.get('extras-mirc').querySelector('.extras-chat-log').children.map(line => line.textContent); },
+    finishTimeouts() {
+      const callbacks = [...timeouts.values()];
+      timeouts.clear();
+      callbacks.forEach(handler => handler());
+    },
     task: mainTask.next
   };
 }
@@ -181,4 +198,79 @@ test('notes remain non-modal alongside mIRC and Escape closes only notes', () =>
   desktop.notepad.fire('keydown', { key: 'Escape', preventDefault() {} });
   assert.equal(desktop.notepad.open, false);
   assert.equal(desktop.mirc.open, true);
+});
+
+test('the hidden channel updates its title and users, greets once and can be left', () => {
+  const desktop = page(new Map());
+  desktop.open('mirc');
+  desktop.send('/join #EXPOSURE_');
+  assert.equal(desktop.mirc.querySelector('[data-chat-title]').textContent, 'mIRC — #exposure_');
+  assert.equal(desktop.mirc.querySelector('[data-chat-channel]').textContent, '#exposure_');
+  assert.equal(desktop.mirc.querySelector('[data-chat-host]').hidden, false);
+  assert.ok(desktop.lines().includes('*** Topic: afk, strax tillbaka'));
+  desktop.send('/join #exposure_');
+  desktop.finishTimeouts();
+  assert.equal(desktop.lines().filter(line => line === '<exposure_> fortfarande här?').length, 1);
+  desktop.send('/join #lobby');
+  assert.equal(desktop.mirc.querySelector('[data-chat-title]').textContent, 'mIRC — #lobby');
+  assert.equal(desktop.mirc.querySelector('[data-chat-host]').hidden, true);
+  assert.ok(!desktop.lines().some(line => line.includes('fortfarande här')));
+});
+
+test('leaving, minimizing and closing the hidden channel cancel its delayed greeting', () => {
+  for (const leave of [
+    desktop => desktop.send('/join #lobby'),
+    desktop => desktop.mirc.querySelector('[data-mirc-minimize]').fire('click'),
+    desktop => desktop.mirc.close()
+  ]) {
+    const desktop = page(new Map());
+    desktop.open('mirc');
+    desktop.send('/join #exposure_');
+    leave(desktop);
+    desktop.open('mirc');
+    desktop.finishTimeouts();
+    assert.ok(!desktop.lines().some(line => line.includes('fortfarande här')));
+  }
+});
+
+test('only slapping the bot counts and clearing or switching channels does not restore the trout', () => {
+  const desktop = page(new Map());
+  desktop.send('/slap someone');
+  desktop.send('/slap');
+  desktop.send('/slap BOT');
+  assert.ok(!desktop.lines().some(line => line.includes('tar ifrån')));
+  desktop.send('/slap bot');
+  assert.equal(desktop.lines().at(-1), '* bot tar ifrån besokare öringen.');
+  desktop.send('/clear');
+  desktop.send('/join #exposure_');
+  desktop.send('/slap someone');
+  assert.equal(desktop.lines().at(-1), '*** Du har ingen öring.');
+});
+
+test('the fish phrase selects Scooter, resets the position and is reflected in now-playing', () => {
+  const desktop = page(new Map());
+  desktop.send('How much is the fish?');
+  assert.ok(desktop.lines().includes('<bot> den här är lånad'));
+  assert.equal(desktop.player.querySelector('[data-player-track]').textContent, 'Scooter — How Much Is the Fish?');
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:00');
+  desktop.send('/np');
+  assert.match(desktop.lines().at(-1), /Scooter — How Much Is the Fish\?.*demo utan ljud/);
+  desktop.player.querySelector('[data-player-next]').fire('click');
+  desktop.send('/np');
+  assert.match(desktop.lines().at(-1), /Limp Bizkit/);
+});
+
+test('the playlist starts in the agreed order and previous wraps to the final song', () => {
+  const desktop = page(new Map());
+  desktop.send('/np');
+  assert.match(desktop.lines().at(-1), /Freestyler/);
+  for (const name of ['Wait and Bleed', 'Detroit Rock City', '9 PM', 'Black Dog']) {
+    desktop.player.querySelector('[data-player-next]').fire('click');
+    desktop.send('/np');
+    assert.ok(desktop.lines().at(-1).includes(name));
+  }
+  const fresh = page(new Map());
+  fresh.player.querySelector('[data-player-previous]').fire('click');
+  fresh.send('/np');
+  assert.match(fresh.lines().at(-1), /One Step Closer/);
 });

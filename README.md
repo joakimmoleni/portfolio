@@ -11,6 +11,8 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 - `contact.html`: a Lunarstorm-inspired profile, using the personal nickname `exposure_`.
 - Start → Program: a completely silent Winamp toy, a local mIRC bot and a temporary editable Notepad. They do not connect to chat servers or load music.
 
+Winamp has a scrollable 16-track nostalgia playlist spanning dance, nu metal and classic rock, starting with Freestyler, Wait and Bleed, Detroit Rock City, 9 PM and Black Dog. Titles and a visual playback clock are the whole demo; there are no audio files. mIRC has three small Easter eggs: `/join #exposure_` opens a hidden local channel (return with `/join #lobby`); slapping the bot three times costs you the trout for the current page session; and `how much is the fish?` selects Scooter in Winamp. `/np` reports that selection, and `/winamp` opens the player. The hidden channel's delayed greeting is cancelled when leaving, minimizing or closing it.
+
 All five main programs share the same desktop shortcuts, Start menu, taskbar, theme control and system dialog. Theme and extras live in Start; the CV toolbar contains only its language and print controls. Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
 
 The light/dark preference applies to reading surfaces, controls and open mIRC/Notepad windows, and syncs between open tabs. The Start menu keeps a stable label with a visible checkmark for dark mode. Winamp retains its own skin.

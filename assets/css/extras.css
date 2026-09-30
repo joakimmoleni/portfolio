@@ -51,8 +51,10 @@
 .extras-control:focus-visible { outline-color: #003f80; outline-offset: -4px; }
 .extras-playlist-heading { display: flex; justify-content: space-between; gap: 8px; margin-top: 9px; padding: 4px 6px; border: 1px solid; border-color: #878c99 #161923 #161923 #787e8c; background: #444856; color: #d6d9c3; font: 9px/1.2 Tahoma, Verdana, sans-serif; letter-spacing: .08em; }
 .extras-playlist-heading span:last-child { letter-spacing: normal; }
-.extras-playlist { list-style: none; margin: 0; padding: 2px; background: #101812; border: 2px solid; border-color: #161822 #73798a #73798a #161822; }
+.extras-playlist { list-style: none; margin: 0; padding: 2px; max-height: 180px; overflow: auto; overscroll-behavior: contain; background: #101812; border: 2px solid; border-color: #161822 #73798a #73798a #161822; }
 .extras-playlist button { display: flex; justify-content: space-between; gap: 8px; width: 100%; min-height: 28px; padding: 4px 6px; border: 0; background: transparent; color: #b3dd98; text-align: left; font: 11px/1.5 "Courier New", monospace; }
+.extras-playlist button span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.extras-playlist button span:last-child { flex-shrink: 0; font-variant-numeric: tabular-nums; }
 .extras-playlist button[aria-pressed="true"] { background: #2d4330; color: #d4ffaa; }
 .extras-playlist button:hover { background: #243a27; }
 .extras-playlist button:focus-visible { outline-color: #d4ffaa; outline-offset: -2px; }

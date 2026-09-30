@@ -3,6 +3,25 @@
 (() => {
   if (document.getElementById('extras-player')) return;
 
+  const tracks = [
+    { name: 'Bomfunk MC’s — Freestyler', duration: 306 },
+    { name: 'Slipknot — Wait and Bleed', duration: 147 },
+    { name: 'KISS — Detroit Rock City', duration: 315 },
+    { name: 'ATB — 9 PM (Till I Come)', duration: 193 },
+    { name: 'Led Zeppelin — Black Dog', duration: 295 },
+    { name: 'Darude — Sandstorm', duration: 225 },
+    { name: 'Alice Deejay — Better Off Alone', duration: 214 },
+    { name: 'The Prodigy — Breathe', duration: 335 },
+    { name: 'Slipknot — Spit It Out', duration: 159 },
+    { name: 'Eiffel 65 — Blue (Da Ba Dee)', duration: 219 },
+    { name: 'KISS — I Was Made for Lovin’ You', duration: 271 },
+    { name: 'Rammstein — Du hast', duration: 234 },
+    { name: 'Scooter — How Much Is the Fish?', duration: 225 },
+    { name: 'Limp Bizkit — Rollin’ (Air Raid Vehicle)', duration: 213 },
+    { name: 'Led Zeppelin — Whole Lotta Love', duration: 333 },
+    { name: 'Linkin Park — One Step Closer', duration: 156 }
+  ];
+  const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
   const programIcon = name => `<img class="extras-program-icon" src="./assets/images/${name}-icon.svg" width="24" height="24" alt="">`;
   const markup = document.createElement('div');
   markup.innerHTML = `
@@ -20,31 +39,29 @@
         <div class="extras-player-screen">
           <div class="extras-player-readout"><span class="extras-player-time" data-player-time>00:00</span><span class="extras-player-state" data-player-state>STOPP</span></div>
           <div class="extras-equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <p class="extras-track" data-player-track>Demospår 01</p>
+          <p class="extras-track" data-player-track>${tracks[0].name}</p>
         </div>
         <label class="extras-progress-label" for="extras-player-progress">Position i spåret</label>
-        <input id="extras-player-progress" class="extras-player-progress" type="range" min="0" max="155" step="1" value="0" aria-valuetext="0 minuter, 0 sekunder">
+        <input id="extras-player-progress" class="extras-player-progress" type="range" min="0" max="${tracks[0].duration}" step="1" value="0" aria-valuetext="0 minuter, 0 sekunder">
         <div class="extras-player-controls">
-          <button type="button" class="extras-control" data-player-previous aria-label="Föregående demospår" title="Föregående spår">|◀</button>
+          <button type="button" class="extras-control" data-player-previous aria-label="Föregående spår" title="Föregående spår">|◀</button>
           <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
           <button type="button" class="extras-control" data-player-stop aria-label="Stoppa den ljudlösa spelaren" title="Stopp">■</button>
-          <button type="button" class="extras-control" data-player-next aria-label="Nästa demospår" title="Nästa spår">▶|</button>
+          <button type="button" class="extras-control" data-player-next aria-label="Nästa spår" title="Nästa spår">▶|</button>
         </div>
-        <div class="extras-playlist-heading" aria-hidden="true"><span>WINAMP PLAYLIST</span><span>3 spår</span></div>
-        <ol class="extras-playlist" aria-label="Spellista med ljudlösa demospår">
-          <li><button type="button" data-player-select="0" aria-pressed="true"><span>01. Demospår 01</span><span>2:35</span></button></li>
-          <li><button type="button" data-player-select="1" aria-pressed="false"><span>02. Demospår 02</span><span>3:00</span></button></li>
-          <li><button type="button" data-player-select="2" aria-pressed="false"><span>03. Demospår 03</span><span>3:30</span></button></li>
+        <div class="extras-playlist-heading" aria-hidden="true"><span>WINAMP PLAYLIST</span><span>${tracks.length} spår</span></div>
+        <ol class="extras-playlist" aria-label="Spellista · demo utan ljud">
+          ${tracks.map((song, index) => `<li><button type="button" data-player-select="${index}" aria-pressed="${index === 0}"><span>${String(index + 1).padStart(2, '0')}. ${song.name}</span><span>${formatTime(song.duration)}</span></button></li>`).join('')}
         </ol>
         <p class="extras-player-note">Demo · utan ljud</p>
       </div>
     </section>
     <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" lang="sv" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">${programIcon('mirc')}mIRC — #lobby</h2><div class="extras-title-actions"><button type="button" class="title-button extras-title-button" data-mirc-minimize aria-label="Minimera mIRC" title="Minimera">_</button><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC" title="Stäng">×</button></div></header>
+      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">${programIcon('mirc')}<span data-chat-title>mIRC — #lobby</span></h2><div class="extras-title-actions"><button type="button" class="title-button extras-title-button" data-mirc-minimize aria-label="Minimera mIRC" title="Minimera">_</button><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC" title="Stäng">×</button></div></header>
       <p id="extras-mirc-description" class="extras-dialog-note">Lokal demokanal · ingen livechatt</p>
       <div class="extras-chat-layout">
         <div class="extras-chat-log" role="log" aria-label="Meddelanden i demokanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
-        <aside class="extras-chat-users" aria-label="Namn i kanalen"><strong>#lobby</strong><span>@bot</span><span>besokare</span></aside>
+        <aside class="extras-chat-users" aria-label="Namn i kanalen"><strong data-chat-channel>#lobby</strong><span>@bot</span><span data-chat-host hidden>@exposure_</span><span>besokare</span></aside>
       </div>
       <form class="extras-chat-form">
         <label for="extras-chat-input">besokare &gt;</label>
@@ -155,6 +172,7 @@
     restoreFocus('winamp');
   }
   function minimizeMirc() {
+    clearTimeout(channelGreeting);
     mirc.hidden = true;
     mirc.dataset.inactive = 'true';
     markOpen('mirc', false);
@@ -195,6 +213,7 @@
     dialog.addEventListener('close', () => {
       markOpen(name, false);
       if (name === 'mirc') {
+        clearTimeout(channelGreeting);
         mircTask.hidden = true;
         mircTask.setAttribute('aria-pressed', 'false');
       }
@@ -203,7 +222,6 @@
   }
 
   // A silent visual clock: no audio objects, media requests or autoplay.
-  const tracks = [155, 180, 210];
   const time = player.querySelector('[data-player-time]');
   const shadeTime = player.querySelector('[data-player-shade-time]');
   const trackLabel = player.querySelector('[data-player-track]');
@@ -218,12 +236,12 @@
   let startedAt = 0;
   let timer;
 
-  function trackName() { return `Demospår ${String(track + 1).padStart(2, '0')}`; }
+  function trackName() { return tracks[track].name; }
   function drawPlayer() {
     const seconds = Math.floor(position);
     time.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
     shadeTime.textContent = time.textContent;
-    progress.max = tracks[track];
+    progress.max = tracks[track].duration;
     progress.value = seconds;
     progress.setAttribute('aria-valuetext', `${Math.floor(seconds / 60)} minuter, ${seconds % 60} sekunder`);
     trackLabel.textContent = trackName();
@@ -232,7 +250,7 @@
       button.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
       button.title = playing ? 'Pausa' : 'Spela';
     }
-    stateLabel.textContent = playing ? 'SPELAR' : position >= tracks[track] ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
+    stateLabel.textContent = playing ? 'SPELAR' : position >= tracks[track].duration ? 'SLUT' : position > 0 ? 'PAUS' : 'STOPP';
     player.classList.toggle('is-playing', playing);
     for (const button of playlistButtons) button.setAttribute('aria-pressed', String(Number(button.dataset.playerSelect) === track));
   }
@@ -241,8 +259,8 @@
     timer = undefined;
   }
   function tick() {
-    position = Math.min(tracks[track], (performance.now() - startedAt) / 1000);
-    if (position >= tracks[track]) {
+    position = Math.min(tracks[track].duration, (performance.now() - startedAt) / 1000);
+    if (position >= tracks[track].duration) {
       playing = false;
       stopTimer();
     }
@@ -260,7 +278,7 @@
       playing = false;
       stopTimer();
     } else {
-      if (position >= tracks[track]) position = 0;
+      if (position >= tracks[track].duration) position = 0;
       playing = true;
       startedAt = performance.now() - position * 1000;
       timer = setInterval(tick, 250);
@@ -297,6 +315,10 @@
   const chatHistory = [];
   let historyIndex = 0;
   let chatDraft = '';
+  let channel = '#lobby';
+  let channelGreeting;
+  let botSlaps = 0;
+  window.addEventListener('pagehide', () => clearTimeout(channelGreeting));
   chatInput.addEventListener('keydown', event => {
     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || !chatHistory.length) return;
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
@@ -320,6 +342,28 @@
     log.scrollTop = log.scrollHeight;
   }
   function bot(text) { addLine(`<bot> ${text}`, 'bot'); }
+  function joinChannel(nextChannel) {
+    if (nextChannel === channel) {
+      bot(`Du är redan i ${channel}.`);
+      return;
+    }
+    clearTimeout(channelGreeting);
+    channel = nextChannel;
+    mirc.querySelector('[data-chat-title]').textContent = `mIRC — ${channel}`;
+    mirc.querySelector('[data-chat-channel]').textContent = channel;
+    mirc.querySelector('[data-chat-host]').hidden = channel !== '#exposure_';
+    log.replaceChildren();
+    addLine(`*** Du har anslutit till ${channel}.`);
+    if (channel === '#exposure_') {
+      addLine('*** Topic: afk, strax tillbaka');
+      addLine('*** /join #lobby tar dig tillbaka.');
+      channelGreeting = setTimeout(() => {
+        if (mirc.open && !mirc.hidden && channel === '#exposure_') addLine('<exposure_> fortfarande här?', 'bot');
+      }, 12000);
+    } else {
+      addLine('*** Skriv /help för kommandon.');
+    }
+  }
   addLine('*** Du har anslutit till #lobby.');
   addLine('*** Skriv /help för kommandon.');
   mirc.querySelector('form').addEventListener('submit', event => {
@@ -337,11 +381,21 @@
       log.replaceChildren();
       addLine('*** Rensat.');
     } else if (command === '/help') {
-      bot('/me [text] · /slap [namn] · /clear · /winamp · /np');
+      bot('/me [text] · /slap [namn] · /clear · /winamp · /np · /join #lobby');
+    } else if (command === '/join') {
+      const nextChannel = argument.toLowerCase();
+      if (nextChannel === '#exposure_' || nextChannel === '#lobby') joinChannel(nextChannel);
+      else bot('Ingen sådan kanal. Prova /join #lobby.');
     } else if (command === '/me') {
       addLine(`* besokare ${argument || 'ser sig omkring.'}`, 'action');
     } else if (command === '/slap') {
-      addLine(`* besokare daskar ${argument || 'bot'} med en öring.`, 'action');
+      if (botSlaps >= 3) {
+        addLine('*** Du har ingen öring.');
+      } else {
+        const target = argument || 'bot';
+        addLine(`* besokare daskar ${target} med en öring.`, 'action');
+        if (target.toLowerCase() === 'bot' && ++botSlaps === 3) addLine('* bot tar ifrån besokare öringen.', 'action');
+      }
     } else if (command === '/np') {
       bot(`${trackName()} · ${playing ? 'spelar' : 'stoppad eller pausad'} · demo utan ljud.`);
     } else if (command === '/winamp') {
@@ -354,7 +408,11 @@
       bot(`Okänt kommando: ${command}. Skriv /help för kommandolistan.`);
     } else {
       addLine(`<besokare> ${message}`, 'visitor');
-      if (/^(hej|hello|hallå|tjena)(\s|[!.?]|$)/i.test(message)) bot('Hej! Ingen kö till den här servern. Prova /me eller /slap.');
+      if (/^how much is the fish\s*[?!]*$/i.test(message)) {
+        selectTrack(tracks.findIndex(song => song.name === 'Scooter — How Much Is the Fish?'));
+        bot('den här är lånad');
+        addLine(`*** Winamp: ${trackName()}`);
+      } else if (/^(hej|hello|hallå|tjena)(\s|[!.?]|$)/i.test(message)) bot('Hej! Ingen kö till den här servern. Prova /me eller /slap.');
     }
     chatInput.focus();
   });
