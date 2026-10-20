@@ -9,14 +9,14 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I design and build web applications, from data flows and integrations to interfaces and operations.\n\nI work with JavaScript, Python/Django and SQL and have integrated ML models for personalised game coaching. In my current role, I build internal tools and also work with mainframe systems.",
-  "profile_sv": "Jag utformar och bygger webbapplikationer, från dataflöden och integrationer till gränssnitt och drift.\n\nJag arbetar med JavaScript, Python/Django och SQL och har integrerat ML-modeller för personlig spelcoaching. På mitt nuvarande jobb bygger jag interna verktyg och arbetar även med stordatorsystem.",
+  "profile": "I design and build web applications, from data flows and integrations to interfaces and operations.\n\nIn my current role, I have independently built an information and agent platform. I bring indexing, routing, memory management and automation together with how people will use it. System knowledge must stay current, and results must be reusable across roles and tasks.\n\nI work with JavaScript, Python/Django and SQL, have integrated ML models for personalised game coaching and also develop mainframe systems.",
+  "profile_sv": "Jag utformar och bygger webbapplikationer, från dataflöden och integrationer till gränssnitt och drift.\n\nPå mitt nuvarande jobb har jag självständigt byggt en informations- och agentplattform. Jag håller ihop indexering, routing, minneshantering och automationer med hur människor ska arbeta i den. Systemkunskapen ska förbli aktuell och resultaten gå att återanvända över roller och uppgifter.\n\nJag arbetar med JavaScript, Python/Django och SQL, har integrerat ML-modeller för personlig spelcoaching och utvecklar även stordatorsystem.",
   "coreStack": [
     "JavaScript, TypeScript and Node.js",
     "Python and Django",
     "SQL and API integration",
     "OpenShift, AWS and Git",
-    "ML integration and data flows",
+    "AI agents, system knowledge and automation",
     "COBOL, HLASM and IBM z/OS"
   ],
   "coreStack_sv": [
@@ -24,7 +24,7 @@
     "Python och Django",
     "SQL och API-integration",
     "OpenShift, AWS och Git",
-    "ML-integration och dataflöden",
+    "AI-agenter, systemkunskap och automation",
     "COBOL, HLASM och IBM z/OS"
   ],
   "experience": [
@@ -35,13 +35,19 @@
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
-        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks.",
+        "Independently designed and built an information and agent platform, from indexing, routing and memory management to controls and automation.",
+        "Build around the requirement that system knowledge must never become stale. Documentation, supporting material and results must follow changes to the systems, retain their context and remain easy to find and reuse.",
+        "Make development with AI agents accessible to colleagues with different levels of prior experience. The platform brings system knowledge and workflows together; results must also be useful to architects and other roles.",
+        "Develop in COBOL and HLASM on IBM z/OS. Design changes and work through dependencies between systems.",
+        "Guide colleagues and give talks on AI and development tools.",
         "Troubleshoot production systems and address root causes with the team."
       ],
       "highlights_sv": [
-        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
-        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag.",
+        "Har självständigt utformat och byggt en informations- och agentplattform, från indexering, routing och minneshantering till styrning och automationer.",
+        "Bygger utifrån kravet att systemkunskap aldrig ska bli inaktuell. Dokumentation, underlag och resultat ska följa systemens förändringar, behålla sitt sammanhang och gå att hitta och återanvända.",
+        "Gör utveckling med AI-agenter tillgänglig för kollegor med olika förkunskaper. Plattformen håller ihop systemkunskap och arbetsflöden; resultaten ska vara användbara även för arkitekter och andra roller.",
+        "Utvecklar i COBOL och HLASM på IBM z/OS. Utformar förändringar och reder ut beroenden mellan system.",
+        "Handleder kollegor och håller föredrag om AI och utvecklingsverktyg.",
         "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet."
       ]
     },
@@ -242,7 +248,7 @@
       "ML integration",
       "Technology choices and system dependencies",
       "Troubleshooting",
-      "AI in software development and business operations",
+      "Agent orchestration, indexing and memory management",
       "Business and delivery processes"
     ],
     "concepts_sv": [
@@ -250,7 +256,7 @@
       "ML-integration",
       "Teknikval och systemberoenden",
       "Felsökning",
-      "AI i utveckling och verksamhet",
+      "Agentstyrning, indexering och minneshantering",
       "Verksamhets- och leveransflöden"
     ]
   }

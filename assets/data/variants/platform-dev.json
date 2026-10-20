@@ -9,15 +9,15 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I develop systems and work through the decisions around them. How the parts should fit together, which dependencies we take on and what the solution needs to handle in practice.\n\nToday, I work with mainframe systems, internal tools and AI. My work takes me from early decisions through implementation to how the solution works day to day.\n\nI have also built up sales, organised deliveries and coordinated live productions. That influences both what I choose to build and which questions I ask first.",
-  "profile_sv": "Jag utvecklar system och arbetar med vägvalen runt dem. Hur delarna ska hänga ihop, vilka beroenden vi tar på oss och vad lösningen behöver klara i praktiken.\n\nI dag arbetar jag med stordatorsystem, interna verktyg och AI. Jag följer frågorna från de tidiga besluten ner i koden och vidare till hur det fungerar i vardagen.\n\nJag har också byggt upp försäljning, organiserat leveranser och samordnat produktioner. Det påverkar både vad jag väljer att bygga och vilka frågor jag ställer först.",
+  "profile": "I develop systems and work through the decisions around them. How the parts should fit together, which dependencies we take on and what the solution needs to handle in practice.\n\nToday, I work with mainframe systems and have independently built an information and agent platform. One core requirement guides the work: system knowledge must not become stale as the systems change. I also build to make working with AI agents and using the knowledge they produce accessible to more people.\n\nI have previously built up sales, organised deliveries and coordinated live productions. That influences both what I choose to build and which questions I ask first.",
+  "profile_sv": "Jag utvecklar system och arbetar med vägvalen runt dem. Hur delarna ska hänga ihop, vilka beroenden vi tar på oss och vad lösningen behöver klara i praktiken.\n\nI dag arbetar jag med stordatorsystem och har självständigt byggt en informations- och agentplattform. Ett grundkrav styr arbetet: systemkunskapen får inte bli inaktuell när systemen förändras. Jag bygger också för att fler ska kunna arbeta med AI-agenter och använda kunskapen som skapas.\n\nJag har tidigare byggt upp försäljning, organiserat leveranser och samordnat produktioner. Det påverkar både vad jag väljer att bygga och vilka frågor jag ställer först.",
   "coreStack": [
     "Technology choices, dependencies and data flows",
     "Business development, delivery processes and training",
     "COBOL, HLASM and IBM z/OS",
     "JavaScript, Python/Django and SQL",
     "Troubleshooting and root-cause analysis",
-    "Internal tools and AI in business operations"
+    "Information platforms and AI agents"
   ],
   "coreStack_sv": [
     "Teknikval, beroenden och dataflöden",
@@ -25,7 +25,7 @@
     "COBOL, HLASM och IBM z/OS",
     "JavaScript, Python/Django och SQL",
     "Felsökning och rotorsaksanalys",
-    "Interna verktyg och AI i verksamheten"
+    "Informationsplattformar och AI-agenter"
   ],
   "experience": [
     {
@@ -35,13 +35,19 @@
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
-        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks.",
+        "Develop in COBOL and HLASM on IBM z/OS. Design changes and work through dependencies between systems.",
+        "Independently designed and built an information and agent platform, from indexing, routing and memory management to controls and automation.",
+        "Build around the requirement that system knowledge must never become stale. Documentation, supporting material and results must follow changes to the systems, retain their context and remain easy to find and reuse.",
+        "Make development with AI agents accessible to colleagues with different levels of prior experience. The platform brings system knowledge and workflows together; results must also be useful to architects and other roles.",
+        "Guide colleagues and give talks on AI and development tools.",
         "Troubleshoot production systems and address root causes with the team."
       ],
       "highlights_sv": [
-        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
-        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag.",
+        "Utvecklar i COBOL och HLASM på IBM z/OS. Utformar förändringar och reder ut beroenden mellan system.",
+        "Har självständigt utformat och byggt en informations- och agentplattform, från indexering, routing och minneshantering till styrning och automationer.",
+        "Bygger utifrån kravet att systemkunskap aldrig ska bli inaktuell. Dokumentation, underlag och resultat ska följa systemens förändringar, behålla sitt sammanhang och gå att hitta och återanvända.",
+        "Gör utveckling med AI-agenter tillgänglig för kollegor med olika förkunskaper. Plattformen håller ihop systemkunskap och arbetsflöden; resultaten ska vara användbara även för arkitekter och andra roller.",
+        "Handleder kollegor och håller föredrag om AI och utvecklingsverktyg.",
         "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet."
       ]
     },
@@ -242,14 +248,14 @@
       "Technology choices and system dependencies",
       "Root-cause analysis and incident response",
       "Data flows and API integration",
-      "AI in software development and business operations",
+      "Agent orchestration, indexing and memory management",
       "Business development and delivery processes"
     ],
     "concepts_sv": [
       "Teknikval och systemberoenden",
       "Rotorsaksanalys och incidenthantering",
       "Dataflöden och API-integration",
-      "AI i utveckling och verksamhet",
+      "Agentstyrning, indexering och minneshantering",
       "Affärsutveckling och leveransflöden"
     ]
   }

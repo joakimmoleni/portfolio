@@ -9,15 +9,15 @@
     "github": "github.com/joakimmoleni",
     "linkedin": "linkedin.com/in/joakimmoleni"
   },
-  "profile": "I develop in COBOL and HLASM on IBM z/OS. Much of my work is about how a change should be implemented: which systems are affected, how the parts fit together and what needs to work between them.\n\nI work through dependencies, design solutions and troubleshoot when something is not behaving as it should. I also build internal tools and shape how we use AI in our work.",
-  "profile_sv": "Jag utvecklar i COBOL och HLASM på IBM z/OS. En stor del av arbetet handlar om hur en förändring ska genomföras: vilka system som berörs, hur delarna hänger ihop och vad som behöver fungera mellan dem.\n\nJag reder ut beroenden, utformar lösningar och felsöker när något inte beter sig som det ska. Jag bygger också interna verktyg och utvecklar hur vi använder AI i arbetet.",
+  "profile": "I develop in COBOL and HLASM on IBM z/OS. Much of my work is about how a change should be implemented: which systems are affected, how the parts fit together and what needs to work between them.\n\nI have also independently built an information and agent platform. I build so that users can start with what needs to change, supported by system knowledge and checks, including in older codebases. That knowledge must follow every change and remain current for the next person and the next task.",
+  "profile_sv": "Jag utvecklar i COBOL och HLASM på IBM z/OS. En stor del av arbetet handlar om hur en förändring ska genomföras: vilka system som berörs, hur delarna hänger ihop och vad som behöver fungera mellan dem.\n\nJag har också självständigt byggt en informations- och agentplattform. Jag bygger för att användaren ska kunna utgå från vad som behöver ändras, med systemkunskap och kontroller som stöd även i äldre kodbaser. Kunskapen ska följa med efter varje förändring och vara aktuell för nästa person och nästa uppgift.",
   "coreStack": [
     "COBOL and IBM z/OS Assembler (HLASM)",
     "IMS, DB2 and JCL",
     "TSO/ISPF and Endevor",
     "Troubleshooting and root-cause analysis",
     "Technology choices and system dependencies",
-    "Internal tools and AI in business operations"
+    "Information platforms and AI agents"
   ],
   "coreStack_sv": [
     "COBOL och IBM z/OS Assembler (HLASM)",
@@ -25,7 +25,7 @@
     "TSO/ISPF och Endevor",
     "Felsökning och rotorsaksanalys",
     "Teknikval och systemberoenden",
-    "Interna verktyg och AI i verksamheten"
+    "Informationsplattformar och AI-agenter"
   ],
   "experience": [
     {
@@ -35,14 +35,20 @@
       "years": "Aug 2024 – Present",
       "years_sv": "Aug 2024 – nu",
       "highlights": [
-        "Design solutions and work through dependencies between systems. Develop in COBOL and HLASM on IBM z/OS.",
+        "Develop in COBOL and HLASM on IBM z/OS. Design changes and work through dependencies between systems.",
         "Troubleshoot production systems and address root causes with the team.",
-        "Build internal tools and shape how AI is used at work. Guide colleagues and give talks."
+        "Independently designed and built an information and agent platform, from indexing, routing and memory management to controls and automation.",
+        "Build around the requirement that system knowledge must never become stale. Documentation, supporting material and results must follow changes to the systems, retain their context and remain easy to find and reuse.",
+        "Make development with AI agents accessible to colleagues with different levels of prior experience. The platform brings system knowledge and workflows together; results must also be useful to architects and other roles.",
+        "Guide colleagues and give talks on AI and development tools."
       ],
       "highlights_sv": [
-        "Utformar lösningar och reder ut beroenden mellan system. Utvecklar i COBOL och HLASM på IBM z/OS.",
+        "Utvecklar i COBOL och HLASM på IBM z/OS. Utformar förändringar och reder ut beroenden mellan system.",
         "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet.",
-        "Bygger interna verktyg och utvecklar hur AI används i arbetet. Handleder kollegor och håller föredrag."
+        "Har självständigt utformat och byggt en informations- och agentplattform, från indexering, routing och minneshantering till styrning och automationer.",
+        "Bygger utifrån kravet att systemkunskap aldrig ska bli inaktuell. Dokumentation, underlag och resultat ska följa systemens förändringar, behålla sitt sammanhang och gå att hitta och återanvända.",
+        "Gör utveckling med AI-agenter tillgänglig för kollegor med olika förkunskaper. Plattformen håller ihop systemkunskap och arbetsflöden; resultaten ska vara användbara även för arkitekter och andra roller.",
+        "Handleder kollegor och håller föredrag om AI och utvecklingsverktyg."
       ]
     },
     {
