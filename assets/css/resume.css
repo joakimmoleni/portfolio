@@ -13,6 +13,8 @@
 .resume-tools { gap: 8px; }
 .lang-btn, .action-btn { font: inherit; font-size: .8125rem; padding: 5px 10px; background: var(--surface); color: var(--text); min-height: 36px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); box-shadow: var(--raised); }
 .lang-btn.active { background: var(--paper); box-shadow: var(--inset); border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); font-weight: bold; }
+.lang-btn { min-width: 42px; }
+.lang-btn:hover:not(:focus-visible), .action-btn:not(:disabled):hover:not(:focus-visible) { outline: 1px solid var(--shadow); outline-offset: -3px; }
 .action-btn:disabled { color: var(--muted); box-shadow: none; cursor: wait; }
 .terminal-screen { background: var(--terminal-bg); color: var(--terminal-text); color-scheme: dark; font: 14px/1.32 var(--terminal-font); padding: 10px 20px 0; border: 2px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); overflow-wrap: anywhere; }
 .terminal-screen a { color: var(--terminal-cyan); text-decoration: none; }

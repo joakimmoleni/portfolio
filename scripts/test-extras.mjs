@@ -6,8 +6,8 @@ import { test } from 'node:test';
 const source = readFileSync(new URL('../assets/js/extras.js', import.meta.url), 'utf8');
 const noteKey = 'portfolio-extra-note-v1';
 
-// Only the browser APIs used by program state and note persistence are needed here.
-// Real dialog focus, layout and the player controls are checked in the browser.
+// Small DOM and controllable clock for state transitions. Native rendering and
+// focus still need browser checks; simulated time must not depend on CPU speed.
 function page(storage, access = { blocked: false }) {
   class Element {
     constructor() {
@@ -17,10 +17,17 @@ function page(storage, access = { blocked: false }) {
       this.nodes = new Map();
       this.attributes = new Map();
       this.isConnected = true;
-      this.classList = { toggle() {}, contains() { return false; } };
+      const classes = new Set();
+      this.classList = {
+        toggle(name, force = !classes.has(name)) {
+          if (force) classes.add(name); else classes.delete(name);
+          return force;
+        },
+        contains(name) { return classes.has(name); }
+      };
     }
     addEventListener(name, handler) { this.handlers.set(name, handler); }
-    fire(name, properties = {}) { this.handlers.get(name)?.({ target: this, ...properties }); }
+    fire(name, properties = {}) { this.handlers.get(name)?.({ target: this, currentTarget: this, ...properties }); }
     closest(selector) {
       if (selector === '[data-open-extra]' && this.dataset.openExtra) return this;
       if (selector === '[data-extra-close]' && this.dataset.extraClose) return this;
@@ -37,7 +44,7 @@ function page(storage, access = { blocked: false }) {
       if (!this.nodes.has(selector)) this.nodes.set(selector, new Element());
       return this.nodes.get(selector);
     }
-    querySelectorAll() { return []; }
+    querySelectorAll(selector) { return selector === '[data-player-select]' ? playlist : []; }
   }
   class Dialog extends Element {
     show() { this.open = true; this.modal = false; }
@@ -56,10 +63,19 @@ function page(storage, access = { blocked: false }) {
   const listeners = new Map();
   const documentListeners = new Map();
   const mainTask = new Element();
+  const playlist = Array.from({ length: 16 }, (_, index) => {
+    const button = new Element();
+    button.dataset.playerSelect = String(index);
+    return button;
+  });
   const timeouts = new Map();
+  const intervals = new Map();
+  let now = 0;
   let nextTimeout = 0;
   const context = vm.createContext({
-    performance: { now: () => 0 },
+    performance: { now: () => now },
+    setInterval(handler) { intervals.set(++nextTimeout, handler); return nextTimeout; },
+    clearInterval(id) { intervals.delete(id); },
     setTimeout(handler) { timeouts.set(++nextTimeout, handler); return nextTimeout; },
     clearTimeout(id) { timeouts.delete(id); },
     HTMLElement: Element,
@@ -83,7 +99,10 @@ function page(storage, access = { blocked: false }) {
         storage.set(key, value);
       }
     },
-    addEventListener: (name, handler) => listeners.set(name, handler)
+    addEventListener: (name, handler) => {
+      if (!listeners.has(name)) listeners.set(name, []);
+      listeners.get(name).push(handler);
+    }
   });
   context.window = context;
   vm.runInContext(source, context, { filename: 'extras.js' });
@@ -95,7 +114,15 @@ function page(storage, access = { blocked: false }) {
   return {
     note: nodes.get('extras-notepad-text'),
     status: nodes.get('extras-notepad').querySelector('.extras-notepad-status'),
-    restore() { listeners.get('pageshow')?.({ persisted: true }); },
+    restore() { listeners.get('pageshow')?.forEach(handler => handler({ persisted: true })); },
+    leave() { listeners.get('pagehide')?.forEach(handler => handler()); },
+    advance(milliseconds) {
+      now += milliseconds;
+      [...intervals.values()].forEach(handler => handler());
+    },
+    activeTimers() { return intervals.size; },
+    playlist,
+    progress: nodes.get('extras-player-progress'),
     openNote() { open('notepad'); },
     open,
     mirc: nodes.get('extras-mirc'),
@@ -128,6 +155,107 @@ test('a restored page reads notes edited on another page before the next edit', 
   first.note.value += '\nContinued here';
   first.note.fire('input');
   assert.equal(storage.get(noteKey), 'New text from another page\nContinued here');
+});
+
+test('play advances both readouts and the seek position; pause freezes and resumes from there', () => {
+  const desktop = page(new Map());
+  desktop.open('winamp');
+  const play = desktop.player.querySelector('[data-player-play]');
+  const readout = desktop.player.querySelector('[data-player-time]');
+  play.fire('click');
+  desktop.advance(1250);
+  assert.equal(readout.textContent, '00:01');
+  assert.equal(desktop.player.querySelector('[data-player-shade-time]').textContent, '00:01');
+  assert.equal(desktop.progress.value, 1);
+  assert.equal(desktop.progress.attributes.get('aria-valuetext'), '0 minuter, 1 sekunder');
+  play.fire('click');
+  desktop.advance(10000);
+  assert.equal(readout.textContent, '00:01');
+  assert.equal(desktop.activeTimers(), 0);
+  play.fire('click');
+  desktop.advance(750);
+  assert.equal(readout.textContent, '00:02');
+  assert.equal(desktop.activeTimers(), 1);
+});
+
+test('seeking during playback uses the new position; next and previous reset elapsed time', () => {
+  const desktop = page(new Map());
+  desktop.player.querySelector('[data-player-play]').fire('click');
+  desktop.advance(6000);
+  desktop.progress.value = 80;
+  desktop.progress.fire('input');
+  desktop.advance(2500);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '01:22');
+  desktop.player.querySelector('[data-player-next]').fire('click');
+  assert.equal(desktop.progress.max, 147);
+  desktop.advance(1000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:01');
+  desktop.player.querySelector('[data-player-previous]').fire('click');
+  assert.equal(desktop.progress.max, 306);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:00');
+  assert.equal(desktop.activeTimers(), 1);
+});
+
+test('stop and leaving the page reset the player and cancel its timer', () => {
+  for (const stop of [
+    desktop => desktop.player.querySelector('[data-player-stop]').fire('click'),
+    desktop => desktop.player.fire('keydown', { key: 'Escape', preventDefault() {} }),
+    desktop => desktop.leave()
+  ]) {
+    const desktop = page(new Map());
+    desktop.open('winamp');
+    desktop.player.querySelector('[data-player-play]').fire('click');
+    desktop.advance(5000);
+    stop(desktop);
+    desktop.advance(5000);
+    assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:00');
+    assert.equal(desktop.player.querySelector('[data-player-state]').textContent, 'STOPP');
+    assert.equal(desktop.activeTimers(), 0);
+  }
+});
+
+test('compact mode keeps counting and its play control pauses the same player', () => {
+  const desktop = page(new Map());
+  desktop.player.querySelector('[data-player-play]').fire('click');
+  desktop.player.querySelector('[data-player-compact]').fire('click');
+  assert.equal(desktop.player.classList.contains('is-compact'), true);
+  desktop.advance(62000);
+  assert.equal(desktop.player.querySelector('[data-player-shade-time]').textContent, '01:02');
+  desktop.player.querySelector('[data-player-shade-play]').fire('click');
+  desktop.advance(3000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '01:02');
+  assert.equal(desktop.player.querySelector('[data-player-play]').attributes.get('aria-label'), 'Starta den ljudlösa spelaren');
+});
+
+test('reaching the end stops cleanly and play restarts the track', () => {
+  const desktop = page(new Map());
+  const play = desktop.player.querySelector('[data-player-play]');
+  play.fire('click');
+  desktop.advance(400000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '05:06');
+  assert.equal(desktop.player.querySelector('[data-player-state]').textContent, 'SLUT');
+  assert.equal(desktop.activeTimers(), 0);
+  play.fire('click');
+  desktop.advance(1000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:01');
+});
+
+test('selecting a playlist track starts its clock, including after pause or end', () => {
+  const desktop = page(new Map());
+  desktop.playlist[1].fire('click');
+  desktop.advance(2000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:02');
+  assert.equal(desktop.playlist[1].attributes.get('aria-pressed'), 'true');
+  desktop.player.querySelector('[data-player-play]').fire('click');
+  desktop.playlist[2].fire('click');
+  desktop.advance(1000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:01');
+  assert.equal(desktop.activeTimers(), 1);
+  desktop.advance(400000);
+  desktop.playlist[3].fire('click');
+  desktop.advance(1000);
+  assert.equal(desktop.player.querySelector('[data-player-time]').textContent, '00:01');
+  assert.equal(desktop.activeTimers(), 1);
 });
 
 test('restoring an intentionally empty note does not bring back old text', () => {

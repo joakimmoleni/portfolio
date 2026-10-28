@@ -22,6 +22,17 @@
     { name: 'Linkin Park — One Step Closer', duration: 156 }
   ];
   const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+  const controlPaths = {
+    play: 'M5 3 13 8 5 13Z',
+    pause: 'M4 3h3v10H4zM9 3h3v10H9z',
+    stop: 'M4 4h8v8H4z',
+    previous: 'M3 3h2v10H3zM13 3v10L6 8Z',
+    next: 'M11 3h2v10h-2zM3 3l7 5-7 5Z',
+    compact: 'M2 4h12v8H2zM4 6v4h8V6Z',
+    minimize: 'M3 11h10v2H3z',
+    close: 'm4 3 4 4 4-4 1 1-4 4 4 4-1 1-4-4-4 4-1-1 4-4-4-4Z'
+  };
+  const controlIcon = name => `<svg class="control-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="${controlPaths[name]}"/></svg>`;
   const programIcon = name => `<img class="extras-program-icon" src="./assets/images/${name}-icon.svg" width="24" height="24" alt="">`;
   const markup = document.createElement('div');
   markup.innerHTML = `
@@ -30,9 +41,9 @@
         <h2 id="extras-player-title">${programIcon('winamp')}WINAMP</h2>
         <span class="extras-shade-time" data-player-shade-time>00:00</span>
         <div class="extras-title-actions">
-          <button type="button" class="extras-shade-play" data-player-shade-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
-          <button type="button" class="title-button extras-title-button" data-player-compact aria-label="Kompakt läge" aria-pressed="false" title="Kompakt läge">▱</button>
-          <button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">×</button>
+          <button type="button" class="extras-shade-play" data-player-shade-play aria-label="Starta den ljudlösa spelaren" title="Spela">${controlIcon('play')}</button>
+          <button type="button" class="title-button extras-title-button" data-player-compact aria-label="Kompakt läge" aria-pressed="false" title="Kompakt läge">${controlIcon('compact')}</button>
+          <button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">${controlIcon('close')}</button>
         </div>
       </header>
       <div class="extras-player-body">
@@ -44,10 +55,10 @@
         <label class="extras-progress-label" for="extras-player-progress">Position i spåret</label>
         <input id="extras-player-progress" class="extras-player-progress" type="range" min="0" max="${tracks[0].duration}" step="1" value="0" aria-valuetext="0 minuter, 0 sekunder">
         <div class="extras-player-controls">
-          <button type="button" class="extras-control" data-player-previous aria-label="Föregående spår" title="Föregående spår">|◀</button>
-          <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren" title="Spela">▶</button>
-          <button type="button" class="extras-control" data-player-stop aria-label="Stoppa den ljudlösa spelaren" title="Stopp">■</button>
-          <button type="button" class="extras-control" data-player-next aria-label="Nästa spår" title="Nästa spår">▶|</button>
+          <button type="button" class="extras-control" data-player-previous aria-label="Föregående spår" title="Föregående spår">${controlIcon('previous')}</button>
+          <button type="button" class="extras-control" data-player-play aria-label="Starta den ljudlösa spelaren" title="Spela">${controlIcon('play')}</button>
+          <button type="button" class="extras-control" data-player-stop aria-label="Stoppa den ljudlösa spelaren" title="Stopp">${controlIcon('stop')}</button>
+          <button type="button" class="extras-control" data-player-next aria-label="Nästa spår" title="Nästa spår">${controlIcon('next')}</button>
         </div>
         <div class="extras-playlist-heading" aria-hidden="true"><span>WINAMP PLAYLIST</span><span>${tracks.length} spår</span></div>
         <ol class="extras-playlist" aria-label="Spellista · demo utan ljud">
@@ -67,7 +78,7 @@
       </div>
     </section>
     <dialog id="extras-mirc" class="window extras-window extras-dialog extras-mirc" lang="sv" aria-labelledby="extras-mirc-title" aria-describedby="extras-mirc-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">${programIcon('mirc')}<span data-chat-title>mIRC — #lobby</span></h2><div class="extras-title-actions"><button type="button" class="title-button extras-title-button" data-mirc-minimize aria-label="Minimera mIRC" title="Minimera">_</button><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC" title="Stäng">×</button></div></header>
+      <header class="titlebar extras-titlebar"><h2 id="extras-mirc-title">${programIcon('mirc')}<span data-chat-title>mIRC — #lobby</span></h2><div class="extras-title-actions"><button type="button" class="title-button extras-title-button" data-mirc-minimize aria-label="Minimera mIRC" title="Minimera">${controlIcon('minimize')}</button><button type="button" class="title-button extras-title-button" data-extra-close="mirc" aria-label="Stäng mIRC" title="Stäng">${controlIcon('close')}</button></div></header>
       <p id="extras-mirc-description" class="extras-dialog-note">Lokal demokanal · ingen livechatt</p>
       <div class="extras-chat-layout">
         <div class="extras-chat-log" role="log" aria-label="Meddelanden i demokanalen" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
@@ -80,7 +91,7 @@
       <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
     </dialog>
     <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" lang="sv" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">${programIcon('notepad')}todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">×</button></header>
+      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">${programIcon('notepad')}todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">${controlIcon('close')}</button></header>
       <p id="extras-notepad-description" class="extras-dialog-note">Tillfälliga anteckningar</p>
       <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
       <textarea id="extras-notepad-text" maxlength="12000" spellcheck="false" autofocus></textarea>
@@ -257,7 +268,11 @@
     progress.setAttribute('aria-valuetext', `${Math.floor(seconds / 60)} minuter, ${seconds % 60} sekunder`);
     trackLabel.textContent = trackName();
     for (const button of [playButton, shadePlayButton]) {
-      button.textContent = playing ? 'Ⅱ' : '▶';
+      const icon = playing ? 'pause' : 'play';
+      if (button.dataset.playbackIcon !== icon) {
+        button.innerHTML = controlIcon(icon);
+        button.dataset.playbackIcon = icon;
+      }
       button.setAttribute('aria-label', playing ? 'Pausa den ljudlösa spelaren' : 'Starta den ljudlösa spelaren');
       button.title = playing ? 'Pausa' : 'Spela';
     }
@@ -309,7 +324,10 @@
   }
   player.querySelector('[data-player-next]').addEventListener('click', () => selectTrack((track + 1) % tracks.length));
   player.querySelector('[data-player-previous]').addEventListener('click', () => selectTrack((track + tracks.length - 1) % tracks.length));
-  for (const button of playlistButtons) button.addEventListener('click', () => selectTrack(Number(button.dataset.playerSelect)));
+  for (const button of playlistButtons) button.addEventListener('click', () => {
+    selectTrack(Number(button.dataset.playerSelect));
+    if (!playing) togglePlayback();
+  });
   progress.addEventListener('input', () => {
     position = Number(progress.value);
     startedAt = performance.now() - position * 1000;

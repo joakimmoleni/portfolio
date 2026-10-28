@@ -31,7 +31,7 @@ body { margin: 0; background: var(--desktop); color: var(--text); font-size: 1re
 a { color: var(--link); text-underline-offset: .2em; }
 a:hover { text-decoration-thickness: 2px; }
 a, summary { cursor: pointer; }
-button { font: inherit; cursor: pointer; color: inherit; }
+button { -webkit-appearance: none; appearance: none; border-radius: 0; margin: 0; font: inherit; cursor: pointer; color: inherit; }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
 .desktop-shortcuts :focus-visible, .titlebar :focus-visible { outline-color: #fff; }
@@ -41,6 +41,7 @@ h1, h2, h3 { line-height: 1.25; }
 h2 { font-size: 1.375rem; }
 h3 { font-size: 1.0625rem; }
 svg { width: 2rem; height: 2rem; flex-shrink: 0; }
+.control-icon { display: block; width: 16px; height: 16px; flex-shrink: 0; pointer-events: none; }
 .icon-definitions { position: absolute; width: 0; height: 0; overflow: hidden; }
 .skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 100; padding: .7rem 1rem; background: var(--paper); }
 .skip-link:focus { top: .5rem; }
@@ -58,6 +59,7 @@ svg { width: 2rem; height: 2rem; flex-shrink: 0; }
 .window-title svg { width: 20px; height: 20px; }
 .title-button { flex-shrink: 0; width: 26px; height: 25px; border: 1px solid var(--edge); border-top-color: var(--highlight); border-left-color: var(--highlight); box-shadow: var(--raised); background: var(--surface); color: var(--text); font: bold 1rem Tahoma, sans-serif; padding: 0; line-height: 1; }
 .title-button:active { box-shadow: var(--inset); border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); }
+.title-button:hover:not(:focus-visible) { outline: 1px solid var(--shadow); outline-offset: -3px; }
 .window-menu { display: flex; align-items: center; gap: 2px; min-height: 43px; padding: 2px 5px; }
 .window-menu a { color: var(--text); padding: 7px 12px; font-size: .875rem; text-decoration: none; }
 .window-menu a:hover { box-shadow: var(--raised); }
@@ -100,6 +102,7 @@ dt { color: var(--muted); }
 .taskbar > a.task-button[data-inactive="true"] { box-shadow: var(--raised); font-weight: 400; }
 .tray { box-shadow: var(--inset); padding: 6px 11px; margin-left: auto; display: flex; gap: 12px; font-size: .75rem; }
 .tray time { font-variant-numeric: tabular-nums; }
+.tray { white-space: nowrap; }
 .start-panel { position: fixed; bottom: calc(46px + env(safe-area-inset-bottom)); left: 5px; z-index: 21; width: 286px; max-width: calc(100% - 10px); max-height: calc(100dvh - 76px - env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; display: flex; }
 .start-brand { writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 4px; background: linear-gradient(#0a246a, #567aa5); color: #fff; font-size: 1.1rem; }
 .start-links { flex: 1; padding: 3px; }

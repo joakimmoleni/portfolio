@@ -102,13 +102,19 @@
 
   const clock = document.getElementById('clock');
   if (clock) {
+    const formatter = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' });
+    let clockTimer;
     function updateClock() {
+      clearTimeout(clockTimer);
       const now = new Date();
-      clock.textContent = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(now);
+      clock.textContent = formatter.format(now);
       clock.dateTime = now.toISOString();
+      clockTimer = setTimeout(updateClock, 60000 - (Date.now() % 60000));
     }
     updateClock();
-    setInterval(updateClock, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) updateClock(); });
+    window.addEventListener('pageshow', updateClock);
+    window.addEventListener('pagehide', () => clearTimeout(clockTimer));
   }
   const copyright = document.getElementById('copyrightYear');
   if (copyright) copyright.textContent = new Date().getFullYear();
