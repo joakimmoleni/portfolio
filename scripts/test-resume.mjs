@@ -67,7 +67,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
   const listeners = new Map();
   const documentListeners = new Map();
   let currentUrl = new URL(`https://portfolio.example/resume.html${search}`);
-  let dialogOpen = false;
+  let dialog = { open: false, modal: false, hidden: false };
   let printCount = 0;
   const location = {
     get href() { return currentUrl.href; },
@@ -80,7 +80,11 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     body: element(), documentElement: { lang: 'en', dataset: {} }, title: '', activeElement: null,
     getElementById: id => nodes.get(id) || null,
     createElement: element,
-    querySelector: selector => selector === 'dialog[open]' && dialogOpen ? element() : null,
+    querySelector(selector) {
+      if (selector === 'dialog[open]' && dialog.open) return dialog;
+      if (selector === 'dialog:modal' && dialog.open && dialog.modal) return dialog;
+      return null;
+    },
     querySelectorAll(selector) {
       if (selector === '#variantList .tab-btn') return nodes.get('variantList').children;
       if (selector === '.resume-panel') return panels;
@@ -134,7 +138,8 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     clickMenu: id => menuButtons.find(button => button.dataset.openPanel === id).fire('click'),
     selectedVariant: () => nodes.get('variantList').children.find(button => button.getAttribute('aria-selected') === 'true')?.dataset.variant ?? null,
     setLanguage: lang => nodes.get(lang === 'sv' ? 'langSvBtn' : 'langEnBtn').fire('click'),
-    setDialogOpen: value => { dialogOpen = value; },
+    setDialogOpen: value => { dialog = { open: value, modal: value, hidden: false }; },
+    setDialogState: state => { dialog = state; },
     pressKey(key, { field = null, extra = false, ...properties } = {}) {
       const event = {
         key, defaultPrevented: false, ...properties,
@@ -534,7 +539,7 @@ await test('F3 protects an unfinished command and exits from an empty command fi
   assert.equal(location.href, 'https://portfolio.example/index.html');
 });
 
-await test('terminal shortcuts remain inactive in other fields, dialogs, composition and modified events', async () => {
+await test('terminal shortcuts remain inactive in other fields, modal dialogs, composition and modified events', async () => {
   const { nodes, pressKey, setDialogOpen, location } = await page();
   const initialUrl = location.href;
   for (const key of ['F1', 'F3']) {
@@ -560,6 +565,20 @@ await test('F1 and F3 still work outside input fields', async () => {
   assert.equal(pressKey('F3'), true);
   assert.equal(location.href, 'https://portfolio.example/index.html');
 });
+
+for (const hidden of [false, true]) {
+  await test(`CV shortcuts still work with ${hidden ? 'minimized' : 'open non-modal'} mIRC`, async () => {
+    const { nodes, pressKey, setDialogState, location } = await page('?lang=sv&panel=work');
+    setDialogState({ open: true, modal: false, hidden });
+    assert.equal(pressKey('F1', { field: 'command' }), true);
+    assert.equal(nodes.get('resumeHelp').hidden, false);
+    assert.equal(pressKey('F1', { field: 'command' }), true);
+    assert.equal(nodes.get('resumeHelp').hidden, true);
+    assert.equal(pressKey('F3', { field: 'command' }), true);
+    assert.equal(location.searchParams.has('panel'), false);
+    assert.equal(nodes.get('resume-menu').hidden, false);
+  });
+}
 
 await test('terminal shortcuts do not interrupt the non-modal Winamp player', async () => {
   const { nodes, pressKey, location, document } = await page();

@@ -6,8 +6,8 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 
 - `index.html`: a compact Windows 2000 desktop with a short introduction and four clear routes into the portfolio.
 - `resume.html`: a mainframe-inspired CV with three perspectives on the same career, Swedish/English, clickable terminal panels and ordinary print/PDF output.
-- `about.html`: a dungeon automap with four linked rooms and a reading journal.
-- `projects.html`: five selected works in a pause menu over an original first-person industrial scene.
+- `about.html`: a reading journal with four linked chapters in an open book.
+- `projects.html`: five selected works in a game-inspired selector, with project details and flow diagrams.
 - `contact.html`: a Lunarstorm-inspired profile, using the personal nickname `exposure_`.
 - Start → Program: a completely silent Winamp toy, a local mIRC bot and a temporary editable Notepad. They do not connect to chat servers or load music.
 
@@ -19,7 +19,7 @@ The light/dark preference applies to reading surfaces, controls and open mIRC/No
 
 Start opens with a short slide; its Programs submenu opens to the side when the screen has room, and inline on smaller screens. Program windows remain non-modal, with a distinct active titlebar. mIRC can be minimized to the taskbar without losing its draft or chat history. Opening animations respect reduced-motion preferences.
 
-The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line stays visible below the panel title; using it is optional, and all sections also have ordinary clickable controls. F1 opens help beside the field, and the function-key row sits below the panel content.
+The CV opens in Swedish for new visitors and preserves the chosen language on return. Its command line stays visible below the panel title; using it is optional, and all sections also have ordinary clickable controls. F1 opens help beside the field, and the function-key row sits below the panel content. CV shortcuts remain available when mIRC is minimized or focus has returned from an extra window to the CV; they stay inactive inside extra windows and while a modal system dialog is open.
 
 The full profile opens first; mainframe and web/backend views adjust emphasis while retaining earlier experience. Existing focus URLs remain valid.
 
@@ -34,6 +34,8 @@ npm test
 ```
 
 Preview: `http://127.0.0.1:4173`. Validation covers local links/assets, duplicate IDs and fragment targets (including links between pages), canonical URLs, shared desktop structure and navigation, JavaScript syntax, resume data and the silent-player requirement. The native Node regression tests cover CV loading failures, retries, competing requests, language changes, history, focus restoration, terminal keyboard behaviour, printing during loading, theme changes between tabs, project/journal history through taskbar anchors, and restoring the latest local note. They test state through UI events; real browser checks cover layout and focus. All tooling uses Node's standard library only.
+
+GitHub Actions runs validation and tests on Node.js 24 for pushes and pull requests. No dependency installation is needed. The workflow reports check results; it does not deploy the site or configure branch protection.
 
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 

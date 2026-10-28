@@ -424,7 +424,7 @@
     input.value = '';
   });
   document.addEventListener('keydown', event => {
-    if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || document.querySelector('dialog[open]')) return;
+    if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || document.querySelector('dialog:modal')) return;
     if (event.target.closest('.extras-window')) return;
     const field = event.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
     if (field && field !== document.getElementById('resumeCommand')) return;
