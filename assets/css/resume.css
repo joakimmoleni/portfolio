@@ -158,6 +158,21 @@
   .job { padding-left: 0; }
   .job-number { position: static; display: inline-block; margin-bottom: 4px; }
 }
+/* Preserve the terminal grid while giving longer passages a calmer reading rhythm. */
+@media screen {
+  .terminal-screen { line-height: 1.45; }
+  .resume-primary-menu { padding-top: 24px; padding-bottom: 32px; }
+  .profile-text, .job-highlights, .resume-project-description { max-width: 78ch; line-height: 1.6; }
+  .job-highlights li + li { margin-top: 8px; }
+  .job-years, .terminal-session { font-variant-numeric: tabular-nums; }
+  .resume-menu-info dl { row-gap: 5px; }
+  .lang-btn:active, .action-btn:not(:disabled):active { box-shadow: var(--inset); }
+}
+@media screen and (max-width: 450px) {
+  .resume-menu-info dl { grid-template-columns: 11ch minmax(0, 1fr); }
+  .resume-menu-info dt::after { content: ':'; margin-left: 0; }
+  .resume-menu-option { row-gap: 3px; }
+}
 @media print {
   @page { size: A4; margin: 14mm; }
   html, body { background: #fff !important; color: #000 !important; font: 10pt/1.4 Arial, sans-serif !important; }

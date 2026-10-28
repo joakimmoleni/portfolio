@@ -90,8 +90,42 @@
 .project-list a { min-width: 0; }
 .project-data { grid-template-columns: 1fr; gap: 4px; }
 }
+/* Keep the compact selector, but let descriptions and diagrams be read at normal size. */
+@media screen {
+  .project-panels { container: project-panel / inline-size; }
+  .project-heading { flex-wrap: wrap; gap: 8px 16px; margin-bottom: 12px; }
+  .project-heading h2 { line-height: 1.2; letter-spacing: -.035em; }
+  .project-lead, .project-copy p, .project-outcome p { font-size: 14px; line-height: 1.75; max-width: 65ch; }
+  .project-copy h3, .project-outcome h3 { font-size: 11px; line-height: 1.5; }
+  .project-name { font-size: 14px; line-height: 1.4; }
+  .project-list small { font-size: 11px; line-height: 1.6; }
+  .project-list a { padding-right: 28px; }
+  .project-list a:focus-visible { outline-color: #e7c48a; outline-offset: -4px; }
+  .preview-caption { font-size: 10px; line-height: 1.5; letter-spacing: .08em; gap: 12px; margin-bottom: 16px; }
+  .flow-node { font-size: 12px; padding: 14px 10px; }
+  .flow-node small { font-size: 11px; line-height: 1.5; color: #51676d; }
+  .project-data { font-size: 12px; line-height: 1.6; }
+  .project-link { font-size: 13px; }
+}
+@media screen and (max-width: 860px) {
+  .flow-node { font-size: 11px; padding: 12px 7px; }
+  .flow-node small { font-size: 10px; }
+}
+@media screen and (max-width: 620px) {
+  .project-name { font-size: 12px; }
+  .project-list a { padding: 14px 22px 14px 12px; }
+  .project-details { padding: 24px 18px; }
+}
+@container project-panel (max-width: 400px) {
+  .project-preview { padding: 14px 12px; }
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .flow-node { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 12px; padding: 12px; text-align: left; font-size: 12px; }
+  .flow-node small { margin: 0; font-size: 11px; }
+  .flow-node + .flow-node::before { content: '\2193'; left: calc(50% - 5px); top: -22px; line-height: 20px; }
+}
 @media (forced-colors: active) {
   .projects-stage, .project-bar, .project-list, .project-preview, .flow-node { background: Canvas; color: CanvasText; box-shadow: none; border-color: CanvasText; }
+  .project-list a:focus-visible { outline-color: Highlight; }
   .project-list a[aria-current="true"] { box-shadow: none; }
   .project-list a::after { display: none; }
 }

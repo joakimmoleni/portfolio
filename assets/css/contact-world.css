@@ -103,6 +103,45 @@
   .mirc-launch { padding-inline: 4px; }
   .contact-panel-body { padding-inline: 18px; }
 }
+/* Align the profile, tabs and reading panel without changing the personal-page layout. */
+@media screen {
+  .contact-stage { --contact-muted: #596f6e; }
+  [data-theme=dark] .contact-stage { --contact-muted: #adc3b7; }
+  .contact-grid { gap: 24px; padding: 24px; }
+  .contact-topbar { padding-inline: 24px; }
+  .contact-tabs { display: grid; grid-template-columns: 112px 80px 76px; }
+  .contact-tabs a { justify-content: center; }
+  .contact-panel-body { padding: 24px 28px; }
+  .contact-panel-body p { font-size: 14px; line-height: 1.75; }
+  .contact-panel-title { font-size: 12px; }
+  .contact-secondary-link { font-size: 12px; line-height: 1.6; }
+  .interests { font-size: 12px; line-height: 1.6; grid-template-columns: 56px minmax(0, 1fr); gap: 8px 12px; }
+  .link-badge { flex-shrink: 0; }
+  .contact-link-row small { font-size: 12px; line-height: 1.5; }
+  .profile-facts { font-size: 11px; color: #526c65; }
+  .profile-email { font-size: 11px; overflow-wrap: anywhere; }
+}
+@media screen and (max-width: 860px) {
+  .contact-grid { gap: 18px; padding: 22px; }
+  .contact-panel-body { padding: 24px; }
+}
+@media screen and (max-width: 620px) {
+  .contact-topbar { padding-inline: 10px; flex-wrap: wrap; }
+  .contact-tabs { flex: 1; min-width: 0; grid-template-columns: 1.45fr 1fr 1fr; }
+  .contact-tabs a { flex: 1; justify-content: center; font-size: 11px; padding-inline: 8px; }
+  .mirc-launch { min-height: 44px; margin-bottom: 0; }
+  .contact-grid { padding: 16px 12px; gap: 16px; }
+  .profile { grid-template-columns: 72px minmax(0, 1fr); }
+  .profile-picture { width: 72px; }
+  .profile-name { font-size: 12px; }
+  .profile-facts, .profile-email { font-size: 11px; }
+  .contact-panel-body { padding: 22px 18px; }
+  .contact-email { font-size: clamp(15px, 4.3vw, 19px); overflow-wrap: anywhere; }
+}
+@media screen and (max-width: 360px) {
+  .contact-topbar { padding-inline: 6px; }
+  .contact-tabs a { padding-inline: 6px; }
+}
 @media (forced-colors: active) {
   .contact-stage, .contact-panel, .profile, .contact-topbar, .contact-tabs a, .contact-panel-title { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; }
   .contact-stage a { color: LinkText; }
