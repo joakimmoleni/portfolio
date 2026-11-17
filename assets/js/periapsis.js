@@ -33,6 +33,7 @@
     box(c,'#445366',-7,-3,11,6); box(c,'#e46f57',-8,-2,4,4);
     box(c,'#ffe0a3',-8,-1,3,2); box(c,'#8499a0',1,-2,5,4);
     box(c,t%12<6?'#c96746':'#ef9865',7,-1,3,2);
+    c.restore();
   }
   function boss(c,x,y,t) {
     c.save(); c.translate(Math.round(x),Math.round(y));
