@@ -11,7 +11,7 @@ const resumeSource = readFileSync(path.join(root, 'assets/js/resume.js'), 'utf8'
 const base = JSON.parse(readFileSync(path.join(root, 'assets/data/resume-data.json'), 'utf8'));
 const files = new Map([
   ['./assets/data/resume-data.json', base],
-  ...base.variants.map(variant => [variant.path, JSON.parse(readFileSync(path.join(root, variant.path), 'utf8'))])
+  ...base.variants.filter(variant => variant.path).map(variant => [variant.path, JSON.parse(readFileSync(path.join(root, variant.path), 'utf8'))])
 ]);
 const [core, modern, platform] = ['mainframe-dev', 'modern-dev', 'platform-dev'].map(id => base.variants.find(variant => variant.id === id));
 const modernCommand = `v${base.variants.findIndex(variant => variant.id === modern.id) + 1}`;
@@ -48,6 +48,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     button.dataset.resumeCommand = 'help';
     button.setAttribute('aria-expanded', 'false');
   });
+  for (const job of base.experience) nodes.set(`job-${job.id}`, element());
   const sectionTabs = [];
   const menuButtons = [];
   const panels = ['profile', 'work', 'skills', 'education', 'projects'].map(panel => {
@@ -73,6 +74,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     get href() { return currentUrl.href; },
     set href(value) { currentUrl = new URL(value, currentUrl); },
     get search() { return currentUrl.search; },
+    get hash() { return currentUrl.hash; },
     get searchParams() { return currentUrl.searchParams; },
     toString() { return currentUrl.href; }
   };
@@ -649,6 +651,49 @@ await test('CV focus and language changes preserve the main menu and the printab
   assert.equal(nodes.get('resumeOptions').hidden, false);
   command('options');
   assert.equal(nodes.get('resumeOptions').hidden, true);
+});
+
+await test('project links focus the corresponding job, release the fragment on exit and restore it on Back', async () => {
+  const url = 'https://portfolio.example/resume.html?focus=modern-dev&panel=work#job-pinevision';
+  const { nodes, document, listeners, location, command } = await page(new URL(url).search + '#job-pinevision');
+  const heading = nodes.get('job-pinevision');
+  assert.equal(document.activeElement, heading);
+  assert.equal(heading.scrolled, true);
+  assert.equal(nodes.get('resume-work').hidden, false);
+  assert.match(nodes.get('resumeContent').innerHTML, /id="job-pinevision" tabindex="-1"/);
+  command('skills');
+  assert.equal(location.hash, '');
+  location.href = url;
+  await listeners.get('popstate')();
+  assert.equal(document.activeElement, heading);
+});
+
+await test('a slow linked resume keeps focus on a control the visitor has chosen', async () => {
+  const pending = delayedResponse();
+  const { document, nodes } = await page('?panel=work#job-fragsheet', new Map([['./assets/data/resume-data.json', pending.get]]));
+  nodes.get('resumeCommand').focus();
+  pending.finish(base);
+  await settle();
+  assert.equal(document.activeElement.id, 'resumeCommand');
+  assert.equal(nodes.get('job-fragsheet').scrolled, undefined);
+});
+
+await test('all profiles inherit employment history and share the same job anchors in both languages', async () => {
+  for (const variant of base.variants) {
+    const { nodes, selectedVariant, setLanguage } = await page(`?focus=${variant.id}&panel=work`);
+    assert.equal(selectedVariant(), variant.id);
+    for (const lang of ['sv', 'en']) {
+      setLanguage(lang);
+      const markup = nodes.get('resumeContent').innerHTML;
+      const override = files.get(variant.path)?.experienceOverrides || {};
+      for (const job of base.experience) {
+        const field = lang === 'sv' ? 'highlights_sv' : 'highlights';
+        const highlights = override[job.id]?.[field] || job[field];
+        assert.ok(markup.includes(`id="job-${job.id}"`));
+        for (const text of highlights) assert.ok(markup.includes(text.replaceAll('&', '&amp;').replaceAll("'", '&#039;')));
+      }
+    }
+  }
 });
 
 for (const result of results) if (result.passed) console.log(`PASS ${result.name}`);

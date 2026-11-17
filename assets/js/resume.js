@@ -18,7 +18,7 @@
   let resumeLoadState = 'loading';
   let requestedVariant = null;
   let commandAwaitingData = false;
-  let currentPanel = panelNames.includes(query.get('panel')) ? query.get('panel') : 'menu';
+  let currentPanel = panelFromLocation();
   let resumeLang = ['en', 'sv'].includes(query.get('lang')) ? query.get('lang') : (storedLang === 'en' ? 'en' : 'sv');
 
   function escapeHtml(value) {
@@ -36,6 +36,19 @@
       ? { profile: 'Profil', work: 'Erfarenhet', skills: 'Kompetenser', education: 'Utbildning', projects: 'Utvalda projekt', coreStack: 'Kärnkompetens', languages: 'Språk', platforms: 'Plattformar och verktyg', focus: 'Områden', contact: 'Kontakt', sections: 'CV-avsnitt', empty: 'Projekten finns i portfolions projektarkiv.' }
       : { profile: 'Profile', work: 'Experience', skills: 'Skills', education: 'Education', projects: 'Selected projects', coreStack: 'Core skills', languages: 'Languages', platforms: 'Platforms and tools', focus: 'Areas', contact: 'Contact', sections: 'Resume sections', empty: 'Project descriptions are available in the portfolio.' };
   }
+  function panelFromLocation() {
+    if (location.hash?.startsWith('#job-')) return 'work';
+    const panel = new URLSearchParams(location.search).get('panel');
+    return panelNames.includes(panel) ? panel : 'menu';
+  }
+  function focusLinkedJob() {
+    if (currentPanel !== 'work' || !location.hash?.startsWith('#job-')) return;
+    const heading = document.getElementById(location.hash.slice(1));
+    if (heading) {
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ block: 'start' });
+    }
+  }
   function syncResumeUrl(replace = false) {
     const next = new URL(location.href);
     next.searchParams.set('lang', resumeLang);
@@ -43,6 +56,7 @@
     else if (resumeLoadState !== 'loading') next.searchParams.delete('focus');
     if (currentPanel === 'menu') next.searchParams.delete('panel');
     else next.searchParams.set('panel', currentPanel);
+    if (currentPanel !== 'work' && next.hash.startsWith('#job-')) next.hash = '';
     if (next.href !== location.href) history[replace ? 'replaceState' : 'pushState'](null, '', `${next.pathname}${next.search}${next.hash}`);
   }
   function setStatus(message, state = 'info') {
@@ -121,7 +135,7 @@
       title_sv: variant.title_sv || variant.title || variant.id,
       description: variant.description || '',
       description_sv: variant.description_sv || variant.description || '',
-      path: variant.path || `./assets/data/variants/${variant.id}.json`
+      path: variant.path
     }));
   }
   function initVariants(variants) {
@@ -158,7 +172,14 @@
     return targets[event.key];
   }
   function mergeResumeData(baseData, overrideData) {
-    return { ...baseData, ...overrideData, personal: { ...baseData.personal, ...overrideData.personal }, skills: { ...baseData.skills, ...overrideData.skills }, variants: baseData.variants || [] };
+    return {
+      ...baseData, ...overrideData,
+      personal: { ...baseData.personal, ...overrideData.personal },
+      skills: { ...baseData.skills, ...overrideData.skills },
+      experience: overrideData.experience || baseData.experience.map(job => ({
+        ...job, ...overrideData.experienceOverrides?.[job.id]
+      }))
+    };
   }
   function selectPanel(panel, updateUrl = true) {
     if ((panel !== 'menu' && !panelNames.includes(panel)) || !document.getElementById(`resume-${panel}`)) return false;
@@ -192,14 +213,12 @@
     resumeLoadState = 'loading';
     resumeContent.setAttribute('aria-busy', 'true');
     updateResumeStatus();
-    let merged;
+    let merged = baseResumeData;
     try {
-      let data = variantCache.get(variant.id);
-      if (!data) {
-        data = await fetchJson(variant.path);
-        variantCache.set(variant.id, data);
+      if (variant.path) {
+        if (!variantCache.has(variant.id)) variantCache.set(variant.id, await fetchJson(variant.path));
+        merged = mergeResumeData(baseResumeData, variantCache.get(variant.id));
       }
-      merged = mergeResumeData(baseResumeData || {}, data);
     } catch (error) {
       if (request !== variantRequest) return;
       console.error(`Could not load resume variant ${variant.id}.`, error);
@@ -259,7 +278,7 @@
     const experienceHtml = experience.map((job, index) => `
       <article class="job">
         <span class="job-number no-print" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
-        <div class="job-header"><h3 class="job-company">${escapeHtml(t(job, 'company'))}</h3><span class="job-years">${escapeHtml(t(job, 'years'))}</span></div>
+        <div class="job-header"><h3 class="job-company"${job.id ? ` id="job-${escapeHtml(job.id)}" tabindex="-1"` : ''}>${escapeHtml(t(job, 'company'))}</h3><span class="job-years">${escapeHtml(t(job, 'years'))}</span></div>
         <p class="job-position">${escapeHtml(t(job, 'role'))}</p>
         <ul class="job-highlights">${tArr(job, 'highlights').map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
       </article>`).join('');
@@ -406,6 +425,7 @@
       resumeContent.setAttribute('aria-busy', 'false');
       updateResumeStatus();
     }
+    if (document.activeElement === document.body || document.activeElement.id === location.hash?.slice(1)) focusLinkedJob();
   }
 
   setResumeLang(resumeLang, false);
@@ -431,12 +451,16 @@
     if (event.key === 'F1') { event.preventDefault(); showHelp(); }
     if (event.key === 'F3' && (!field || !field.value.trim())) { event.preventDefault(); returnToMenu(); }
   });
-  window.addEventListener('popstate', () => {
+  window.addEventListener('popstate', async () => {
     const currentQuery = new URLSearchParams(location.search);
-    currentPanel = panelNames.includes(currentQuery.get('panel')) ? currentQuery.get('panel') : 'menu';
+    currentPanel = panelFromLocation();
     setResumeLang(['en', 'sv'].includes(currentQuery.get('lang')) ? currentQuery.get('lang') : resumeLang, false);
     const selected = resumeVariants.find(variant => variant.id === currentQuery.get('focus')) || resumeVariants[0];
-    if (selected) selectVariant(selected.id, false);
+    const origin = document.activeElement;
+    if (!selected) return;
+    const result = await selectVariant(selected.id, false);
+    const focused = document.activeElement;
+    if (result !== undefined && (focused === origin || (origin.id && focused.id === origin.id))) focusLinkedJob();
   });
   loadResume();
 })();

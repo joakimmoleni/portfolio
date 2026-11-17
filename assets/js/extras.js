@@ -412,7 +412,13 @@
       log.replaceChildren();
       addLine('*** Rensat.');
     } else if (command === '/help') {
-      bot('/me [text] · /slap [namn] · /clear · /winamp · /np · /join #lobby');
+      bot('/me [text] · /slap [namn] · /whois [nick] · /clear · /winamp · /np · /join #lobby');
+    } else if (command === '/whois') {
+      switch (argument.toLowerCase()) {
+        case 'exposure_': addLine('*** exposure_ (Joakim Moléni) · Stockholm · #exposure_'); break;
+        case 'bot': bot('Det är jag. Skriv /help om du vill se vad jag kan.'); break;
+        default: bot(argument ? 'Inget sådant nick här.' : 'Använd /whois [nick].');
+      }
     } else if (command === '/join') {
       const nextChannel = argument.toLowerCase();
       if (nextChannel === '#exposure_' || nextChannel === '#lobby') joinChannel(nextChannel);

@@ -120,15 +120,25 @@ if (/<audio\b|new\s+Audio\s*\(|\b(?:AudioContext|webkitAudioContext)\b/.test(ext
 }
 
 const resumeData = JSON.parse(await read('assets/data/resume-data.json'));
+const jobIds = new Set();
+for (const job of resumeData.experience) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(job.id || '') || jobIds.has(job.id)) {
+    errors.push(`Invalid or duplicate resume job ID: ${job.id}`);
+  }
+  jobIds.add(job.id);
+}
 for (const variant of resumeData.variants || []) {
   const variantPath = variant.path?.replace(/^\.\//, '');
   if (!variantPath) {
-    errors.push(`assets/data/resume-data.json: variant ${variant.id || '(unnamed)'} has no path`);
+    if (variant.id !== 'platform-dev') errors.push(`Resume variant ${variant.id} is missing its override path`);
     continue;
   }
   await exists(variantPath, 'resume variant');
   try {
-    JSON.parse(await read(variantPath));
+    const override = JSON.parse(await read(variantPath));
+    for (const id of Object.keys(override.experienceOverrides || {})) {
+      if (!jobIds.has(id)) errors.push(`${variantPath}: unknown job ID ${id}`);
+    }
   } catch (error) {
     errors.push(`${variantPath}: invalid JSON (${error.message})`);
   }
@@ -137,7 +147,7 @@ for (const variant of resumeData.variants || []) {
 const publishableFiles = [
   ...htmlFiles,
   'assets/data/resume-data.json',
-  ...(resumeData.variants || []).map(variant => variant.path.replace(/^\.\//, ''))
+  ...(resumeData.variants || []).filter(variant => variant.path).map(variant => variant.path.replace(/^\.\//, ''))
 ];
 const unsupportedClaims = [
   /850\+/i,

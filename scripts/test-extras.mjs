@@ -402,3 +402,14 @@ test('the playlist starts in the agreed order and previous wraps to the final so
   fresh.send('/np');
   assert.match(fresh.lines().at(-1), /One Step Closer/);
 });
+
+test('WHOIS reveals the local channel and handles missing or unknown nicknames', () => {
+  const desktop = page(new Map());
+  desktop.open('mirc');
+  desktop.send('/WHOIS Exposure_');
+  assert.equal(desktop.lines().at(-1), '*** exposure_ (Joakim Moléni) · Stockholm · #exposure_');
+  desktop.send('/whois');
+  assert.match(desktop.lines().at(-1), /Använd \/whois/);
+  desktop.send('/whois nobody');
+  assert.match(desktop.lines().at(-1), /Inget sådant nick/);
+});

@@ -97,6 +97,10 @@
 .job-number { position: absolute; left: 0; top: 0; color: var(--terminal-blue); }
 .job-header { display: flex; justify-content: space-between; align-items: baseline; gap: 2ch; }
 .job-company { font: inherit; color: var(--terminal-cyan); }
+.job-company[id] { scroll-margin-block-start: 1rem; }
+@media screen {
+  .job-company:target { text-decoration: underline; text-underline-offset: .25em; }
+}
 .job-years { color: var(--terminal-blue); max-width: 32ch; text-align: right; }
 .job-position { margin-top: 3px; color: var(--terminal-bright); }
 .job-highlights { padding-left: 2ch; margin: 10px 0 0; color: var(--terminal-text); max-width: 88ch; }
