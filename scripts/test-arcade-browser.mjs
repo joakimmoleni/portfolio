@@ -50,13 +50,19 @@ async function check() {
         for (let i=0; i<data.length; i+=4) {
           if (data[i]===rgb[0] && data[i+1]===rgb[1] && data[i+2]===rgb[2]) return true;
         }
+        const palette = new Map();
+        for (let i=0; i<data.length; i+=4) {
+          const colour = Array.from(data.subarray(i,i+4)).join(',');
+          palette.set(colour,(palette.get(colour)||0)+1);
+        }
+        hasColour.palette = [...palette].sort((a,b)=>b[1]-a[1]).slice(0,8).map(([rgba,n])=>rgba+' x '+n).join(' / ');
         return false;
       }
       const cockpit = [115,225,236], gold = [224,161,74], beam = [228,255,243];
       const rect = screen.getBoundingClientRect();
       const elementAtShip = doc.elementFromPoint(rect.left+48/384*rect.width,rect.top+97/192*rect.height);
       assert(elementAtShip === screen && id('space-prompt').getBoundingClientRect().top >= rect.bottom, 'briefing leaves playfield visible');
-      assert(hasColour([30,83,36,28],cockpit), 'player visible before launch');
+      assert(hasColour([30,83,36,28],cockpit), 'player visible before launch: '+hasColour.palette);
       assert(hasColour([260,65,124,80],gold), 'first carrier visible before launch');
       id('space-go').click();
       assert(id('space-prompt').hidden && hasColour([58,88,20,17],beam), 'flight starts with a visible shot');

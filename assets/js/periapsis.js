@@ -53,7 +53,7 @@
     box(c,'#fff1b0',-24,-1,10,2); box(c,'#e4bda0',11,-2,13,4);
     c.restore();
   }
-  function fighter(c,x,y,w=34) {
+  function fighter(c,x,y,w=40) {
     c.save();
     c.translate(Math.round(x-w/2),Math.round(y-w*.35));
     c.scale(w/40,w/40);
@@ -145,6 +145,7 @@
   function open() {
     panel.hidden=false;
     if(!panel.open) panel.show();
+    paint();
     window.DesktopWindows.opened(panel);
     (mode==='running'?pause:go).focus({preventScroll:true});
   }
@@ -190,5 +191,7 @@
   panel.addEventListener('desktop-deactivate',hold);
   window.addEventListener('blur',hold); window.addEventListener('pagehide',hold);
   document.addEventListener('visibilitychange',()=>{ if(document.hidden) hold(); });
-  sleeve(); paint(); opener.hidden=false;
+  screen.addEventListener('contextrestored',paint);
+  cover.addEventListener('contextrestored',sleeve);
+  sleeve(); opener.hidden=false;
 })();
