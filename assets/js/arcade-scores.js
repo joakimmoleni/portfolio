@@ -2,7 +2,7 @@
 const ArcadeScores = (() => {
   'use strict';
   const hosted = location.protocol==='file:' || location.hostname==='portfolio.moleni.se' || location.hostname.endsWith('.github.io');
-  const api = hosted ? 'https://moleni-arkad.jcrooge.chatgpt.site/api/scores/' : '/api/scores/';
+  const api = hosted ? 'https://moleni-arkad.jcrooge.workers.dev/api/scores/' : '/api/scores/';
   function runId() {
     if (crypto.randomUUID) return crypto.randomUUID();
     const bytes=crypto.getRandomValues(new Uint8Array(16));

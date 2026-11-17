@@ -34,7 +34,7 @@ Periapsis is a horizontal pixel shooter. Fly through three sectors of eight form
 
 Both games have a shared top ten. Periapsis ranks points and Spökvarvet ranks lap ticks. A player enters three initials after finishing. The server filters initials and reproduces the game from its controls before ranking a score. It keeps just the ranked entries. The local preview uses Node 24+ and stores the two boards in `.local/arcade.sqlite`. Set `ARCADE_SCORE_DB=:memory:` for a disposable preview.
 
-For the public portfolio the API runs separately from GitHub Pages. Prepare its Sites checkout with `node arcade/build-worker.mjs <service-checkout>` and publish that checkout with the D1 binding `DB`. Both deployments use the same engine and SQL migration. Rebuild the service when changing either game's rules.
+Production uses the Cloudflare Worker `moleni-arkad.jcrooge.workers.dev` with the D1 database `moleni-arkad-scores` bound as `DB`. The public endpoints are `/api/scores/space` and `/api/scores/rally`. The initial deployment bundle and schema are on the `arkad-deploy` branch under `cloudflare-deploy/`. When the game rules change, rebuild the server with the matching engines and deploy the Worker alongside the client.
 
 ## Preview and validate
 
