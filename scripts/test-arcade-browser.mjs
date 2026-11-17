@@ -98,6 +98,14 @@ async function check() {
       id('rally-go').click();
       for (let i=0;i<400 && id('rally-wallpaper').hidden;i++) advance();
       assert(!id('rally-wallpaper').hidden && id('rally-progress').textContent === '100 %', 'finish a complete lap');
+      const board=id('rally-scores'), initials=id('rally-initials');
+      assert(board.open && fits(initials), 'initials fit after finishing');
+      initials.value=width===320?'PIX':'ÅKE';
+      const form=board.querySelector('form');
+      form.requestSubmit();
+      for(let i=0;i<80 && !form.hidden;i++) await new Promise(resolve=>setTimeout(resolve,50));
+      assert(form.hidden && board.querySelector('ol').textContent.includes(initials.value),'shared score accepted');
+      if(width===1024) assert(board.querySelector('ol').textContent.includes('PIX'),'another player remains on the board');
       id('rally-wallpaper').click();
       assert(doc.documentElement.hasAttribute('data-rally-wallpaper'), 'apply finish frame');
       const reset = id('themeToggle').nextElementSibling;
@@ -110,7 +118,7 @@ async function check() {
 const root = new URL('../', import.meta.url);
 const dir = await mkdtemp(join(root.pathname, 'arcade-check-'));
 const profile = await mkdtemp(join(tmpdir(),'portfolio-browser-'));
-const server = spawn(process.execPath, ['scripts/serve.mjs','--port','4179'], {cwd:root});
+const server = spawn(process.execPath, ['scripts/serve.mjs','--port','4179'], {cwd:root,env:{...process.env,ARCADE_SCORE_DB:':memory:'}});
 try {
   await Promise.race([once(server.stdout,'data'), once(server,'exit').then(()=>{throw Error('Preview server stopped');})]);
   const html = '<meta charset="utf-8"><p id="result">Pending</p><iframe style="border:0" height="720"></iframe><script>(' + check.toString() + ')()</script>';

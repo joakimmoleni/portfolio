@@ -10,8 +10,11 @@
   const stars=Array.from({length:88},(_,i)=>({
     x:(i*137+i*i*3)%389, y:(i*79+i*i*13)%193, layer:i%3
   }));
-  let s=Periapsis.flight(), mode='ready', frame, last=null, carry=0, pointer=null, best=0;
-  try { best=Math.max(0,Number(localStorage.getItem('moleni-periapsis-best')) || 0); } catch {}
+  let s=Periapsis.flight(), mode='ready', frame, last=null, carry=0, pointer=null;
+  let best = 0;
+  try { best = Math.max(0,Number(localStorage.getItem('moleni-periapsis-best')) || 0); } catch {}
+  const board = ArcadeScores.mount(byId('scores'), 'space', value => value.toLocaleString('sv-SE')+' p');
+  let steps = [];
   const box=(c,color,x,y,w,h)=>{ c.fillStyle=color; c.fillRect(Math.round(x),Math.round(y),w,h); };
   function field(c,w,h,tick) {
     box(c,'#020306',0,0,w,h);
@@ -20,7 +23,7 @@
       box(c,['#344253','#6e7481','#bdb9a9'][star.layer],x,y,1,1);
     }
   }
-  function drone(c,x,y,carrier,t) {
+  function drone(c,x,y,carrier,t,charging) {
     c.save(); c.translate(Math.round(x),Math.round(y));
     const plate=carrier?'#e0a14a':'#97788e', light=carrier?'#ffe594':'#dfb6b9';
     for (const side of [-1,1]) {
@@ -31,7 +34,7 @@
       c.restore();
     }
     box(c,'#445366',-7,-3,11,6); box(c,'#e46f57',-8,-2,4,4);
-    box(c,'#ffe0a3',-8,-1,3,2); box(c,'#8499a0',1,-2,5,4);
+    box(c,charging?'#fff5ba':'#ffe0a3',-8,-1,charging?7:3,charging?4:2); box(c,'#8499a0',1,-2,5,4);
     box(c,t%12<6?'#c96746':'#ef9865',7,-1,3,2);
     c.restore();
   }
@@ -91,12 +94,20 @@
       if(e.boss) {
         boss(ctx,e.x,e.y,e.age);
         box(ctx,'#4d3c42',e.x-23,e.y-25,46,2);
-        box(ctx,'#eeb691',e.x-23,e.y-25,Math.ceil(e.hp/44*46),2);
-      } else drone(ctx,e.x,e.y,e.carrier,s.tick);
+        box(ctx,'#eeb691',e.x-23,e.y-25,Math.ceil(e.hp/Periapsis.bossHull*46),2);
+      } else drone(ctx,e.x,e.y,e.carrier,s.tick,e.gunner && e.age>=92 && e.age<115);
     }
     for (const b of s.bolts) {
-      const len=[6,10,16][s.laser];
-      box(ctx,s.laser===2?'#6dcdb3':'#57aebc',b.x-len,b.y-1,len,3);
+      if (b.rocket) {
+        box(ctx,'#d66843',b.x-13,b.y-1,5,3);
+        box(ctx,'#ffe398',b.x-10,b.y,4,1);
+        box(ctx,'#899ca9',b.x-7,b.y-3,3,7);
+        box(ctx,'#e3e7d9',b.x-7,b.y-1,9,3);
+        box(ctx,'#e5936a',b.x+2,b.y,2,1);
+        continue;
+      }
+      const len=[6,10,16][b.tier];
+      box(ctx,b.tier===2?'#6dcdb3':'#57aebc',b.x-len,b.y-1,len,3);
       box(ctx,'#e4fff3',b.x-len+2,b.y,len-2,1);
     }
     for (const b of s.hostile) { box(ctx,'#ef7754',b.x-2,b.y-2,5,5); box(ctx,'#ffecae',b.x-1,b.y-1,3,3); }
@@ -110,13 +121,17 @@
     }
     fighter(ctx,s.x,s.y);
     for (const p of s.sparks) box(ctx,p.color,p.x,p.y,p.life>10?2:1,1);
-    const values={score:s.score,hull:s.hull+' / 3',laser:Periapsis.lasers[s.laser]};
+    const weapon = Periapsis.weapons[s.weapon], next = Periapsis.weapons[s.weapon+1];
+    const charge = next ? ' · '+(s.collected-weapon.cells)+'/'+(next.cells-weapon.cells) : '';
+    const sector = (s.sector+1)+' / '+Periapsis.sectors.length+' · '+Periapsis.sectors[s.sector];
+    const values={score:s.score+' · ×'+Periapsis.multiplier(s),hull:s.hull+' / 3',laser:weapon.name+charge,sector};
     for(const [name,value] of Object.entries(values)) {
       const node=byId(name); if(node.textContent!==String(value)) node.textContent=value;
     }
   }
   function prompt(title,message,action) {
     cancelAnimationFrame(frame); keys.clear(); pointer=null;
+    board.visible(true);
     byId('heading').textContent=title; byId('message').textContent=message;
     go.textContent=action; byId('prompt').hidden=false; pause.disabled=true;
     if(panel.open && !panel.hidden && panel.contains(document.activeElement)) go.focus({preventScroll:true});
@@ -133,14 +148,18 @@
     for (const key of keys) { dx+=arrows[key][0]; dy+=arrows[key][1]; }
     while(carry>=1000/60 && !s.result) {
       if(pointer) { dx=(pointer.x-s.x)/2.15; dy=(pointer.y-s.y)/2.15; }
-      Periapsis.step(s,dx,dy); carry-=1000/60;
+      const scale=127/Math.max(1,Math.hypot(dx,dy));
+      const inputX=Math.round(dx*scale), inputY=Math.round(dy*scale);
+      ArcadeScores.append(steps,inputX,inputY);
+      Periapsis.step(s,inputX/127,inputY/127); carry-=1000/60;
     }
     paint();
     if(s.result) {
       mode='finished';
       best=Math.max(best,s.score);
       try { localStorage.setItem('moleni-periapsis-best',String(best)); } catch {}
-      prompt(s.result==='won'?'Sektorn är fri':'Skrovet gav upp',s.score+' poäng · Personbästa '+best,'Flyg igen');
+      board.finish(s.score,steps);
+      prompt(s.result==='won'?'Varvet är fritt':s.result==='escaped'?'Flaggskeppet kom undan':'Skrovet gav upp',s.score+' poäng · Personbästa '+best,'Flyg igen');
     } else frame=requestAnimationFrame(loop);
   }
   function open() {
@@ -155,10 +174,12 @@
   go.addEventListener('click',()=>{
     if(mode!=='paused') {
       s=Periapsis.flight();
+      steps=[[1,0,0]]; board.start();
       Periapsis.step(s);
       carry=0;
     }
     paint();
+    board.visible(false);
     mode='running'; last=null; byId('prompt').hidden=true; pause.disabled=false;
     screen.focus({preventScroll:true}); frame=requestAnimationFrame(loop);
   });
@@ -166,7 +187,7 @@
   byId('close').addEventListener('click',()=>panel.close());
   panel.addEventListener('close',()=>{
     hold(); mode='ready'; s=Periapsis.flight();
-    prompt('Redo för start','Skjut de guldfärgade fienderna och plocka deras laserceller.','Flyg');
+    prompt('Redo för start','Plocka celler från de guldfärgade skeppen för att uppgradera vapnet.','Flyg');
     paint(); opener.focus({preventScroll:true});
   });
   panel.addEventListener('keydown',e=>{

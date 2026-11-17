@@ -4,3 +4,4 @@ Thumbs.db
 *.swo
 old/
 .claude/
+/.local/

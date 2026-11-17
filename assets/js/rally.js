@@ -17,7 +17,10 @@
     const hundredths = Math.round(ticks * GhostLap.tick * 100);
     return Math.floor(hundredths / 6000) + ':' + String(Math.floor(hundredths / 100) % 60).padStart(2,'0') + ',' + String(hundredths % 100).padStart(2,'0');
   }
+  const board = ArcadeScores.mount(byId('scores'), 'rally', format);
+  let steps = [], pressed = false, tap = 0;
   function clearControls() {
+    pressed = false; tap = 0;
     keys.clear(); pointers.clear();
     steering.forEach(button => button.removeAttribute('data-held'));
   }
@@ -36,12 +39,13 @@
     }
     byId('time').textContent = format(lap.ticks);
     byId('pace').textContent = Math.round(GhostLap.pace(lap) * 100) + ' %';
-    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + ' %';
+    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + (Math.abs(lap.lane)>0.9?' % · Grus':' %');
   }
   function prompt(next, title, message, action) {
     cancelAnimationFrame(frame);
     clearControls();
     mode = next;
+    board.visible(true);
     byId('prompt').hidden = false;
     wallpaper.hidden = next !== 'finished';
     byId('heading').textContent = title;
@@ -61,6 +65,7 @@
     const title = 'I mål på ' + format(lap.ticks);
     byId('status').textContent = title + '. ' + message;
     prompt('finished',title,message,'Kör igen');
+    board.finish(lap.ticks,steps);
   }
   function hold() {
     if (mode !== 'running') return;
@@ -76,7 +81,10 @@
     lastFrame = now;
     const direction = driveDirection();
     while (carry >= GhostLap.tick && lap.distance < GhostLap.length) {
-      GhostLap.step(lap,direction,keys.size > 0 || pointers.size > 0);
+      const flags=Number(pressed || keys.size>0 || pointers.size>0) | tap;
+      ArcadeScores.append(steps,direction,flags);
+      GhostLap.drive(lap,direction,flags);
+      pressed=false; tap=0;
       carry -= GhostLap.tick;
     }
     paint();
@@ -84,7 +92,8 @@
     frame = requestAnimationFrame(loop);
   }
   function start() {
-    if (mode !== 'paused') { lap = GhostLap.newLap(); carry = 0; }
+    if (mode !== 'paused') { lap = GhostLap.newLap(); carry = 0; steps=[]; board.start(); }
+    board.visible(false);
     mode = 'running'; lastFrame = null;
     paint();
     byId('reference').textContent = previous ? 'Spökvarv ' + format(previous.ticks) : 'Första varvet';
@@ -129,14 +138,14 @@
     const code=event.key.toLowerCase();
     if (mode !== 'running' || event.metaKey || event.ctrlKey || event.altKey || !driveKeys.has(code)) return;
     event.preventDefault(); keys.add(code);
-    lap.coastTicks = 0;
+    pressed = true;
   });
   window.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
   for (const button of steering) {
     button.addEventListener('pointerdown',event=>{
       if (mode !== 'running' || event.button !== 0) return;
       button.setPointerCapture(event.pointerId);
-      lap.coastTicks = 0;
+      pressed = true;
       pointers.set(event.pointerId,Number(button.dataset.steer)); button.setAttribute('data-held','');
     });
     button.addEventListener('lostpointercapture',event=>{
@@ -146,8 +155,8 @@
     // Keyboard and assistive-technology activation also give a short steering input.
     button.addEventListener('click',event=>{
       if (mode === 'running' && event.detail === 0) {
-        lap.coastTicks = 0;
-        lap.lateral = Number(button.dataset.steer) * 2.35;
+        pressed = true;
+        tap = Number(button.dataset.steer)<0 ? 2 : 4;
       }
     });
   }

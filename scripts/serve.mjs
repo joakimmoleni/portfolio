@@ -1,5 +1,7 @@
 // Dependency-free local preview. Production remains a static site.
 import http from 'node:http';
+import { Readable } from 'node:stream';
+import { localLeaderboard } from '../arcade/local.mjs';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7,9 +9,19 @@ const root = fileURLToPath(new URL('../', import.meta.url)).replace(/\/$/, '');
 const args = process.argv.slice(2);
 const value = (flag, fallback) => args.includes(flag) ? args[args.indexOf(flag) + 1] : fallback;
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
+let scores;
 http.createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (pathname.startsWith('/api/scores/')) {
+      scores ??= localLeaderboard(process.env.ARCADE_SCORE_DB || resolve(root,'.local/arcade.sqlite'));
+      const options={method:req.method,headers:req.headers};
+      if (req.method==='POST') { options.body=Readable.toWeb(req); options.duplex='half'; }
+      const reply=await scores(new Request('http://localhost'+pathname,options));
+      res.writeHead(reply.status,Object.fromEntries(reply.headers));
+      res.end(await reply.text());
+      return;
+    }
     if (pathname.split('/').some(segment => segment.startsWith('.'))) throw new Error('Private path');
     let file = resolve(root, '.' + pathname);
     if (file !== root && !file.startsWith(root + sep)) throw new Error('Outside root');

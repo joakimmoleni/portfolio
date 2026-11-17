@@ -6,7 +6,7 @@
     "dev": "node scripts/serve.mjs",
     "cv:sync": "node scripts/sync-resume.mjs",
     "validate": "node scripts/sync-resume.mjs --check && node scripts/validate-site.mjs",
-    "test": "node scripts/test-resume.mjs && node scripts/test-worlds.mjs && node scripts/test-desktop.mjs && node scripts/test-extras.mjs && node scripts/test-rally.mjs && node scripts/test-periapsis.mjs",
+    "test": "node scripts/test-resume.mjs && node scripts/test-worlds.mjs && node scripts/test-desktop.mjs && node scripts/test-extras.mjs && node scripts/test-rally.mjs && node scripts/test-periapsis.mjs && node scripts/test-arcade-scores.mjs",
     "test:browser": "node scripts/test-arcade-browser.mjs"
   }
 }

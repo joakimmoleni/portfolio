@@ -76,3 +76,18 @@ test('gravel and opposing steering inputs cannot build a bonus', () => {
     assert.equal(game.pace(lap), 1);
   }
 });
+
+test('a brief shoulder touch costs a fraction of a second and a deeper excursion costs more', () => {
+  function timeAt(lane, duration) {
+    const lap=game.newLap();
+    while (lap.distance<game.length) {
+      lap.lane=lap.ticks>=600 && lap.ticks<600+duration?lane:0;
+      game.step(lap,0);
+    }
+    return lap.ticks;
+  }
+  const clear=timeAt(0,0), edge=timeAt(0.88,60), brush=timeAt(1,24), wide=timeAt(1.35,60);
+  assert.ok(edge>clear && edge-clear<15);
+  assert.ok(brush>clear && brush-clear<30);
+  assert.ok(wide>brush && wide-clear<95);
+});

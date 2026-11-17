@@ -25,10 +25,16 @@ The full profile opens first; mainframe and web/backend views adjust emphasis wh
 
 The overview uses `assets/data/resume-data.json` directly. Two specialist profiles override selected fields and jobs. Project links open the matching employer in the CV. Run `npm run cv:sync` after changing base data to refresh the printable Swedish HTML fallback. Validation checks that it is current. Public copy describes general bank responsibilities, not internal assignments, environments or unverified project/adoption figures. Earlier career entries cover sales, business development, customer websites, production and logistics. The personal narrative is deliberately selective: employers remain in CV and project headings, while private anecdotes and explanations of the interface references stay out of the page copy.
 
-Spökvarvet opens from its illustrated sleeve on the desktop. Steering works with the arrow keys, A/D and the two touch buttons. Releasing the steering on asphalt for 0.6 seconds starts a smooth speed increase to 115% over the next 0.9 seconds. Steering or reaching the gravel cancels the bonus. The last completed lap is recorded locally and becomes the ghost on the next run. Minimizing the window or leaving the tab pauses the race. After finishing, the player can use the frame as the portfolio desktop wallpaper and restore the original in Start.
+Spökvarvet opens from its illustrated sleeve on the desktop. Steering works with the arrow keys, A/D and the two touch buttons. Releasing the steering on asphalt for 0.6 seconds starts a smooth speed increase to 115% over the next 0.9 seconds. Steering or reaching the gravel cancels the bonus. Running wide gradually bleeds speed. Going deeper into gravel costs more, with no time added at the finish. The last completed lap is recorded locally and becomes the ghost on the next run. Minimizing the window or leaving the tab pauses the race. After finishing, the player can use the frame as the portfolio desktop wallpaper and restore the original in Start.
 
-Periapsis is a horizontal pixel shooter. Follow the formations, collect cells for double and spread lasers and clear the last ship. It supports arrow keys, WASD and relative dragging. Both games and the desktop programs have taskbar buttons and are listed in Start under Öppna fönster while open or minimized. Closing a game ends that run.
+Periapsis is a horizontal pixel shooter. Fly through three sectors of eight formations and intercept the flagship. Cells unlock twin lasers, prism fire, guided missiles and a paired salvo at 3, 6, 10 and 15 pickups. Early interceptions, unbroken kill chains and a fast, clean boss fight reward repeat runs. It supports arrow keys, WASD and relative dragging. Both games and the desktop programs have taskbar buttons and are listed in Start under Öppna fönster while open or minimized. Closing a game ends that run.
 
+
+## Arcade scores
+
+Both games have a shared top ten. Periapsis ranks points and Spökvarvet ranks lap ticks. A player enters three initials after finishing. The server filters initials and reproduces the game from its controls before ranking a score. It keeps just the ranked entries. The local preview uses Node 24+ and stores the two boards in `.local/arcade.sqlite`. Set `ARCADE_SCORE_DB=:memory:` for a disposable preview.
+
+For the public portfolio the API runs separately from GitHub Pages. Prepare its Sites checkout with `node arcade/build-worker.mjs <service-checkout>` and publish that checkout with the D1 binding `DB`. Both deployments use the same engine and SQL migration. Rebuild the service when changing either game's rules.
 
 ## Preview and validate
 

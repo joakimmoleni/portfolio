@@ -39,7 +39,11 @@ const GhostLap = (() => {
     if (lap.distance >= length) return;
     const onRoad = Math.abs(lap.lane) <= 0.9;
     lap.coastTicks = onRoad && !steeringHeld ? Math.min(lap.coastTicks + 1, coastDelayTicks + coastRampTicks) : 0;
-    const targetSpeed = onRoad ? 58 : 23;
+    // A tyre on the verge costs a little. Staying out in the gravel costs more.
+    const offset = Math.abs(lap.lane);
+    const outerEdge = clamp((offset - 0.72) / 0.18, 0, 1);
+    const gravel = clamp((offset - 0.9) / 0.5, 0, 1);
+    const targetSpeed = 58 - 3.5 * outerEdge - 24 * gravel;
     lap.baseSpeed += (targetSpeed - lap.baseSpeed) * tick * 1.8;
     const speed = lap.baseSpeed * pace(lap);
     lap.lateral += (clamp(steering, -1, 1) * 2.35 - lap.lateral) * tick * 8;
@@ -50,6 +54,12 @@ const GhostLap = (() => {
     if (lap.ticks % sampleTicks === 0 || lap.distance === length) {
       lap.samples.push([Math.round(lap.distance * 100) / 100, Math.round(lap.lane * 1000) / 1000]);
     }
+  }
+  // Flags preserve a held control (1), or a short left/right button press (2/4).
+  function drive(lap, direction, flags) {
+    if (flags & 2) lap.lateral = -2.35;
+    if (flags & 4) lap.lateral = 2.35;
+    step(lap, direction, flags !== 0 || direction !== 0);
   }
   function validReplay(replay) {
     if (!replay || !Number.isInteger(replay.ticks) || replay.ticks < 1 || replay.ticks > 6000 || !Array.isArray(replay.samples)) return false;
@@ -67,6 +77,6 @@ const GhostLap = (() => {
     const blend = (ticks - index * sampleTicks) / Math.min(sampleTicks, replay.ticks - index * sampleTicks);
     return { distance: a[0] + (b[0] - a[0]) * blend, lane: a[1] + (b[1] - a[1]) * blend };
   }
-  return { length, tick, newLap, step, pace, validReplay, ghostAt,
+  return { length, tick, newLap, step, drive, pace, validReplay, ghostAt,
     position: distance => at(positions, distance), slope: distance => at(slopes, distance) };
 })();
