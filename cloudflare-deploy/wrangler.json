@@ -1,0 +1,14 @@
+{
+  "name": "moleni-arkad",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-17",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "moleni-arkad-scores",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
