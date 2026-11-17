@@ -24,6 +24,8 @@
 .rally-window .title-button { font: bold 20px/1 Arial, sans-serif; }
 .rally-hud, .rally-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 9px; }
 .rally-hud { font: .82rem/1.35 Tahoma, sans-serif; color: #e6e9da; background: #202e33; min-height: 32px; font-variant-numeric: tabular-nums; }
+.rally-hud { flex-wrap: wrap; row-gap: 2px; }
+.rally-hud > span { white-space: nowrap; }
 .rally-hud b { color: #fff; margin-left: 4px; }
 .rally-track { position: relative; background: #435661; border: 1px solid #243438; }
 .rally-prompt { position: absolute; inset: 0; display: grid; place-items: center; padding: 8px; background: #13273444; }

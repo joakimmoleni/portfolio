@@ -37,3 +37,42 @@ test('invalid and partial stored laps cannot become ghosts', () => {
     assert.equal(game.validReplay(lap), false);
   }
 });
+
+test('coasting on asphalt ramps to 115% and steering immediately restores the normal distance per tick', () => {
+  const lap = game.newLap();
+  lap.baseSpeed = 58;
+  function onAsphalt(steering) {
+    lap.lane = 0;
+    const before = lap.distance;
+    game.step(lap, steering);
+    assert.ok(Math.abs(lap.distance - before - 58 * game.tick * game.pace(lap)) < 1e-10);
+  }
+  for (let i = 0; i < 36; i++) onAsphalt(0);
+  assert.equal(game.pace(lap), 1);
+  for (let i = 0; i < 54; i++) {
+    const previous = game.pace(lap);
+    onAsphalt(0);
+    assert.ok(game.pace(lap) > previous);
+  }
+  onAsphalt(0);
+  assert.equal(game.pace(lap), 1.15);
+  onAsphalt(-1);
+  assert.equal(game.pace(lap), 1);
+  for (let i = 0; i < 36; i++) onAsphalt(0);
+  assert.equal(game.pace(lap), 1);
+});
+test('gravel and opposing steering inputs cannot build a bonus', () => {
+  const lap = game.newLap();
+  for (let i = 0; i < 100; i++) {
+    lap.lane = 0;
+    game.step(lap, 0, true);
+  }
+  assert.equal(lap.coastTicks, 0);
+  for (let i = 0; i < 95; i++) { lap.lane = 0; game.step(lap, 0); }
+  assert.equal(game.pace(lap), 1.15);
+  for (let i = 0; i < 95; i++) {
+    lap.lane = 1.2;
+    game.step(lap, 0);
+    assert.equal(game.pace(lap), 1);
+  }
+});

@@ -53,6 +53,13 @@ async function check() {
       assert(visible(id('space-window')) && id('space-go').textContent === 'Fortsätt', 'resume same flight');
       id('rally-open').click();
       id('rally-go').click();
+      // On the opening bend the car stays on asphalt long enough to start accelerating.
+      for (let i=0;i<5;i++) advance();
+      assert(parseInt(id('rally-pace').textContent,10)>100, 'pace builds on asphalt');
+      id('rally-window').dispatchEvent(new win.KeyboardEvent('keydown', {key:'ArrowLeft', bubbles:true}));
+      advance();
+      assert(id('rally-pace').textContent === '100 %', 'steering cancels pace bonus');
+      win.dispatchEvent(new win.KeyboardEvent('keyup', {key:'ArrowLeft'}));
       id('rally-window').querySelector('[data-window-minimize]').click();
       task('rally-window').click();
       assert(id('rally-go').textContent === 'Fortsätt', 'restore rally');

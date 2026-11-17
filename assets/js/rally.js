@@ -35,6 +35,7 @@
         (gap > 0 ? 'Du leder med ' : 'Spöket leder med ') + Math.abs(gap) + ' m';
     }
     byId('time').textContent = format(lap.ticks);
+    byId('pace').textContent = Math.round(GhostLap.pace(lap) * 100) + ' %';
     byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + ' %';
   }
   function prompt(next, title, message, action) {
@@ -75,7 +76,7 @@
     lastFrame = now;
     const direction = driveDirection();
     while (carry >= GhostLap.tick && lap.distance < GhostLap.length) {
-      GhostLap.step(lap,direction);
+      GhostLap.step(lap,direction,keys.size > 0 || pointers.size > 0);
       carry -= GhostLap.tick;
     }
     paint();
@@ -85,6 +86,7 @@
   function start() {
     if (mode !== 'paused') { lap = GhostLap.newLap(); carry = 0; }
     mode = 'running'; lastFrame = null;
+    paint();
     byId('reference').textContent = previous ? 'Spökvarv ' + format(previous.ticks) : 'Första varvet';
     byId('status').textContent = previous ? 'Varvet har startat. Den ljusa bilen är ditt förra varv.' : 'Varvet har startat.';
     byId('prompt').hidden = true;
@@ -127,12 +129,14 @@
     const code=event.key.toLowerCase();
     if (mode !== 'running' || event.metaKey || event.ctrlKey || event.altKey || !driveKeys.has(code)) return;
     event.preventDefault(); keys.add(code);
+    lap.coastTicks = 0;
   });
   window.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
   for (const button of steering) {
     button.addEventListener('pointerdown',event=>{
       if (mode !== 'running' || event.button !== 0) return;
       button.setPointerCapture(event.pointerId);
+      lap.coastTicks = 0;
       pointers.set(event.pointerId,Number(button.dataset.steer)); button.setAttribute('data-held','');
     });
     button.addEventListener('lostpointercapture',event=>{
@@ -141,7 +145,10 @@
     });
     // Keyboard and assistive-technology activation also give a short steering input.
     button.addEventListener('click',event=>{
-      if (mode === 'running' && event.detail === 0) lap.lateral = Number(button.dataset.steer) * 2.35;
+      if (mode === 'running' && event.detail === 0) {
+        lap.coastTicks = 0;
+        lap.lateral = Number(button.dataset.steer) * 2.35;
+      }
     });
   }
   document.addEventListener('visibilitychange',()=>{ if (document.hidden) hold(); });

@@ -4,6 +4,9 @@ const GhostLap = (() => {
   const length = 1536;
   const tick = 1 / 60;
   const sampleTicks = 6;
+  const coastDelayTicks = 36;
+  const coastRampTicks = 54;
+  const maxPaceGain = 0.15;
   const frequency = 2 * Math.PI / length;
   const bends = [[37, 3, 0.3], [11, 5, 1.5], [4, 8, -0.7]];
   const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
@@ -27,16 +30,22 @@ const GhostLap = (() => {
     return table[i] + (table[i + 1] - table[i]) * (p - i);
   }
   function newLap() {
-    return { distance: 0, lane: 0, lateral: 0, speed: 20, ticks: 0, samples: [[0, 0]] };
+    return { distance: 0, lane: 0, lateral: 0, baseSpeed: 20, coastTicks: 0, ticks: 0, samples: [[0, 0]] };
   }
-  function step(lap, steering) {
+  function pace(lap) {
+    return 1 + maxPaceGain * clamp((lap.coastTicks - coastDelayTicks) / coastRampTicks, 0, 1);
+  }
+  function step(lap, steering, steeringHeld = steering !== 0) {
     if (lap.distance >= length) return;
-    const targetSpeed = Math.abs(lap.lane) > 0.9 ? 23 : 58;
-    lap.speed += (targetSpeed - lap.speed) * tick * 1.8;
+    const onRoad = Math.abs(lap.lane) <= 0.9;
+    lap.coastTicks = onRoad && !steeringHeld ? Math.min(lap.coastTicks + 1, coastDelayTicks + coastRampTicks) : 0;
+    const targetSpeed = onRoad ? 58 : 23;
+    lap.baseSpeed += (targetSpeed - lap.baseSpeed) * tick * 1.8;
+    const speed = lap.baseSpeed * pace(lap);
     lap.lateral += (clamp(steering, -1, 1) * 2.35 - lap.lateral) * tick * 8;
-    const drift = at(turns, lap.distance) * lap.speed * lap.speed * 0.052;
+    const drift = at(turns, lap.distance) * speed * speed * 0.052;
     lap.lane = clamp(lap.lane + (lap.lateral - drift) * tick, -1.4, 1.4);
-    lap.distance = Math.min(length, lap.distance + lap.speed * tick);
+    lap.distance = Math.min(length, lap.distance + speed * tick);
     lap.ticks++;
     if (lap.ticks % sampleTicks === 0 || lap.distance === length) {
       lap.samples.push([Math.round(lap.distance * 100) / 100, Math.round(lap.lane * 1000) / 1000]);
@@ -58,6 +67,6 @@ const GhostLap = (() => {
     const blend = (ticks - index * sampleTicks) / Math.min(sampleTicks, replay.ticks - index * sampleTicks);
     return { distance: a[0] + (b[0] - a[0]) * blend, lane: a[1] + (b[1] - a[1]) * blend };
   }
-  return { length, tick, newLap, step, validReplay, ghostAt,
+  return { length, tick, newLap, step, pace, validReplay, ghostAt,
     position: distance => at(positions, distance), slope: distance => at(slopes, distance) };
 })();
