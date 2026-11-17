@@ -31,8 +31,9 @@
   <link rel="sitemap" type="application/xml" href="https://portfolio.moleni.se/sitemap.xml">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20261028-controls">
-  <link rel="stylesheet" href="./assets/css/extras.css?v=20261029-window-fit">
+  <link rel="stylesheet" href="./assets/css/portfolio.css?v=20261117-arcade">
+  <link rel="stylesheet" href="./assets/css/extras.css?v=20261117-arcade">
+  <link rel="stylesheet" href="./assets/css/rally.css?v=20261117-arcade">
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}
   </script>
@@ -99,13 +100,28 @@
         <a href="#panel-boot" aria-current="page">Skrivbord</a><a href="./about.html">Om mig</a><a href="./projects.html">Projekt</a><a href="./resume.html">CV</a><a href="./contact.html">Kontakt</a>
       </nav>
       <main id="main" class="document" tabindex="-1">
-        <section class="intro" id="panel-boot" aria-labelledby="entryTitle">
-          <p class="eyebrow">Teknik · Verksamhet · Stockholm</p>
-          <h1 id="entryTitle">Joakim Moléni</h1>
-          <p class="intro-lead">Jag vill förstå hela grejen.</p>
-          <p>Jag bygger lösningar och reder ut vad som behöver fungera runt dem. Teknikval, flöden och människorna som ska använda det hela.</p>
-          <p>I dag utvecklar jag stordatorsystem och bygger en informations- och agentplattform. Systemkunskap som håller sig aktuell och AI-agenter som fler kan arbeta med. Erfarenheter från försäljning, företagsbyggen och produktion följer med i hur jag tänker.</p>
-        </section>
+        <div class="home-opening">
+          <section class="intro" id="panel-boot" aria-labelledby="entryTitle">
+            <p class="eyebrow">Teknik · Verksamhet · Stockholm</p>
+            <h1 id="entryTitle">Joakim Moléni</h1>
+            <p class="intro-lead">Jag vill förstå hela grejen.</p>
+            <p>Jag bygger lösningar och reder ut vad som behöver fungera runt dem. Teknikval, flöden och människorna som ska använda det hela.</p>
+            <p>I dag utvecklar jag stordatorsystem och bygger en informations- och agentplattform. Systemkunskap som håller sig aktuell och AI-agenter som fler kan arbeta med. Erfarenheter från försäljning, företagsbyggen och produktion följer med i hur jag tänker.</p>
+          </section>
+          <div class="arcade-shelf">
+          <button type="button" id="rally-open" class="rally-cover" aria-haspopup="dialog" aria-controls="rally-window" aria-label="Öppna Spökvarvet, ett rallyspel" hidden>
+            <span class="rally-sleeve">
+              <canvas id="rally-art" width="384" height="216" aria-hidden="true"></canvas>
+              <span class="rally-logotype" aria-hidden="true">Spökvarvet</span>
+            </span>
+            <span class="rally-cover-foot"><img src="./assets/images/rally-icon.svg" width="24" height="24" alt=""><span>Tävla mot ditt spökvarv</span><strong>Spela <span aria-hidden="true">↗</span></strong></span>
+          </button>
+          <button type="button" id="space-open" class="rally-cover space-cover" aria-haspopup="dialog" aria-controls="space-window" aria-label="Öppna Periapsis, ett rymdspel" hidden>
+            <span class="rally-sleeve"><canvas id="space-art" width="384" height="132" aria-hidden="true"></canvas><span class="space-logotype" aria-hidden="true">Periapsis</span></span>
+            <span class="rally-cover-foot"><img src="./assets/images/periapsis-icon.svg" width="28" height="24" alt=""><span>Sidscrollande rymdspel</span><strong>Spela <span aria-hidden="true">↗</span></strong></span>
+          </button>
+          </div>
+        </div>
         <nav class="program-list" aria-label="Utforska portfolion">
           <div id="panel-identity">
             <a class="program-link" id="panel-dual" href="./resume.html">
@@ -166,7 +182,39 @@
     <fieldset><legend>Systemegenskaper</legend><dl><div><dt>Inriktning</dt><dd>Kod, system och sidospår</dd></div><div><dt>Grundinställning</dt><dd>Går det att göra enklare?</dd></div></dl></fieldset>
     <form method="dialog" class="dialog-actions"><button class="system-button" autofocus>OK</button></form>
   </dialog>
-  <script src="./assets/js/portfolio.js?v=20261028-controls" defer></script>
-  <script src="./assets/js/extras.js?v=20261117-whois" defer></script>
+  <dialog id="rally-window" class="window rally-window" aria-labelledby="rally-title" aria-describedby="rally-help">
+    <header class="titlebar"><h2 id="rally-title"><img src="./assets/images/rally-icon.svg" width="22" height="22" alt="">Spökvarvet</h2><button class="title-button" type="button" data-window-minimize aria-label="Minimera Spökvarvet">_</button><button type="button" class="title-button" id="rally-close" aria-label="Stäng spelet">×</button></header>
+    <div class="rally-hud"><span>Varvtid <b id="rally-time">0:00,00</b></span><span id="rally-reference">Första varvet</span></div>
+    <div class="rally-track">
+      <canvas id="rally-screen" width="384" height="216" role="img" aria-label="Rallybana längs en sjö, sedd bakifrån bilen"></canvas>
+      <div class="rally-prompt" id="rally-prompt"><div>
+        <h3 id="rally-heading">Första varvet</h3><p id="rally-message">Kör ett varv. Nästa gång möter du din egen bil.</p>
+        <button class="system-button" id="rally-go" type="button" autofocus>Kör</button>
+      </div></div>
+    </div>
+    <div class="rally-controls"><div class="rally-steering" role="group" aria-label="Styrning">
+      <button type="button" class="system-button" data-steer="-1" aria-label="Styr vänster">◀</button>
+      <button type="button" class="system-button" data-steer="1" aria-label="Styr höger">▶</button>
+    </div><span id="rally-progress">0 %</span><button type="button" class="system-button" id="rally-pause" disabled>Paus</button></div>
+    <button class="system-button rally-wallpaper" id="rally-wallpaper" type="button" hidden>Använd målbilden som skrivbordsbakgrund</button>
+    <p id="rally-help">Bilen gasar själv. Styr med ← →, A/D eller knapparna. Gruset kostar fart.</p>
+    <p id="rally-status" class="rally-sr" role="status"></p>
+  </dialog>
+  <dialog id="space-window" class="window rally-window" aria-labelledby="space-title" aria-describedby="space-help">
+    <header class="titlebar"><h2 id="space-title"><img src="./assets/images/periapsis-icon.svg" width="26" height="20" alt="">Periapsis</h2><button type="button" class="title-button" data-window-minimize aria-label="Minimera Periapsis">_</button><button type="button" class="title-button" id="space-close" aria-label="Stäng Periapsis">×</button></header>
+    <div class="rally-hud space-hud"><span>Poäng <b id="space-score">0</b></span><span>Skrov <b id="space-hull">3 / 3</b></span><span>Laser <b id="space-laser">Puls</b></span></div>
+    <div class="rally-track"><canvas id="space-screen" width="384" height="192" tabindex="-1" role="img" aria-label="Spelfält. Ditt skepp flyger åt höger."></canvas>
+      <div class="rally-prompt" id="space-prompt"><div><h3 id="space-heading">Periapsis</h3><p id="space-message">Plocka de gröna lasercellerna och ta dig genom åtta formationer.</p><button type="button" class="system-button" id="space-go">Flyg</button></div></div>
+    </div>
+    <div class="space-controls"><p id="space-help">Styr med piltangenterna, WASD eller dra på spelytan. Skeppet skjuter själv.</p><button class="system-button" type="button" id="space-pause" disabled>Paus</button></div>
+  </dialog>
+  <script src="./assets/js/desktop-windows.js" defer></script>
+  <script src="./assets/js/rally-engine.js" defer></script>
+  <script src="./assets/js/rally-scene.js" defer></script>
+  <script src="./assets/js/rally.js" defer></script>
+  <script src="./assets/js/periapsis-engine.js" defer></script>
+  <script src="./assets/js/periapsis.js" defer></script>
+  <script src="./assets/js/portfolio.js?v=20261117-arcade" defer></script>
+  <script src="./assets/js/extras.js?v=20261117-arcade" defer></script>
 </body>
 </html>

@@ -110,7 +110,7 @@ for (const file of await readdir(path.join(root, 'assets/css'))) {
     await exists(path.relative(root, path.resolve(root, 'assets/css', match[1].split(/[?#]/)[0])), file);
   }
 }
-for (const file of ['portfolio.js', 'resume.js', 'resume-shell.js', 'worlds.js', 'extras.js']) {
+for (const file of ['portfolio.js', 'resume.js', 'resume-shell.js', 'worlds.js', 'extras.js', 'rally-engine.js', 'rally-scene.js', 'rally.js', 'desktop-windows.js', 'periapsis-engine.js', 'periapsis.js']) {
   const result = spawnSync(process.execPath, ['--check', path.join(root, 'assets/js', file)], { encoding: 'utf8' });
   if (result.status !== 0) errors.push(`${file}: JavaScript syntax check failed: ${result.stderr.trim()}`);
 }
