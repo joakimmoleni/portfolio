@@ -228,3 +228,37 @@ dt { color: var(--muted); }
 
 /* Give the professional introduction and career context separate breathing room. */
 .intro > p + p { margin-top: 12px; }
+
+@media screen {
+  html[data-rally-wallpaper] body { background: transparent; }
+  html[data-rally-wallpaper] body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: var(--desktop) var(--rally-wallpaper) center / cover no-repeat;
+    image-rendering: pixelated; filter: brightness(.7);
+  }
+  html[data-rally-wallpaper] .desktop-shortcuts a span,
+  html[data-rally-wallpaper] .desktop-caption { background-color: #132328; }
+  html[data-rally-wallpaper] .desktop-caption { justify-self: start; padding: 2px 5px; margin-top: 10px; }
+}
+
+.running-tasks { display: flex; gap: 4px; flex: 0 1 auto; min-width: 0; overflow-x: auto; }
+.running-tasks button { width: auto; min-width: 42px; max-width: 150px; min-height: 34px; border: 0; background: var(--surface); color: var(--text); box-shadow: var(--raised); font-weight: 400; }
+.running-tasks button[aria-pressed="true"] { box-shadow: var(--inset); font-weight: 700; }
+.running-tasks img, .running-menu img { width: 22px; height: 22px; flex: none; image-rendering: pixelated; }
+.running-tasks span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.running-menu { border-bottom: 1px solid var(--shadow); padding-bottom: 3px; }
+.running-menu h2 { font: bold .75rem/1.4 Tahoma, sans-serif; padding: 6px 12px 2px; color: var(--muted); }
+.taskbar[data-running] .taskbar-note { display: none; }
+.start-panel:has(.running-menu:not([hidden])) { overflow: auto; }
+.start-panel:has(.running-menu:not([hidden])) [data-extras-menu] { position: static; width: auto; box-shadow: none; border: 0; }
+.about-dialog[open] { position: fixed; inset: 0 0 48px; z-index: 12; height: fit-content; max-height: calc(100dvh - 70px); }
+.window[data-inactive="false"]:is(.about-dialog,.rally-window,.extras-window) { z-index: 16; }
+@media (max-width: 760px) {
+  .taskbar[data-running] .tray { display: none; }
+  .taskbar[data-running] > .task-button { width: auto; flex: 0 1 auto; }
+  .taskbar[data-running] > .task-button span, .running-tasks span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .running-tasks button { flex: 0 0 42px; justify-content: center; min-height: 42px; padding: 4px; }
+}
+@media (max-width: 760px) {
+  .taskbar[data-running] > .task-button svg { display: block; }
+}

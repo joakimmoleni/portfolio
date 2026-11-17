@@ -19,3 +19,9 @@ Keep claims consistent across the page text, CV, metadata and sharing image. Con
 ## Environments
 
 Projects uses an original first-person industrial scene with a pause-menu-style project selector. About uses four linked rooms on a dungeon automap alongside the reading journal. Let the scene, materials and navigation convey the genres; keep the personal writing ordinary. Do not add game titles, fake skill statistics, character roles, mission language or mandatory game controls. All actual content must remain directly accessible through labelled links.
+
+## Interface design
+
+Give each program the typography, density and controls that suit its task and its place on the desktop. Use colour, symbols and motion consistently to show an action, selection or state. Keep labels concrete and give links meaningful destinations. Keep discoveries inside the programs where they belong.
+
+Review wrapping, spacing and proportions on narrow and wide screens. Follow links with the keyboard, check where focus lands, and exercise loading, empty, error and print views when relevant. Keep the content reachable with scripts disabled.

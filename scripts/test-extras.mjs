@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import { test } from 'node:test';
 
 const source = readFileSync(new URL('../assets/js/extras.js', import.meta.url), 'utf8');
+const manager = readFileSync(new URL('../assets/js/desktop-windows.js', import.meta.url), 'utf8');
 const noteKey = 'portfolio-extra-note-v1';
 
 // Small DOM and controllable clock for state transitions. Native rendering and
@@ -26,8 +27,15 @@ function page(storage, access = { blocked: false }) {
         contains(name) { return classes.has(name); }
       };
     }
-    addEventListener(name, handler) { this.handlers.set(name, handler); }
-    fire(name, properties = {}) { this.handlers.get(name)?.({ target: this, currentTarget: this, ...properties }); }
+    addEventListener(name, handler) {
+      if (!this.handlers.has(name)) this.handlers.set(name, []);
+      this.handlers.get(name).push(handler);
+    }
+    dispatchEvent(event) { this.fire(event.type); }
+    prepend(...children) { this.children.unshift(...children); }
+    contains(node) { return this === node || this.children.some(child => child.contains?.(node)); }
+    toggleAttribute(name, on) { if (on) this.setAttribute(name, ''); else this.attributes.delete(name); }
+    fire(name, properties = {}) { this.handlers.get(name)?.forEach(fn => fn({ target: this, currentTarget: this, ...properties })); }
     closest(selector) {
       if (selector === '[data-open-extra]' && this.dataset.openExtra) return this;
       if (selector === '[data-extra-close]' && this.dataset.extraClose) return this;
@@ -41,6 +49,7 @@ function page(storage, access = { blocked: false }) {
     replaceChildren(...children) { this.children = children; }
     after(node) { this.next = node; }
     querySelector(selector) {
+      if (selector.includes('[data-mirc-minimize]')) selector='[data-mirc-minimize]';
       if (!this.nodes.has(selector)) this.nodes.set(selector, new Element());
       return this.nodes.get(selector);
     }
@@ -62,7 +71,11 @@ function page(storage, access = { blocked: false }) {
   let inserted = false;
   const listeners = new Map();
   const documentListeners = new Map();
-  const mainTask = new Element();
+  const bar = new Element(), main = new Element(), start = new Element(), startButton = new Element();
+  const mainTask = bar.querySelector('.task-button');
+  bar.nodes.set('a.task-button', mainTask);
+  const shell = new Map([['startPanel',start],['startButton',startButton]]);
+  for (const [id, panel] of nodes) panel.id = id;
   const playlist = Array.from({ length: 16 }, (_, index) => {
     const button = new Element();
     button.dataset.playerSelect = String(index);
@@ -78,14 +91,14 @@ function page(storage, access = { blocked: false }) {
     clearInterval(id) { intervals.delete(id); },
     setTimeout(handler) { timeouts.set(++nextTimeout, handler); return nextTimeout; },
     clearTimeout(id) { timeouts.delete(id); },
-    HTMLElement: Element,
+    Event, HTMLElement: Element,
     HTMLDialogElement: Dialog,
     getComputedStyle: () => ({ visibility: 'visible' }),
     document: {
       body: { append() { inserted = true; } },
-      getElementById: id => inserted ? nodes.get(id) : null,
+      getElementById: id => shell.get(id) ?? (inserted ? nodes.get(id) : null),
       createElement: () => new Element(),
-      querySelector: selector => selector === '.taskbar > .task-button' ? mainTask : null,
+      querySelector: selector => selector === '.taskbar' ? bar : selector === '.main-window' ? main : null,
       querySelectorAll: () => [],
       addEventListener: (name, handler) => documentListeners.set(name, handler)
     },
@@ -105,6 +118,7 @@ function page(storage, access = { blocked: false }) {
     }
   });
   context.window = context;
+  vm.runInContext(manager, context, { filename: 'desktop-windows.js' });
   vm.runInContext(source, context, { filename: 'extras.js' });
   function open(name) {
     const trigger = new Element();
@@ -139,7 +153,9 @@ function page(storage, access = { blocked: false }) {
       timeouts.clear();
       callbacks.forEach(handler => handler());
     },
-    task: mainTask.next
+    task: mainTask.next.children.find(node => node.title === 'mIRC'),
+    tasks: mainTask.next.children,
+    menu: start.querySelector('.start-links').children[0]
   };
 }
 
@@ -401,4 +417,33 @@ test('the playlist starts in the agreed order and previous wraps to the final so
   fresh.player.querySelector('[data-player-previous]').fire('click');
   fresh.send('/np');
   assert.match(fresh.lines().at(-1), /One Step Closer/);
+});
+
+test('WHOIS reveals the local channel and handles missing or unknown nicknames', () => {
+  const desktop = page(new Map());
+  desktop.open('mirc');
+  desktop.send('/WHOIS Exposure_');
+  assert.equal(desktop.lines().at(-1), '*** exposure_ (Joakim Moléni) · Stockholm · #exposure_');
+  desktop.send('/whois');
+  assert.match(desktop.lines().at(-1), /Använd \/whois/);
+  desktop.send('/whois nobody');
+  assert.match(desktop.lines().at(-1), /Inget sådant nick/);
+});
+
+test('Start and taskbar track each program until it closes, including minimized windows', () => {
+  const desktop = page(new Map());
+  desktop.open('winamp');
+  desktop.open('notepad');
+  desktop.open('mirc');
+  const visible = () => desktop.tasks.filter(button => !button.hidden).map(button => button.title);
+  assert.deepEqual(visible(), ['Winamp', 'mIRC', 'Anteckningar']);
+  const notes = desktop.menu.children.find(button => button.title === 'Visa Anteckningar');
+  desktop.task.fire('click');
+  assert.ok(desktop.mirc.hidden);
+  assert.equal(visible().length, 3);
+  notes.fire('click');
+  assert.equal(desktop.tasks[2].attributes.get('aria-pressed'), 'true');
+  desktop.notepad.close();
+  assert.deepEqual(visible(), ['Winamp', 'mIRC']);
+  assert.equal(notes.hidden, true);
 });

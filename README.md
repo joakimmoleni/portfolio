@@ -11,7 +11,7 @@ A personal Windows 2000 desktop, with a few places to explore. Plain HTML, CSS a
 - `contact.html`: a Lunarstorm-inspired profile, using the personal nickname `exposure_`.
 - Start → Program: a completely silent Winamp toy, a local mIRC bot and a temporary editable Notepad. They do not connect to chat servers or load music.
 
-Winamp has a scrollable 16-track nostalgia playlist spanning dance, nu metal and classic rock, starting with Freestyler, Wait and Bleed, Detroit Rock City, 9 PM and Black Dog. Titles and a visual playback clock are the whole demo; there are no audio files. Selecting a playlist track starts its clock; Play/Pause, Stop, seeking and compact mode share the same playback state. mIRC has three small Easter eggs: `/join #exposure_` opens a hidden local channel (return with `/join #lobby`); slapping the bot three times costs you the trout for the current page session; and `how much is the fish?` selects Scooter in Winamp. `/np` reports that selection, and `/winamp` opens the player. The hidden channel's delayed greeting is cancelled when leaving, minimizing or closing it. Track 7 appears as `Track07.mp3`; selecting it reveals a Spårinformation disclosure with Unknown artist/album, Other genre and a comment pointing to the hidden channel.
+Winamp has a scrollable 16-track nostalgia playlist spanning dance, nu metal and classic rock, starting with Freestyler, Wait and Bleed, Detroit Rock City, 9 PM and Black Dog. Titles and a visual playback clock are the whole demo; there are no audio files. Selecting a playlist track starts its clock; Play/Pause, Stop, seeking and compact mode share the same playback state. Try `/whois exposure_` for the local nickname entry. There are also three small Easter eggs: `/join #exposure_` opens a hidden local channel (return with `/join #lobby`); slapping the bot three times costs you the trout for the current page session; and `how much is the fish?` selects Scooter in Winamp. `/np` reports that selection, and `/winamp` opens the player. The hidden channel's delayed greeting is cancelled when leaving, minimizing or closing it. Track 7 appears as `Track07.mp3`; selecting it reveals a Spårinformation disclosure with Unknown artist/album, Other genre and a comment pointing to the hidden channel.
 
 All five main programs share the same desktop shortcuts, Start menu, taskbar, theme control and system dialog. Theme and extras live in Start; the CV toolbar contains only its language and print controls. Each main program has its own URL. Ordinary links and browser history keep navigation predictable; closing a program returns to the desktop. The original homepage anchor IDs and resume variant URLs remain valid. The home overview and personal pages remain readable without JavaScript.
 
@@ -23,7 +23,18 @@ The CV opens in Swedish for new visitors and preserves the chosen language on re
 
 The full profile opens first; mainframe and web/backend views adjust emphasis while retaining earlier experience. Existing focus URLs remain valid.
 
-The resume continues to use `assets/data/resume-data.json` and its three variant overrides. Public copy describes general bank responsibilities, not internal assignments, environments or unverified project/adoption figures. Earlier career entries cover sales, business development, customer websites, production and logistics. The personal narrative is deliberately selective: employers remain in CV and project headings, while private anecdotes and explanations of the interface references stay out of the page copy.
+The overview uses `assets/data/resume-data.json` directly. Two specialist profiles override selected fields and jobs. Project links open the matching employer in the CV. Run `npm run cv:sync` after changing base data to refresh the printable Swedish HTML fallback. Validation checks that it is current. Public copy describes general bank responsibilities, not internal assignments, environments or unverified project/adoption figures. Earlier career entries cover sales, business development, customer websites, production and logistics. The personal narrative is deliberately selective: employers remain in CV and project headings, while private anecdotes and explanations of the interface references stay out of the page copy.
+
+Spökvarvet opens from its illustrated sleeve on the desktop. Steering works with the arrow keys, A/D and the two touch buttons. Releasing the steering on asphalt for 0.6 seconds starts a smooth speed increase to 115% over the next 0.9 seconds. Steering or reaching the gravel cancels the bonus. Running wide gradually bleeds speed. Going deeper into gravel costs more, with no time added at the finish. The last completed lap is recorded locally and becomes the ghost on the next run. Minimizing the window or leaving the tab pauses the race. After finishing, the player can use the frame as the portfolio desktop wallpaper and restore the original in Start.
+
+Periapsis is a horizontal pixel shooter. Fly through three sectors of eight formations and intercept the flagship. Cells unlock twin lasers, prism fire, guided missiles and a paired salvo at 3, 6, 10 and 15 pickups. Early interceptions, unbroken kill chains and a fast, clean boss fight reward repeat runs. It supports arrow keys, WASD and relative dragging. Both games and the desktop programs have taskbar buttons and are listed in Start under Öppna fönster while open or minimized. Closing a game ends that run.
+
+
+## Arcade scores
+
+Both games have a shared top ten. Periapsis ranks points and Spökvarvet ranks lap ticks. A player enters three initials after finishing. The server filters initials and reproduces the game from its controls before ranking a score. It keeps just the ranked entries. The local preview uses Node 24+ and stores the two boards in `.local/arcade.sqlite`. Set `ARCADE_SCORE_DB=:memory:` for a disposable preview.
+
+For the public portfolio the API runs separately from GitHub Pages. Prepare its Sites checkout with `node arcade/build-worker.mjs <service-checkout>` and publish that checkout with the D1 binding `DB`. Both deployments use the same engine and SQL migration. Rebuild the service when changing either game's rules.
 
 ## Preview and validate
 
@@ -40,6 +51,8 @@ GitHub Actions runs validation and tests on Node.js 24 for pushes and pull reque
 Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No hosting or DNS change is required.
 
 ## Visual references
+
+Keep interface changes tied to the task and the identity of each program. Give colour a consistent meaning and keep labels, type and icons readable. Use effects for meaningful feedback. Check rendered spacing, keyboard focus, touch targets and empty or unavailable states at both mobile and desktop widths.
 
 The interface artwork is drawn in HTML, CSS and SVG. About uses a journal with chapters; Projects uses a compact FPS-style selector with a flow preview for each project. Contact has a persistent profile, content tabs and a separate mIRC launcher. Their page-specific styles live in `about-world.css`, `projects-world.css` and `contact-world.css`. All three use ordinary fragment links enhanced into panels; the content remains readable without JavaScript.
 

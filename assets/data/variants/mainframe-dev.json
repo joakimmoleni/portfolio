@@ -1,13 +1,7 @@
 {
   "personal": {
-    "name": "Joakim Moléni",
     "title": "Software Developer | COBOL, HLASM & IBM z/OS",
-    "title_sv": "Systemutvecklare | COBOL, HLASM & IBM z/OS",
-    "location": "Stockholm, Sweden",
-    "location_sv": "Stockholm, Sverige",
-    "email": "jcrooge@gmail.com",
-    "github": "github.com/joakimmoleni",
-    "linkedin": "linkedin.com/in/joakimmoleni"
+    "title_sv": "Systemutvecklare | COBOL, HLASM & IBM z/OS"
   },
   "profile": "I develop in COBOL and HLASM on IBM z/OS. Much of my work is about how a change should be implemented: which systems are affected, how the parts fit together and what needs to work between them.\n\nI have also independently built an information and agent platform. I build so that users can start with what needs to change, supported by system knowledge and checks, including in older codebases. That knowledge must follow every change and remain current for the next person and the next task.",
   "profile_sv": "Jag utvecklar i COBOL och HLASM på IBM z/OS. En stor del av arbetet handlar om hur en förändring ska genomföras: vilka system som berörs, hur delarna hänger ihop och vad som behöver fungera mellan dem.\n\nJag har också självständigt byggt en informations- och agentplattform. Jag bygger för att användaren ska kunna utgå från vad som behöver ändras, med systemkunskap och kontroller som stöd även i äldre kodbaser. Kunskapen ska följa med efter varje förändring och vara aktuell för nästa person och nästa uppgift.",
@@ -27,13 +21,8 @@
     "Teknikval och systemberoenden",
     "Informationsplattformar och AI-agenter"
   ],
-  "experience": [
-    {
-      "company": "SEB",
-      "role": "Software Developer",
-      "role_sv": "Systemutvecklare",
-      "years": "Aug 2024 – Present",
-      "years_sv": "Aug 2024 – nu",
+  "experienceOverrides": {
+    "seb": {
       "highlights": [
         "Develop in COBOL and HLASM on IBM z/OS. Design changes and work through dependencies between systems.",
         "Troubleshoot production systems and address root causes with the team.",
@@ -50,146 +39,9 @@
         "Gör utveckling med AI-agenter tillgänglig för kollegor med olika förkunskaper. Plattformen håller ihop systemkunskap och arbetsflöden; resultaten ska vara användbara även för arkitekter och andra roller.",
         "Handleder kollegor och håller föredrag om AI och utvecklingsverktyg."
       ]
-    },
-    {
-      "company": "Handelsbanken",
-      "role": "Software Developer",
-      "role_sv": "Systemutvecklare",
-      "years": "Aug 2023 – Aug 2024",
-      "years_sv": "Aug 2023 – aug 2024",
-      "highlights": [
-        "Developed in COBOL on IBM z/OS."
-      ],
-      "highlights_sv": [
-        "Utvecklade i COBOL på IBM z/OS."
-      ]
-    },
-    {
-      "company": "Fragsheet",
-      "role": "Web Developer Intern (LIA)",
-      "role_sv": "Webbutvecklare (LIA)",
-      "years": "Jan 2023 – Jul 2023",
-      "years_sv": "Jan 2023 – jul 2023",
-      "highlights": [
-        "Coordinated the technology and data flows for personalised game coaching.",
-        "Built the web application in Python/Django and JavaScript and integrated models with the ML developer.",
-        "Designed the solution and carried out the migration to AWS."
-      ],
-      "highlights_sv": [
-        "Höll ihop tekniken och dataflödena för personlig spelcoaching.",
-        "Byggde webbapplikationen i Python/Django och JavaScript och integrerade modeller tillsammans med ML-utvecklaren.",
-        "Utformade lösningen vid plattformsbytet och genomförde flytten till AWS."
-      ]
-    },
-    {
-      "company": "PostNord TPL AB",
-      "role": "Returns Manager",
-      "role_sv": "Returansvarig",
-      "years": "Apr 2020 – Sep 2021",
-      "years_sv": "Apr 2020 – sep 2021",
-      "highlights": [
-        "Managed returns and improved logistics workflows. This was my first experience of IBM mainframe systems at work."
-      ],
-      "highlights_sv": [
-        "Ansvarade för returer och förbättrade logistikflöden. Här kom jag först i kontakt med IBM:s stordatorsystem i arbetet."
-      ]
-    },
-    {
-      "company": "Svea Solar",
-      "role": "Sales and Business Development",
-      "role_sv": "Försäljning och affärsutveckling",
-      "years": "",
-      "years_sv": "",
-      "highlights": [
-        "I started working with Svea Solar while at Cell Solar and later joined the company."
-      ],
-      "highlights_sv": [
-        "Samarbetet började under min tid på Cell Solar och ledde senare till en anställning."
-      ]
-    },
-    {
-      "company": "Cell Solar Nordic AB",
-      "role": "Sales and Business Development",
-      "role_sv": "Försäljning och affärsutveckling",
-      "years": "Feb 2017 – Mar 2019",
-      "years_sv": "Feb 2017 – mar 2019",
-      "highlights": [
-        "As the first employee, built up sales, delivery processes and the technology supporting the business.",
-        "Selected products and suppliers and organised international deliveries directly to installation sites.",
-        "Trained salespeople and coordinated subcontractors."
-      ],
-      "highlights_sv": [
-        "Byggde som första anställd upp försäljning, leveransflöden och teknikstöd.",
-        "Valde produkter och leverantörer och organiserade internationella leveranser direkt till installationsplatserna.",
-        "Utbildade säljare och samordnade underleverantörer."
-      ]
-    },
-    {
-      "company": "Pinevision / ePage",
-      "role": "Sales, Business Development and Web Design",
-      "role_sv": "Försäljning, affärsutveckling och webb",
-      "years": "",
-      "years_sv": "",
-      "highlights": [
-        "Built up sales and developed the business with the founders.",
-        "Designed and built customer websites and worked on hosting, storage and domains."
-      ],
-      "highlights_sv": [
-        "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna.",
-        "Formgav och byggde kundernas hemsidor och arbetade med drift, lagring och domäner."
-      ]
-    },
-    {
-      "company": "Ericsson",
-      "role": "Machine Technician",
-      "role_sv": "Maskintekniker",
-      "years": "Apr 2011 – Apr 2014",
-      "years_sv": "Apr 2011 – apr 2014",
-      "highlights": [
-        "Worked with manufacturing equipment, technical operations and systematic troubleshooting."
-      ],
-      "highlights_sv": [
-        "Arbetade med tillverkningsutrustning, teknisk drift och systematisk felsökning."
-      ]
-    },
-    {
-      "company": "Genom Historien AB",
-      "role": "Production and Operations",
-      "role_sv": "Produktion och verksamhet",
-      "years": "2007 – 2011",
-      "years_sv": "2007 – 2011",
-      "highlights": [
-        "Produced shows and coordinated stage work, technical operations and transport on site.",
-        "Built stages and worked with sound and lighting. Also took part in performances and music recordings."
-      ],
-      "highlights_sv": [
-        "Producerade shower och samordnade scen, teknik och transporter på plats.",
-        "Byggde scen och arbetade med ljud och ljus. Medverkade också i föreställningar och musikinspelningar."
-      ]
-    },
-    {
-      "company": "Paf",
-      "role": "Administration",
-      "role_sv": "Administration",
-      "years": "2005 – 2006",
-      "years_sv": "2005 – 2006",
-      "highlights": [
-        "Worked remotely in administration and made the work more efficient by anticipating changes in user numbers."
-      ],
-      "highlights_sv": [
-        "Arbetade på distans med administration och effektiviserade arbetet genom att förutse variationer i användarantalet."
-      ]
     }
-  ],
+  },
   "projects": [],
-  "education": [
-    {
-      "school": "Changemaker Educations",
-      "degree": "Frontend App Developer Programme",
-      "degree_sv": "Frontend App Developer",
-      "years": "2021 – 2023"
-    }
-  ],
   "skills": {
     "languages": [
       "COBOL",

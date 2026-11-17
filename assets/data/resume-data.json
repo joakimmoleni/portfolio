@@ -15,7 +15,6 @@
       "title": "Overview",
       "title_sv": "Helhetsprofil",
       "template": "platform-dev",
-      "path": "./assets/data/variants/platform-dev.json",
       "description": "Software development, technology decisions and experience building businesses.",
       "description_sv": "Systemutveckling, teknikval och erfarenhet av att bygga upp verksamheter."
     },
@@ -78,7 +77,8 @@
         "Gör utveckling med AI-agenter tillgänglig för kollegor med olika förkunskaper. Plattformen håller ihop systemkunskap och arbetsflöden; resultaten ska vara användbara även för arkitekter och andra roller.",
         "Handleder kollegor och håller föredrag om AI och utvecklingsverktyg.",
         "Felsöker i produktion och åtgärdar grundorsaker tillsammans med teamet."
-      ]
+      ],
+      "id": "seb"
     },
     {
       "company": "Handelsbanken",
@@ -91,7 +91,8 @@
       ],
       "highlights_sv": [
         "Utvecklade i COBOL på IBM z/OS."
-      ]
+      ],
+      "id": "handelsbanken"
     },
     {
       "company": "Fragsheet",
@@ -108,7 +109,8 @@
         "Höll ihop tekniken och dataflödena för personlig spelcoaching.",
         "Byggde webbapplikationen i Python/Django och JavaScript och integrerade modeller tillsammans med ML-utvecklaren.",
         "Utformade lösningen vid plattformsbytet och genomförde flytten till AWS."
-      ]
+      ],
+      "id": "fragsheet"
     },
     {
       "company": "PostNord TPL AB",
@@ -121,7 +123,8 @@
       ],
       "highlights_sv": [
         "Ansvarade för returer och förbättrade logistikflöden. Här kom jag först i kontakt med IBM:s stordatorsystem i arbetet."
-      ]
+      ],
+      "id": "postnord"
     },
     {
       "company": "Svea Solar",
@@ -134,7 +137,8 @@
       ],
       "highlights_sv": [
         "Samarbetet började under min tid på Cell Solar och ledde senare till en anställning."
-      ]
+      ],
+      "id": "svea-solar"
     },
     {
       "company": "Cell Solar Nordic AB",
@@ -151,7 +155,8 @@
         "Byggde som första anställd upp försäljning, leveransflöden och teknikstöd.",
         "Valde produkter och leverantörer och organiserade internationella leveranser direkt till installationsplatserna.",
         "Utbildade säljare och samordnade underleverantörer."
-      ]
+      ],
+      "id": "cell-solar"
     },
     {
       "company": "Pinevision / ePage",
@@ -166,7 +171,8 @@
       "highlights_sv": [
         "Byggde upp försäljningen och utvecklade affären tillsammans med grundarna.",
         "Formgav och byggde kundernas hemsidor och arbetade med drift, lagring och domäner."
-      ]
+      ],
+      "id": "pinevision"
     },
     {
       "company": "Ericsson",
@@ -179,7 +185,8 @@
       ],
       "highlights_sv": [
         "Arbetade med tillverkningsutrustning, teknisk drift och systematisk felsökning."
-      ]
+      ],
+      "id": "ericsson"
     },
     {
       "company": "Genom Historien AB",
@@ -194,7 +201,8 @@
       "highlights_sv": [
         "Producerade shower och samordnade scen, teknik och transporter på plats.",
         "Byggde scen och arbetade med ljud och ljus. Medverkade också i föreställningar och musikinspelningar."
-      ]
+      ],
+      "id": "genom-historien"
     },
     {
       "company": "Paf",
@@ -207,7 +215,8 @@
       ],
       "highlights_sv": [
         "Arbetade på distans med administration och effektiviserade arbetet genom att förutse variationer i användarantalet."
-      ]
+      ],
+      "id": "paf"
     }
   ],
   "projects": [

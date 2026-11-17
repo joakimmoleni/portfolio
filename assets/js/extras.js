@@ -43,7 +43,7 @@
         <div class="extras-title-actions">
           <button type="button" class="extras-shade-play" data-player-shade-play aria-label="Starta den ljudlösa spelaren" title="Spela">${controlIcon('play')}</button>
           <button type="button" class="title-button extras-title-button" data-player-compact aria-label="Kompakt läge" aria-pressed="false" title="Kompakt läge">${controlIcon('compact')}</button>
-          <button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">${controlIcon('close')}</button>
+          <button type="button" class="title-button extras-title-button" data-window-minimize aria-label="Minimera Winamp" title="Minimera">${controlIcon('minimize')}</button><button type="button" class="title-button extras-title-button" data-extra-close="winamp" aria-label="Stäng Winamp" title="Stäng">${controlIcon('close')}</button>
         </div>
       </header>
       <div class="extras-player-body">
@@ -91,7 +91,7 @@
       <p class="extras-chat-hint">Prova /help, /me, /slap, /clear, /winamp eller /np.</p>
     </dialog>
     <dialog id="extras-notepad" class="window extras-window extras-dialog extras-notepad" lang="sv" aria-labelledby="extras-notepad-title" aria-describedby="extras-notepad-description">
-      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">${programIcon('notepad')}todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">${controlIcon('close')}</button></header>
+      <header class="titlebar extras-titlebar"><h2 id="extras-notepad-title">${programIcon('notepad')}todo.txt — Anteckningar</h2><button type="button" class="title-button extras-title-button" data-window-minimize aria-label="Minimera Anteckningar" title="Minimera">${controlIcon('minimize')}</button><button type="button" class="title-button extras-title-button" data-extra-close="notepad" aria-label="Stäng Anteckningar">${controlIcon('close')}</button></header>
       <p id="extras-notepad-description" class="extras-dialog-note">Tillfälliga anteckningar</p>
       <label class="extras-progress-label" for="extras-notepad-text">Din anteckning</label>
       <textarea id="extras-notepad-text" maxlength="12000" spellcheck="false" autofocus></textarea>
@@ -105,16 +105,16 @@
   const panels = { winamp: player, mirc, notepad };
   const returnFocus = new Map();
   const names = { winamp: 'Winamp', mirc: 'mIRC', notepad: 'Anteckningar' };
-  const mircTask = document.createElement('button');
-  mircTask.type = 'button';
-  mircTask.className = 'task-button extras-task-button';
-  mircTask.dataset.mircTask = '';
-  mircTask.hidden = true;
-  mircTask.setAttribute('aria-controls', mirc.id);
-  mircTask.setAttribute('aria-pressed', 'false');
-  mircTask.setAttribute('aria-label', 'Visa eller minimera mIRC');
-  mircTask.innerHTML = `${programIcon('mirc')}<span>mIRC</span>`;
-  document.querySelector('.taskbar > .task-button')?.after(mircTask);
+  for (const [name, panel] of Object.entries(panels)) {
+    window.DesktopWindows.register(panel, {
+      title: names[name], icon: './assets/images/' + name + '-icon.svg',
+      restore: () => openExtra(name),
+      minimize: () => {
+        if (name === 'mirc') clearTimeout(channelGreeting);
+        markOpen(name, false);
+      }
+    });
+  }
 
   for (const menu of document.querySelectorAll('[data-extras-menu]')) {
     menu.lang = 'sv';
@@ -163,7 +163,7 @@
     if (!panel) return;
     const start = document.getElementById('startPanel');
     const startButton = document.getElementById('startButton');
-    if (trigger !== mircTask) returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
+    if (trigger) returnFocus.set(name, start?.contains(trigger) ? startButton : trigger);
     const disclosure = trigger?.closest('details');
     if (disclosure) disclosure.open = false;
     const previousDialog = trigger?.closest('dialog');
@@ -173,10 +173,7 @@
     if (name === 'notepad') loadNote();
     markOpen(name, true);
     panel.hidden = false;
-    if (name === 'mirc') {
-      mircTask.hidden = false;
-      mircTask.setAttribute('aria-pressed', 'true');
-    }
+    window.DesktopWindows.opened(panel);
     if (panel instanceof HTMLDialogElement) {
       if (!panel.open) panel.show();
       panel.querySelector('[autofocus]')?.focus({ preventScroll: true });
@@ -188,23 +185,11 @@
   }
   function closePlayer() {
     stopPlayer();
+    window.DesktopWindows.closed(player);
     player.hidden = true;
     markOpen('winamp', false);
     restoreFocus('winamp');
   }
-  function minimizeMirc() {
-    clearTimeout(channelGreeting);
-    mirc.hidden = true;
-    mirc.dataset.inactive = 'true';
-    markOpen('mirc', false);
-    mircTask.setAttribute('aria-pressed', 'false');
-    restoreFocus('mirc', false);
-  }
-  mirc.querySelector('[data-mirc-minimize]').addEventListener('click', minimizeMirc);
-  mircTask.addEventListener('click', () => {
-    if (!mirc.hidden && mirc.dataset.inactive !== 'true') minimizeMirc();
-    else openExtra('mirc', mircTask);
-  });
   document.addEventListener('click', event => {
     const opener = event.target.closest('[data-open-extra]');
     if (opener && panels[opener.dataset.openExtra]) {
@@ -235,8 +220,6 @@
       markOpen(name, false);
       if (name === 'mirc') {
         clearTimeout(channelGreeting);
-        mircTask.hidden = true;
-        mircTask.setAttribute('aria-pressed', 'false');
       }
       restoreFocus(name);
     });
@@ -412,7 +395,13 @@
       log.replaceChildren();
       addLine('*** Rensat.');
     } else if (command === '/help') {
-      bot('/me [text] · /slap [namn] · /clear · /winamp · /np · /join #lobby');
+      bot('/me [text] · /slap [namn] · /whois [nick] · /clear · /winamp · /np · /join #lobby');
+    } else if (command === '/whois') {
+      switch (argument.toLowerCase()) {
+        case 'exposure_': addLine('*** exposure_ (Joakim Moléni) · Stockholm · #exposure_'); break;
+        case 'bot': bot('Det är jag. Skriv /help om du vill se vad jag kan.'); break;
+        default: bot(argument ? 'Inget sådant nick här.' : 'Använd /whois [nick].');
+      }
     } else if (command === '/join') {
       const nextChannel = argument.toLowerCase();
       if (nextChannel === '#exposure_' || nextChannel === '#lobby') joinChannel(nextChannel);

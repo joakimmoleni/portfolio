@@ -9,19 +9,6 @@
   const programsSummary = programs?.querySelector('summary');
   let aboutTrigger;
 
-  function activateWindow(element) {
-    const active = element?.closest('.main-window, .extras-window, .about-dialog');
-    if (!active) return;
-    for (const panel of document.querySelectorAll('.main-window, .extras-window, .about-dialog')) {
-      panel.dataset.inactive = String(panel !== active);
-    }
-    const mainTask = document.querySelector('.taskbar > a.task-button');
-    if (mainTask) mainTask.dataset.inactive = String(!active.classList.contains('main-window'));
-    document.querySelector('[data-mirc-task]')?.setAttribute('aria-pressed', String(active.id === 'extras-mirc'));
-  }
-  document.addEventListener('pointerdown', event => activateWindow(event.target));
-  activateWindow(document.querySelector('.main-window'));
-
   function closeStart(restoreFocus = false) {
     if (!startPanel || !startButton) return;
     startPanel.hidden = true;
@@ -43,7 +30,6 @@
     if (!startPanel?.contains(event.target) && !startButton?.contains(event.target)) closeStart();
   });
   document.addEventListener('focusin', event => {
-    activateWindow(event.target);
     if (startPanel && !startPanel.hidden && !startPanel.contains(event.target) && event.target !== startButton) closeStart();
   });
   document.addEventListener('keydown', event => {
@@ -64,12 +50,24 @@
     }
   });
   if (aboutDialog) {
+    const showAbout = () => {
+      aboutDialog.hidden = false;
+      if (!aboutDialog.open) aboutDialog.show();
+      aboutDialog.querySelector('[data-close]')?.focus();
+      window.DesktopWindows.opened(aboutDialog);
+    };
+    window.DesktopWindows.register(aboutDialog, {
+      title: 'Om den här datorn', icon: './favicon.svg', restore: showAbout
+    });
+    aboutDialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); aboutDialog.close(); }
+    });
     for (const button of document.querySelectorAll('[data-about]')) {
       button.hidden = false;
       button.addEventListener('click', () => {
         aboutTrigger = startPanel?.contains(button) ? startButton : button;
         closeStart();
-        aboutDialog.showModal();
+        showAbout();
       });
     }
     aboutDialog.querySelector('[data-close]')?.addEventListener('click', () => aboutDialog.close());
@@ -86,6 +84,42 @@
     if (meta) meta.content = dark ? '#182b41' : '#3a6ea5';
   }
   applyTheme(document.documentElement.dataset.theme);
+  const wallpaperKey = 'moleni-desktop-wallpaper-v1';
+  if (startPanel && themeToggle) {
+    const reset = document.createElement('button');
+    reset.type = 'button';
+    reset.textContent = 'Återställ skrivbordsbakgrund';
+    reset.lang = 'sv';
+    themeToggle.after(reset);
+    function applyWallpaper(image) {
+      const root = document.documentElement;
+      const valid = typeof image === 'string' && image.length < 250000 && /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(image);
+      reset.hidden = !valid;
+      root.toggleAttribute('data-rally-wallpaper', valid);
+      if (valid) root.style.setProperty('--rally-wallpaper', 'url("' + image + '")');
+      else root.style.removeProperty('--rally-wallpaper');
+    }
+    function restoreWallpaper() {
+      try { applyWallpaper(localStorage.getItem(wallpaperKey)); }
+      catch { applyWallpaper(null); }
+    }
+    restoreWallpaper();
+    window.addEventListener('pageshow', event => { if (event.persisted) restoreWallpaper(); });
+    window.addEventListener('storage', event => {
+      if (event.storageArea === localStorage && (event.key === wallpaperKey || event.key === null)) restoreWallpaper();
+    });
+    reset.addEventListener('click', () => {
+      applyWallpaper(null);
+      try { localStorage.removeItem(wallpaperKey); } catch { /* The current page still resets. */ }
+      closeStart(true);
+    });
+    document.getElementById('rally-wallpaper')?.addEventListener('click', () => {
+      const image = document.getElementById('rally-screen').toDataURL('image/png');
+      applyWallpaper(image);
+      try { localStorage.setItem(wallpaperKey, image); } catch { /* Use it on this page. */ }
+      document.getElementById('rally-window').close();
+    });
+  }
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
     try { applyTheme(localStorage.getItem('theme')); } catch (error) { /* Keep the current theme when storage is unavailable. */ }
