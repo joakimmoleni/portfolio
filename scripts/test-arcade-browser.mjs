@@ -27,7 +27,20 @@ async function check() {
       assert(visible(id('space-open')) && visible(id('rally-open')), 'both sleeves');
       assert(fits(id('space-open')) && fits(id('rally-open')), 'sleeve layout');
       assert(doc.documentElement.scrollWidth <= width + 1, 'document overflow');
-      id('space-open').click();
+      const win = frame.contentWindow;
+      const queue = new Map();
+      let serial = 0, now = 0;
+      win.requestAnimationFrame = callback => { queue.set(++serial,callback); return serial; };
+      win.cancelAnimationFrame = key => queue.delete(key);
+      const advance = () => {
+        const callbacks = [...queue.values()]; queue.clear(); now += 200;
+        for (const callback of callbacks) callback(now);
+      };
+      if (width > 650) {
+        const shortcut = doc.querySelector('[data-shortcut="space"]');
+        assert(visible(shortcut), 'desktop ship icon');
+        shortcut.click();
+      } else id('space-open').click();
       assert(id('space-window').open && fits(id('space-window')), 'game window');
       id('space-go').click();
       assert(id('space-prompt').hidden, 'flight started');
@@ -51,6 +64,15 @@ async function check() {
       id('space-close').click();
       await new Promise(resolve => setTimeout(resolve, 40));
       assert(!visible(task('space-window')) && item('space-window').hidden, 'closed game removed');
+      task('rally-window').click();
+      id('rally-go').click();
+      for (let i=0;i<400 && id('rally-wallpaper').hidden;i++) advance();
+      assert(!id('rally-wallpaper').hidden && id('rally-progress').textContent === '100 %', 'finish a complete lap');
+      id('rally-wallpaper').click();
+      assert(doc.documentElement.hasAttribute('data-rally-wallpaper'), 'apply finish frame');
+      const reset = id('themeToggle').nextElementSibling;
+      reset.click();
+      assert(!doc.documentElement.hasAttribute('data-rally-wallpaper'), 'restore desktop background');
     }
     report.textContent = 'BROWSER PASS';
   } catch (err) { report.textContent = 'BROWSER FAIL ' + err.message; }

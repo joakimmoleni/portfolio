@@ -128,6 +128,11 @@
       });
       window.addEventListener('DOMContentLoaded', () => {
         link.hidden = opener.hidden;
+        const shortcut = document.querySelector('[data-shortcut="' + key + '"]');
+        if (shortcut) {
+          shortcut.hidden = opener.hidden;
+          shortcut.addEventListener('click', () => opener.click());
+        }
         if (!opener.hidden && new URLSearchParams(location.search).get('spel') === key) opener.click();
       });
     } else link.href = './index.html?spel=' + key;
