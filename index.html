@@ -33,7 +33,7 @@
 
   <link rel="stylesheet" href="./assets/css/portfolio.css?v=20261117-arcade">
   <link rel="stylesheet" href="./assets/css/extras.css?v=20261117-arcade">
-  <link rel="stylesheet" href="./assets/css/rally.css?v=20261117-pace">
+  <link rel="stylesheet" href="./assets/css/rally.css?v=20261117-flight">
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch (e) {}
   </script>
@@ -206,16 +206,16 @@
     <header class="titlebar"><h2 id="space-title"><img src="./assets/images/periapsis-icon.svg" width="26" height="20" alt="">Periapsis</h2><button type="button" class="title-button" data-window-minimize aria-label="Minimera Periapsis">_</button><button type="button" class="title-button" id="space-close" aria-label="Stäng Periapsis">×</button></header>
     <div class="rally-hud space-hud"><span>Poäng <b id="space-score">0</b></span><span>Skrov <b id="space-hull">3 / 3</b></span><span>Laser <b id="space-laser">Puls</b></span></div>
     <div class="rally-track"><canvas id="space-screen" width="384" height="192" tabindex="-1" role="img" aria-label="Spelfält. Ditt skepp flyger åt höger."></canvas>
-      <div class="rally-prompt" id="space-prompt"><div><h3 id="space-heading">Periapsis</h3><p id="space-message">Plocka de gröna lasercellerna och ta dig genom åtta formationer.</p><button type="button" class="system-button" id="space-go">Flyg</button></div></div>
     </div>
+    <div class="space-briefing" id="space-prompt"><div><h3 id="space-heading">Redo för start</h3><p id="space-message">Skjut de guldfärgade fienderna och plocka deras laserceller.</p></div><button type="button" class="system-button" id="space-go">Flyg</button></div>
     <div class="space-controls"><p id="space-help">Styr med piltangenterna, WASD eller dra på spelytan. Skeppet skjuter själv.</p><button class="system-button" type="button" id="space-pause" disabled>Paus</button></div>
   </dialog>
   <script src="./assets/js/desktop-windows.js" defer></script>
   <script src="./assets/js/rally-engine.js?v=20261117-pace" defer></script>
   <script src="./assets/js/rally-scene.js" defer></script>
   <script src="./assets/js/rally.js?v=20261117-pace" defer></script>
-  <script src="./assets/js/periapsis-engine.js" defer></script>
-  <script src="./assets/js/periapsis.js" defer></script>
+  <script src="./assets/js/periapsis-engine.js?v=20261117-flight" defer></script>
+  <script src="./assets/js/periapsis.js?v=20261117-flight" defer></script>
   <script src="./assets/js/portfolio.js?v=20261117-arcade" defer></script>
   <script src="./assets/js/extras.js?v=20261117-arcade" defer></script>
 </body>

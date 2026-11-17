@@ -5,8 +5,10 @@ const Periapsis = (() => {
   const lasers = ['Puls', 'Dubbellaser', 'Prisma'];
   const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
   function flight() {
-    return {tick: 0, x: 48, y: 97, hull: 3, laser: 0, grace: 0, score: 0,
+    const s = {tick: 0, x: 48, y: 97, hull: 3, laser: 0, grace: 0, score: 0,
       enemies: [], bolts: [], hostile: [], cells: [], sparks: [], wave: 0, result: null};
+    spawn(s);
+    return s;
   }
   function spawn(s) {
     const wave = s.wave++;
@@ -15,8 +17,10 @@ const Periapsis = (() => {
       return;
     }
     const mid = [94, 60, 128, 90, 51, 136, 74, 113][wave];
+    const startX = wave === 0 ? width - 105 : width + 10;
     for (let i=0; i<5; i++) {
-      s.enemies.push({x:width+10+i*24, y:mid, mid, age:0, phase:i*.59,
+      const phase = i * .59;
+      s.enemies.push({x:startX+i*24, y:mid+Math.sin(phase)*19, mid, age:0, phase,
         hp:i===2?3:1, carrier:i===2, wave});
     }
   }
@@ -77,7 +81,7 @@ const Periapsis = (() => {
     const scale=2.15/Math.max(1,Math.hypot(dx,dy));
     s.x=clamp(s.x+dx*scale,12,width-18);
     s.y=clamp(s.y+dy*scale,9,height-10);
-    if ((s.tick-1)%230===0 && s.wave<=8) spawn(s);
+    if (s.tick===1+230*s.wave && s.wave<=8) spawn(s);
     if (s.tick%11===1) fire(s);
     for (const b of s.bolts) { b.x+=5.4; b.y+=b.vy; }
     for (const e of s.enemies) {

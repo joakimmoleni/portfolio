@@ -4,8 +4,6 @@
   const panel=byId('window'), screen=byId('screen'), ctx=screen.getContext('2d');
   const cover=byId('art'), opener=byId('open'), go=byId('go'), pause=byId('pause');
   if (!ctx || !cover.getContext('2d') || typeof panel.show !== 'function') return;
-  const ship=new Image();
-  ship.src='./assets/images/periapsis-icon.svg';
   const keys=new Set();
   const arrows={arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0],
     arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1]};
@@ -55,9 +53,25 @@
     box(c,'#fff1b0',-24,-1,10,2); box(c,'#e4bda0',11,-2,13,4);
     c.restore();
   }
-  function fighter(c,x,y,w=29) {
-    if (ship.complete && ship.naturalWidth) c.drawImage(ship,Math.round(x-w/2),Math.round(y-w*.35),w,Math.round(w*.7));
-    else { box(c,'#dde6dc',x-8,y-2,19,4); box(c,'#70dbe3',x,y-3,4,2); }
+  function fighter(c,x,y,w=34) {
+    c.save();
+    c.translate(Math.round(x-w/2),Math.round(y-w*.35));
+    c.scale(w/40,w/40);
+    // Paint the hull directly so the first frame never depends on image loading.
+    box(c,'#f57d48',0,12,11,5);
+    box(c,'#fff1a8',4,13,8,3);
+    for (const side of [-1,1]) {
+      c.save(); c.translate(0,14); c.scale(1,side);
+      box(c,'#677c94',10,3,15,4); box(c,'#bacbd0',10,7,10,3);
+      box(c,'#ed825d',8,10,7,2); box(c,'#ffe1b8',8,11,4,1);
+      c.restore();
+    }
+    box(c,'#40596e',7,9,16,11); box(c,'#849eac',11,8,16,11);
+    box(c,'#cfdbd9',14,11,19,6); box(c,'#eef4dc',25,12,12,4);
+    box(c,'#fff4d9',33,13,7,2); box(c,'#395c77',15,9,11,3);
+    box(c,'#73e1ec',17,8,7,3); box(c,'#d1ffff',19,8,4,1);
+    box(c,'#e98162',11,14,10,2); box(c,'#ffbd7e',7,12,2,5);
+    c.restore();
   }
   function sleeve() {
     const c=cover.getContext('2d');
@@ -89,7 +103,11 @@
       box(ctx,'#92ead2',cell.x-4,cell.y-4,9,9); box(ctx,'#173f44',cell.x-3,cell.y-3,7,7);
       box(ctx,'#d0ffdb',cell.x,cell.y-2,1,5); box(ctx,'#d0ffdb',cell.x-2,cell.y,5,1);
     }
-    if (!s.grace || Math.floor(s.tick/9)%2===0) fighter(ctx,s.x,s.y);
+    if (s.grace && Math.floor(s.tick/9)%2===0) {
+      ctx.strokeStyle='#78b7c9';
+      ctx.strokeRect(Math.round(s.x)-17,Math.round(s.y)-12,35,24);
+    }
+    fighter(ctx,s.x,s.y);
     for (const p of s.sparks) box(ctx,p.color,p.x,p.y,p.life>10?2:1,1);
     const values={score:s.score,hull:s.hull+' / 3',laser:Periapsis.lasers[s.laser]};
     for(const [name,value] of Object.entries(values)) {
@@ -130,10 +148,15 @@
     window.DesktopWindows.opened(panel);
     (mode==='running'?pause:go).focus({preventScroll:true});
   }
-  window.DesktopWindows.register(panel,{title:'Periapsis',icon:ship.src,restore:open,minimize:hold});
+  window.DesktopWindows.register(panel,{title:'Periapsis',icon:'./assets/images/periapsis-icon.svg',restore:open,minimize:hold});
   opener.addEventListener('click',open);
   go.addEventListener('click',()=>{
-    if(mode!=='paused') { s=Periapsis.flight(); carry=0; }
+    if(mode!=='paused') {
+      s=Periapsis.flight();
+      Periapsis.step(s);
+      carry=0;
+    }
+    paint();
     mode='running'; last=null; byId('prompt').hidden=true; pause.disabled=false;
     screen.focus({preventScroll:true}); frame=requestAnimationFrame(loop);
   });
@@ -141,7 +164,7 @@
   byId('close').addEventListener('click',()=>panel.close());
   panel.addEventListener('close',()=>{
     hold(); mode='ready'; s=Periapsis.flight();
-    prompt('Periapsis','Plocka de gröna lasercellerna och ta dig genom åtta formationer.','Flyg');
+    prompt('Redo för start','Skjut de guldfärgade fienderna och plocka deras laserceller.','Flyg');
     paint(); opener.focus({preventScroll:true});
   });
   panel.addEventListener('keydown',e=>{
@@ -168,5 +191,4 @@
   window.addEventListener('blur',hold); window.addEventListener('pagehide',hold);
   document.addEventListener('visibilitychange',()=>{ if(document.hidden) hold(); });
   sleeve(); paint(); opener.hidden=false;
-  ship.addEventListener('load',()=>{ sleeve(); if(mode!=='running') paint(); });
 })();

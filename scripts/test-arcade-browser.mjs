@@ -42,8 +42,30 @@ async function check() {
         shortcut.click();
       } else id('space-open').click();
       assert(id('space-window').open && fits(id('space-window')), 'game window');
+      const screen = id('space-screen');
+      const pixels = screen.getContext('2d');
+      // Match the cockpit, carrier plating and laser core separately from the stars.
+      function hasColour(area, rgb) {
+        const data = pixels.getImageData(...area).data;
+        for (let i=0; i<data.length; i+=4) {
+          if (data[i]===rgb[0] && data[i+1]===rgb[1] && data[i+2]===rgb[2]) return true;
+        }
+        return false;
+      }
+      const cockpit = [115,225,236], gold = [224,161,74], beam = [228,255,243];
+      const rect = screen.getBoundingClientRect();
+      const elementAtShip = doc.elementFromPoint(rect.left+48/384*rect.width,rect.top+97/192*rect.height);
+      assert(elementAtShip === screen && id('space-prompt').getBoundingClientRect().top >= rect.bottom, 'briefing leaves playfield visible');
+      assert(hasColour([30,83,36,28],cockpit), 'player visible before launch');
+      assert(hasColour([260,65,124,80],gold), 'first carrier visible before launch');
       id('space-go').click();
-      assert(id('space-prompt').hidden, 'flight started');
+      assert(id('space-prompt').hidden && hasColour([58,88,20,17],beam), 'flight starts with a visible shot');
+      screen.dispatchEvent(new win.KeyboardEvent('keydown', {key:'ArrowDown', bubbles:true}));
+      advance(); advance();
+      win.dispatchEvent(new win.KeyboardEvent('keyup', {key:'ArrowDown'}));
+      assert(!hasColour([30,83,36,28],cockpit) && hasColour([30,111,36,24],cockpit), 'steering moves the visible ship');
+      assert(hasColour([105,86,43,22],beam), 'shots travel across the playfield');
+      assert(hasColour([250,65,125,80],gold), 'carrier stays visible during flight');
       id('space-window').querySelector('[data-window-minimize]').click();
       assert(!id('space-prompt').hidden && id('space-window').hidden, 'flight paused on minimize');
       assert(visible(task('space-window')), 'minimized game in taskbar');
