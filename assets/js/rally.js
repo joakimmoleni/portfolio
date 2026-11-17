@@ -39,7 +39,7 @@
     }
     byId('time').textContent = format(lap.ticks);
     byId('pace').textContent = Math.round(GhostLap.pace(lap) * 100) + ' %';
-    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + (Math.abs(lap.lane)>0.9?' % · Grus':' %');
+    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + (lap.distance<GhostLap.length && Math.abs(lap.lane)>0.9?' % · Grus':' %');
   }
   function prompt(next, title, message, action) {
     cancelAnimationFrame(frame);

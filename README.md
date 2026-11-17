@@ -52,6 +52,8 @@ Production is GitHub Pages from `main`, at `https://portfolio.moleni.se/`. No ho
 
 ## Visual references
 
+Keep interface changes tied to the task and the identity of each program. Give colour a consistent meaning and keep labels, type and icons readable. Use effects for meaningful feedback. Check rendered spacing, keyboard focus, touch targets and empty or unavailable states at both mobile and desktop widths.
+
 The interface artwork is drawn in HTML, CSS and SVG. About uses a journal with chapters; Projects uses a compact FPS-style selector with a flow preview for each project. Contact has a persistent profile, content tabs and a separate mIRC launcher. Their page-specific styles live in `about-world.css`, `projects-world.css` and `contact-world.css`. All three use ordinary fragment links enhanced into panels; the content remains readable without JavaScript.
 
 These references record the original desktop and game-specific direction; their images are not bundled:
