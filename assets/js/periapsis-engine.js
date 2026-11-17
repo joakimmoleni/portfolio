@@ -26,7 +26,7 @@ const Periapsis = (() => {
   }
   function fire(s) {
     const offsets = s.laser === 0 ? [0] : [-4, 4];
-    for (const offset of offsets) s.bolts.push({x:s.x+13, y:s.y+offset, vy:0});
+    for (const offset of offsets) s.bolts.push({x:s.x+21, y:s.y+offset, vy:0});
     if (s.laser===2) {
       for (const vy of [-.7,.7]) s.bolts.push({x:s.x+8, y:s.y, vy});
     }
