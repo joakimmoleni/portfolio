@@ -6,6 +6,7 @@ import vm from 'node:vm';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const desktopSource = readFileSync(path.join(root, 'assets/js/portfolio.js'), 'utf8');
+const languageSource = readFileSync(path.join(root, 'assets/js/language.js'), 'utf8');
 const shellSource = readFileSync(path.join(root, 'assets/js/resume-shell.js'), 'utf8');
 const resumeSource = readFileSync(path.join(root, 'assets/js/resume.js'), 'utf8');
 const base = JSON.parse(readFileSync(path.join(root, 'assets/data/resume-data.json'), 'utf8'));
@@ -114,7 +115,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     }
   });
   const context = vm.createContext({
-    document, location, URL, URLSearchParams, innerHeight: 800, console: { error() {} },
+    dispatchEvent() {}, Event, document, location, URL, URLSearchParams, innerHeight: 800, console: { error() {} },
     print() { printCount += 1; },
     localStorage: { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     history: {
@@ -129,6 +130,7 @@ async function page(search = '?lang=en&focus=mainframe-dev', responses = new Map
     }
   });
   context.window = context;
+  vm.runInContext(languageSource, context);
   vm.runInContext(desktopSource, context, { filename: 'portfolio.js' });
   vm.runInContext(shellSource, context, { filename: 'resume-shell.js' });
   vm.runInContext(resumeSource, context, { filename: 'resume.js' });
@@ -250,10 +252,10 @@ for (const result of ['success', 'failure']) {
 await test('base-file failure remains an error after a language change', async () => {
   const { nodes, setLanguage } = await page('?lang=sv', new Map([['./assets/data/resume-data.json', fail]]));
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
-  assert.match(nodes.get('resumeStatus').textContent, /sparade svenska CV:t/);
+  assert.match(nodes.get('resumeStatus').textContent, /sparade CV:t/);
   setLanguage('en');
   assert.equal(nodes.get('resumeStatus').dataset.state, 'error');
-  assert.match(nodes.get('resumeStatus').textContent, /saved Swedish CV/);
+  assert.match(nodes.get('resumeStatus').textContent, /saved CV/);
   assert.equal(nodes.get('resumeContent').getAttribute('aria-busy'), 'false');
 });
 
@@ -496,7 +498,8 @@ await test('END exits to the desktop, like home and exit', async () => {
   for (const value of [' end ', 'HOME', 'exit']) {
     const { command, location } = await page();
     command(value);
-    assert.equal(location.href, 'https://portfolio.example/index.html');
+    assert.equal(new URL(location.href).pathname, '/index.html');
+  assert.match(new URL(location.href).searchParams.get('lang'), /^(en|sv)$/);
   }
 });
 
@@ -538,7 +541,8 @@ await test('F3 protects an unfinished command and exits from an empty command fi
   assert.equal(nodes.get('resumeCommand').value, 'skills');
   nodes.get('resumeCommand').value = '  ';
   assert.equal(pressKey('F3', { field: 'command' }), true);
-  assert.equal(location.href, 'https://portfolio.example/index.html');
+  assert.equal(new URL(location.href).pathname, '/index.html');
+  assert.match(new URL(location.href).searchParams.get('lang'), /^(en|sv)$/);
 });
 
 await test('terminal shortcuts remain inactive in other fields, modal dialogs, composition and modified events', async () => {
@@ -565,7 +569,8 @@ await test('F1 and F3 still work outside input fields', async () => {
   assert.equal(pressKey('F1'), true);
   assert.equal(nodes.get('resumeHelp').hidden, false);
   assert.equal(pressKey('F3'), true);
-  assert.equal(location.href, 'https://portfolio.example/index.html');
+  assert.equal(new URL(location.href).pathname, '/index.html');
+  assert.match(new URL(location.href).searchParams.get('lang'), /^(en|sv)$/);
 });
 
 for (const hidden of [false, true]) {

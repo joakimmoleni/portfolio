@@ -3,7 +3,7 @@
     "title": "Software Developer | COBOL, HLASM & IBM z/OS",
     "title_sv": "Systemutvecklare | COBOL, HLASM & IBM z/OS"
   },
-  "profile": "I develop in COBOL and HLASM on IBM z/OS. Much of my work is about how a change should be implemented: which systems are affected, how the parts fit together and what needs to work between them.\n\nI have also independently built an information and agent platform. I build so that users can start with what needs to change, supported by system knowledge and checks, including in older codebases. That knowledge must follow every change and remain current for the next person and the next task.",
+  "profile": "I write COBOL and HLASM on IBM z/OS. Much of the work happens around a change. Which systems does it touch? How do they fit together? What has to keep working between them?\n\nI’ve also built a platform for system knowledge and AI agents. I want people to start with what needs to change, with the knowledge and checks they need even in an older codebase. When the code changes, that knowledge has to keep up. Someone else will need it for the next job.",
   "profile_sv": "Jag utvecklar i COBOL och HLASM på IBM z/OS. En stor del av arbetet handlar om hur en förändring ska genomföras: vilka system som berörs, hur delarna hänger ihop och vad som behöver fungera mellan dem.\n\nJag har också självständigt byggt en informations- och agentplattform. Jag bygger för att användaren ska kunna utgå från vad som behöver ändras, med systemkunskap och kontroller som stöd även i äldre kodbaser. Kunskapen ska följa med efter varje förändring och vara aktuell för nästa person och nästa uppgift.",
   "coreStack": [
     "COBOL and IBM z/OS Assembler (HLASM)",

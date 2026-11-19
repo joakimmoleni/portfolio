@@ -10,10 +10,9 @@
   bar.querySelector('.task-button').after(tasks);
   const group = document.createElement('section');
   group.className = 'running-menu';
-  group.lang = 'sv';
   group.hidden = true;
   const heading = document.createElement('h2');
-  heading.textContent = 'Öppna fönster';
+  PortfolioLanguage.text(heading, 'Öppna fönster', 'Open windows');
   group.append(heading);
   start.querySelector('.start-links').prepend(group);
   const entries = new Map();
@@ -27,12 +26,17 @@
       any ||= entry.open;
       entry.task.hidden = entry.menu.hidden = !entry.open;
       entry.task.setAttribute('aria-pressed', String(entry.open && active === panel && !panel.hidden));
-      entry.menu.title = panel.hidden ? 'Återställ ' + entry.title : 'Visa ' + entry.title;
+      const title = PortfolioLanguage.choose(entry.title, entry.englishTitle);
+      entry.task.title = title;
+      entry.task.setAttribute('aria-label', title);
+      const verb = panel.hidden ? PortfolioLanguage.choose('Återställ', 'Restore') : PortfolioLanguage.choose('Visa', 'Show');
+      entry.menu.title = verb + ' ' + title;
     }
     tasks.hidden = group.hidden = !any;
     bar.toggleAttribute('data-running', any);
     mainTask.dataset.inactive = String(active !== main);
   }
+  window.addEventListener('portfolio-language', sync);
   function select(panel) {
     if (!panel || (panel !== main && !entries.has(panel))) return;
     if (active !== panel) active?.dispatchEvent(new Event('desktop-deactivate'));
@@ -54,7 +58,7 @@
     if (active === panel) select(main);
     else sync();
   }
-  function register(panel, { title, icon, restore, minimize }) {
+  function register(panel, { title, englishTitle = title, icon, restore, minimize }) {
     function button() {
       const control = document.createElement('button');
       control.type = 'button';
@@ -64,7 +68,7 @@
       image.src = icon;
       image.alt = '';
       const label = document.createElement('span');
-      label.textContent = title;
+      PortfolioLanguage.text(label, title, englishTitle);
       control.append(image, label);
       return control;
     }
@@ -92,7 +96,7 @@
     menu.addEventListener('click', show);
     panel.querySelector('[data-window-minimize], [data-mirc-minimize]')?.addEventListener('click', hide);
     if (panel instanceof HTMLDialogElement) panel.addEventListener('close', () => { if (!panel.open) closed(panel); });
-    entries.set(panel, { task, menu, title, open: false, hide });
+    entries.set(panel, { task, menu, title, englishTitle, open: false, hide });
     sync();
   }
   function selectTarget(event) {

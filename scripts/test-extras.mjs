@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import { test } from 'node:test';
 
 const source = readFileSync(new URL('../assets/js/extras.js', import.meta.url), 'utf8');
+const language = readFileSync(new URL('../assets/js/language.js', import.meta.url), 'utf8');
 const manager = readFileSync(new URL('../assets/js/desktop-windows.js', import.meta.url), 'utf8');
 const noteKey = 'portfolio-extra-note-v1';
 
@@ -95,6 +96,7 @@ function page(storage, access = { blocked: false }) {
     HTMLDialogElement: Dialog,
     getComputedStyle: () => ({ visibility: 'visible' }),
     document: {
+      documentElement: {lang: 'sv'},
       body: { append() { inserted = true; } },
       getElementById: id => shell.get(id) ?? (inserted ? nodes.get(id) : null),
       createElement: () => new Element(),
@@ -118,6 +120,7 @@ function page(storage, access = { blocked: false }) {
     }
   });
   context.window = context;
+  vm.runInContext(language, context);
   vm.runInContext(manager, context, { filename: 'desktop-windows.js' });
   vm.runInContext(source, context, { filename: 'extras.js' });
   function open(name) {

@@ -78,7 +78,7 @@ const RallyScene = (() => {
     }
     if (k>2) {
       ctx.fillStyle='#f8ebc7'; ctx.font='bold '+Math.max(3,Math.round(k*.7))+'px monospace';
-      ctx.textAlign='center'; ctx.fillText('MÅL',Math.round(x),Math.round(y-4.15*k)); ctx.textAlign='start';
+      ctx.textAlign='center'; ctx.fillText(PortfolioLanguage.choose('MÅL', 'FINISH'),Math.round(x),Math.round(y-4.15*k)); ctx.textAlign='start';
     }
   }
   function car(ctx,x,y,scale,ghost,steer) {

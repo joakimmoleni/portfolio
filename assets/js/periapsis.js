@@ -13,7 +13,7 @@
   let s=Periapsis.flight(), mode='ready', frame, last=null, carry=0, pointer=null;
   let best = 0;
   try { best = Math.max(0,Number(localStorage.getItem('moleni-periapsis-best')) || 0); } catch {}
-  const board = ArcadeScores.mount(byId('scores'), 'space', value => value.toLocaleString('sv-SE')+' p');
+  const board = ArcadeScores.mount(byId('scores'), 'space', value => value.toLocaleString(PortfolioLanguage.choose('sv-SE', 'en-GB')) + PortfolioLanguage.choose(' p', ' pts'));
   let steps = [];
   const box=(c,color,x,y,w,h)=>{ c.fillStyle=color; c.fillRect(Math.round(x),Math.round(y),w,h); };
   function field(c,w,h,tick) {
@@ -87,6 +87,8 @@
       box(c,'#3babae',x,99,20,3); box(c,'#cdfcf1',x,100,15,1);
     }
   }
+  const weaponNames = ['Pulse', 'Twin laser', 'Prism', 'Homing missile', 'Missile salvo'];
+  const sectorNames = ['Outer Ring', 'The Narrows', 'Shipyard'];
   function paint() {
     ctx.imageSmoothingEnabled=false;
     field(ctx,384,192,s.tick);
@@ -123,8 +125,8 @@
     for (const p of s.sparks) box(ctx,p.color,p.x,p.y,p.life>10?2:1,1);
     const weapon = Periapsis.weapons[s.weapon], next = Periapsis.weapons[s.weapon+1];
     const charge = next ? ' · '+(s.collected-weapon.cells)+'/'+(next.cells-weapon.cells) : '';
-    const sector = (s.sector+1)+' / '+Periapsis.sectors.length+' · '+Periapsis.sectors[s.sector];
-    const values={score:s.score+' · ×'+Periapsis.multiplier(s),hull:s.hull+' / 3',laser:weapon.name+charge,sector};
+    const sector = (s.sector+1)+' / '+Periapsis.sectors.length+' · '+PortfolioLanguage.choose(Periapsis.sectors[s.sector], sectorNames[s.sector]);
+    const values={score:s.score+' · ×'+Periapsis.multiplier(s),hull:s.hull+' / 3',laser:PortfolioLanguage.choose(weapon.name, weaponNames[s.weapon])+charge,sector};
     for(const [name,value] of Object.entries(values)) {
       const node=byId(name); if(node.textContent!==String(value)) node.textContent=value;
     }
@@ -132,13 +134,14 @@
   function prompt(title,message,action) {
     cancelAnimationFrame(frame); keys.clear(); pointer=null;
     board.visible(true);
-    byId('heading').textContent=title; byId('message').textContent=message;
-    go.textContent=action; byId('prompt').hidden=false; pause.disabled=true;
+    PortfolioLanguage.text(byId('heading'), ...title);
+    PortfolioLanguage.text(byId('message'), ...message);
+    PortfolioLanguage.text(go, ...action); byId('prompt').hidden=false; pause.disabled=true;
     if(panel.open && !panel.hidden && panel.contains(document.activeElement)) go.focus({preventScroll:true});
   }
   function hold() {
     if(mode!=='running') return;
-    mode='paused'; prompt('Paus','Din flygning väntar här.','Fortsätt');
+    mode='paused'; prompt(['Paus', 'Paused'], ['Din flygning väntar här.', 'Your flight is paused.'], ['Fortsätt', 'Resume']);
   }
   function loop(now) {
     if(mode!=='running') return;
@@ -159,7 +162,9 @@
       best=Math.max(best,s.score);
       try { localStorage.setItem('moleni-periapsis-best',String(best)); } catch {}
       board.finish(s.score,steps);
-      prompt(s.result==='won'?'Varvet är fritt':s.result==='escaped'?'Flaggskeppet kom undan':'Skrovet gav upp',s.score+' poäng · Personbästa '+best,'Flyg igen');
+      const title = s.result === 'won' ? ['Varvet är fritt', 'Shipyard clear'] :
+        s.result === 'escaped' ? ['Flaggskeppet kom undan', 'The flagship got away'] : ['Skrovet gav upp', 'Hull lost'];
+      prompt(title, [s.score + ' poäng · Personbästa ' + best, s.score + ' points · Personal best ' + best], ['Flyg igen', 'Fly again']);
     } else frame=requestAnimationFrame(loop);
   }
   function open() {
@@ -187,7 +192,8 @@
   byId('close').addEventListener('click',()=>panel.close());
   panel.addEventListener('close',()=>{
     hold(); mode='ready'; s=Periapsis.flight();
-    prompt('Redo för start','Plocka celler från de guldfärgade skeppen för att uppgradera vapnet.','Flyg');
+    prompt(['Redo för start', 'Ready for take-off'],
+      ['Plocka celler från de guldfärgade skeppen för att uppgradera vapnet.', 'Collect cells from the gold ships to upgrade your weapon.'], ['Flyg', 'Fly']);
     paint(); opener.focus({preventScroll:true});
   });
   panel.addEventListener('keydown',e=>{
@@ -215,5 +221,6 @@
   document.addEventListener('visibilitychange',()=>{ if(document.hidden) hold(); });
   screen.addEventListener('contextrestored',paint);
   cover.addEventListener('contextrestored',sleeve);
+  window.addEventListener('portfolio-language', paint);
   sleeve(); opener.hidden=false;
 })();
