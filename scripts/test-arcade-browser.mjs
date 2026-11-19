@@ -129,6 +129,31 @@ async function check() {
           throw Error(width + 'px: language switch on ' + doc.location.pathname);
         }
       }
+      function checkShortcuts(doc, lang) {
+        const rail = doc.querySelector('.desktop-shortcuts');
+        if (rail.children.length !== 7) throw Error('Incomplete desktop on ' + doc.location.pathname);
+        const links = {};
+        for (const game of ['space', 'rally']) {
+          const icon = rail.querySelector('[data-shortcut="' + game + '"]');
+          const menu = [...doc.querySelectorAll('[data-extras-menu] a, [data-extras-menu] button')]
+            .find(link => link.textContent === icon.textContent);
+          const onHome = !!doc.getElementById(game + '-open');
+          if (!menu || icon.hidden || menu.hidden || !!icon.getClientRects().length !== (width > 650)) {
+            throw Error('Missing launcher: ' + game + ' on ' + doc.location.pathname);
+          }
+          for (const link of [icon, menu]) {
+            if (onHome) {
+              if (link.getAttribute('aria-controls') !== game + '-window') throw Error('Wrong game button');
+            } else {
+              const url = new URL(link.href);
+              if (!url.pathname.endsWith('/index.html') || url.searchParams.get('spel') !== game ||
+                  url.searchParams.get('lang') !== lang) throw Error('Wrong game link: ' + url);
+            }
+          }
+          links[game] = width > 650 ? icon : menu;
+        }
+        return links;
+      }
       for (const [path, heading] of [
         ['about.html?lang=en#tekniken', 'How I think'],
         ['projects.html?lang=en#fragsheet', 'Fragsheet'],
@@ -141,6 +166,7 @@ async function check() {
         for (const lang of ['sv', 'en']) {
           doc.querySelector('[data-lang="' + lang + '"]').click();
           checkLanguage(doc, lang);
+          checkShortcuts(doc, lang);
           if (panel.hidden || doc.location.hash !== '#' + panel.id) throw Error('Language lost the current panel');
         }
       }
@@ -155,7 +181,42 @@ async function check() {
       cv.querySelector('[data-lang="sv"]').click();
       checkLanguage(cv, 'sv');
       if (cv.location.hash !== '#job-seb' || !cv.location.search.includes('panel=work')) throw Error('CV lost its place');
+      const links = checkShortcuts(cv, 'sv');
+      const game = width === 320 ? 'rally' : 'space';
+      if (width <= 650) {
+        cv.getElementById('startButton').click();
+        const programs = cv.querySelector('.start-extras summary');
+        programs.focus();
+        programs.dispatchEvent(new frame.contentWindow.KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true}));
+        if (cv.activeElement !== links.rally) throw Error('Program menu skipped the first game');
+      }
+      if (!links[game].getClientRects().length) throw Error('Game launcher is unreachable');
+      const navigated = new Promise(resolve => { frame.onload = resolve; });
+      links[game].click();
+      await navigated;
+      const landing = frame.contentDocument;
+      const dialog = landing.getElementById(game + '-window');
+      if (!dialog.open || landing.documentElement.lang !== 'sv') throw Error('Cross-page game launch failed');
+      const closed = new Promise(resolve => dialog.addEventListener('close', resolve, {once: true}));
+      landing.getElementById(game + '-close').click();
+      await closed;
+      if (new URL(landing.location.href).searchParams.has('spel')) throw Error('Closed game still in URL');
+      const refreshed = await open(landing.location.href);
+      if (refreshed.querySelector('.rally-window[open]')) throw Error('Closed game reopened on refresh');
+      checkLanguage(refreshed, 'sv');
       const home = await open('/index.html?lang=en');
+      const homeLinks = checkShortcuts(home, 'en');
+      if (width <= 650) {
+        home.getElementById('startButton').click();
+        home.querySelector('.start-extras summary').click();
+      }
+      homeLinks.rally.click();
+      const finished = new Promise(resolve => home.getElementById('rally-window').addEventListener('close', resolve, {once:true}));
+      home.getElementById('rally-close').click();
+      await finished;
+      if (home.activeElement !== (width > 650 ? homeLinks.rally : home.getElementById('startButton'))) {
+        throw Error('Closing the game lost keyboard focus');
+      }
       const id = name => home.getElementById(name);
       id('space-open').click();
       id('space-go').click();

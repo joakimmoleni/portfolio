@@ -47,10 +47,15 @@ svg { width: 2rem; height: 2rem; flex-shrink: 0; }
 .skip-link:focus { top: .5rem; }
 .desktop { max-width: 1232px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 0 30px; align-items: start; }
 .desktop-shortcuts { position: sticky; top: 32px; display: grid; gap: 25px; padding-top: 10px; }
-.desktop-shortcuts a { display: grid; justify-items: center; gap: 6px; color: #fff; font-size: .875rem; line-height: 1.4; text-align: center; text-decoration: none; padding: 4px; }
-.desktop-shortcuts a span { padding: 1px 4px; }
-.desktop-shortcuts a:hover span, .desktop-shortcuts a:focus-visible span, .desktop-shortcuts a[aria-current="page"] span { background: #0a246a; }
+.desktop-shortcuts :is(a, button) { display: grid; justify-items: center; gap: 6px; color: #fff; font-size: .875rem; line-height: 1.4; text-align: center; text-decoration: none; padding: 4px; }
+.desktop-shortcuts :is(a, button) span { padding: 1px 4px; }
+.desktop-shortcuts :is(a, button):hover span, .desktop-shortcuts :is(a, button):focus-visible span, .desktop-shortcuts a[aria-current="page"] span { background: #0a246a; }
 .desktop-shortcuts a[aria-current="page"] span { outline: 1px dotted #fff; }
+.desktop-shortcuts button { background: transparent; border: 0; }
+.desktop-shortcuts img { object-fit: contain; image-rendering: pixelated; }
+@media (min-width: 651px) and (max-height: 760px) {
+  .desktop-shortcuts { gap: 12px; }
+}
 .window { background: var(--surface); padding: 3px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); box-shadow: inset -1px -1px var(--shadow), inset 1px 1px var(--surface), 2px 2px 0 #0003; }
 .main-window { min-width: 0; }
 .titlebar { min-height: 32px; padding: 3px 4px; background: linear-gradient(90deg, var(--title), var(--title-end)); color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -236,7 +241,7 @@ dt { color: var(--muted); }
     background: var(--desktop) var(--rally-wallpaper) center / cover no-repeat;
     image-rendering: pixelated; filter: brightness(.7);
   }
-  html[data-rally-wallpaper] .desktop-shortcuts a span,
+  html[data-rally-wallpaper] .desktop-shortcuts :is(a, button) span,
   html[data-rally-wallpaper] .desktop-caption { background-color: #132328; }
   html[data-rally-wallpaper] .desktop-caption { justify-self: start; padding: 2px 5px; margin-top: 10px; }
 }

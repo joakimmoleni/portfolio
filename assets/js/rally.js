@@ -151,7 +151,7 @@
   go.addEventListener('click',start);
   pause.addEventListener('click',hold);
   byId('close').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('close',()=>{ hold(); mode = 'ready'; opener.focus({preventScroll:true}); });
+  dialog.addEventListener('close',()=>{ hold(); mode = 'ready'; });
   dialog.addEventListener('cancel',event=>{ if (mode === 'running') { event.preventDefault(); hold(); } });
   const driveKeys = new Set(['arrowleft','arrowright','a','d']);
   dialog.addEventListener('keydown',event=>{

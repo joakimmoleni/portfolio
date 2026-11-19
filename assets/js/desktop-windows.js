@@ -114,33 +114,62 @@
     document.querySelector('main')?.focus({preventScroll:true});
   });
   const menu = start.querySelector('[data-extras-menu]');
-  for (const [key, title, icon] of [['rally','Spökvarvet','rally'], ['space','Periapsis','periapsis']]) {
-    if (!menu) break;
+  const desktop = document.querySelector('.desktop-shortcuts');
+  for (const [key, title, icon, width] of [['rally','Spökvarvet','rally',36], ['space','Periapsis','periapsis',40]]) {
     const opener = document.getElementById(key + '-open');
-    const link = document.createElement(opener ? 'button' : 'a');
-    const image = document.createElement('img');
-    image.src = './assets/images/' + icon + '-icon.svg'; image.alt = '';
-    image.width = image.height = 24;
-    link.append(image, title);
-    if (opener) {
-      link.type = 'button';
-      link.addEventListener('click', () => {
-        start.hidden = true;
-        start.querySelector('.start-extras').open = false;
-        document.getElementById('startButton').setAttribute('aria-expanded','false');
-        opener.click();
-      });
-      window.addEventListener('DOMContentLoaded', () => {
-        link.hidden = opener.hidden;
-        const shortcut = document.querySelector('[data-shortcut="' + key + '"]');
-        if (shortcut) {
-          shortcut.hidden = opener.hidden;
-          shortcut.addEventListener('click', () => opener.click());
+    const panel = document.getElementById(key + '-window');
+    const startButton = document.getElementById('startButton');
+    let returnTo = opener;
+    function launcher(onDesktop) {
+      const control = document.createElement(opener ? 'button' : 'a');
+      const image = document.createElement('img');
+      image.src = './assets/images/' + icon + '-icon.svg';
+      image.alt = '';
+      image.width = onDesktop ? width : 24;
+      image.height = onDesktop ? 32 : 24;
+      const label = document.createElement('span');
+      label.textContent = title;
+      control.append(image, label);
+      if (onDesktop) control.dataset.shortcut = key;
+      if (!opener) {
+        control.href = './index.html?spel=' + key;
+        return control;
+      }
+      control.type = 'button';
+      control.hidden = true;
+      control.setAttribute('aria-haspopup', 'dialog');
+      control.setAttribute('aria-controls', panel.id);
+      control.addEventListener('click', () => {
+        if (!onDesktop) {
+          start.hidden = true;
+          start.querySelector('.start-extras').open = false;
+          startButton.setAttribute('aria-expanded', 'false');
         }
-        if (!opener.hidden && new URLSearchParams(location.search).get('spel') === key) opener.click();
+        opener.click();
+        returnTo = onDesktop ? control : startButton;
       });
-    } else link.href = './index.html?spel=' + key;
-    menu.append(link);
+      return control;
+    }
+    const shortcut = launcher(true);
+    const menuItem = launcher(false);
+    desktop?.append(shortcut);
+    menu?.append(menuItem);
+    if (!opener) continue;
+    opener.addEventListener('click', () => { returnTo = opener; });
+    panel.addEventListener('close', () => {
+      if (panel.open) return;
+      const url = new URL(location.href);
+      if (url.searchParams.get('spel') === key) {
+        url.searchParams.delete('spel');
+        history.replaceState(history.state, '', url);
+      }
+      const target = returnTo.getClientRects().length ? returnTo : opener;
+      target.focus({preventScroll:true});
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      shortcut.hidden = menuItem.hidden = opener.hidden;
+      if (!opener.hidden && new URLSearchParams(location.search).get('spel') === key) opener.click();
+    });
   }
   window.DesktopWindows = {register, opened, closed};
 })();
