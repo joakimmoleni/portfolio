@@ -2,6 +2,7 @@
 import { spawn } from 'node:child_process';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { once } from 'node:events';
+import { createInterface } from 'node:readline';
 import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -129,6 +130,31 @@ async function check() {
           throw Error(width + 'px: language switch on ' + doc.location.pathname);
         }
       }
+      function checkShortcuts(doc, lang) {
+        const rail = doc.querySelector('.desktop-shortcuts');
+        if (rail.children.length !== 7) throw Error('Incomplete desktop on ' + doc.location.pathname);
+        const links = {};
+        for (const game of ['space', 'rally']) {
+          const icon = rail.querySelector('[data-shortcut="' + game + '"]');
+          const menu = [...doc.querySelectorAll('[data-extras-menu] a, [data-extras-menu] button')]
+            .find(link => link.textContent === icon.textContent);
+          const onHome = !!doc.getElementById(game + '-open');
+          if (!menu || icon.hidden || menu.hidden || !!icon.getClientRects().length !== (width > 650)) {
+            throw Error('Missing launcher: ' + game + ' on ' + doc.location.pathname);
+          }
+          for (const link of [icon, menu]) {
+            if (onHome) {
+              if (link.getAttribute('aria-controls') !== game + '-window') throw Error('Wrong game button');
+            } else {
+              const url = new URL(link.href);
+              if (!url.pathname.endsWith('/index.html') || url.searchParams.get('spel') !== game ||
+                  url.searchParams.get('lang') !== lang) throw Error('Wrong game link: ' + url);
+            }
+          }
+          links[game] = width > 650 ? icon : menu;
+        }
+        return links;
+      }
       for (const [path, heading] of [
         ['about.html?lang=en#tekniken', 'How I think'],
         ['projects.html?lang=en#fragsheet', 'Fragsheet'],
@@ -141,6 +167,7 @@ async function check() {
         for (const lang of ['sv', 'en']) {
           doc.querySelector('[data-lang="' + lang + '"]').click();
           checkLanguage(doc, lang);
+          checkShortcuts(doc, lang);
           if (panel.hidden || doc.location.hash !== '#' + panel.id) throw Error('Language lost the current panel');
         }
       }
@@ -155,7 +182,42 @@ async function check() {
       cv.querySelector('[data-lang="sv"]').click();
       checkLanguage(cv, 'sv');
       if (cv.location.hash !== '#job-seb' || !cv.location.search.includes('panel=work')) throw Error('CV lost its place');
+      const links = checkShortcuts(cv, 'sv');
+      const game = width === 320 ? 'rally' : 'space';
+      if (width <= 650) {
+        cv.getElementById('startButton').click();
+        const programs = cv.querySelector('.start-extras summary');
+        programs.focus();
+        programs.dispatchEvent(new frame.contentWindow.KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true}));
+        if (cv.activeElement !== links.rally) throw Error('Program menu skipped the first game');
+      }
+      if (!links[game].getClientRects().length) throw Error('Game launcher is unreachable');
+      const navigated = new Promise(resolve => { frame.onload = resolve; });
+      links[game].click();
+      await navigated;
+      const landing = frame.contentDocument;
+      const dialog = landing.getElementById(game + '-window');
+      if (!dialog.open || landing.documentElement.lang !== 'sv') throw Error('Cross-page game launch failed');
+      const closed = new Promise(resolve => dialog.addEventListener('close', resolve, {once: true}));
+      landing.getElementById(game + '-close').click();
+      await closed;
+      if (new URL(landing.location.href).searchParams.has('spel')) throw Error('Closed game still in URL');
+      const refreshed = await open(landing.location.href);
+      if (refreshed.querySelector('.rally-window[open]')) throw Error('Closed game reopened on refresh');
+      checkLanguage(refreshed, 'sv');
       const home = await open('/index.html?lang=en');
+      const homeLinks = checkShortcuts(home, 'en');
+      if (width <= 650) {
+        home.getElementById('startButton').click();
+        home.querySelector('.start-extras summary').click();
+      }
+      homeLinks.rally.click();
+      const finished = new Promise(resolve => home.getElementById('rally-window').addEventListener('close', resolve, {once:true}));
+      home.getElementById('rally-close').click();
+      await finished;
+      if (home.activeElement !== (width > 650 ? homeLinks.rally : home.getElementById('startButton'))) {
+        throw Error('Closing the game lost keyboard focus');
+      }
       const id = name => home.getElementById(name);
       id('space-open').click();
       id('space-go').click();
@@ -176,26 +238,41 @@ async function check() {
     }
     report.textContent = 'BROWSER PASS';
   } catch (err) { report.textContent = 'BROWSER FAIL ' + err.message; }
+  console.log('PORTFOLIO_TEST_RESULT ' + report.textContent);
 }
 const root = new URL('../', import.meta.url);
 const dir = await mkdtemp(join(root.pathname, 'arcade-check-'));
 const profile = await mkdtemp(join(tmpdir(),'portfolio-browser-'));
 const server = spawn(process.execPath, ['scripts/serve.mjs','--port','4179'], {cwd:root,env:{...process.env,ARCADE_SCORE_DB:':memory:'}});
+let browser, timeout;
 try {
   await Promise.race([once(server.stdout,'data'), once(server,'exit').then(()=>{throw Error('Preview server stopped');})]);
   const html = '<meta charset="utf-8"><p id="result">Pending</p><iframe style="border:0" height="720"></iframe><script>(' + check.toString() + ')()</script>';
   await writeFile(join(dir,'index.html'),html);
-  const browser = spawn(process.env.CHROME_BIN || 'google-chrome', [
+  browser = spawn(process.env.CHROME_BIN || 'google-chrome', [
     '--headless','--disable-dev-shm-usage','--disable-gpu','--no-first-run','--disable-extensions',
-    '--user-data-dir='+profile,'--virtual-time-budget=30000','--dump-dom','http://127.0.0.1:4179/'+basename(dir)+'/'
-  ], {stdio:['ignore','pipe','inherit']});
-  let output='';
-  browser.stdout.on('data',chunk=>output+=chunk);
-  const [code]=await once(browser,'close');
-  const result=output.match(/<p id="result">([^<]+)<\/p>/)?.[1];
-  if(code || result!=='BROWSER PASS') throw Error(result || 'Chrome did not report a browser result');
-  console.log('Chrome passed game launch, pause, restore, close and layout checks at 320 and 1024 px.');
+    '--enable-logging=stderr','--user-data-dir='+profile,'http://127.0.0.1:4179/'+basename(dir)+'/'
+  ], {stdio:['ignore','ignore','pipe']});
+  // Native dialog events and cross-document navigation need actual frames.
+  // Wait for the page to finish, independently of Chrome's virtual clock.
+  const lines = createInterface({input: browser.stderr});
+  const result = await Promise.race([
+    new Promise(resolve => lines.on('line', line => {
+      const match = line.match(/"PORTFOLIO_TEST_RESULT (BROWSER (?:PASS|FAIL)[^"]*)"/);
+      if (match) resolve(match[1]);
+    })),
+    once(browser, 'exit').then(([code]) => { throw Error('Chrome exited before reporting: ' + code); }),
+    new Promise((_, reject) => { timeout = setTimeout(() => reject(Error('Browser checks timed out')), 90000); })
+  ]);
+  if (result !== 'BROWSER PASS') throw Error(result);
+  console.log('Chrome passed desktop, arcade, keyboard and language checks at 320, 390 and 1024 px.');
 } finally {
+  clearTimeout(timeout);
+  if (browser?.pid && browser.exitCode === null && browser.signalCode === null) {
+    const stopped = once(browser, 'exit');
+    browser.kill();
+    await stopped;
+  }
   server.kill();
   await Promise.all([rm(dir,{force:true,recursive:true}),rm(profile,{force:true,recursive:true})]);
 }

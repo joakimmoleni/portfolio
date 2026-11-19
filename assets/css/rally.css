@@ -95,14 +95,6 @@
   .space-logotype { font-size: 13cqw; text-transform: none; }
 }
 
-.desktop-game { font: inherit; font-size: .875rem; line-height: 1.4; color: #fff; background: transparent; border: 0; display: grid; justify-items: center; gap: 6px; padding: 4px; }
-.desktop-game img { object-fit: contain; image-rendering: pixelated; }
-.desktop-game span { padding: 1px 4px; }
-.desktop-game:hover span, .desktop-game:focus-visible span, [data-rally-wallpaper] .desktop-game span { background: #0a246a; }
-@media (min-width: 651px) and (max-height: 760px) {
-  .desktop-shortcuts:has(.desktop-game) { gap: 12px; }
-}
-
 .arcade-scores { font: .8125rem/1.45 Tahoma,sans-serif; border-top: 1px solid var(--shadow); }
 .arcade-scores summary { padding: 6px 10px; cursor: pointer; font-weight: 700; }
 .arcade-scores form, .scores-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; padding: 5px 10px; }

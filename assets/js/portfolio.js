@@ -42,7 +42,7 @@
     if (event.key === 'ArrowRight' && event.target === programsSummary) {
       event.preventDefault();
       programs.open = true;
-      programs.querySelector('button')?.focus();
+      programs.querySelector('a[href], button:not([hidden]):not(:disabled)')?.focus();
     } else if (programs.open && (event.key === 'ArrowLeft' || event.key === 'Escape')) {
       event.preventDefault();
       programs.open = false;

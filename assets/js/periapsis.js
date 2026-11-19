@@ -194,7 +194,7 @@
     hold(); mode='ready'; s=Periapsis.flight();
     prompt(['Redo för start', 'Ready for take-off'],
       ['Plocka celler från de guldfärgade skeppen för att uppgradera vapnet.', 'Collect cells from the gold ships to upgrade your weapon.'], ['Flyg', 'Fly']);
-    paint(); opener.focus({preventScroll:true});
+    paint();
   });
   panel.addEventListener('keydown',e=>{
     if(e.isComposing || e.ctrlKey || e.metaKey || e.altKey) return;
