@@ -12,7 +12,7 @@ async function check() {
     for (const width of [320, 1024]) {
       frame.width = width;
       const loaded = new Promise(resolve => frame.onload = resolve);
-      frame.src = '/index.html?size=' + width;
+      frame.src = '/index.html?lang=sv&size=' + width;
       await loaded;
       const doc = frame.contentDocument;
       const id = name => doc.getElementById(name);
@@ -91,8 +91,9 @@ async function check() {
       assert([...doc.querySelectorAll('.running-menu button')].filter(visible).length === 5, 'all five programs listed');
       assert(fits(id('startPanel')), 'Start fits viewport');
       item('space-window').click();
+      const closed = new Promise(resolve => id('space-window').addEventListener('close', resolve, {once: true}));
       id('space-close').click();
-      await new Promise(resolve => setTimeout(resolve, 40));
+      await closed;
       assert(!visible(task('space-window')) && item('space-window').hidden, 'closed game removed');
       task('rally-window').click();
       id('rally-go').click();
@@ -112,6 +113,67 @@ async function check() {
       reset.click();
       assert(!doc.documentElement.hasAttribute('data-rally-wallpaper'), 'restore desktop background');
     }
+    for (const width of [320, 390, 1024]) {
+      frame.width = width;
+      async function open(path) {
+        const ready = new Promise(resolve => { frame.onload = resolve; });
+        frame.src = path;
+        await ready;
+        return frame.contentDocument;
+      }
+      function checkLanguage(doc, lang) {
+        const control = doc.querySelector('[data-lang="' + lang + '"]');
+        const rect = control.getBoundingClientRect();
+        if (doc.documentElement.lang !== lang || control.getAttribute('aria-pressed') !== 'true' ||
+            rect.width < 24 || rect.left < 0 || rect.right > width || doc.documentElement.scrollWidth > width + 1) {
+          throw Error(width + 'px: language switch on ' + doc.location.pathname);
+        }
+      }
+      for (const [path, heading] of [
+        ['about.html?lang=en#tekniken', 'How I think'],
+        ['projects.html?lang=en#fragsheet', 'Fragsheet'],
+        ['contact.html?lang=en#kontakt', 'Contact']
+      ]) {
+        const doc = await open('/' + path);
+        const panel = doc.querySelector('[data-world-panel]:not([hidden])');
+        if (!panel || panel.querySelector('h2').textContent !== heading) throw Error('Wrong English panel: ' + path);
+        checkLanguage(doc, 'en');
+        for (const lang of ['sv', 'en']) {
+          doc.querySelector('[data-lang="' + lang + '"]').click();
+          checkLanguage(doc, lang);
+          if (panel.hidden || doc.location.hash !== '#' + panel.id) throw Error('Language lost the current panel');
+        }
+      }
+      const projectLink = frame.contentDocument.querySelector('a[href*="projects.html"]');
+      if (!projectLink || new URL(projectLink.href).searchParams.get('lang') !== 'en') throw Error('Navigation lost English');
+      const cv = await open('/resume.html?focus=mainframe-dev&panel=work&lang=en#job-seb');
+      const until = Date.now() + 2000;
+      while (cv.querySelector('#resumeContent').getAttribute('aria-busy') === 'true' && Date.now() < until) {
+        await new Promise(resolve => setTimeout(resolve, 20));
+      }
+      checkLanguage(cv, 'en');
+      cv.querySelector('[data-lang="sv"]').click();
+      checkLanguage(cv, 'sv');
+      if (cv.location.hash !== '#job-seb' || !cv.location.search.includes('panel=work')) throw Error('CV lost its place');
+      const home = await open('/index.html?lang=en');
+      const id = name => home.getElementById(name);
+      id('space-open').click();
+      id('space-go').click();
+      id('space-pause').click();
+      id('langSvBtn').click();
+      id('langEnBtn').click();
+      if (id('space-heading').textContent !== 'Paused' || id('space-go').textContent !== 'Resume') throw Error('Paused flight lost its state');
+      id('space-close').click();
+      home.querySelector('[data-open-extra="notepad"]').click();
+      const note = id('extras-notepad-text');
+      note.value = 'Svenska and English';
+      id('langSvBtn').click();
+      id('langEnBtn').click();
+      if (note.value !== 'Svenska and English' || !id('extras-notepad-title').textContent.includes('Notepad')) throw Error('Notepad lost its text or label');
+      const recovery = await open('/missing-page?lang=en');
+      if (recovery.querySelector('h1').textContent !== 'Page not found') throw Error('Untranslated recovery page');
+      checkLanguage(recovery, 'en');
+    }
     report.textContent = 'BROWSER PASS';
   } catch (err) { report.textContent = 'BROWSER FAIL ' + err.message; }
 }
@@ -125,7 +187,7 @@ try {
   await writeFile(join(dir,'index.html'),html);
   const browser = spawn(process.env.CHROME_BIN || 'google-chrome', [
     '--headless','--disable-dev-shm-usage','--disable-gpu','--no-first-run','--disable-extensions',
-    '--user-data-dir='+profile,'--virtual-time-budget=15000','--dump-dom','http://127.0.0.1:4179/'+basename(dir)+'/'
+    '--user-data-dir='+profile,'--virtual-time-budget=30000','--dump-dom','http://127.0.0.1:4179/'+basename(dir)+'/'
   ], {stdio:['ignore','pipe','inherit']});
   let output='';
   browser.stdout.on('data',chunk=>output+=chunk);

@@ -57,7 +57,7 @@
       window.DesktopWindows.opened(aboutDialog);
     };
     window.DesktopWindows.register(aboutDialog, {
-      title: 'Om den här datorn', icon: './favicon.svg', restore: showAbout
+      title: 'Om den här datorn', englishTitle: 'About this computer', icon: './favicon.svg', restore: showAbout
     });
     aboutDialog.addEventListener('keydown', event => {
       if (event.key === 'Escape') { event.preventDefault(); aboutDialog.close(); }
@@ -88,8 +88,7 @@
   if (startPanel && themeToggle) {
     const reset = document.createElement('button');
     reset.type = 'button';
-    reset.textContent = 'Återställ skrivbordsbakgrund';
-    reset.lang = 'sv';
+    PortfolioLanguage.text(reset, 'Återställ skrivbordsbakgrund', 'Restore desktop wallpaper');
     themeToggle.after(reset);
     function applyWallpaper(image) {
       const root = document.documentElement;

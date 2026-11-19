@@ -74,7 +74,7 @@
       setStatus(swedish ? `Laddar ${target}…` : `Loading ${target}…`, 'loading');
     } else if (resumeLoadState === 'error') {
       if (!currentResumeData) {
-        setStatus(swedish ? 'CV-data kunde inte laddas. Det sparade svenska CV:t visas.' : 'Resume data could not be loaded. Showing the saved Swedish CV.', 'error');
+        setStatus(swedish ? 'CV-data kunde inte laddas. Det sparade CV:t visas.' : 'Resume data could not be loaded. Showing the saved CV.', 'error');
       } else {
         const shown = t(currentVariantMeta, 'title');
         const fallback = shown
@@ -98,12 +98,9 @@
   }
   function setResumeLang(lang, updateUrl = true) {
     resumeLang = lang === 'sv' ? 'sv' : 'en';
-    storageSet('resumeLang', resumeLang);
+    PortfolioLanguage.apply(resumeLang);
     document.body.dataset.resumeLang = resumeLang;
-    document.documentElement.lang = resumeLang;
     const english = resumeLang === 'en';
-    langEnBtn.classList.toggle('active', english);
-    langSvBtn.classList.toggle('active', !english);
     langEnBtn.setAttribute('aria-pressed', String(english));
     langSvBtn.setAttribute('aria-pressed', String(!english));
     translateResumeShell(resumeLang);
@@ -319,6 +316,7 @@
     resumeContent.querySelectorAll('[data-open-panel]').forEach(button => {
       button.addEventListener('click', () => { selectPanel(button.dataset.openPanel); revealCurrentPanel(); });
     });
+    PortfolioLanguage.localLinks(resumeContent);
     selectPanel(currentPanel, false);
     if (focused && focused !== resumeContent) {
       let target = focused.matches('.section-tab')
@@ -345,7 +343,7 @@
     if (bounds.top < 0 || bounds.bottom > window.innerHeight) target.scrollIntoView({ block: 'start' });
   }
   function returnToMenu() {
-    if (currentPanel === 'menu') location.href = './index.html';
+    if (currentPanel === 'menu') location.href = './index.html?lang=' + resumeLang;
     else if (selectPanel('menu')) revealCurrentPanel(true);
   }
   function toggleOptions() {
@@ -373,7 +371,7 @@
       else window.print();
       return;
     }
-    if (command === 'home' || command === 'exit' || command === 'x') { location.href = './index.html'; return; }
+    if (command === 'home' || command === 'exit' || command === 'x') { location.href = './index.html?lang=' + resumeLang; return; }
     if (command === 'end' || command === 'back') { returnToMenu(); return; }
     if (command === 'en' || command === 'sv') { setResumeLang(command); return; }
     const aliases = { meny: 'menu', profil: 'profile', experience: 'work', erfarenhet: 'work', kompetenser: 'skills', utbildning: 'education', projekt: 'projects' };

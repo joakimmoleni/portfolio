@@ -13,9 +13,9 @@
     if (GhostLap.validReplay(saved)) previous = saved;
   } catch { /* Local storage is optional. */ }
 
-  function format(ticks) {
+  function format(ticks, lang = document.documentElement.lang) {
     const hundredths = Math.round(ticks * GhostLap.tick * 100);
-    return Math.floor(hundredths / 6000) + ':' + String(Math.floor(hundredths / 100) % 60).padStart(2,'0') + ',' + String(hundredths % 100).padStart(2,'0');
+    return Math.floor(hundredths / 6000) + ':' + String(Math.floor(hundredths / 100) % 60).padStart(2,'0') + (lang === 'en' ? '.' : ',') + String(hundredths % 100).padStart(2,'0');
   }
   const board = ArcadeScores.mount(byId('scores'), 'rally', format);
   let steps = [], pressed = false, tap = 0;
@@ -34,12 +34,13 @@
     RallyScene.draw(screen,lap,ghost);
     if (previous && mode === 'running') {
       const gap = Math.round(lap.distance - (ghost?.distance ?? GhostLap.length));
-      byId('reference').textContent = Math.abs(gap) < 2 ? 'Sida vid sida' :
-        (gap > 0 ? 'Du leder med ' : 'Spöket leder med ') + Math.abs(gap) + ' m';
+      const distance = Math.abs(gap) + ' m';
+      byId('reference').textContent = Math.abs(gap) < 2 ? PortfolioLanguage.choose('Sida vid sida', 'Side by side') :
+        (gap > 0 ? PortfolioLanguage.choose('Du leder med ', 'You lead by ') : PortfolioLanguage.choose('Spöket leder med ', 'Your ghost leads by ')) + distance;
     }
     byId('time').textContent = format(lap.ticks);
     byId('pace').textContent = Math.round(GhostLap.pace(lap) * 100) + ' %';
-    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + (lap.distance<GhostLap.length && Math.abs(lap.lane)>0.9?' % · Grus':' %');
+    byId('progress').textContent = Math.floor(lap.distance / GhostLap.length * 100) + (lap.distance<GhostLap.length && Math.abs(lap.lane)>0.9? PortfolioLanguage.choose(' % · Grus', '% · Gravel') : ' %');
   }
   function prompt(next, title, message, action) {
     cancelAnimationFrame(frame);
@@ -48,28 +49,38 @@
     board.visible(true);
     byId('prompt').hidden = false;
     wallpaper.hidden = next !== 'finished';
-    byId('heading').textContent = title;
-    byId('message').textContent = message;
-    go.textContent = action;
+    PortfolioLanguage.text(byId('heading'), ...title);
+    PortfolioLanguage.text(byId('message'), ...message);
+    PortfolioLanguage.text(go, ...action);
     pause.disabled = true;
     steering.forEach(button => { button.disabled = true; });
     if (dialog.open && !dialog.hidden && dialog.contains(document.activeElement)) go.focus({preventScroll:true});
   }
   function finish() {
     const delta = previous ? lap.ticks - previous.ticks : null;
-    let message = 'Nästa varv kör du mot din egen inspelning.';
-    if (delta !== null) message = delta === 0 ? 'Samma tid som förra varvet.' : (Math.abs(delta) * GhostLap.tick).toFixed(2).replace('.', ',') + ' s' + (delta < 0 ? ' snabbare' : ' långsammare') + ' än förra varvet.';
+    const message = ['Nästa varv kör du mot din egen inspelning.', 'Next lap, you race your own ghost.'];
+    if (delta === 0) {
+      message[0] = 'Samma tid som förra varvet.';
+      message[1] = 'Exactly the same time as your last lap.';
+    } else if (delta !== null) {
+      const seconds = (Math.abs(delta) * GhostLap.tick).toFixed(2);
+      message[0] = seconds.replace('.', ',') + ' s ' + (delta < 0 ? 'snabbare' : 'långsammare') + ' än förra varvet.';
+      message[1] = seconds + ' s ' + (delta < 0 ? 'faster' : 'slower') + ' than your last lap.';
+    }
     previous = {ticks:lap.ticks, samples:lap.samples};
     try { localStorage.setItem(key,JSON.stringify(previous)); }
-    catch { message += ' Inspelningen finns kvar tills du lämnar sidan.'; }
-    const title = 'I mål på ' + format(lap.ticks);
-    byId('status').textContent = title + '. ' + message;
-    prompt('finished',title,message,'Kör igen');
+    catch {
+      message[0] += ' Inspelningen finns kvar tills du lämnar sidan.';
+      message[1] += ' Your ghost is available until you leave this page.';
+    }
+    const title = ['I mål på ' + format(lap.ticks, 'sv'), 'Finished in ' + format(lap.ticks, 'en')];
+    PortfolioLanguage.text(byId('status'), title[0] + '. ' + message[0], title[1] + '. ' + message[1]);
+    prompt('finished', title, message, ['Kör igen', 'Race again']);
     board.finish(lap.ticks,steps);
   }
   function hold() {
     if (mode !== 'running') return;
-    prompt('paused','Paus', 'Varvet väntar här.', 'Fortsätt');
+    prompt('paused',['Paus', 'Paused'], ['Varvet väntar här.', 'Your lap is paused.'], ['Fortsätt', 'Resume']);
   }
   function loop(now) {
     if (mode !== 'running') return;
@@ -91,13 +102,24 @@
     if (lap.distance >= GhostLap.length) { finish(); return; }
     frame = requestAnimationFrame(loop);
   }
+  function showReference() {
+    PortfolioLanguage.text(byId('reference'),
+      previous ? 'Spökvarv ' + format(previous.ticks, 'sv') : 'Första varvet',
+      previous ? 'Ghost lap ' + format(previous.ticks, 'en') : 'First lap');
+  }
+  window.addEventListener('portfolio-language', () => {
+    RallyScene.draw(byId('art'), cover, null, true);
+    if (lap) paint();
+  });
   function start() {
     if (mode !== 'paused') { lap = GhostLap.newLap(); carry = 0; steps=[]; board.start(); }
     board.visible(false);
     mode = 'running'; lastFrame = null;
     paint();
-    byId('reference').textContent = previous ? 'Spökvarv ' + format(previous.ticks) : 'Första varvet';
-    byId('status').textContent = previous ? 'Varvet har startat. Den ljusa bilen är ditt förra varv.' : 'Varvet har startat.';
+    showReference();
+    PortfolioLanguage.text(byId('status'),
+      previous ? 'Varvet har startat. Den ljusa bilen är ditt förra varv.' : 'Varvet har startat.',
+      previous ? 'Lap started. The pale car is your ghost.' : 'Lap started.');
     byId('prompt').hidden = true;
     wallpaper.hidden = true;
     steering.forEach(button => { button.disabled = false; });
@@ -112,8 +134,11 @@
     dialog.hidden = false;
     if (mode === 'ready') {
       lap = GhostLap.newLap();
-      byId('reference').textContent = previous ? 'Spökvarv ' + format(previous.ticks) : 'Första varvet';
-      prompt('ready',previous?'Spökvarvet':'Första varvet',previous?'Den ljusa bilen kör exakt som du gjorde förra varvet.':'Kör ett varv. Nästa gång möter du din egen bil.','Kör');
+      showReference();
+      prompt('ready', previous ? ['Spökvarvet', 'Spökvarvet'] : ['Första varvet', 'First lap'],
+        previous ? ['Den ljusa bilen kör exakt som du gjorde förra varvet.', 'The pale car follows your last lap, turn for turn.'] :
+          ['Kör ett varv. Nästa gång möter du din egen bil.', 'Drive a lap. Next time, you’ll race your own ghost.'],
+        ['Kör', 'Drive']);
       paint();
     }
     if (!dialog.open) dialog.show();

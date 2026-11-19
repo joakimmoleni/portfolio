@@ -9,12 +9,10 @@
 .resume-menubar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 12px; }
 .resume-menu { flex-wrap: wrap; }
 .resume-toolbar { display: flex; align-items: center; gap: 12px; padding: 3px 7px 3px 0; font-size: .75rem; }
-.resume-tools, .resume-lang-switch { display: flex; align-items: center; gap: 3px; }
+.resume-tools { display: flex; align-items: center; gap: 3px; }
 .resume-tools { gap: 8px; }
-.lang-btn, .action-btn { font: inherit; font-size: .8125rem; padding: 5px 10px; background: var(--surface); color: var(--text); min-height: 36px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); box-shadow: var(--raised); }
-.lang-btn.active { background: var(--paper); box-shadow: var(--inset); border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); font-weight: bold; }
-.lang-btn { min-width: 42px; }
-.lang-btn:hover:not(:focus-visible), .action-btn:not(:disabled):hover:not(:focus-visible) { outline: 1px solid var(--shadow); outline-offset: -3px; }
+.action-btn { font: inherit; font-size: .8125rem; padding: 5px 10px; background: var(--surface); color: var(--text); min-height: 36px; border: 1px solid; border-color: var(--highlight) var(--edge) var(--edge) var(--highlight); box-shadow: var(--raised); }
+.action-btn:not(:disabled):hover:not(:focus-visible) { outline: 1px solid var(--shadow); outline-offset: -3px; }
 .action-btn:disabled { color: var(--muted); box-shadow: none; cursor: wait; }
 .terminal-screen { background: var(--terminal-bg); color: var(--terminal-text); color-scheme: dark; font: 14px/1.32 var(--terminal-font); padding: 10px 20px 0; border: 2px solid; border-color: var(--shadow) var(--highlight) var(--highlight) var(--shadow); overflow-wrap: anywhere; }
 .terminal-screen a { color: var(--terminal-cyan); text-decoration: none; }
@@ -146,7 +144,7 @@
 @media (max-width: 450px) {
   .resume-toolbar { padding: 0 5px 4px; gap: 6px; flex-wrap: wrap; }
   .resume-tools { gap: 5px; }
-  .lang-btn, .action-btn { min-height: 44px; padding: 5px 8px; }
+  .action-btn { min-height: 44px; padding: 5px 8px; }
   .resume-menu a { font-size: .8125rem; padding: 7px; }
   .terminal-screen { padding: 8px 10px 0; }
   .terminal-heading { grid-template-columns: auto minmax(0, 1fr); }
@@ -172,7 +170,7 @@
   .job-highlights li + li { margin-top: 8px; }
   .job-years, .terminal-session { font-variant-numeric: tabular-nums; }
   .resume-menu-info dl { row-gap: 5px; }
-  .lang-btn:active, .action-btn:not(:disabled):active { box-shadow: var(--inset); }
+  .action-btn:not(:disabled):active { box-shadow: var(--inset); }
 }
 @media screen and (max-width: 450px) {
   .resume-menu-info dl { grid-template-columns: 11ch minmax(0, 1fr); }
@@ -225,3 +223,5 @@
   h2, h3 { break-after: avoid; }
   a { color: #000 !important; text-decoration: none; }
 }
+
+.resume-fallback :is(li, p):empty { display: none; }
