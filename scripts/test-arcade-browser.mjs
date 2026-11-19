@@ -2,6 +2,7 @@
 import { spawn } from 'node:child_process';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { once } from 'node:events';
+import { createInterface } from 'node:readline';
 import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -237,26 +238,41 @@ async function check() {
     }
     report.textContent = 'BROWSER PASS';
   } catch (err) { report.textContent = 'BROWSER FAIL ' + err.message; }
+  console.log('PORTFOLIO_TEST_RESULT ' + report.textContent);
 }
 const root = new URL('../', import.meta.url);
 const dir = await mkdtemp(join(root.pathname, 'arcade-check-'));
 const profile = await mkdtemp(join(tmpdir(),'portfolio-browser-'));
 const server = spawn(process.execPath, ['scripts/serve.mjs','--port','4179'], {cwd:root,env:{...process.env,ARCADE_SCORE_DB:':memory:'}});
+let browser, timeout;
 try {
   await Promise.race([once(server.stdout,'data'), once(server,'exit').then(()=>{throw Error('Preview server stopped');})]);
   const html = '<meta charset="utf-8"><p id="result">Pending</p><iframe style="border:0" height="720"></iframe><script>(' + check.toString() + ')()</script>';
   await writeFile(join(dir,'index.html'),html);
-  const browser = spawn(process.env.CHROME_BIN || 'google-chrome', [
+  browser = spawn(process.env.CHROME_BIN || 'google-chrome', [
     '--headless','--disable-dev-shm-usage','--disable-gpu','--no-first-run','--disable-extensions',
-    '--user-data-dir='+profile,'--virtual-time-budget=30000','--dump-dom','http://127.0.0.1:4179/'+basename(dir)+'/'
-  ], {stdio:['ignore','pipe','inherit']});
-  let output='';
-  browser.stdout.on('data',chunk=>output+=chunk);
-  const [code]=await once(browser,'close');
-  const result=output.match(/<p id="result">([^<]+)<\/p>/)?.[1];
-  if(code || result!=='BROWSER PASS') throw Error(result || 'Chrome did not report a browser result');
-  console.log('Chrome passed game launch, pause, restore, close and layout checks at 320 and 1024 px.');
+    '--enable-logging=stderr','--user-data-dir='+profile,'http://127.0.0.1:4179/'+basename(dir)+'/'
+  ], {stdio:['ignore','ignore','pipe']});
+  // Native dialog events and cross-document navigation need actual frames.
+  // Wait for the page to finish, independently of Chrome's virtual clock.
+  const lines = createInterface({input: browser.stderr});
+  const result = await Promise.race([
+    new Promise(resolve => lines.on('line', line => {
+      const match = line.match(/"PORTFOLIO_TEST_RESULT (BROWSER (?:PASS|FAIL)[^"]*)"/);
+      if (match) resolve(match[1]);
+    })),
+    once(browser, 'exit').then(([code]) => { throw Error('Chrome exited before reporting: ' + code); }),
+    new Promise((_, reject) => { timeout = setTimeout(() => reject(Error('Browser checks timed out')), 90000); })
+  ]);
+  if (result !== 'BROWSER PASS') throw Error(result);
+  console.log('Chrome passed desktop, arcade, keyboard and language checks at 320, 390 and 1024 px.');
 } finally {
+  clearTimeout(timeout);
+  if (browser?.pid && browser.exitCode === null && browser.signalCode === null) {
+    const stopped = once(browser, 'exit');
+    browser.kill();
+    await stopped;
+  }
   server.kill();
   await Promise.all([rm(dir,{force:true,recursive:true}),rm(profile,{force:true,recursive:true})]);
 }
